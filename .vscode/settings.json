@@ -1,0 +1,4 @@
+{
+  "dotnet.defaultSolution": "./RichillCapital.Identity.Web.sln",
+  "cSpell.words": ["ASPNETCORE"]
+}
