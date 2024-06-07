@@ -10,12 +10,6 @@ builder.WebHost.UseIdentityWebLogger();
 builder.Services.AddSerilog();
 
 // Infrastructure - Identity
-builder.Services
-    .AddIdentityServer()
-    .AddInMemoryIdentityResources([])
-    .AddInMemoryApiScopes([])
-    .AddInMemoryApiResources([])
-    .AddInMemoryClients([]);
 
 builder.Services.AddPages();
 
@@ -33,7 +27,6 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-app.UseIdentityServer();
 app.UseAuthorization();
 
 app.MapPages();
