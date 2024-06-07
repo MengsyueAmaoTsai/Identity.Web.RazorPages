@@ -18,6 +18,7 @@
     <ProjectReference Include="Libs\RichillCapital.Identity\RichillCapital.Identity.csproj" />
     <ProjectReference Include="Libs\RichillCapital.Logging\RichillCapital.Logging.csproj" />
     <ProjectReference Include="Libs\RichillCapital.Modules\RichillCapital.Modules.csproj" />
+    <ProjectReference Include="Libs\RichillCapital.Persistence\RichillCapital.Persistence.csproj" />
   </ItemGroup>
 
 </Project>
