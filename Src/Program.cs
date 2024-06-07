@@ -9,6 +9,14 @@ var builder = WebApplication.CreateBuilder(args);
 builder.WebHost.UseIdentityWebLogger();
 builder.Services.AddSerilog();
 
+// Infrastructure - Identity
+builder.Services
+    .AddIdentityServer()
+    .AddInMemoryIdentityResources([])
+    .AddInMemoryApiScopes([])
+    .AddInMemoryApiResources([])
+    .AddInMemoryClients([]);
+
 builder.Services.AddPages();
 
 var app = builder.Build();
@@ -25,6 +33,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseIdentityServer();
 app.UseAuthorization();
 
 app.MapPages();

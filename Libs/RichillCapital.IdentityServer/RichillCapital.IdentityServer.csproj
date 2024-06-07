@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Duende.IdentityServer" Version="7.0.5" />
+  </ItemGroup>
+  
+  <ItemGroup>
     <ProjectReference Include="..\RichillCapital.Modules\RichillCapital.Modules.csproj" />
   </ItemGroup>
 
