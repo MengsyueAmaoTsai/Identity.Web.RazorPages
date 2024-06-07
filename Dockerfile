@@ -12,6 +12,12 @@ ARG APP_NAME=RichillCapital.Identity.Web
 
 COPY ./build.cake ./${APP_NAME}.sln ./${APP_NAME}.csproj ./
 
+COPY ./Libs/RichillCapital.Domain/*.csproj ./Libs/RichillCapital.Domain/
+COPY ./Libs/RichillCapital.Identity/*.csproj ./Libs/RichillCapital.Identity/
+COPY ./Libs/RichillCapital.IdentityServer/*.csproj ./Libs/RichillCapital.IdentityServer/
+COPY ./Libs/RichillCapital.Logging/*.csproj ./Libs/RichillCapital.Logging/
+COPY ./Libs/RichillCapital.Modules/*.csproj ./Libs/RichillCapital.Modules/
+
 RUN dotnet cake --target restore 
 
 # Build and Publish Source Code
