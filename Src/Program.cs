@@ -1,6 +1,13 @@
 using RichillCapital.Identity.Web.Pages;
+using RichillCapital.Logging;
+
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Infrastructure - Logging
+builder.WebHost.UseIdentityWebLogger();
+builder.Services.AddSerilog();
 
 builder.Services.AddPages();
 
