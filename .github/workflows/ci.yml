@@ -1,0 +1,33 @@
+name: ASP.NET RazorPages Continuous Integration
+
+on:
+  push:
+    branches: 
+      - master
+
+env:
+  BUILD_CONFIGURATION: Debug
+  CAKE_FILE: build.cake
+  BUILD_TARGET: Default
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+          
+    - name: Build and Test
+      uses: cake-build/cake-action@v2
+      with:
+        script-path: ${{ env.CAKE_FILE }}
+        target: ${{ env.BUILD_TARGET }}
+        verbosity: Diagnostic
+        arguments: |
+          configuration: ${{ env.BUILD_CONFIGURATION }}
+
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: RichillCapital.Api-${{ env.Build_Configuration }}-${{ matrix.os }}
+        path: ./publish          
