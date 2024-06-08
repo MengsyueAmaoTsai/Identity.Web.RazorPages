@@ -9,15 +9,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libs", "Libs", "{327EC73C-F
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RichillCapital.Domain", "Libs\RichillCapital.Domain\RichillCapital.Domain.csproj", "{F8C4E42F-6058-4CB5-94C1-1C6A66B96084}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RichillCapital.IdentityServer", "Libs\RichillCapital.IdentityServer\RichillCapital.IdentityServer.csproj", "{E43B36D3-6273-467B-AA68-A286D6BE8C11}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RichillCapital.Identity", "Libs\RichillCapital.Identity\RichillCapital.Identity.csproj", "{801C473F-AB79-4C53-B57E-D6A1EBD09C47}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RichillCapital.Modules", "Libs\RichillCapital.Modules\RichillCapital.Modules.csproj", "{5A9ADEA5-2478-4F56-982A-D36DDAA3BEBA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RichillCapital.Logging", "Libs\RichillCapital.Logging\RichillCapital.Logging.csproj", "{6A798AFE-63E6-40E8-B580-C62A85E15423}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RichillCapital.Identity", "Libs\RichillCapital.Identity\RichillCapital.Identity.csproj", "{801C473F-AB79-4C53-B57E-D6A1EBD09C47}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RichillCapital.Persistence", "Libs\RichillCapital.Persistence\RichillCapital.Persistence.csproj", "{06A2F917-5DAA-4CF5-9CCC-5E83F9B52905}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RichillCapital.Logging", "Libs\RichillCapital.Logging\RichillCapital.Logging.csproj", "{6A798AFE-63E6-40E8-B580-C62A85E15423}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RichillCapital.Persistence", "Libs\RichillCapital.Persistence\RichillCapital.Persistence.csproj", "{06A2F917-5DAA-4CF5-9CCC-5E83F9B52905}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RichillCapital.UseCases", "Libs\RichillCapital.UseCases\RichillCapital.UseCases.csproj", "{6543DF9C-DF95-4980-9969-2CA818733265}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,14 +31,6 @@ Global
 		{F8C4E42F-6058-4CB5-94C1-1C6A66B96084}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F8C4E42F-6058-4CB5-94C1-1C6A66B96084}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F8C4E42F-6058-4CB5-94C1-1C6A66B96084}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E43B36D3-6273-467B-AA68-A286D6BE8C11}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E43B36D3-6273-467B-AA68-A286D6BE8C11}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E43B36D3-6273-467B-AA68-A286D6BE8C11}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E43B36D3-6273-467B-AA68-A286D6BE8C11}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5A9ADEA5-2478-4F56-982A-D36DDAA3BEBA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5A9ADEA5-2478-4F56-982A-D36DDAA3BEBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5A9ADEA5-2478-4F56-982A-D36DDAA3BEBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5A9ADEA5-2478-4F56-982A-D36DDAA3BEBA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{801C473F-AB79-4C53-B57E-D6A1EBD09C47}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{801C473F-AB79-4C53-B57E-D6A1EBD09C47}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{801C473F-AB79-4C53-B57E-D6A1EBD09C47}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -53,16 +43,22 @@ Global
 		{06A2F917-5DAA-4CF5-9CCC-5E83F9B52905}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{06A2F917-5DAA-4CF5-9CCC-5E83F9B52905}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{06A2F917-5DAA-4CF5-9CCC-5E83F9B52905}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6543DF9C-DF95-4980-9969-2CA818733265}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6543DF9C-DF95-4980-9969-2CA818733265}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6543DF9C-DF95-4980-9969-2CA818733265}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6543DF9C-DF95-4980-9969-2CA818733265}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{F8C4E42F-6058-4CB5-94C1-1C6A66B96084} = {327EC73C-F16D-44A4-9CC2-8010C6B4F312}
-		{E43B36D3-6273-467B-AA68-A286D6BE8C11} = {327EC73C-F16D-44A4-9CC2-8010C6B4F312}
-		{5A9ADEA5-2478-4F56-982A-D36DDAA3BEBA} = {327EC73C-F16D-44A4-9CC2-8010C6B4F312}
 		{801C473F-AB79-4C53-B57E-D6A1EBD09C47} = {327EC73C-F16D-44A4-9CC2-8010C6B4F312}
 		{6A798AFE-63E6-40E8-B580-C62A85E15423} = {327EC73C-F16D-44A4-9CC2-8010C6B4F312}
 		{06A2F917-5DAA-4CF5-9CCC-5E83F9B52905} = {327EC73C-F16D-44A4-9CC2-8010C6B4F312}
+		{6543DF9C-DF95-4980-9969-2CA818733265} = {327EC73C-F16D-44A4-9CC2-8010C6B4F312}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {495BD3C3-714B-412A-83E0-44F3813D150F}
 	EndGlobalSection
 EndGlobal

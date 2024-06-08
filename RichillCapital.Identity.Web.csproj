@@ -14,11 +14,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="Libs\RichillCapital.IdentityServer\RichillCapital.IdentityServer.csproj" />
     <ProjectReference Include="Libs\RichillCapital.Identity\RichillCapital.Identity.csproj" />
     <ProjectReference Include="Libs\RichillCapital.Logging\RichillCapital.Logging.csproj" />
-    <ProjectReference Include="Libs\RichillCapital.Modules\RichillCapital.Modules.csproj" />
     <ProjectReference Include="Libs\RichillCapital.Persistence\RichillCapital.Persistence.csproj" />
+    <ProjectReference Include="Libs\RichillCapital.UseCases\RichillCapital.UseCases.csproj" />
   </ItemGroup>
 
 </Project>
