@@ -21,8 +21,12 @@ internal static class IdentityServerExtensions
 
 internal static class InMemoryClients
 {
+    private static readonly ICollection<Secret> DefaultClientSecrets = [new("secret".Sha256())];
     internal static IEnumerable<Client> Default =
     [
+        new Client
+        {
+        },
     ];
 }
 
