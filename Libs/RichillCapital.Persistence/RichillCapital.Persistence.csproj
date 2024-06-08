@@ -11,5 +11,9 @@
     <PackageReference Include="RichillCapital.Extensions.Options" Version="1.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.3" />
   </ItemGroup>
+  
+  <ItemGroup>
+    <ProjectReference Include="..\RichillCapital.UseCases\RichillCapital.UseCases.csproj" />
+  </ItemGroup>
 
 </Project>
