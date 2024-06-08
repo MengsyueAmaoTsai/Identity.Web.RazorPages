@@ -1,3 +1,4 @@
+using RichillCapital.Identity.Web.IdentityServer;
 using RichillCapital.Identity.Web.Pages;
 using RichillCapital.Logging;
 
@@ -10,6 +11,7 @@ builder.WebHost.UseIdentityWebLogger();
 builder.Services.AddSerilog();
 
 // Infrastructure - Identity
+builder.Services.ConfigureIdentityServer();
 
 builder.Services.AddPages();
 
@@ -27,7 +29,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-app.UseAuthorization();
+app.UseIdentityServer();
 
 app.MapPages();
 
