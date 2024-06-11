@@ -4,21 +4,13 @@
 
 @{
     ViewData["Title"] = "About";
-
-    static string GetAssemblyVersion() =>
-        typeof(Program).Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion ?? "Unknown";
-    
-    static string GetDotNetRuntimeVersion() =>
-        typeof(object).Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion ?? "Unknown";
-
-    static string GetInstallLocation() => Assembly.GetExecutingAssembly().Location;
 }
 
-<h2>Assembly Version</h2>
-<h4>@GetAssemblyVersion()</h4>
+<h3>Assembly Version</h3>
+<h6>@ApplicationInfo.GetAssemblyVersion()</h6>
 
-<h2>DotNet Runtime Version</h2>
-<h4>@GetDotNetRuntimeVersion()</h4>
+<h3>DotNet Runtime Version</h3>
+<h6>@ApplicationInfo.GetDotNetRuntimeVersion()</h6>
 
-<h2>Install Location</h2>
-<h4>@GetInstallLocation()</h4>
+<h3>Install Location</h3>
+<h6>@ApplicationInfo.GetInstallLocation()</h6>
