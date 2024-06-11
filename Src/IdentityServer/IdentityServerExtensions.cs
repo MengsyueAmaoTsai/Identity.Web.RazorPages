@@ -13,10 +13,10 @@ internal static class IdentityServerExtensions
                 options.UserInteraction.LoginUrl = "/Users/SignIn";
                 options.UserInteraction.LoginReturnUrlParameter = "ReturnUrl";
             })
-            .AddInMemoryClients(InMemoryClients.Default)
             .AddInMemoryIdentityResources(InMemoryIdentityResources.Default)
             .AddInMemoryApiResources(InMemoryApiResources.Default)
             .AddInMemoryApiScopes(InMemoryApiScopes.Default)
+            .AddInMemoryClients(InMemoryClients.Default)
             .AddTestUsers(TestUsers.Default);
 
         return services;
@@ -26,11 +26,9 @@ internal static class IdentityServerExtensions
 internal static class InMemoryClients
 {
     private static readonly ICollection<Secret> DefaultClientSecrets = [new("secret".Sha256())];
+
     internal static IEnumerable<Client> Default =
     [
-        new Client
-        {
-        },
     ];
 }
 
@@ -38,6 +36,11 @@ internal static class InMemoryIdentityResources
 {
     internal static IEnumerable<IdentityResource> Default =
     [
+        new IdentityResources.OpenId(),
+        new IdentityResources.Profile(),
+        new IdentityResources.Email(),
+        new IdentityResources.Phone(),
+        new IdentityResources.Address(),
     ];
 }
 
