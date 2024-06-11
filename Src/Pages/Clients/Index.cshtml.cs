@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace RichillCapital.Identity.Web.Pages.Clients;
 
-[Authorize]
+[AllowAnonymous]
 public sealed class ClientsViewModel() :
     PageModel
 {

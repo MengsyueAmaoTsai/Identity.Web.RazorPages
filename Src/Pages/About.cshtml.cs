@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace RichillCapital.Identity.Web.Pages;
 
-[Authorize]
+[AllowAnonymous]
 public class AboutViewModel(
     ILogger<AboutViewModel> _logger) :
     PageModel

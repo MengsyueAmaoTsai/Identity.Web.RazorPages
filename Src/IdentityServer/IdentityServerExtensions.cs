@@ -30,7 +30,6 @@ internal static class InMemoryClients
     ];
 }
 
-
 internal static class InMemoryIdentityResources
 {
     internal static IEnumerable<IdentityResource> Default =

@@ -1,10 +1,24 @@
 ﻿@page
+@using System.Reflection
 @model AboutViewModel
 
 @{
-    ViewData["Title"] = "Privacy Policy";
+    ViewData["Title"] = "About";
+
+    static string GetAssemblyVersion() =>
+        typeof(Program).Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion ?? "Unknown";
+    
+    static string GetDotNetRuntimeVersion() =>
+        typeof(object).Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion ?? "Unknown";
+
+    static string GetInstallLocation() => Assembly.GetExecutingAssembly().Location;
 }
 
-<h1>@ViewData["Title"]</h1>
+<h2>Assembly Version</h2>
+<h4>@GetAssemblyVersion()</h4>
 
-<p>Use this page to detail your site's privacy policy.</p>
+<h2>DotNet Runtime Version</h2>
+<h4>@GetDotNetRuntimeVersion()</h4>
+
+<h2>Install Location</h2>
+<h4>@GetInstallLocation()</h4>
