@@ -1,3 +1,5 @@
+using RichillCapital.Persistence;
+using RichillCapital.UseCases;
 using RichillCapital.Identity.Web.IdentityServer;
 using RichillCapital.Identity.Web.Pages;
 using RichillCapital.Identity.Web.Services;
@@ -7,9 +9,14 @@ using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddMediator();
+
 // Infrastructure - Logging
 builder.WebHost.UseIdentityWebLogger();
 builder.Services.AddSerilog();
+
+// Infrastructure - Persistence 
+builder.Services.AddDatabase();
 
 // Infrastructure - Identity
 builder.Services.ConfigureIdentityServer();
