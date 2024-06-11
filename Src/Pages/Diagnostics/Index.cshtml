@@ -5,4 +5,58 @@
     ViewData["Title"] = "Diagnostics";
 }
 
-<h1>Diagnostics</h1>
+<h1>Authentication Cookie</h1>
+
+<fluent-card>
+    <h2>Claims</h2>
+
+    <dl>
+        @foreach (var claim in Model.Claims)
+        {
+            <dt>@claim.Type</dt>
+            
+            @if (claim.Type == "auth_time")
+            {
+                <dd>@DateTimeOffset.FromUnixTimeSeconds(long.Parse(claim.Value)).ToString("yyyy-MM-dd HH:mm:ss zzz")</dd>
+            } 
+            else
+            {
+                <dd>@claim.Value</dd>
+            }
+        }
+    </dl>
+</fluent-card>
+
+
+
+<fluent-card>
+    <h2>Properties</h2>
+
+     <dl>
+        @foreach (var prop in Model.Properties)
+        {
+            <dt>@prop.Key</dt>
+            <dd>@prop.Value</dd>
+        }
+        
+        @if (Model.Clients.Any())
+        {
+            <dt>Clients</dt>
+            <dd>
+            @{
+                var clients = Model.Clients.ToArray();
+                
+                for(var i = 0; i < clients.Length; i++)
+                {
+                    <text>@clients[i]</text>
+                    
+                    if (i < clients.Length - 1)
+                    {
+                        <text>, </text>
+                    }
+                }
+            }
+            </dd>
+        }
+    </dl>
+</fluent-card>
