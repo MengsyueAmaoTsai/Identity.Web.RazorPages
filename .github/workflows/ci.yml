@@ -6,9 +6,11 @@ on:
       - master
 
 env:
-  BUILD_CONFIGURATION: Debug
-  CAKE_FILE: build.cake
-  BUILD_TARGET: Default
+  Build_Configuration: Debug
+  Cake_File: build.cake
+  Build_Target: Default
+  Image_Name: identity-web
+  Tag: latest
 
 jobs:
   build:
@@ -20,12 +22,16 @@ jobs:
     - name: Build and Test
       uses: cake-build/cake-action@v2
       with:
-        script-path: ${{ env.CAKE_FILE }}
-        target: ${{ env.BUILD_TARGET }}
+        script-path: ${{ env.Cake_File }}
+        target: ${{ env.Build_Target }}
         verbosity: Diagnostic
         arguments: |
-          configuration: ${{ env.BUILD_CONFIGURATION }}
+          configuration: ${{ env.Build_Configuration }}
 
+    - name: Docker Build
+      run: |
+        docker build -t ${{ env.Image_Name }}:${{ env.Tag }} . 
+  
     - name: Upload Artifact
       uses: actions/upload-artifact@v2
       with:
