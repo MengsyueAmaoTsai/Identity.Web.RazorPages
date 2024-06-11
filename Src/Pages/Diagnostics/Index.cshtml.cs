@@ -13,6 +13,8 @@ namespace RichillCapital.Identity.Web.Pages.Diagnostics;
 public sealed class DiagnosticsViewModel :
     PageModel
 {
+    private const string ClientListKey = "client_list";
+
     public required IEnumerable<string> Clients { get; set; } = [];
     public required IEnumerable<Claim> Claims { get; set; } = [];
     public required IDictionary<string, string?> Properties { get; set; } = new Dictionary<string, string?>();
@@ -21,12 +23,9 @@ public sealed class DiagnosticsViewModel :
     {
         var result = await HttpContext.AuthenticateAsync();
 
-        if (result.Properties!.Items.ContainsKey("client_list"))
+        if (result.Properties!.Items.TryGetValue(ClientListKey, out var clients))
         {
-            var encoded = result.Properties.Items["client_list"] ?? string.Empty;
-
-            var bytes = Convert.FromBase64String(encoded);
-
+            var bytes = Convert.FromBase64String(clients ?? string.Empty);
             Clients = JsonSerializer.Deserialize<IEnumerable<string>>(Encoding.UTF8.GetString(bytes)) ?? [];
         }
 
