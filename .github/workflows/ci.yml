@@ -28,7 +28,7 @@ jobs:
         arguments: |
           configuration: ${{ env.Build_Configuration }}
 
-    - name: Docker Build
+    - name: Build Docker Image
       run: |
         docker build -t ${{ env.Image_Name }}:${{ env.Tag }} . 
   
