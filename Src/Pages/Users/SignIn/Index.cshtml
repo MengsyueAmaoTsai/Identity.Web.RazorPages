@@ -1,0 +1,24 @@
+@page
+@model SignInViewModel
+@{
+}
+
+<h1>Sign In</h1>
+
+<form method="post">
+    <div>
+        <label asp-for="Email"></label>
+        <input asp-for="Email" />
+    </div>
+    
+    <div>
+        <label asp-for="Password"></label>
+        <input asp-for="Password" />
+    </div>
+
+    <fluent-button type="submit">Sign In</fluent-button>
+</form>
+
+<div>--------------------</div>
+<b>@Model.ReturnUrl</b>
+<p>IsLocalUrl: @Url.IsLocalUrl(@Model.ReturnUrl)</p>

@@ -8,7 +8,11 @@ internal static class IdentityServerExtensions
     internal static IServiceCollection ConfigureIdentityServer(this IServiceCollection services)
     {
         services
-            .AddIdentityServer()
+            .AddIdentityServer(options =>
+            {
+                options.UserInteraction.LoginUrl = "/Users/SignIn";
+                options.UserInteraction.LoginReturnUrlParameter = "ReturnUrl";
+            })
             .AddInMemoryClients(InMemoryClients.Default)
             .AddInMemoryIdentityResources(InMemoryIdentityResources.Default)
             .AddInMemoryApiResources(InMemoryApiResources.Default)
