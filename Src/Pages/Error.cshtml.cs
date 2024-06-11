@@ -8,7 +8,7 @@ namespace RichillCapital.Identity.Web.Pages;
 
 [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
 [IgnoreAntiforgeryToken]
-[AllowAnonymous]
+[Authorize]
 public class ErrorViewModel : PageModel
 {
     public string? RequestId { get; set; }

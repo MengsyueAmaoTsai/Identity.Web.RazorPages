@@ -6,7 +6,7 @@ using RichillCapital.Identity.Web.Services;
 
 namespace RichillCapital.Identity.Web.Pages.Users;
 
-[AllowAnonymous]
+[Authorize]
 public sealed class UsersViewModel(
     IApiService _apiService) :
     PageModel
