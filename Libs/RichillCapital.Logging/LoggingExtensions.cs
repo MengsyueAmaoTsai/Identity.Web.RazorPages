@@ -15,7 +15,9 @@ public static class LoggingExtensions
     private const string ConsoleTemplate = "[{Timestamp:HH:mm:ss} {Level:u3}] {SourceContext} - {Message:lj}{NewLine}{Exception}{NewLine}";
     private const string FileTemplate = "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} [{Level:u3}] [{SourceContext}] [TraceId: {TraceId}] [MachineName: {MachineName}] [ProcessId: {ProcessId}] {Message:lj}{NewLine}{Exception}";
 
+    private const int FileSizeLimitBytes = 10 * 1024 * 1024;
     private const string LogDirectory = "Logs";
+    private const string LogFileName = "log-.log";
 
     public static IWebHostBuilder UseIdentityWebLogger(this IWebHostBuilder builder)
     {
@@ -51,8 +53,8 @@ public static class LoggingExtensions
                     outputTemplate: ConsoleTemplate,
                     theme: AnsiConsoleTheme.Code)
                 .WriteTo.File(
-                    Path.Combine(logsPath, "log.txt"),
-                    fileSizeLimitBytes: 10 * 1024 * 1024,
+                    Path.Combine(logsPath, LogFileName),
+                    fileSizeLimitBytes: FileSizeLimitBytes,
                     rollOnFileSizeLimit: true,
                     shared: true,
                     flushToDiskInterval: TimeSpan.FromSeconds(1),
