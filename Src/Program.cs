@@ -1,9 +1,9 @@
-using RichillCapital.Persistence;
-using RichillCapital.UseCases;
 using RichillCapital.Identity.Web.IdentityServer;
 using RichillCapital.Identity.Web.Pages;
 using RichillCapital.Identity.Web.Services;
 using RichillCapital.Logging;
+using RichillCapital.Persistence;
+using RichillCapital.UseCases;
 
 using Serilog;
 
