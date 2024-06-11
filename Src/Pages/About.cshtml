@@ -6,11 +6,30 @@
     ViewData["Title"] = "About";
 }
 
-<h3>Assembly Version</h3>
-<h6>@ApplicationInfo.GetAssemblyVersion()</h6>
+<fluent-breadcrumb class="breadcrumb">
+  <fluent-breadcrumb-item href="/">Home</fluent-breadcrumb-item>
+  <fluent-breadcrumb-item>About</fluent-breadcrumb-item>
+</fluent-breadcrumb>
 
-<h3>DotNet Runtime Version</h3>
-<h6>@ApplicationInfo.GetDotNetRuntimeVersion()</h6>
+<fluent-card class="card-assembly-name">
+    <h3>Assembly Name</h3>
+    <h6>@ApplicationInfo.GetDisplayName()</h6>
+</fluent-card>
 
-<h3>Install Location</h3>
-<h6>@ApplicationInfo.GetInstallLocation()</h6>
+<fluent-card class="card-assembly-version">
+    <h3>Assembly Version</h3>
+    <h6>@ApplicationInfo.GetAssemblyVersion()</h6>
+</fluent-card>
+
+<fluent-card class="card-dotnet-runtime-info">
+    <h3>DotNet Runtime Version</h3>
+    <h6>@ApplicationInfo.GetDotNetRuntimeVersion()</h6>
+</fluent-card>
+
+<fluent-card class="card-install-location">
+    <h3>Install Location</h3>
+    <h6>@ApplicationInfo.GetInstallLocation()</h6>
+</fluent-card>
+
+<style>
+</style>
