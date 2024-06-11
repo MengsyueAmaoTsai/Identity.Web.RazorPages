@@ -5,4 +5,33 @@
 @{
 }
 
-<h1>Users</h1>
+<fluent-breadcrumb class="breadcrumb">
+  <fluent-breadcrumb-item href="/">Home</fluent-breadcrumb-item>
+  <fluent-breadcrumb-item>Users</fluent-breadcrumb-item>
+</fluent-breadcrumb>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Email</th>
+            <th>Name</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model.Users)
+        {
+            <tr>
+                <td>@user.Id</td>
+                <td>@user.Email</td>
+                <td>@user.Name</td>
+                <td>
+                    <a asp-page="./Details" asp-route-userId="@user.Id">
+                        <fluent-button appearance="accent">Details</fluent-button>
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

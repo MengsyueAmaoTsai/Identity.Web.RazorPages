@@ -1,7 +1,17 @@
-@page
+@page 
 @model UserDetailsViewModel
 
 @{
 }
 
-<h1>User Details</h1>
+<fluent-breadcrumb class="breadcrumb">
+  <fluent-breadcrumb-item href="/">Home</fluent-breadcrumb-item>
+  <fluent-breadcrumb-item href="/Users/Index">Users</fluent-breadcrumb-item>
+  <fluent-breadcrumb-item>@Model.Id</fluent-breadcrumb-item>
+</fluent-breadcrumb>
+
+<fluent-card class="card-user-details">
+    <h3>User Details</h3>
+    <h6>@Model.Email</h6>
+    <h6>@Model.Name</h6>
+</fluent-card>
