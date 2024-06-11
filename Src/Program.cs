@@ -1,5 +1,6 @@
 using RichillCapital.Identity.Web.IdentityServer;
 using RichillCapital.Identity.Web.Pages;
+using RichillCapital.Identity.Web.Services;
 using RichillCapital.Logging;
 
 using Serilog;
@@ -12,6 +13,9 @@ builder.Services.AddSerilog();
 
 // Infrastructure - Identity
 builder.Services.ConfigureIdentityServer();
+
+// Infrastructure - Services
+builder.Services.AddApiService();
 
 builder.Services.AddPages();
 
@@ -34,5 +38,6 @@ app.UseIdentityServer();
 app.MapPages();
 
 await app.RunAsync();
+
 
 public partial class Program;
