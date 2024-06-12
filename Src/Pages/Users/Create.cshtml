@@ -1,5 +1,5 @@
 @page
-
+@model CreateUserViewModel
 @{
     ViewData["Title"] = "Create";
 }
@@ -12,10 +12,16 @@
 
 <h1>Create New User</h1>
 
-
 <fluent-card>
     <form method="post">
-        
+        <div>
+            <fluent-text-field appearance="outline" placeholder="example@domain.com">Email</fluent-text-field>
+        </div>
+
+        <div>
+            <fluent-text-field appearance="outline">Name</fluent-text-field>
+        </div>
+
         <fluent-button type="submit" appearance="accent">Submit</fluent-button>
     </form>
 </fluent-card>

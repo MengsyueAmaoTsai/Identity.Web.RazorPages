@@ -15,4 +15,6 @@ public sealed class UserId : SingleValueObject<string>
     public static Result<UserId> From(string value) => value
         .ToResult()
         .Then(id => new UserId(id));
+
+    public static UserId NewUserId() => From(Guid.NewGuid().ToString()).Value;
 }
