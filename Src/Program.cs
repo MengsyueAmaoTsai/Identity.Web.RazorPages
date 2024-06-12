@@ -20,6 +20,7 @@ builder.Services.AddDatabase();
 
 // Infrastructure - Identity
 builder.Services.ConfigureIdentityServer();
+builder.Services.AddAuthentication();
 
 // Infrastructure - Services
 builder.Services.AddApiService();
