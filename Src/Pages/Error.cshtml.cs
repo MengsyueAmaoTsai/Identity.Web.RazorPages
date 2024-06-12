@@ -19,9 +19,11 @@ public class ErrorViewModel(
     [BindProperty(Name = "errorId", SupportsGet = true)]
     public required string ErrorId { get; init; }
 
-    public required ErrorMessage ErrorMessage { get; set; }
+    public required ErrorMessage IdentityErrorMessage { get; set; }
 
     public required string TraceId { get; set; }
+
+    public required string ErrorMessage { get; set; }
 
     public async Task<IActionResult> OnGetAsync()
     {
@@ -29,7 +31,7 @@ public class ErrorViewModel(
 
         if (message is not null)
         {
-            ErrorMessage = message;
+            IdentityErrorMessage = message;
         }
 
         TraceId = Activity.Current?.Id ??

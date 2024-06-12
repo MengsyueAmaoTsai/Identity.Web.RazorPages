@@ -5,27 +5,32 @@
     ViewData["Title"] = "Error";
 }
 
-<div class="alert alert-danger">
-    Sorry, there was an error
+<fluent-card>
+        
+    <div class="alert alert-danger">
+        Sorry, there was an error 
 
-    @if (Model.ErrorMessage != null)
-    {
-        <strong>
-            <em>
-                : @Model.ErrorMessage.Error
-            </em>
-        </strong>
-
-        if (Model.ErrorMessage.ErrorDescription is not null)
+        @if (Model.IdentityErrorMessage != null)
         {
-            <div>@Model.ErrorMessage.ErrorDescription</div>
-        }
-    }
-</div>
-@if (Model.TraceId is not null)
-{
-    <p>
-        <strong>Trace ID:</strong> <code>@Model.TraceId</code>
-    </p>
-}
+            <strong>
+                <em>
+                    : @Model.IdentityErrorMessage.Error
+                </em>
+            </strong>
 
+            if (Model.IdentityErrorMessage.ErrorDescription is not null)
+            {
+                <div>@Model.IdentityErrorMessage.ErrorDescription</div>
+            }
+        }
+    </div>
+
+    @if (Model.TraceId is not null)
+    {
+        <p>
+            <strong>Trace ID:</strong> <code>@Model.TraceId</code>
+        </p>
+    }
+
+
+</fluent-card>
