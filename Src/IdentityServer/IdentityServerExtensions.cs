@@ -2,16 +2,32 @@ using Duende.IdentityServer;
 using Duende.IdentityServer.Models;
 using Duende.IdentityServer.Test;
 
+using FluentValidation;
+
+using Microsoft.Extensions.Options;
+
+using RichillCapital.Extensions.Options;
+
 namespace RichillCapital.Identity.Web.IdentityServer;
 
 internal static class IdentityServerExtensions
 {
     internal static IServiceCollection ConfigureIdentityServer(this IServiceCollection services)
     {
+        services.AddValidatorsFromAssembly(
+            typeof(IdentityServerExtensions).Assembly,
+            includeInternalTypes: true);
+
+        services.AddOptionsWithFluentValidation<IdentityServerOptions>(IdentityServerOptions.SectionKey);
+
+        using var scope = services.BuildServiceProvider().CreateScope();
+        var identityServerOptions = scope.ServiceProvider
+            .GetRequiredService<IOptions<IdentityServerOptions>>().Value;
+
         services
             .AddIdentityServer(options =>
             {
-                options.IssuerUri = "https://localhost:9999";
+                options.IssuerUri = identityServerOptions.IssuerUri;
 
                 options.UserInteraction.LoginUrl = "/Users/SignIn";
                 options.UserInteraction.LoginReturnUrlParameter = "ReturnUrl";
