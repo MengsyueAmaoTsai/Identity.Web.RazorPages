@@ -2,11 +2,13 @@ using FluentValidation;
 
 namespace RichillCapital.Identity.Web.IdentityServer;
 
-internal sealed record IdentityServerOptions
+public sealed record IdentityServerOptions
 {
     internal const string SectionKey = "IdentityServer";
 
-    internal required string IssuerUri { get; init; }
+    public required string IssuerUri { get; init; }
+
+    public required int RememberMeDurationDays { get; init; }
 }
 
 internal sealed class IdentityServerOptionsValidator :

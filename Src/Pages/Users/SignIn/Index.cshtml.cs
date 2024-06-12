@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Extensions.Options;
 
 using RichillCapital.Domain;
 using RichillCapital.Domain.Common.Repositories;
@@ -18,6 +19,7 @@ namespace RichillCapital.Identity.Web.Pages.Users.SignIn;
 public sealed class SignInViewModel(
     IReadOnlyRepository<User> _userRepository,
     IIdentityServerInteractionService _interactionService,
+    IOptions<IdentityServer.IdentityServerOptions> _identityServerOptions,
     IEventService _eventService) :
     PageModel
 {
@@ -55,7 +57,6 @@ public sealed class SignInViewModel(
             Password,
             cancellationToken);
 
-
         if (signInResult.IsFailure)
         {
             ModelState.AddModelError(signInResult.Error.Code, signInResult.Error.Message);
@@ -69,7 +70,6 @@ public sealed class SignInViewModel(
         }
 
         var user = signInResult.Value;
-
 
         await _eventService.RaiseAsync(new UserLoginSuccessEvent(
             user.Name,
@@ -109,13 +109,13 @@ public sealed class SignInViewModel(
             return error.ToResult<User>();
         }
 
-        var authenticationProperties = new AuthenticationProperties
-        {
-            IsPersistent = RememberMe,
-            ExpiresUtc = RememberMe ?
-                DateTimeOffset.UtcNow.Add(TimeSpan.FromMinutes(3)) :
-                DateTimeOffset.UtcNow.Add(TimeSpan.FromMinutes(1)),
-        };
+        var authenticationProperties = RememberMe ?
+            new AuthenticationProperties
+            {
+                IsPersistent = RememberMe,
+                ExpiresUtc = DateTimeOffset.UtcNow.Add(TimeSpan.FromDays(_identityServerOptions.Value.RememberMeDurationDays)),
+            } :
+            null;
 
         var identityUser = new IdentityServerUser(user.Id.Value)
         {
