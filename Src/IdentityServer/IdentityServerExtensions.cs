@@ -20,9 +20,13 @@ internal static class IdentityServerExtensions
 
         services.AddOptionsWithFluentValidation<IdentityServerOptions>(IdentityServerOptions.SectionKey);
 
-        using var scope = services.BuildServiceProvider().CreateScope();
+        using var scope = services
+            .BuildServiceProvider()
+            .CreateScope();
+
         var identityServerOptions = scope.ServiceProvider
-            .GetRequiredService<IOptions<IdentityServerOptions>>().Value;
+            .GetRequiredService<IOptions<IdentityServerOptions>>()
+            .Value;
 
         services
             .AddIdentityServer(options =>

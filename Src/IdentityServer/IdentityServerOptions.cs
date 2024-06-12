@@ -12,10 +12,7 @@ internal sealed record IdentityServerOptions
 internal sealed class IdentityServerOptionsValidator :
     AbstractValidator<IdentityServerOptions>
 {
-    internal IdentityServerOptionsValidator()
+    public IdentityServerOptionsValidator()
     {
-        RuleFor(options => options.IssuerUri)
-            .NotEmpty()
-            .WithMessage("Issuer URI is required.");
     }
 }
