@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -6,6 +7,7 @@ using RichillCapital.Domain.Common.Repositories;
 
 namespace RichillCapital.Identity.Web.Pages.Users;
 
+[Authorize]
 public sealed class CreateUserViewModel(
     IRepository<User> _userRepository,
     IUnitOfWork _unitOfWork) : PageModel

@@ -3,11 +3,13 @@ using Duende.IdentityServer.Services;
 
 using IdentityModel;
 
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace RichillCapital.Identity.Web.Pages.Users.Consent;
 
+[Authorize]
 public sealed class ConsentViewModel(
     IIdentityServerInteractionService _interactionService) :
     PageModel
@@ -104,6 +106,17 @@ public sealed class ConsentViewModel(
 
         return Page();
     }
+}
+
+public sealed record IdentityResourceModel
+{
+    public required string Name { get; init; }
+    public required string DisplayName { get; init; }
+    public required string Description { get; init; }
+    public required string Value { get; init; }
+    public required bool Required { get; init; }
+    public required bool Emphasize { get; init; }
+    public required bool IsConsented { get; init; }
 }
 
 public sealed record ApiScopeModel
