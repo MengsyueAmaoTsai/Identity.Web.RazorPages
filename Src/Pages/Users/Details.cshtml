@@ -11,7 +11,20 @@
 </fluent-breadcrumb>
 
 <fluent-card class="card-user-details">
-    <h3>User Details</h3>
-    <h6>@Model.Email</h6>
-    <h6>@Model.Name</h6>
+  <h2>@Model.Name (@Model.Id)</h2>
+  <div>
+    <label>E-Mail: @Model.Email</label>
+  </div>
+</fluent-card>
+
+
+<fluent-card>
+  <fluent-tabs activeid="accounts">
+      <fluent-tab id="accounts">Accounts</fluent-tab>
+      
+      <fluent-tab-panel id="accounts-content">
+        <div>No Accounts</div>
+      </fluent-tab-panel>
+      
+  </fluent-tabs>
 </fluent-card>
