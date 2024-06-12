@@ -12,6 +12,8 @@ internal static class IdentityServerExtensions
             {
                 options.UserInteraction.LoginUrl = "/Users/SignIn";
                 options.UserInteraction.LoginReturnUrlParameter = "ReturnUrl";
+                options.UserInteraction.ErrorUrl = "/Error";
+                options.UserInteraction.ErrorIdParameter = "ErrorId";
             })
             .AddInMemoryIdentityResources(InMemoryIdentityResources.Default)
             .AddInMemoryApiResources(InMemoryApiResources.Default)

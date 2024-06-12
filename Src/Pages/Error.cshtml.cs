@@ -21,7 +21,7 @@ public class ErrorViewModel(
 
     public required ErrorMessage ErrorMessage { get; set; }
 
-    public required string RequestId { get; set; }
+    public required string TraceId { get; set; }
 
     public async Task<IActionResult> OnGetAsync()
     {
@@ -32,7 +32,7 @@ public class ErrorViewModel(
             ErrorMessage = message;
         }
 
-        RequestId = Activity.Current?.Id ??
+        TraceId = Activity.Current?.Id ??
             HttpContext.TraceIdentifier;
 
         return Page();
