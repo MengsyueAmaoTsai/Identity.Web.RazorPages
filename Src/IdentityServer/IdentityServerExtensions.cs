@@ -11,10 +11,14 @@ internal static class IdentityServerExtensions
         services
             .AddIdentityServer(options =>
             {
+                options.IssuerUri = "https://localhost:9999";
+
                 options.UserInteraction.LoginUrl = "/Users/SignIn";
                 options.UserInteraction.LoginReturnUrlParameter = "ReturnUrl";
                 options.UserInteraction.ErrorUrl = "/Error";
                 options.UserInteraction.ErrorIdParameter = "ErrorId";
+                options.UserInteraction.ConsentUrl = "/Users/Consent";
+                options.UserInteraction.ConsentReturnUrlParameter = "ReturnUrl";
 
                 options.Events.RaiseErrorEvents = true;
                 options.Events.RaiseFailureEvents = true;
@@ -24,8 +28,7 @@ internal static class IdentityServerExtensions
             .AddInMemoryIdentityResources(InMemoryIdentityResources.Default)
             .AddInMemoryApiResources(InMemoryApiResources.Default)
             .AddInMemoryApiScopes(InMemoryApiScopes.Default)
-            .AddInMemoryClients(InMemoryClients.Default)
-            .AddTestUsers(TestUsers.Default);
+            .AddInMemoryClients(InMemoryClients.Default);
 
         return services;
     }
@@ -42,21 +45,25 @@ internal static class InMemoryClients
             ClientId = "Richillcapital.TraderStudio.Web.Blazor",
             ClientName = "Trader Studio Web",
             ClientSecrets = DefaultClientSecrets,
-            AllowedGrantTypes = GrantTypes.Code,
-
+            AllowedGrantTypes = GrantTypes.Code.Combines(GrantTypes.ResourceOwnerPassword),
+            RequirePkce = true,
+            RedirectUris =
+            {
+                "https://localhost:9998/signin-oidc",
+                "http://trader-studio.richillcapital.com/signin-oidc",
+            },
+            PostLogoutRedirectUris =
+            {
+                "https://localhost:9998/signout-callback-oidc",
+                "http://trader-studio.richillcapital.com/signout-callback-oidc",
+            },
             AllowedScopes =
             {
                 IdentityServerConstants.StandardScopes.OpenId,
                 IdentityServerConstants.StandardScopes.Profile,
-                IdentityServerConstants.StandardScopes.Email,
-                IdentityServerConstants.StandardScopes.Phone,
-                IdentityServerConstants.StandardScopes.Address,
             },
-
-            RedirectUris =
-            {
-                "https://localhost:9998/signin-oidc",
-            },
+            AllowOfflineAccess = true,
+            RequireConsent = true,
         },
     ];
 }
