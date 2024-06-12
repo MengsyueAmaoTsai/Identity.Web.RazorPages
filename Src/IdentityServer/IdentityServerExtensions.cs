@@ -61,7 +61,9 @@ internal static class InMemoryClients
             {
                 IdentityServerConstants.StandardScopes.OpenId,
                 IdentityServerConstants.StandardScopes.Profile,
+                "RichillCapital.Api.AspNetCore",
             },
+            AllowRememberConsent = true,
             AllowOfflineAccess = true,
             RequireConsent = true,
         },
@@ -80,16 +82,20 @@ internal static class InMemoryIdentityResources
     ];
 }
 
-internal static class InMemoryApiResources
-{
-    internal static IEnumerable<ApiResource> Default =
-    [
-    ];
-}
-
 internal static class InMemoryApiScopes
 {
     internal static IEnumerable<ApiScope> Default =
+    [
+        new ApiScope(
+            name: "RichillCapital.Api.AspNetCore",
+            displayName: "RichillCapital API",
+            userClaims: null),
+    ];
+}
+
+internal static class InMemoryApiResources
+{
+    internal static IEnumerable<ApiResource> Default =
     [
     ];
 }

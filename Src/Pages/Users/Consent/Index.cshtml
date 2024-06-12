@@ -1,0 +1,137 @@
+@page
+@model ConsentViewModel
+
+@{
+    ViewData["Title"] = "Consent";
+}
+
+
+<fluent-card>
+    <h2>Client Information</h2>
+    
+    <div>
+        <b>ReturnUrl</b> => @Model.ReturnUrl
+    </div>
+
+    <div>
+        <b>ClientId</b> => @Model.ClientId
+    </div>
+
+    <div>
+        <b>ClientName</b> => @Model.ClientName
+    </div>
+
+    <div>
+        <b>ClientUrl</b> => @Model.ClientUrl
+    </div>
+
+    <div>
+        <b>ClientLogoUrl</b> => @Model.ClientLogoUrl
+    </div>
+
+    <div>
+        <b>AllowRememberConsent</b> => @Model.AllowRememberConsent
+    </div>
+</fluent-card>
+
+<br />
+<fluent-card>
+    <h2>IdentityResources</h2>
+
+    @foreach (var identityResource in Model.IdentityResources)
+    {
+        <fluent-checkbox 
+            checked=@identityResource.Required 
+            disabled=@identityResource.Required>
+        </fluent-checkbox>
+
+        <br />
+        <fluent-card>
+            <label>Name: @identityResource.Name</label>
+        </fluent-card>
+
+        <fluent-card>
+            <label>DisplayName: @identityResource.DisplayName</label>
+        </fluent-card>
+
+        <fluent-card>
+            <label>Description: @identityResource.Description</label>
+        </fluent-card>
+
+        <fluent-card>
+            <label>Emphasize: @identityResource.Emphasize</label>
+        </fluent-card>
+
+        <fluent-card>
+            <label>Required: @identityResource.Required</label>
+        </fluent-card>
+
+        <fluent-card>
+            <label>IsConsented: @identityResource.IsConsented</label>
+        </fluent-card>
+
+        <fluent-card>
+            <label>Value: @identityResource.Value</label>
+        </fluent-card>
+    }
+</fluent-card>
+
+
+<br />
+<fluent-card>
+    <h2>Api Scopes</h2>
+
+    @foreach (var apiScope in Model.ApiScopes)
+    {
+        <fluent-checkbox 
+            checked=@apiScope.Required 
+            disabled=@apiScope.Required>
+        </fluent-checkbox>
+
+        <br />
+        <fluent-card>
+            <label>Name: @apiScope.Name</label>
+        </fluent-card>
+
+        <fluent-card>
+            <label>DisplayName: @apiScope.DisplayName</label>
+        </fluent-card>
+
+        <fluent-card>
+            <label>Description: @apiScope.Description</label>
+        </fluent-card>
+
+        <fluent-card>
+            <label>Emphasize: @apiScope.Emphasize</label>
+        </fluent-card>
+
+        <fluent-card>
+            <label>Required: @apiScope.Required</label>
+        </fluent-card>
+
+        <fluent-card>
+            <label>IsConsented: @apiScope.IsConsented</label>
+        </fluent-card>
+
+        <fluent-card>
+            <label>Value: @apiScope.Value</label>
+        </fluent-card>
+
+        <fluent-card>
+            <label>Resources</label>
+
+            @foreach (var resource in @apiScope.Resources)
+            {
+                <fluent-card>
+                    <label>Name: @resource.Name</label>
+                    <label>DisplayName: @resource.DisplayName</label>
+                </fluent-card>
+            }
+        </fluent-card>
+    }
+</fluent-card>
+
+<fluent-card>
+    <fluent-button appearance="accent">Yes, Allow</fluent-button>
+    <fluent-button appearance="accent">No, Do Not Allow</fluent-button>
+</fluent-card>
