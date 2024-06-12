@@ -1,3 +1,4 @@
+using Duende.IdentityServer;
 using Duende.IdentityServer.Models;
 using Duende.IdentityServer.Test;
 
@@ -14,6 +15,11 @@ internal static class IdentityServerExtensions
                 options.UserInteraction.LoginReturnUrlParameter = "ReturnUrl";
                 options.UserInteraction.ErrorUrl = "/Error";
                 options.UserInteraction.ErrorIdParameter = "ErrorId";
+
+                options.Events.RaiseErrorEvents = true;
+                options.Events.RaiseFailureEvents = true;
+                options.Events.RaiseInformationEvents = true;
+                options.Events.RaiseSuccessEvents = true;
             })
             .AddInMemoryIdentityResources(InMemoryIdentityResources.Default)
             .AddInMemoryApiResources(InMemoryApiResources.Default)
@@ -31,6 +37,27 @@ internal static class InMemoryClients
 
     internal static IEnumerable<Client> Default =
     [
+        new()
+        {
+            ClientId = "Richillcapital.TraderStudio.Web.Blazor",
+            ClientName = "Trader Studio Web",
+            ClientSecrets = DefaultClientSecrets,
+            AllowedGrantTypes = GrantTypes.Code,
+
+            AllowedScopes =
+            {
+                IdentityServerConstants.StandardScopes.OpenId,
+                IdentityServerConstants.StandardScopes.Profile,
+                IdentityServerConstants.StandardScopes.Email,
+                IdentityServerConstants.StandardScopes.Phone,
+                IdentityServerConstants.StandardScopes.Address,
+            },
+
+            RedirectUris =
+            {
+                "https://localhost:9998/signin-oidc",
+            },
+        },
     ];
 }
 
