@@ -4,4 +4,15 @@
 @{
 }
 
-<h1>Client Details</h1>
+<fluent-breadcrumb class="breadcrumb">
+  <fluent-breadcrumb-item href="/">Home</fluent-breadcrumb-item>
+  <fluent-breadcrumb-item href="/Clients/Index">Clients</fluent-breadcrumb-item>
+  <fluent-breadcrumb-item>@Model.Id</fluent-breadcrumb-item>
+</fluent-breadcrumb>
+
+<fluent-card class="card-client-details">
+    <h3>Client Details</h3>
+    <h6>@Model.Client.ClientId</h6>
+    <h6>@Model.Client.ClientName</h6>
+    <h6>@Model.Client.Description</h6>
+</fluent-card>
