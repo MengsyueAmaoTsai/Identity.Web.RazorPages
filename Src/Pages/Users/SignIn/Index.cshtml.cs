@@ -3,6 +3,7 @@ using Duende.IdentityServer.Events;
 using Duende.IdentityServer.Services;
 
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -13,6 +14,7 @@ using RichillCapital.SharedKernel.Monads;
 
 namespace RichillCapital.Identity.Web.Pages.Users.SignIn;
 
+[AllowAnonymous]
 public sealed class SignInViewModel(
     IReadOnlyRepository<User> _userRepository,
     IIdentityServerInteractionService _interactionService,
@@ -46,20 +48,28 @@ public sealed class SignInViewModel(
             return Page();
         }
 
+        var request = await _interactionService.GetAuthorizationContextAsync(ReturnUrl);
+
         var signInResult = await SignInAsync(
             emailResult.Value,
             Password,
             cancellationToken);
 
+
         if (signInResult.IsFailure)
         {
             ModelState.AddModelError(signInResult.Error.Code, signInResult.Error.Message);
+
+            await _eventService.RaiseAsync(new UserLoginFailureEvent(
+                Email,
+                signInResult.Error.Message,
+                clientId: request?.Client.ClientId));
+
             return Page();
         }
 
         var user = signInResult.Value;
 
-        var request = await _interactionService.GetAuthorizationContextAsync(ReturnUrl);
 
         await _eventService.RaiseAsync(new UserLoginSuccessEvent(
             user.Name,
@@ -71,7 +81,7 @@ public sealed class SignInViewModel(
             request.IsNativeClient() ? this.LoadingPage(ReturnUrl) : Redirect(ReturnUrl) :
             Url.IsLocalUrl(ReturnUrl) ?
             Redirect(ReturnUrl) :
-            string.IsNullOrEmpty(ReturnUrl) ? (IActionResult)Redirect("~/") : throw new Exception("invalid return URL");
+            string.IsNullOrEmpty(ReturnUrl) ? Redirect("~/") : throw new Exception("invalid return URL");
     }
 
     private async Task<Result<User>> SignInAsync(
