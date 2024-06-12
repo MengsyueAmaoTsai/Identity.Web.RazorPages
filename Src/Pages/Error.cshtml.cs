@@ -1,5 +1,8 @@
 using System.Diagnostics;
 
+using Duende.IdentityServer.Models;
+using Duende.IdentityServer.Services;
+
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -8,16 +11,31 @@ namespace RichillCapital.Identity.Web.Pages;
 
 [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
 [IgnoreAntiforgeryToken]
-[Authorize]
-public class ErrorViewModel : PageModel
+[AllowAnonymous]
+public class ErrorViewModel(
+    IIdentityServerInteractionService _interactionService) :
+    PageModel
 {
-    public string? RequestId { get; set; }
+    [BindProperty(Name = "errorId", SupportsGet = true)]
+    public required string ErrorId { get; init; }
 
-    public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
+    public required ErrorMessage ErrorMessage { get; set; }
 
-    public void OnGet()
+    public required string RequestId { get; set; }
+
+    public async Task<IActionResult> OnGetAsync()
     {
-        RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier;
+        var message = await _interactionService.GetErrorContextAsync(ErrorId);
+
+        if (message is not null)
+        {
+            ErrorMessage = message;
+        }
+
+        RequestId = Activity.Current?.Id ??
+            HttpContext.TraceIdentifier;
+
+        return Page();
     }
 }
 
