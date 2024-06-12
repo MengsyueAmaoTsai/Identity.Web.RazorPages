@@ -81,6 +81,10 @@ internal static class InMemoryClients
             {
                 IdentityServerConstants.StandardScopes.OpenId,
                 IdentityServerConstants.StandardScopes.Profile,
+                IdentityServerConstants.StandardScopes.Email,
+                IdentityServerConstants.StandardScopes.Phone,
+                IdentityServerConstants.StandardScopes.Address,
+                IdentityServerConstants.StandardScopes.OfflineAccess,
                 "RichillCapital.Api.AspNetCore",
             },
             AllowRememberConsent = true,
