@@ -19,9 +19,4 @@
     <ProjectReference Include="Libs\RichillCapital.Persistence\RichillCapital.Persistence.csproj" />
     <ProjectReference Include="Libs\RichillCapital.UseCases\RichillCapital.UseCases.csproj" />
   </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Duende.IdentityServer" Version="7.0.5" />
-  </ItemGroup>
-
 </Project>

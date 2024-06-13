@@ -5,13 +5,6 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Duende.IdentityServer" Version="7.0.5" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="8.0.6" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.MicrosoftAccount" Version="8.0.6" />
-  </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\RichillCapital.UseCases\RichillCapital.UseCases.csproj" />
   </ItemGroup>

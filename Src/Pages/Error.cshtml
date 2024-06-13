@@ -9,20 +9,6 @@
         
     <div class="alert alert-danger">
         Sorry, there was an error 
-
-        @if (Model.IdentityErrorMessage != null)
-        {
-            <strong>
-                <em>
-                    : @Model.IdentityErrorMessage.Error
-                </em>
-            </strong>
-
-            if (Model.IdentityErrorMessage.ErrorDescription is not null)
-            {
-                <div>@Model.IdentityErrorMessage.ErrorDescription</div>
-            }
-        }
     </div>
 
     @if (Model.TraceId is not null)
@@ -31,6 +17,4 @@
             <strong>Trace ID:</strong> <code>@Model.TraceId</code>
         </p>
     }
-
-
 </fluent-card>
