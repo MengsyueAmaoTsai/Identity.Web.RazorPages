@@ -1,0 +1,38 @@
+@page
+@model ProfileViewModel
+@{
+    ViewData["Title"] = "Your profile";
+}
+
+<fluent-card>
+    <img src="@Model.PictureUrl" alt="profile-picture" />
+    
+    <div>
+        <a href="./Profile">
+            @Model.Name
+        </a>
+    </div>
+
+    <div>
+        <a href="mailto:@Model.Email">
+            @Model.Email
+        </a>
+    </div>    
+</fluent-card>
+
+<fluent-card id="card-basic-info">
+    <h5>Basic Information</h5>
+
+    <a>Edit Profile</a>
+
+    <div>
+        E-Mail @Model.Email
+    </div>
+
+    <div>
+        Phone Number: @Model.PhoneNumber
+    </div>
+
+    <a>Close</a>
+    
+</fluent-card>
