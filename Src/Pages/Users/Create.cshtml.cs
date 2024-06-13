@@ -7,7 +7,7 @@ using RichillCapital.Domain.Common.Repositories;
 
 namespace RichillCapital.Identity.Web.Pages.Users;
 
-[Authorize]
+[AllowAnonymous]
 public sealed class CreateUserViewModel(
     IRepository<User> _userRepository,
     IUnitOfWork _unitOfWork) : PageModel
