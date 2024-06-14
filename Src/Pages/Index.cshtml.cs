@@ -3,8 +3,8 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace RichillCapital.Identity.Web.Pages;
 
-[AllowAnonymous]
-public class IndexModel : PageModel
+[Authorize]
+public class IndexViewModel : PageModel
 {
     public void OnGet()
     {

@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -6,6 +7,7 @@ using RichillCapital.Identity.Web.Services;
 
 namespace RichillCapital.Identity.Web.Pages.Users;
 
+[Authorize]
 public sealed class UserDetailsViewModel(
     ILogger<UserDetailsViewModel> _logger,
     IApiService _apiService) :

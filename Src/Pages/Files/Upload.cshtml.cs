@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -8,6 +9,7 @@ using RichillCapital.Identity.Web.Services.Contracts.Files;
 
 namespace RichillCapital.Identity.Web.Pages.Files;
 
+[Authorize]
 public sealed class UploadFileViewModel(
     ILogger<UploadFileViewModel> _logger,
     IApiService _apiService) : 

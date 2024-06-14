@@ -1,3 +1,4 @@
+using RichillCapital.Identity;
 using RichillCapital.Identity.Web.Pages;
 using RichillCapital.Identity.Web.Services;
 using RichillCapital.Logging;
@@ -24,6 +25,16 @@ builder.Services.AddApiService();
 
 builder.Services.AddPages();
 
+
+builder.Services
+    .AddAuthentication(RichillCapitalAuthenticationConstants.CookieAuthenticationScheme)
+    .AddCookie(RichillCapitalAuthenticationConstants.CookieAuthenticationScheme, options=>
+    {
+        options.LoginPath = "/users/signin";
+    });
+
+builder.Services.AddAuthorization();
+
 var app = builder.Build();
 
 if (!app.Environment.IsDevelopment())
@@ -37,6 +48,9 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.MapPages();
 
