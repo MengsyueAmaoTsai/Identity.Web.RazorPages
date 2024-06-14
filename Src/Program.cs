@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.DataProtection;
+
 using RichillCapital.Identity;
 using RichillCapital.Identity.Web.Pages;
 using RichillCapital.Identity.Web.Services;
@@ -25,10 +27,16 @@ builder.Services.AddApiService();
 
 builder.Services.AddPages();
 
+builder.Services
+    .AddIdentityServer(options =>
+    {
+        options.UserInteraction.LoginUrl = "/users/signin";
+        options.UserInteraction.LoginReturnUrlParameter = "returnUrl";
+    });
 
 builder.Services
     .AddAuthentication(RichillCapitalAuthenticationConstants.CookieAuthenticationScheme)
-    .AddCookie(RichillCapitalAuthenticationConstants.CookieAuthenticationScheme, options=>
+    .AddCookie(RichillCapitalAuthenticationConstants.CookieAuthenticationScheme, options =>
     {
         options.LoginPath = "/users/signin";
     });
@@ -49,6 +57,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseIdentityServer();
 app.UseAuthentication();
 app.UseAuthorization();
 

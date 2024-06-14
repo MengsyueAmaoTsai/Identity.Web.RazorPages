@@ -8,20 +8,22 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 namespace RichillCapital.Identity.Web.Pages.Users.SignIn;
 
 [AllowAnonymous]
-public sealed class SignInViewModel : 
+public sealed class SignInViewModel :
     PageModel
 {
+    [BindProperty(SupportsGet = true)]
+    public required string ReturnUrl { get; set; }
+
     public async Task<IActionResult> OnPostAsync(CancellationToken cancellationToken = default)
     {
-        var pricipal = new ClaimsPrincipal(
+        var principle = new ClaimsPrincipal(
             new ClaimsIdentity(
             [
-                new Claim(ClaimTypes.NameIdentifier, "1"),
+                new Claim("sub", "1"),
                 new Claim(ClaimTypes.Name, "John Doe"),
                 new Claim(ClaimTypes.Email, "mengsyue.tsai@outlook.com"),
                 new Claim(ClaimTypes.Role, "Admin"),
-        
-            ], 
+            ],
             RichillCapitalAuthenticationConstants.CookieAuthenticationScheme));
 
         var properties = new AuthenticationProperties
@@ -30,8 +32,8 @@ public sealed class SignInViewModel :
             ExpiresUtc = DateTimeOffset.UtcNow.AddSeconds(30),
         };
 
-        await HttpContext.SignInAsync(pricipal, properties);
-        
+        await HttpContext.SignInAsync(principle, properties);
+
         return Page();
     }
 }
