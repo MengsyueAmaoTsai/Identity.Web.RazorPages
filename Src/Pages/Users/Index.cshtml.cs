@@ -19,7 +19,7 @@ public sealed class ListUsersViewModel(
 
         if (users.IsFailure)
         {
-            return RedirectToPage("/Error");
+            return RedirectToPage("/error");
         }
 
         Users = users.Value.Items

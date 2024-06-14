@@ -49,7 +49,7 @@
                         @if (User.Identity!.IsAuthenticated)
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="">Sign Out</a>
+                                <a class="nav-link text-dark" asp-area="" asp-page="/users/signout/index">Sign Out</a>
                             </li>
                         }
 
