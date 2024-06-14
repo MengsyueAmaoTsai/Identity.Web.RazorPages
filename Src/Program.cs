@@ -38,9 +38,9 @@ builder.Services
 builder.Services
     .AddAuthentication(options =>
     {
-        options.DefaultScheme = RichillCapitalAuthenticationConstants.CookieAuthenticationScheme;
+        options.DefaultScheme = RichillCapitalAuthenticationSchemes.Cookie;
     })
-    .AddCookie(RichillCapitalAuthenticationConstants.CookieAuthenticationScheme, options =>
+    .AddCookie(RichillCapitalAuthenticationSchemes.Cookie, options =>
     {
         options.LoginPath = "/users/signin";
     });

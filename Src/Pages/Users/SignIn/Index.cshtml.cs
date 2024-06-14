@@ -24,7 +24,7 @@ public sealed class SignInViewModel :
                 new Claim(ClaimTypes.Email, "mengsyue.tsai@outlook.com"),
                 new Claim(ClaimTypes.Role, "Admin"),
             ],
-            RichillCapitalAuthenticationConstants.CookieAuthenticationScheme));
+            RichillCapitalAuthenticationSchemes.Cookie));
 
         var properties = new AuthenticationProperties
         {
