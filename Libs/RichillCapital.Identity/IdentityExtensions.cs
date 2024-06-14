@@ -24,6 +24,8 @@ public static class IdentityExtensions
         services
             .AddIdentityServer(options =>
             {
+                options.Authentication.CookieAuthenticationScheme = RichillCapitalAuthenticationSchemes.Cookie;
+
                 options.IssuerUri = identityOptions.IssuerUri;
                 options.UserInteraction.LoginUrl = "/users/signin";
                 options.UserInteraction.LoginReturnUrlParameter = "returnUrl";
