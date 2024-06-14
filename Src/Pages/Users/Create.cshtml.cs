@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations;
+
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -7,22 +9,29 @@ using RichillCapital.Domain.Common.Repositories;
 namespace RichillCapital.Identity.Web.Pages.Users;
 
 public sealed class CreateUserViewModel(
-    ILogger<CreateUserViewModel> _logger,
     IRepository<User> _userRepository,
     IUnitOfWork _unitOfWork) :
     PageModel
 {
+    [Display(Name = "E-Mail")]
+    [EmailAddress]
     [BindProperty]
-    public required string Email { get; set; }
+    public required string Email { get; init; }
 
     [BindProperty]
-    public required string Name { get; set; }
+    public required string Name { get; init; }
 
+    [Display(Name = "Phone Number")]
     [BindProperty]
-    public required string PhoneNumber { get; set; }
+    public required string PhoneNumber { get; init; }
 
     public async Task<IActionResult> OnPostAsync(CancellationToken cancellationToken = default)
     {
+        if (!ModelState.IsValid)
+        {
+            return Page();
+        }
+
         var emailResult = Domain.Email.From(Email);
 
         if (emailResult.IsFailure)
