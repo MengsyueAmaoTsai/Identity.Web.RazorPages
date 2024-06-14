@@ -13,7 +13,15 @@
         @foreach (var property in Model.Items)
         {
             <dt>@property.Key</dt>
-            <dt>@property.Value</dt>
+            
+            @if (property.Key == ".issued" || property.Key == ".expires")
+            {
+                <dd>@DateTimeOffset.Parse(property.Value!).ToString("yyyy-MM-dd HH:mm:ss")</dd>
+            }
+            else
+            {
+                <dd>@property.Value</dd>
+            }
         }
     </dl>
 </div>

@@ -7,8 +7,8 @@
 
 <h1>Diagnostics</h1>
 
-<h3>Authentication Scheme: @Model.User.Identity!.AuthenticationType</h3>
-<h3>Is Authenticated: @Model.User.Identity!.IsAuthenticated</h3>
+<h3>Scheme: <b>@Model.User.Identity!.AuthenticationType</b></h3>
+<h5>@(Model.User.Identity!.IsAuthenticated ? "Authenticated" : "Not authenticated!")</h5>
 
 <partial name="_Claims" model="@Model.User" />
 <partial name="_Properties" model="@Model.Properties" />
