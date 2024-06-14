@@ -11,6 +11,7 @@ internal static class RazorPageExtensions
         services.Configure<RouteOptions>(options =>
         {
             options.LowercaseUrls = true;
+            options.LowercaseQueryStrings = true;
         });
 
         return services;
