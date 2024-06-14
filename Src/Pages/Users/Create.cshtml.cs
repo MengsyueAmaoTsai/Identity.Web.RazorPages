@@ -39,6 +39,6 @@ public sealed class CreateUserViewModel(
 
         await _unitOfWork.SaveChangesAsync(cancellationToken);
 
-        return RedirectToPage("./Index");
+        return RedirectToPage("./index");
     }
 }

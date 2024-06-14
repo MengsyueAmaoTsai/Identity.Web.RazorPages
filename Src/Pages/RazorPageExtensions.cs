@@ -8,6 +8,11 @@ internal static class RazorPageExtensions
             .AddRazorPages()
             .WithRazorPagesRoot("/Src/Pages");
 
+        services.Configure<RouteOptions>(options =>
+        {
+            options.LowercaseUrls = true;
+        });
+
         return services;
     }
 
