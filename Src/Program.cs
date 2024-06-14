@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.DataProtection;
+
 using RichillCapital.Identity;
 using RichillCapital.Identity.Web.Pages;
 using RichillCapital.Identity.Web.Services;
@@ -6,6 +8,8 @@ using RichillCapital.Persistence;
 using RichillCapital.UseCases;
 
 using Serilog;
+
+using StackExchange.Redis;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -28,6 +32,13 @@ builder.Services.AddApiService();
 // Presentation - RazorPages
 builder.Services.AddPages();
 
+// Security
+builder.Services
+    .AddDataProtection()
+    .PersistKeysToStackExchangeRedis(
+        ConnectionMultiplexer.Connect("redis://localhost:6379"),
+        "DataProtection-Keys")
+    .SetApplicationName("RichillCapital.Identity.Web");
 
 var app = builder.Build();
 
