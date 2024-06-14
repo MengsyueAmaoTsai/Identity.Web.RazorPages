@@ -7,7 +7,7 @@ namespace RichillCapital.Identity.Web.Services;
 internal sealed class ApiService(HttpClient _httpClient) :
     IApiService
 {
-    public async Task<Result<UserResponse>> GetUsersByIdAsync(
+    public async Task<Result<UserResponse>> GetUserByIdAsync(
         string userId,
         CancellationToken cancellationToken = default)
     {

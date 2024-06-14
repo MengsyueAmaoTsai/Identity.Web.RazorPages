@@ -1,0 +1,30 @@
+@page 
+@model ListUsersViewModel 
+@{
+    ViewData["Title"] = "Users";
+}
+
+<table class="table-responsive">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Email</th>
+            <th>Name</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var user in Model.Users)
+        {
+            <tr>
+                <td>@user.Id</td>
+                <td>@user.Email</td>
+                <td>@user.Name</td>
+                <td>
+                    <a class="btn btn-primary" asp-page="./details" asp-route-userId="@user.Id">Details</a> 
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
