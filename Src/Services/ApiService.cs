@@ -1,10 +1,13 @@
 using RichillCapital.Identity.Web.Services.Contracts;
+using RichillCapital.Identity.Web.Services.Contracts.Files;
+using RichillCapital.Identity.Web.Services.Contracts.Users;
 using RichillCapital.SharedKernel;
 using RichillCapital.SharedKernel.Monads;
 
 namespace RichillCapital.Identity.Web.Services;
 
-internal sealed class ApiService(HttpClient _httpClient) :
+internal sealed class ApiService(
+    HttpClient _httpClient) :
     IApiService
 {
     public async Task<Result<UserResponse>> GetUserByIdAsync(
@@ -21,6 +24,21 @@ internal sealed class ApiService(HttpClient _httpClient) :
         }
 
         var result = await response.Content.ReadFromJsonAsync<UserResponse>(cancellationToken);
+
+        return result!.ToResult();
+    }
+
+    public async Task<Result<IEnumerable<FileEntryResponse>>> ListFileEntriesAsync(CancellationToken cancellationToken = default)
+    {
+        var response = await _httpClient.GetAsync("api/v1/files", cancellationToken);
+
+        if (!response.IsSuccessStatusCode) {
+            return Error
+                .Invalid("Failed to list file entries")
+                .ToResult<IEnumerable<FileEntryResponse>>();
+        }
+
+        var result = await response.Content.ReadFromJsonAsync<IEnumerable<FileEntryResponse>>(cancellationToken);
 
         return result!.ToResult();
     }

@@ -1,4 +1,4 @@
-﻿using RichillCapital.Identity.Web.Services.Contracts;
+﻿using RichillCapital.Identity.Web.Services.Contracts.Users;
 
 namespace RichillCapital.Identity.Web.Models.Users;
 

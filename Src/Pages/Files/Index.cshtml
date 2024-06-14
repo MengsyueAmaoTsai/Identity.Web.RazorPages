@@ -1,0 +1,40 @@
+@page
+
+@model ListFilesViewModel
+
+@{
+    ViewData["Title"] = "Files";
+}
+
+<h1>File Entries</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>File Name</th>
+            <th>Description</th>
+            <th>Size (bytes)</th>
+            <th>Uploaded Time</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var file in Model.Files)
+        {
+            <tr>
+                <td>@file.Id</td>
+                <td>@file.FileName</td>
+                <td>@file.Description</td>
+                <td>@file.Size</td>
+                <td>@file.UploadedTime</td>
+                <td>
+                    <a>Download</a>
+                    <a>Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a>Click to upload a File</a>
