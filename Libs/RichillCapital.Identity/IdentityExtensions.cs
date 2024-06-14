@@ -1,0 +1,46 @@
+﻿using FluentValidation;
+
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
+
+using RichillCapital.Extensions.Options;
+using RichillCapital.Identity.Web.IdentityServer;
+
+namespace RichillCapital.Identity;
+
+public static class IdentityExtensions
+{
+    public static IServiceCollection AddIdentityWebIdentity(this IServiceCollection servces)
+    {
+        servces.AddValidatorsFromAssembly(
+            typeof(IdentityExtensions).Assembly,
+            includeInternalTypes: true);
+
+        servces.AddOptionsWithFluentValidation<IdentityOptions>(IdentityOptions.SectionKey);
+
+        using var scope = servces.BuildServiceProvider().CreateScope();
+        var identityOptions = scope.ServiceProvider.GetRequiredService<IOptions<IdentityOptions>>().Value;
+
+        servces
+            .AddIdentityServer(options =>
+            {
+                options.IssuerUri = identityOptions.IssuerUri;
+                options.UserInteraction.LoginUrl = "/users/signin";
+                options.UserInteraction.LoginReturnUrlParameter = "returnUrl";
+            })
+            .AddInMemoryClients(InMemoryClients.Default)
+            .AddInMemoryIdentityResources(InMemoryIdentityResources.Default);
+
+        servces
+            .AddAuthentication(options =>
+            {
+                options.DefaultScheme = RichillCapitalAuthenticationSchemes.Cookie;
+            })
+            .AddCookie(RichillCapitalAuthenticationSchemes.Cookie, options =>
+            {
+                options.LoginPath = "/users/signin";
+            });
+
+        return servces;
+    }
+}

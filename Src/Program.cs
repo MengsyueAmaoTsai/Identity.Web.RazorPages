@@ -1,5 +1,4 @@
 using RichillCapital.Identity;
-using RichillCapital.Identity.Web.IdentityServer;
 using RichillCapital.Identity.Web.Pages;
 using RichillCapital.Identity.Web.Services;
 using RichillCapital.Logging;
@@ -10,6 +9,7 @@ using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Application Layer
 builder.Services.AddMediator();
 
 // Infrastructure - Logging
@@ -20,32 +20,14 @@ builder.Services.AddSerilog();
 builder.Services.AddDatabase();
 
 // Infrastructure - Identity
+builder.Services.AddIdentityWebIdentity();
 
 // Infrastructure - Services
 builder.Services.AddApiService();
 
+// Presentation - RazorPages
 builder.Services.AddPages();
 
-builder.Services
-    .AddIdentityServer(options =>
-    {
-        options.UserInteraction.LoginUrl = "/users/signin";
-        options.UserInteraction.LoginReturnUrlParameter = "returnUrl";
-    })
-    .AddInMemoryClients(InMemoryClients.Default)
-    .AddInMemoryIdentityResources(InMemoryIdentityResources.Default);
-
-builder.Services
-    .AddAuthentication(options =>
-    {
-        options.DefaultScheme = RichillCapitalAuthenticationSchemes.Cookie;
-    })
-    .AddCookie(RichillCapitalAuthenticationSchemes.Cookie, options =>
-    {
-        options.LoginPath = "/users/signin";
-    });
-
-builder.Services.AddAuthorization();
 
 var app = builder.Build();
 

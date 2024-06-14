@@ -2,14 +2,14 @@
 
 namespace RichillCapital.Identity.Web.IdentityServer;
 
-internal static class InMemoryClients
+public static class InMemoryClients
 {
     private static readonly ICollection<Secret> DefaultSecrets = 
-        [
-            new Secret("secret".Sha256()),
-        ];
+    [
+        new Secret("secret".Sha256()),
+    ];
 
-    internal static readonly IEnumerable<Client> Default = 
+    public static readonly IEnumerable<Client> Default = 
     [
         new Client
         {

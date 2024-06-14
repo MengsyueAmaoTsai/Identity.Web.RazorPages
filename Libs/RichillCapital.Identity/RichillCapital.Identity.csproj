@@ -10,6 +10,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Duende.IdentityServer" Version="7.0.5" />
+    <PackageReference Include="RichillCapital.Extensions.Options" Version="1.0.0" />
   </ItemGroup>
 
 </Project>
