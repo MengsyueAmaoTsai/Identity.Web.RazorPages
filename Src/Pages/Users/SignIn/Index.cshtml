@@ -7,5 +7,20 @@
 <h1>Sign In</h1>
 
 <form method="post">
-    <button type="submit" class="btn btn-primary">Sign In</button>
+    <label asp-for="Email"></label>
+    <input asp-for="Email" class="form-control" />
+
+    <label asp-for="Password"></label>
+    <input asp-for="Password" class="form-control" />
+
+    <label asp-for="RememberMe"></label>
+
+    <input asp-for="RememberMe" type="checkbox" />
+
+    <div>
+        <button type="submit" class="btn btn-primary">Sign In</button>
+        <a class="btn btn-primary">Cancel</a>
+        <a class="btn btn-primary">Sign Up</a>
+        <a class="btn btn-primary">Forgoet Password</a>
+    </div>
 </form>
