@@ -1,0 +1,19 @@
+﻿@using Microsoft.AspNetCore.Authentication
+
+@model AuthenticationProperties
+@{
+}
+
+<div class="card-header">
+    <h4>Properties</h4>
+</div>
+
+<div class="card-body">
+    <dl>
+        @foreach (var property in Model.Items)
+        {
+            <dt>@property.Key</dt>
+            <dt>@property.Value</dt>
+        }
+    </dl>
+</div>

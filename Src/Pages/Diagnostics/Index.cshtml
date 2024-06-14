@@ -5,21 +5,10 @@
     ViewData["Title"] = "Diagnostics";
 }
 
-
 <h1>Diagnostics</h1>
 
-<div>
-    <h3>Claims:</h3>
-    @foreach (var claim in User.Claims)
-    {
-        <div class="alert-danger">@claim.Type: @claim.Value</div>
-    }
+<h3>Authentication Scheme: @Model.User.Identity!.AuthenticationType</h3>
+<h3>Is Authenticated: @Model.User.Identity!.IsAuthenticated</h3>
 
-    <h3>
-        IsAuthenticated: @User.Identity!.IsAuthenticated;
-    </h3>
-    
-    <h3>
-        AuthenticationType: @User.Identity.AuthenticationType;
-    </h3>
-</div>
+<partial name="_Claims" model="@Model.User" />
+<partial name="_Properties" model="@Model.Properties" />
