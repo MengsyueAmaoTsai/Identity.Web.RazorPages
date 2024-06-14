@@ -33,10 +33,13 @@ builder.Services.AddApiService();
 builder.Services.AddPages();
 
 // Security
+// Get from {"Redis": "connectionString"}
+var connectionString = builder.Configuration["Redis"];
+
 builder.Services
     .AddDataProtection()
     .PersistKeysToStackExchangeRedis(
-        ConnectionMultiplexer.Connect("redis://localhost:6379"),
+        ConnectionMultiplexer.Connect(connectionString),
         "DataProtection-Keys")
     .SetApplicationName("RichillCapital.Identity.Web");
 
