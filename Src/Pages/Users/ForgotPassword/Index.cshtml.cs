@@ -7,8 +7,7 @@ using RichillCapital.Domain.Common.Repositories;
 namespace RichillCapital.Identity.Web.Pages.Users.ForgotPassword;
 
 public sealed class ForgotPasswordViewModel(
-    IRepository<User> _userRepository,
-    IUnitOfWork _unitOfWork) : PageModel
+    IReadOnlyRepository<User> _userRepository) : PageModel
 {
     [BindProperty]
     public required string Email { get; init; }
