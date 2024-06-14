@@ -11,4 +11,5 @@ public interface IApiService
     Task<Result<UserResponse>> GetUserByIdAsync(string userId, CancellationToken cancellationToken = default);
 
     Task<Result<IEnumerable<FileEntryResponse>>> ListFileEntriesAsync(CancellationToken cancellationToken = default);
+    Task<Result<Guid>> UploadFileAsync(UploadFileRequest request, CancellationToken cancellationToken = default);
 }

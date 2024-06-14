@@ -1,3 +1,5 @@
+using System.Net.Http.Headers;
+
 using RichillCapital.Identity.Web.Services.Contracts;
 using RichillCapital.Identity.Web.Services.Contracts.Files;
 using RichillCapital.Identity.Web.Services.Contracts.Users;
@@ -28,21 +30,6 @@ internal sealed class ApiService(
         return result!.ToResult();
     }
 
-    public async Task<Result<IEnumerable<FileEntryResponse>>> ListFileEntriesAsync(CancellationToken cancellationToken = default)
-    {
-        var response = await _httpClient.GetAsync("api/v1/files", cancellationToken);
-
-        if (!response.IsSuccessStatusCode) {
-            return Error
-                .Invalid("Failed to list file entries")
-                .ToResult<IEnumerable<FileEntryResponse>>();
-        }
-
-        var result = await response.Content.ReadFromJsonAsync<IEnumerable<FileEntryResponse>>(cancellationToken);
-
-        return result!.ToResult();
-    }
-
     public async Task<Result<PagedResponse<UserResponse>>> ListUsersAsync(CancellationToken cancellationToken = default)
     {
         var response = await _httpClient.GetAsync("api/v1/users", cancellationToken);
@@ -57,5 +44,56 @@ internal sealed class ApiService(
         var result = await response.Content.ReadFromJsonAsync<PagedResponse<UserResponse>>(cancellationToken);
 
         return result!.ToResult();
+    }
+
+    public async Task<Result<IEnumerable<FileEntryResponse>>> ListFileEntriesAsync(CancellationToken cancellationToken = default)
+    {
+        var response = await _httpClient.GetAsync("api/v1/files", cancellationToken);
+
+        if (!response.IsSuccessStatusCode)
+        {
+            return Error
+                .Invalid("Failed to list file entries")
+                .ToResult<IEnumerable<FileEntryResponse>>();
+        }
+
+        var result = await response.Content.ReadFromJsonAsync<IEnumerable<FileEntryResponse>>(cancellationToken);
+
+        return result!.ToResult();
+    }
+
+    public async Task<Result<Guid>> UploadFileAsync(
+        UploadFileRequest requset,
+        CancellationToken cancellationToken = default)
+    {
+        using var fileStream = requset.File.OpenReadStream();
+
+        var fileContent = new StreamContent(fileStream);
+
+        fileContent.Headers.ContentType = new MediaTypeHeaderValue(requset.File.ContentType);
+
+        using var content = new MultipartFormDataContent
+        {
+            { new StringContent(requset.Name), "Name" },
+            { new StringContent(requset.Description), "Description" },
+            { new StringContent(requset.Encrypt.ToString()), "Encrypt" },
+            { fileContent, "File", requset.File.FileName }
+        };
+
+        var response = await _httpClient.PostAsync(
+            "api/v1/files", 
+            content, 
+            cancellationToken);
+
+        if (!response.IsSuccessStatusCode)
+        {
+            return Error
+                .Invalid("Failed to upload file")
+                .ToResult<Guid>();
+        }
+
+        var result = await response.Content.ReadFromJsonAsync<UploadFileResponse>(cancellationToken);
+
+        return result!.Id.ToResult();
     }
 }

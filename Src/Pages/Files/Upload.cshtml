@@ -1,0 +1,27 @@
+﻿@page
+@model UploadFileViewModel
+@{
+    ViewData["Title"] = "Upload";
+}
+
+<h1>Upload file</h1>
+<form enctype="multipart/form-data" method="post">
+    <dl>
+        <div>
+            <label asp-for="Name"></label>
+            <input asp-for="Name" type="text"/>
+        </div>
+
+        <div>
+            <label asp-for="Description"></label>
+            <input asp-for="Description" type="text" />
+        </div>
+
+        <div>
+            <label asp-for="FromFile"></label>
+            <input asp-for="FromFile" type="file"/>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Upload</button>
+    </dl>
+</form>
