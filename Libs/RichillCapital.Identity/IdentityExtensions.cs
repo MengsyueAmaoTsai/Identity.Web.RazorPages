@@ -10,18 +10,18 @@ namespace RichillCapital.Identity;
 
 public static class IdentityExtensions
 {
-    public static IServiceCollection AddIdentityWebIdentity(this IServiceCollection servces)
+    public static IServiceCollection AddIdentityWebIdentity(this IServiceCollection services)
     {
-        servces.AddValidatorsFromAssembly(
+        services.AddValidatorsFromAssembly(
             typeof(IdentityExtensions).Assembly,
             includeInternalTypes: true);
 
-        servces.AddOptionsWithFluentValidation<IdentityOptions>(IdentityOptions.SectionKey);
+        services.AddOptionsWithFluentValidation<IdentityOptions>(IdentityOptions.SectionKey);
 
-        using var scope = servces.BuildServiceProvider().CreateScope();
+        using var scope = services.BuildServiceProvider().CreateScope();
         var identityOptions = scope.ServiceProvider.GetRequiredService<IOptions<IdentityOptions>>().Value;
 
-        servces
+        services
             .AddIdentityServer(options =>
             {
                 options.IssuerUri = identityOptions.IssuerUri;
@@ -29,9 +29,10 @@ public static class IdentityExtensions
                 options.UserInteraction.LoginReturnUrlParameter = "returnUrl";
             })
             .AddInMemoryClients(InMemoryClients.Default)
-            .AddInMemoryIdentityResources(InMemoryIdentityResources.Default);
+            .AddInMemoryIdentityResources(InMemoryIdentityResources.Default)
+            .AddDeveloperSigningCredential();
 
-        servces
+        services
             .AddAuthentication(options =>
             {
                 options.DefaultScheme = RichillCapitalAuthenticationSchemes.Cookie;
@@ -41,6 +42,6 @@ public static class IdentityExtensions
                 options.LoginPath = "/users/signin";
             });
 
-        return servces;
+        return services;
     }
 }
