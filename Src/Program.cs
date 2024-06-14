@@ -1,4 +1,5 @@
 using RichillCapital.Identity;
+using RichillCapital.Identity.Web.IdentityServer;
 using RichillCapital.Identity.Web.Pages;
 using RichillCapital.Identity.Web.Services;
 using RichillCapital.Logging;
@@ -30,10 +31,15 @@ builder.Services
     {
         options.UserInteraction.LoginUrl = "/users/signin";
         options.UserInteraction.LoginReturnUrlParameter = "returnUrl";
-    });
+    })
+    .AddInMemoryClients(InMemoryClients.Default)
+    .AddInMemoryIdentityResources(InMemoryIdentityResources.Default);
 
 builder.Services
-    .AddAuthentication(RichillCapitalAuthenticationConstants.CookieAuthenticationScheme)
+    .AddAuthentication(options =>
+    {
+        options.DefaultScheme = RichillCapitalAuthenticationConstants.CookieAuthenticationScheme;
+    })
     .AddCookie(RichillCapitalAuthenticationConstants.CookieAuthenticationScheme, options =>
     {
         options.LoginPath = "/users/signin";
