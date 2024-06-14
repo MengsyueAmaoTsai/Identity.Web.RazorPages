@@ -8,7 +8,7 @@
 <fluent-card>
         
     <div class="alert alert-danger">
-        Sorry, there was an error 
+        @Model.ErrorMessage
     </div>
 
     @if (Model.TraceId is not null)

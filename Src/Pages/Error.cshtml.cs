@@ -1,6 +1,7 @@
 using System.Diagnostics;
 
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -17,10 +18,16 @@ public class ErrorViewModel() :
 
     public required string TraceId { get; set; }
 
+    public required string ErrorMessage { get; set; }
+
     public IActionResult OnGetAsync()
     {
         TraceId = Activity.Current?.Id ??
             HttpContext.TraceIdentifier;
+
+        var exceptionFeature = HttpContext.Features.Get<IExceptionHandlerFeature>();
+
+        ErrorMessage = exceptionFeature?.Error.Message ?? "An error occurred while processing your request.";
 
         return Page();
     }
