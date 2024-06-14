@@ -2,7 +2,7 @@
 
 namespace RichillCapital.Identity;
 
-internal sealed record IdentityOptions
+public sealed record IdentityOptions
 {
     internal const string SectionKey = "Identity";
 
@@ -11,7 +11,7 @@ internal sealed record IdentityOptions
     public required int RememberMeDurationDays { get; init; }
 }
 
-internal sealed class IdentityOptionsValidator : 
+internal sealed class IdentityOptionsValidator :
     AbstractValidator<IdentityOptions>
 {
     public IdentityOptionsValidator()

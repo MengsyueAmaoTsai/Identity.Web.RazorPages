@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Extensions.Options;
 
 using RichillCapital.Domain;
 using RichillCapital.Domain.Common.Repositories;
@@ -12,7 +13,8 @@ namespace RichillCapital.Identity.Web.Pages.Users.SignIn;
 
 [AllowAnonymous]
 public sealed class SignInViewModel(
-    IReadOnlyRepository<User> _userRepository) :
+    IReadOnlyRepository<User> _userRepository,
+    IOptionsSnapshot<IdentityOptions> _identityOptions) :
     PageModel
 {
     [BindProperty(SupportsGet = true)]
@@ -70,8 +72,8 @@ public sealed class SignInViewModel(
         var properties = RememberMe ?
             new AuthenticationProperties
             {
-                IsPersistent = false,
-                ExpiresUtc = DateTimeOffset.UtcNow.AddSeconds(30),
+                IsPersistent = true,
+                ExpiresUtc = DateTimeOffset.UtcNow.AddDays(_identityOptions.Value.RememberMeDurationDays),
             } :
             null;
 
