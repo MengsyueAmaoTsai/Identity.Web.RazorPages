@@ -1,4 +1,4 @@
-﻿@page
+﻿@page 
 @model SignInViewModel
 @{
     ViewData["Title"] = "Sign In";
@@ -20,7 +20,7 @@
     <div>
         <button type="submit" class="btn btn-primary">Sign In</button>
         <a class="btn btn-primary">Cancel</a>
-        <a class="btn btn-primary">Sign Up</a>
-        <a class="btn btn-primary">Forgoet Password</a>
+        <a class="btn btn-primary" asp-page="/users/signup/index">Sign Up</a>
+        <a class="btn btn-primary" asp-page="/users/forgotpassword/index">Forgoet Password</a>
     </div>
 </form>
