@@ -3,13 +3,16 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
+using RichillCapital.UseCases.Common;
+
 namespace RichillCapital.Identity.Web.Pages.Diagnostics;
 
 [Authorize]
-public class DiagnosticsViewModel : PageModel
+public class DiagnosticsViewModel(ICurrentUser _currentUser) : PageModel
 {
     public required AuthenticationProperties Properties { get; set; }
-    
+    public ICurrentUser CurrentUser => _currentUser;
+
     public async Task<IActionResult> OnGetAsync()
     {
         var result = await HttpContext.AuthenticateAsync();

@@ -5,10 +5,10 @@
     ViewData["Title"] = "Diagnostics";
 }
 
-<h1>Diagnostics</h1>
+<h1>Diagnostics for current user: @Model.CurrentUser.Id</h1>
 
 <h3>Scheme: <b>@Model.User.Identity!.AuthenticationType</b></h3>
-<h5>@(Model.User.Identity!.IsAuthenticated ? "Authenticated" : "Not authenticated!")</h5>
+<h5>@(Model.CurrentUser.IsAuthenticated ? "Authenticated" : "Not authenticated!")</h5>
 
 <partial name="_Claims" model="@Model.User" />
 <partial name="_Properties" model="@Model.Properties" />
