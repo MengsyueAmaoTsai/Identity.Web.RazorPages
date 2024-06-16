@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 
 using RichillCapital.Extensions.Options;
+using RichillCapital.Identity.Web.IdentityServer;
 using RichillCapital.UseCases.Common;
 
 namespace RichillCapital.Identity;
@@ -35,11 +36,20 @@ public static class IdentityExtensions
             {
                 options.IssuerUri = identityOptions.IssuerUri;
                 options.UserInteraction.LoginUrl = "/identity/sign-in";
-            });
+            })
+            .AddInMemoryClients(InMemoryClients.Default)
+            .AddInMemoryIdentityResources(InMemoryIdentityResources.Default)
+            .AddInMemoryApiResources(InMemoryApiResources.Default)
+            .AddDeveloperSigningCredential();
 
         services
             .AddAuthentication(options =>
             {
+                options.DefaultScheme = RichillCapitalAuthenticationSchemes.DefaultCookieScheme;
+            })
+            .AddCookie(RichillCapitalAuthenticationSchemes.DefaultCookieScheme, options =>
+            {
+                options.Cookie.Name = RichillCapitalAuthenticationSchemes.DefaultCookieScheme;
             })
             .AddMicrosoftAccount("Microsoft", options =>
             {
