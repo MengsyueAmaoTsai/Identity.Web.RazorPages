@@ -40,6 +40,7 @@ public static class IdentityExtensions
             })
             .AddInMemoryClients(InMemoryClients.Default)
             .AddInMemoryIdentityResources(InMemoryIdentityResources.Default)
+            .AddInMemoryApiResources(InMemoryApiResources.Default)
             .AddDeveloperSigningCredential();
 
         services

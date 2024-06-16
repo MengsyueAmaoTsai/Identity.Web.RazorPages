@@ -7,3 +7,28 @@
 <h1>
     Api Resources
 </h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Display Name</th>
+            <th>Description</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var apiResource in Model.ApiResources)
+        {
+            <tr>
+                <td>@apiResource.Name</td>
+                <td>@apiResource.DisplayName</td>
+                <td>@apiResource.Description</td>
+                <td>
+                    <a asp-page="./details" asp-route-resourceId="@apiResource.Name">Details</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

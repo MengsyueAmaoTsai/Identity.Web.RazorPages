@@ -15,6 +15,7 @@ public static class InMemoryClients
         {
             ClientId = "RichillCapital.Identity.Web.RazorPages",
             ClientName = "RichillCapital Identity Web",
+            Description = "RichillCapital Identity Web Client",
             ClientSecrets = DefaultSecrets,
 
             AllowedGrantTypes = GrantTypes.Code,
@@ -42,6 +43,7 @@ public static class InMemoryClients
         {
             ClientId = "RichillCapital.TraderStudio.Web.Blazor",
             ClientName = "RichillCapital Trader Studio Web",
+            Description = "RichillCapital Trader Studio Web Client",
             ClientSecrets = DefaultSecrets,
 
             AllowedGrantTypes = GrantTypes.Code,
@@ -69,6 +71,7 @@ public static class InMemoryClients
         {
             ClientId = "RichillCapital.Research.Web.Next",
             ClientName = "RichillCapital Research Web",
+            Description = "RichillCapital Research Web Client",
             ClientSecrets = DefaultSecrets,
 
             AllowedGrantTypes = GrantTypes.Code,
@@ -97,6 +100,7 @@ public static class InMemoryClients
         {
             ClientId = "RichillCapital.Exchange.Web.Angular",
             ClientName = "RichillCapital Exchange Web",
+            Description = "RichillCapital Exchange Web Client",
             ClientSecrets = DefaultSecrets,
 
             AllowedGrantTypes = GrantTypes.Code,
@@ -153,8 +157,8 @@ public static class InMemoryClients
         {
             ClientId = "RichillCapital.Community.Web.Astro",
             ClientName = "RichillCapital Community Web",
+            Description = "RichillCapital Community Web Client",
             ClientSecrets = DefaultSecrets,
-
             AllowedGrantTypes = GrantTypes.Code,
 
             RequirePkce = true,
@@ -180,6 +184,7 @@ public static class InMemoryClients
         {
             ClientId = "RichillCapital.TraderStudio.Desktop.Wpf",
             ClientName = "RichillCapital Trader Studio Desktop",
+            Description = "RichillCapital Trader Studio Desktop Client",
             ClientSecrets = DefaultSecrets,
 
             AllowedGrantTypes = GrantTypes.Code,
