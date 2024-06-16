@@ -1,0 +1,73 @@
+﻿@using Duende.IdentityServer.Models
+@model Client
+@{
+}
+
+<table class="table">
+    <tbody>
+        <tr>
+            <th>Name</th>
+            <td>Value</td>
+        </tr>
+
+        <tr>
+            <th>Enabled</th>
+            <td>@Model.Enabled</td>
+        </tr>
+
+        <tr>
+            <th>Protocol Type</th>
+            <td>@Model.ProtocolType</td>
+        </tr>
+
+        <tr>
+            <th>Require Client Secret</th>
+            <td>@Model.RequireClientSecret</td>
+        </tr>
+
+        <tr>
+            <th>Require Pkce</th>
+            <td>@Model.RequirePkce</td>
+        </tr>
+
+        <tr>
+            <th>Allow Plain Text Pkce</th>
+            <td>@Model.AllowPlainTextPkce</td>
+        </tr>
+
+        <tr>
+            <th>Allow Offline Access</th>
+            <td>@Model.AllowOfflineAccess</td>
+        </tr>
+
+        <tr>
+            <th>Allow Access Tokens Via Browser</th>
+            <td>@Model.AllowAccessTokensViaBrowser</td>
+        </tr>
+
+        <tr>
+            <th>Allowed Scopes</th>
+            <td>Values</td>
+        </tr>
+
+        <tr>
+            <th>Redirect Uris</th>
+            <td>Values</td>
+        </tr>
+
+        <tr>
+            <th>Allowed Grant Types</th>
+            <td>Value</td>
+        </tr>
+
+        <tr>
+            <th>Client Secrets</th>
+            <td><a asp-page="/clients/secrets" asp-route-clientId="@Model.ClientId">Manage</a></td>
+        </tr>
+
+        <tr>
+            <th>Properties</th>
+            <td><a asp-page="/clients/properties" asp-route-clientId="@Model.ClientId">Manage</a></td>
+        </tr>
+    </tbody>
+</table>

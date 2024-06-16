@@ -4,129 +4,37 @@
     ViewData["Title"] = "Client Details";
 }
 
-<fluent-card>
-    <h2>
-        @Model.Client.ClientName <small>(@Model.Client.ClientId)</small>
-    </h2> 
+@await Html.PartialAsync("_Header", Model.Client)
 
-    <div>@(!string.IsNullOrEmpty(Model.Client.Description) ? Model.Client.Description : "No description for this client.")</div>
-</fluent-card>
 
 <fluent-card>
-    <h3>Basic Information</h3>
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Enabled</th>
-                <td>@Model.Client.Enabled</td>
-            </tr>
+    <h3>Settings</h3>
 
-            <tr>
-                <th>Uri</th>
-                <td>@Model.Client.ClientUri</td>
-            </tr>
+    <fluent-tabs activeid="tab-basics">
+        <fluent-tab id="tab-basics">Basics</fluent-tab>
+        <fluent-tab id="tab-authentication">Authentication</fluent-tab>
+        <fluent-tab id="tab-token">Token</fluent-tab>
+        <fluent-tab id="tab-consent">Consent</fluent-tab>
+        <fluent-tab id="tab-device-flow">Device Flow</fluent-tab>
 
-            <tr>
-                <th>Protocol Type</th>
-                <td>@Model.Client.ProtocolType</td>
-            </tr>
+        <fluent-tab-panel id="tab-panel-basics">
+            @await Html.PartialAsync("_BasicsTabContent", Model.Client)
+        </fluent-tab-panel>
 
-            <tr>
-                <th>Require Secret</th>
-                <td>@Model.Client.RequireClientSecret</td>
-            </tr>
+        <fluent-tab-panel id="tab-panel-authentication">
+            @await Html.PartialAsync("_AuthenticationTabContent", Model.Client)
+        </fluent-tab-panel>
 
-            <tr>
-                <th>Require Pkce</th>
-                <td>@Model.Client.RequirePkce</td>
-            </tr>
+        <fluent-tab-panel id="tab-panel-token">
+            @await Html.PartialAsync("_TokenTabContent", Model.Client)
+            </fluent-tab-panel>
 
-            <tr>
-                <th>Allow Plain Text Pkce</th>
-                <td>@Model.Client.AllowPlainTextPkce</td>
-            </tr>
+        <fluent-tab-panel id="tab-panel-consent">
+            @await Html.PartialAsync("_ConsentTabContent", Model.Client)
+        </fluent-tab-panel>
 
-            <tr>
-                <th>Allow Offline Access</th>
-                <td>@Model.Client.AllowOfflineAccess</td>
-            </tr>
-
-            <tr>
-                <th>Allow Access Tokens Via Browser</th>
-                <td>@Model.Client.AllowAccessTokensViaBrowser</td>
-            </tr>
-        </tbody>
-    </table>
-</fluent-card>
-
-<fluent-card>
-    <h3>Authentication</h3>
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Front Channel Logout Session Required</th>
-                <td>@Model.Client.FrontChannelLogoutSessionRequired</td>
-            </tr>
-            <tr>
-                <th>Front Channel Sign Out Uri</th>
-                <td>@Model.Client.FrontChannelLogoutUri</td>
-            </tr>
-
-            <tr>
-                <th>Back Channel Logout Session Required</th>
-                <td>@Model.Client.BackChannelLogoutSessionRequired</td>
-            </tr>
-            <tr>
-                <th>Back Channel Logout Uri</th>
-                <td>@Model.Client.BackChannelLogoutUri</td>
-            </tr>
-
-            <tr>
-                <th>Enable Local Login</th>
-                <td>@Model.Client.EnableLocalLogin</td>
-            </tr>
-
-            <tr>
-                <th>User SSO Lifetime</th>
-                <td>@Model.Client.UserSsoLifetime</td>
-            </tr>
-        </tbody>
-    </table>
-
-</fluent-card>
-
-<fluent-card>
-    <h3>Token</h3>
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Identity Token Lifetime</th>
-                <td>@Model.Client.IdentityTokenLifetime</td>
-            </tr>
-            <tr>
-                <th>Access Token Lifetime</th>
-                <td>@Model.Client.AccessTokenLifetime</td>
-            </tr>
-
-            <tr>
-                <th>Access Token Type</th>
-                <td>@Model.Client.AccessTokenType</td>
-            </tr>
-            <tr>
-                <th>Authorization Code Lifetime</th>
-                <td>@Model.Client.AuthorizationCodeLifetime</td>
-            </tr>
-
-            <tr>
-                <th>Absolute Refresh Token Lifetime</th>
-                <td>@Model.Client.AbsoluteRefreshTokenLifetime</td>
-            </tr>
-
-            <tr>
-                <th>Sliding Refresh Token Lifetime</th>
-                <td>@Model.Client.SlidingRefreshTokenLifetime</td>
-            </tr>
-        </tbody>
-    </table>
-
+        <fluent-tab-panel id="tab-panel-device-flow">
+            @await Html.PartialAsync("_DeviceFlowTabContent", Model.Client)
+        </fluent-tab-panel>
+    </fluent-tabs>
 </fluent-card>
