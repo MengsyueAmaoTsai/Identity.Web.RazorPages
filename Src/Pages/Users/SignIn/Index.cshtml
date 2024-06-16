@@ -14,7 +14,6 @@
     <input asp-for="Password" class="form-control" />
 
     <label asp-for="RememberMe"></label>
-
     <input asp-for="RememberMe" type="checkbox" />
 
     <div>
@@ -26,6 +25,13 @@
 
     @foreach (var scheme in Model.ExternalSchems)
     {
-        @scheme
+        <div>
+            <a class="btn btn-secondary" 
+                asp-page="/users/challenge/index" 
+                asp-route-returnUrl="@Model.ReturnUrl" 
+                asp-route-scheme="@scheme.Name">
+                Sign In with @scheme.DisplayName
+            </a>
+        </div>
     }
 </form>

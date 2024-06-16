@@ -50,6 +50,16 @@ public static class IdentityExtensions
                 options.LoginPath = "/users/sign-in";
                 options.Cookie.Name = RichillCapitalAuthenticationSchemes.Cookie;
                 options.ExpireTimeSpan = defaultCookieLifetime;
+            })
+            .AddMicrosoftAccount("Microsoft", options =>
+            {
+                options.ClientId = "123";
+                options.ClientSecret = "123";
+            })
+            .AddGoogle("Google", options =>
+            {
+                options.ClientId = "123";
+                options.ClientSecret = "123";
             });
 
         // Current user context

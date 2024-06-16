@@ -31,3 +31,37 @@
 
 <partial name="_Claims" model="@Model.User" />
 <partial name="_Properties" model="@Model.Properties" />
+
+<table class="table">
+    <h4>External Schemes</h4>
+    <thead>
+        <tr>
+            <th>
+                Scheme
+            </th>
+            <th>
+                Display Name
+            </th>
+            <th>
+                Handler Type
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var scheme in Model.ExternalSchems)
+        {
+            <tr>
+                <td>
+                    @scheme.Name
+                </td>
+                <td>
+                    @scheme.DisplayName
+                </td>
+
+                <td>
+                    @scheme.HandlerType
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

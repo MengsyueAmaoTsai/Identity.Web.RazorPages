@@ -8,18 +8,26 @@ using RichillCapital.UseCases.Common;
 namespace RichillCapital.Identity.Web.Pages.Diagnostics;
 
 [Authorize]
-public class DiagnosticsViewModel(ICurrentUser _currentUser) : PageModel
+public class DiagnosticsViewModel(
+    IAuthenticationSchemeProvider _authenticationSchemeProvider,
+    ICurrentUser _currentUser) : PageModel
 {
     public required AuthenticationProperties Properties { get; set; }
     public ICurrentUser CurrentUser => _currentUser;
+    public required IEnumerable<AuthenticationScheme> ExternalSchems { get; set; } = [];
 
     public async Task<IActionResult> OnGetAsync()
     {
-        var result = await HttpContext.AuthenticateAsync();
+        // Get external authentication schemes
+        var allSchems = await _authenticationSchemeProvider.GetAllSchemesAsync();
+        var externalSchemes = allSchems.Where(scheme => !string.IsNullOrEmpty(scheme.DisplayName));
+        ExternalSchems = externalSchemes;
 
+        var result = await HttpContext.AuthenticateAsync();
+        
         if (!result.Succeeded)
         {
-            return RedirectToPage("/users/signin", new { ReturnUrl = "/" });
+            return RedirectToPage("/users/sign-in", new { ReturnUrl = "/" });
         }
 
         Properties = result.Properties;
