@@ -67,6 +67,117 @@ public static class InMemoryClients
         },
         new Client
         {
+            ClientId = "RichillCapital.Research.Web.Next",
+            ClientName = "RichillCapital Research Web",
+            ClientSecrets = DefaultSecrets,
+
+            AllowedGrantTypes = GrantTypes.Code,
+
+            RequirePkce = true,
+            RequireClientSecret = true,
+            RequireConsent = false,
+
+            RedirectUris =
+            {
+                "https://localhost:9997/signin-oidc",
+            },
+            PostLogoutRedirectUris =
+            {
+                "https://localhost:9997/signout-callback-oidc",
+            },
+            AllowOfflineAccess = true,
+            AllowedScopes =
+            {
+                "openid",
+                "profile",
+            },
+        },
+
+        new Client
+        {
+            ClientId = "RichillCapital.Exchange.Web.Angular",
+            ClientName = "RichillCapital Exchange Web",
+            ClientSecrets = DefaultSecrets,
+
+            AllowedGrantTypes = GrantTypes.Code,
+
+            RequirePkce = true,
+            RequireClientSecret = true,
+            RequireConsent = false,
+
+            RedirectUris =
+            {
+                "https://localhost:9996/signin-oidc",
+            },
+            PostLogoutRedirectUris =
+            {
+                "https://localhost:9996/signout-callback-oidc",
+            },
+            AllowOfflineAccess = true,
+            AllowedScopes =
+            {
+                "openid",
+                "profile",
+            },
+        },
+
+        new Client
+        {
+            ClientId = "RichillCapital.Admin.Web.Nuxt",
+            ClientName = "RichillCapital Admin Web",
+            ClientSecrets = DefaultSecrets,
+
+            AllowedGrantTypes = GrantTypes.Code,
+
+            RequirePkce = true,
+            RequireClientSecret = true,
+            RequireConsent = false,
+
+            RedirectUris =
+            {
+                "https://localhost:9995/signin-oidc",
+            },
+            PostLogoutRedirectUris =
+            {
+                "https://localhost:9995/signout-callback-oidc",
+            },
+            AllowOfflineAccess = true,
+            AllowedScopes =
+            {
+                "openid",
+                "profile",
+            },
+        },
+
+        new Client
+        {
+            ClientId = "RichillCapital.Community.Web.Astro",
+            ClientName = "RichillCapital Community Web",
+            ClientSecrets = DefaultSecrets,
+
+            AllowedGrantTypes = GrantTypes.Code,
+
+            RequirePkce = true,
+            RequireClientSecret = true,
+            RequireConsent = false,
+
+            RedirectUris =
+            {
+                "https://localhost:9994/signin-oidc",
+            },
+            PostLogoutRedirectUris =
+            {
+                "https://localhost:9994/signout-callback-oidc",
+            },
+            AllowOfflineAccess = true,
+            AllowedScopes =
+            {
+                "openid",
+                "profile",
+            },
+        },
+        new Client
+        {
             ClientId = "RichillCapital.TraderStudio.Desktop.Wpf",
             ClientName = "RichillCapital Trader Studio Desktop",
             ClientSecrets = DefaultSecrets,
