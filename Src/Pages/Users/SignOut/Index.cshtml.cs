@@ -10,7 +10,7 @@ namespace RichillCapital.Identity.Web.Pages.Users.SignOut;
 [Authorize]
 public sealed class SignOutViewModel(
     ILogger<SignOutViewModel> _logger,
-    ICurrentUser _currentUser) : 
+    ICurrentUser _currentUser) :
     PageModel
 {
     public async Task<IActionResult> OnPostAsync(
@@ -20,6 +20,6 @@ public sealed class SignOutViewModel(
 
         _logger.LogInformation("User {userId} signed out", _currentUser.Id);
 
-        return RedirectToPage("/users/signed-out");
+        return RedirectToPage("/users/signedOut");
     }
 }

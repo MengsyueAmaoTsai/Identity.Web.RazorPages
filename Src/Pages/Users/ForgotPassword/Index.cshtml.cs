@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -6,6 +7,7 @@ using RichillCapital.Domain.Common.Repositories;
 
 namespace RichillCapital.Identity.Web.Pages.Users.ForgotPassword;
 
+[AllowAnonymous]
 public sealed class ForgotPasswordViewModel(
     IReadOnlyRepository<User> _userRepository) : PageModel
 {
