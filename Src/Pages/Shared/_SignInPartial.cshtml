@@ -1,0 +1,24 @@
+﻿@using RichillCapital.UseCases.Common
+@inject ICurrentUser CurrentUser
+
+@if (CurrentUser.IsAuthenticated)
+{
+    <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/Index", new { area = "" })" method="post" id="logoutForm" class="navbar-right">
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                <a asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @CurrentUser.Id</a>
+            </li>
+
+            <li>
+                <button type="submit" class="btn btn-link navbar-btn navbar-link">Sign Out</button>
+            </li>
+        </ul>
+    </form>
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right">
+        <li><a asp-area="Identity" asp-page="/identity/signUp">Sign Up</a></li>
+        <li><a asp-area="Identity" asp-page="/identity/signIn">Sign In</a></li>
+    </ul>
+}

@@ -97,30 +97,16 @@ public sealed class SignInViewModel(
 
         var context = await _interactionService.GetAuthorizationContextAsync(ReturnUrl);
 
-        if (context is not null)
+        if (context is null)
         {
-            if (context.IsNativeClient())
-            {
-                return this.LoadingPage(ReturnUrl);
-            }
-
-            return Redirect(ReturnUrl);
+            return Url.IsLocalUrl(ReturnUrl) ? 
+                Redirect(ReturnUrl) : string.IsNullOrEmpty(ReturnUrl) ? 
+                    Redirect("~/") : throw new Exception("invalid return URL");
         }
 
-        // request for a local page
-        if (Url.IsLocalUrl(ReturnUrl))
-        {
-            return Redirect(ReturnUrl);
-        }
-        else if (string.IsNullOrEmpty(ReturnUrl))
-        {
-            return Redirect("~/");
-        }
-        else
-        {
-            // user might have clicked on a malicious link - should be logged
-            throw new Exception("invalid return URL");
-        }
+        return context.IsNativeClient() ? 
+            this.LoadingPage(ReturnUrl) : 
+            Redirect(ReturnUrl);
     }
 
     private async Task InitializeAsync(CancellationToken cancellationToken = default)
