@@ -23,4 +23,9 @@
         <a class="btn btn-primary" asp-page="/users/signup/index">Sign Up</a>
         <a class="btn btn-primary" asp-page="/users/forgotpassword/index">Forgoet Password</a>
     </div>
+
+    @foreach (var scheme in Model.ExternalSchems)
+    {
+        @scheme
+    }
 </form>

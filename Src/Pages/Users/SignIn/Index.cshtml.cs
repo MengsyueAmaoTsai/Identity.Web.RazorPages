@@ -13,6 +13,7 @@ namespace RichillCapital.Identity.Web.Pages.Users.SignIn;
 
 [AllowAnonymous]
 public sealed class SignInViewModel(
+    IAuthenticationSchemeProvider _authenticationSchemeProvider,
     IReadOnlyRepository<User> _userRepository,
     IOptionsSnapshot<IdentityOptions> _identityOptions) :
     PageModel
@@ -28,6 +29,16 @@ public sealed class SignInViewModel(
 
     [BindProperty]
     public bool RememberMe { get; init; }
+
+    public required IEnumerable<string> ExternalSchems { get; set; } = [];
+
+    public async void OnGet()
+    {
+        var allSchems = await _authenticationSchemeProvider.GetAllSchemesAsync();
+        var externalSchemes = allSchems.Where(scheme => !string.IsNullOrEmpty(scheme.DisplayName));
+
+        ExternalSchems = externalSchemes.Select(scheme => scheme.Name);
+    }
 
     public async Task<IActionResult> OnPostAsync(CancellationToken cancellationToken = default)
     {

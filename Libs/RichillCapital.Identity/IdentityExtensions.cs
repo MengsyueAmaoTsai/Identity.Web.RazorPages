@@ -4,7 +4,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 
 using RichillCapital.Extensions.Options;
-using RichillCapital.Identity.Web.IdentityServer;
 using RichillCapital.UseCases.Common;
 
 namespace RichillCapital.Identity;
