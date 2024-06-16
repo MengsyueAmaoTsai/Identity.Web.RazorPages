@@ -14,10 +14,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Remove="Src\Pages\Diagnostics\_ExternalAuthenticationSchemes.cshtml" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="Libs\RichillCapital.Identity\RichillCapital.Identity.csproj" />
     <ProjectReference Include="Libs\RichillCapital.Logging\RichillCapital.Logging.csproj" />
     <ProjectReference Include="Libs\RichillCapital.Persistence\RichillCapital.Persistence.csproj" />
@@ -26,17 +22,5 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.DataProtection.StackExchangeRedis" Version="8.0.6" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <UpToDateCheckInput Remove="Src\Pages\Diagnostics\_ExternalAuthenticationSchemes.cshtml" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <_ContentIncludedByDefault Remove="Src\Pages\Diagnostics\_ExternalAuthenticationSchemes.cshtml" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="Src\Pages\Diagnostics\_ExternalAuthenticationSchemes.cshtml" />
   </ItemGroup>
 </Project>

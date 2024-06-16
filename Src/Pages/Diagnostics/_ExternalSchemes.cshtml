@@ -1,0 +1,40 @@
+﻿@using Microsoft.AspNetCore.Authentication
+@model IEnumerable<AuthenticationScheme>
+@{
+}
+
+<fluent-card>
+    <h4>External Schemes</h4>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Scheme
+                </th>
+                <th>
+                    Display Name
+                </th>
+                <th>
+                    Handler Type
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var scheme in Model)
+            {
+                <tr>
+                    <td>
+                        @scheme.Name
+                    </td>
+                    <td>
+                        @scheme.DisplayName
+                    </td>
+
+                    <td>
+                        @scheme.HandlerType.Name
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</fluent-card>

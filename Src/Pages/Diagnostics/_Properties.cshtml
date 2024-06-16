@@ -6,9 +6,6 @@
 
 <fluent-card>
     <h4>Properties</h4>
-</fluent-card>
-
-<fluent-card>
     <table class="table">
         <tbody>
             <tr>
@@ -20,7 +17,6 @@
                 <tr>
                     <td>@property.Key</td>
 
-                    <!-- parse Sun, 16 Jun 2024 08:04:39 GMT string-->
                     @if (property.Key == ".issued" || property.Key == ".expires")
                     {
                         var dateTime = DateTimeOffset.Parse(property.Value?.ToString() ?? string.Empty);
