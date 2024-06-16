@@ -4,4 +4,129 @@
     ViewData["Title"] = "Client Details";
 }
 
-<h1>Client Details</h1>
+<fluent-card>
+    <h2>
+        @Model.Client.ClientName <small>(@Model.Client.ClientId)</small>
+    </h2> 
+
+    <div>@(!string.IsNullOrEmpty(Model.Client.Description) ? Model.Client.Description : "No description for this client.")</div>
+</fluent-card>
+
+<fluent-card>
+    <h3>Basic Information</h3>
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Enabled</th>
+                <td>@Model.Client.Enabled</td>
+            </tr>
+
+            <tr>
+                <th>Uri</th>
+                <td>@Model.Client.ClientUri</td>
+            </tr>
+
+            <tr>
+                <th>Protocol Type</th>
+                <td>@Model.Client.ProtocolType</td>
+            </tr>
+
+            <tr>
+                <th>Require Secret</th>
+                <td>@Model.Client.RequireClientSecret</td>
+            </tr>
+
+            <tr>
+                <th>Require Pkce</th>
+                <td>@Model.Client.RequirePkce</td>
+            </tr>
+
+            <tr>
+                <th>Allow Plain Text Pkce</th>
+                <td>@Model.Client.AllowPlainTextPkce</td>
+            </tr>
+
+            <tr>
+                <th>Allow Offline Access</th>
+                <td>@Model.Client.AllowOfflineAccess</td>
+            </tr>
+
+            <tr>
+                <th>Allow Access Tokens Via Browser</th>
+                <td>@Model.Client.AllowAccessTokensViaBrowser</td>
+            </tr>
+        </tbody>
+    </table>
+</fluent-card>
+
+<fluent-card>
+    <h3>Authentication</h3>
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Front Channel Logout Session Required</th>
+                <td>@Model.Client.FrontChannelLogoutSessionRequired</td>
+            </tr>
+            <tr>
+                <th>Front Channel Sign Out Uri</th>
+                <td>@Model.Client.FrontChannelLogoutUri</td>
+            </tr>
+
+            <tr>
+                <th>Back Channel Logout Session Required</th>
+                <td>@Model.Client.BackChannelLogoutSessionRequired</td>
+            </tr>
+            <tr>
+                <th>Back Channel Logout Uri</th>
+                <td>@Model.Client.BackChannelLogoutUri</td>
+            </tr>
+
+            <tr>
+                <th>Enable Local Login</th>
+                <td>@Model.Client.EnableLocalLogin</td>
+            </tr>
+
+            <tr>
+                <th>User SSO Lifetime</th>
+                <td>@Model.Client.UserSsoLifetime</td>
+            </tr>
+        </tbody>
+    </table>
+
+</fluent-card>
+
+<fluent-card>
+    <h3>Token</h3>
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Identity Token Lifetime</th>
+                <td>@Model.Client.IdentityTokenLifetime</td>
+            </tr>
+            <tr>
+                <th>Access Token Lifetime</th>
+                <td>@Model.Client.AccessTokenLifetime</td>
+            </tr>
+
+            <tr>
+                <th>Access Token Type</th>
+                <td>@Model.Client.AccessTokenType</td>
+            </tr>
+            <tr>
+                <th>Authorization Code Lifetime</th>
+                <td>@Model.Client.AuthorizationCodeLifetime</td>
+            </tr>
+
+            <tr>
+                <th>Absolute Refresh Token Lifetime</th>
+                <td>@Model.Client.AbsoluteRefreshTokenLifetime</td>
+            </tr>
+
+            <tr>
+                <th>Sliding Refresh Token Lifetime</th>
+                <td>@Model.Client.SlidingRefreshTokenLifetime</td>
+            </tr>
+        </tbody>
+    </table>
+
+</fluent-card>
