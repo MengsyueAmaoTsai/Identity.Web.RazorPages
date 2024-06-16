@@ -1,4 +1,4 @@
-﻿@page 
+﻿@page "/clients"
 @model ListClientsViewModel
 @{
     ViewData["Title"] = "Clients";
@@ -6,19 +6,11 @@
 
 <h1>Clients</h1>
 
-<table class="table-responsive">
+<table class="table">
     <thead>
         <tr>
             <th>Id</th>
             <th>Name</th>
-            <th>Require Secret</th>
-            <th>Require Consent</th>
-            <th>Require Pkce</th>
-            <th>Allow Offline Access</th>
-            <th>Allowed Scopes</th>
-            <th>Allowed Grant Types</th>
-            <th>Redirect Uris</th>
-            <th>Post Logout Redirect Uris</th>
             <th>Actions</th>
         </tr>
     </thead>
@@ -29,16 +21,12 @@
             <tr>
                 <td>@client.ClientId</td>
                 <td>@client.ClientName</td>
-                <td>@client.RequireClientSecret</td>
-                <td>@client.RequireConsent</td>
-                <td>@client.RequirePkce</td>
-                <td>@client.AllowOfflineAccess</td>
-                <td>@string.Join(",", client.AllowedScopes.Select(scope => scope))</td>
-                <td>@string.Join(",", client.AllowedGrantTypes.Select(type => type.ToString()))</td>
-                <td>@string.Join(",", client.RedirectUris.Select(uri => uri))</td>
-                <td>@string.Join(",", client.PostLogoutRedirectUris.Select(uri => uri))</td>
                 <td>
-                    <a class="btn btn-primary">Details</a>
+                    <a class="btn btn-primary" 
+                        asp-page="./details" 
+                        asp-route-clientId="@client.ClientId">
+                        Details
+                    </a>
                 </td>
             </tr>
         }
