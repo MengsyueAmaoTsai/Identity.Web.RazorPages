@@ -3,4 +3,45 @@
 @{
 }
 
-<div>Authentication</div>
+<table class="table">
+    <tbody>
+        <tr>
+            <th>Front Channel Logout Uri</th>
+            <td>@Model.FrontChannelLogoutUri</td>
+        </tr>
+        <tr>
+            <th>Front Channel Logout Session Required</th>
+            <td>@Model.FrontChannelLogoutSessionRequired</td>
+        </tr>
+
+        <tr>
+            <th>Back Channel Logout Uri</th>
+            <td>@Model.BackChannelLogoutUri</td>
+        </tr>
+
+        <tr>
+            <th>Back Channel Logout Session Required</th>
+            <td>@Model.BackChannelLogoutSessionRequired</td>
+        </tr>
+
+        <tr>
+            <th>Enable Local Login</th>
+            <td>@Model.EnableLocalLogin</td>
+        </tr>
+
+        <tr>
+            <th>Post Logout Redirect Uris</th>
+            <td>Values</td>
+        </tr>
+
+        <tr>
+            <th>Identity Provider Restrictions</th>
+            <td>Values</td>
+        </tr>
+
+        <tr>
+            <th>User Sso Lifetime</th>
+            <td>@Model.UserSsoLifetime</td>
+        </tr>
+    </tbody>
+</table>

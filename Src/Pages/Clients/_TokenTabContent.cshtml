@@ -3,4 +3,71 @@
 @{
 }
 
-<div>Token</div>
+<table class="table">
+    <tbody>
+        <tr>
+            <th>Identity Token Lifetime</th>
+            <td>@Model.IdentityTokenLifetime</td>
+        </tr>
+        <tr>
+            <th>Access Token Lifetime</th>
+            <td>@Model.AccessTokenLifetime</td>
+        </tr>
+        <tr>
+            <th>Access Token Type</th>
+            <td>@Model.AccessTokenType</td>
+        </tr>
+        <tr>
+            <th>Authorization Code Lifetime</th>
+            <td>@Model.AuthorizationCodeLifetime</td>
+        </tr>
+        <tr>
+            <th>Absolute Refresh Token Lifetime</th>
+            <td>@Model.AbsoluteRefreshTokenLifetime</td>
+        </tr>
+        <tr>
+            <th>Sliding Refresh Token Lifetime</th>
+            <td>@Model.SlidingRefreshTokenLifetime</td>
+        </tr>
+        <tr>
+            <th>Refresh Token Usage</th>
+            <td>@Model.RefreshTokenUsage</td>
+        </tr>
+        <tr>
+            <th>Refresh Token Expiration</th>
+            <td>@Model.RefreshTokenExpiration</td>
+        </tr>
+        <tr>
+            <th>AllowedCorsOrigins</th>
+            <td>Values</td>
+        </tr>
+        <tr>
+            <th>Update Access Token Claims On Refresh</th>
+            <td>@Model.UpdateAccessTokenClaimsOnRefresh</td>
+        </tr>
+        <tr>
+            <th>Include Jwt Id</th>
+            <td>@Model.IncludeJwtId</td>
+        </tr>
+        <tr>
+            <th>Always Send Client Claims</th>
+            <td>@Model.AlwaysSendClientClaims</td>
+        </tr>
+        <tr>
+            <th>Always Include User Claims In Id Token</th>
+            <td>@Model.AlwaysIncludeUserClaimsInIdToken</td>
+        </tr>
+        <tr>
+            <th>Client Claims Prefix</th>
+            <td>@Model.ClientClaimsPrefix</td>
+        </tr>
+        <tr>
+            <th>Pair Wise Subject Salt</th>
+            <td>@Model.PairWiseSubjectSalt</td>
+        </tr>
+        <tr>
+            <th>Claims</th>
+            <td><a asp-page="/clients/claims" asp-route-clientId="@Model.ClientId">Manage</a></td>
+        </tr>
+    </tbody>
+</table>
