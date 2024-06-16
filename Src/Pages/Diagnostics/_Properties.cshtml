@@ -4,24 +4,24 @@
 @{
 }
 
-<div class="card-header">
+<fluent-card>
     <h4>Properties</h4>
-</div>
+</fluent-card>
 
-<div class="card-body">
-    <dl>
-        @foreach (var property in Model.Items)
-        {
-            <dt>@property.Key</dt>
-            
-            @if (property.Key == ".issued" || property.Key == ".expires")
+<fluent-card>
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Key</th>
+                <th>Value</th>
+            </tr>
+            @foreach (var property in Model.Items)
             {
-                <dd>@DateTimeOffset.Parse(property.Value!).ToString("yyyy-MM-dd HH:mm:ss")</dd>
+                <tr>
+                    <td>@property.Key</td>
+                    <td>@property.Value</td>
+                </tr>
             }
-            else
-            {
-                <dd>@property.Value</dd>
-            }
-        }
-    </dl>
-</div>
+        </tbody>
+    </table>
+</fluent-card>

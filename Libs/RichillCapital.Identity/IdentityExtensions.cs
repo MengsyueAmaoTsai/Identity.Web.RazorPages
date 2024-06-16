@@ -26,18 +26,18 @@ public static class IdentityExtensions
         var identityOptions = scope.ServiceProvider.GetRequiredService<IOptions<IdentityOptions>>().Value;
 
         // Authentication
-        services
-            .AddIdentityServer(options =>
-            {
-                options.Authentication.CookieAuthenticationScheme = RichillCapitalAuthenticationSchemes.Cookie;
+        // services
+        //     .AddIdentityServer(options =>
+        //     {
+        //         options.Authentication.CookieAuthenticationScheme = RichillCapitalAuthenticationSchemes.Cookie;
 
-                options.IssuerUri = identityOptions.IssuerUri;
-                options.UserInteraction.LoginUrl = "/users/sign-in";
-                options.UserInteraction.LoginReturnUrlParameter = "returnUrl";
-            })
-            .AddInMemoryClients(InMemoryClients.Default)
-            .AddInMemoryIdentityResources(InMemoryIdentityResources.Default)
-            .AddDeveloperSigningCredential();
+        //         options.IssuerUri = identityOptions.IssuerUri;
+        //         options.UserInteraction.LoginUrl = "/users/sign-in";
+        //         options.UserInteraction.LoginReturnUrlParameter = "returnUrl";
+        //     })
+        //     .AddInMemoryClients(InMemoryClients.Default)
+        //     .AddInMemoryIdentityResources(InMemoryIdentityResources.Default)
+        //     .AddDeveloperSigningCredential();
 
         services
             .AddAuthentication(options =>
@@ -46,7 +46,11 @@ public static class IdentityExtensions
             })
             .AddCookie(RichillCapitalAuthenticationSchemes.Cookie, options =>
             {
+                var defaultCookieLifetime = TimeSpan.FromHours(8);
+
                 options.LoginPath = "/users/sign-in";
+                options.Cookie.Name = RichillCapitalAuthenticationSchemes.Cookie;
+                options.ExpireTimeSpan = defaultCookieLifetime;
             });
 
         // Current user context

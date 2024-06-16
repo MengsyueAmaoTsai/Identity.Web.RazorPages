@@ -4,24 +4,24 @@
 @{
 }
 
-
-<div class="card-header">
+<fluent-card>
     <h4>Claims</h4>
-</div>
+</fluent-card>
 
-<div class="card-body">
-    <dl>
-        @foreach (var claim in Model.Claims)
-        {
-            <dt>@claim.Type</dt>
-            @if (claim.Type == "auth_time")
+<fluent-card>
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Type</th>
+                <th>Value</th>
+            </tr>
+            @foreach (var claim in Model.Claims)
             {
-                <dt>@DateTimeOffset.FromUnixTimeSeconds(int.Parse(claim.Value)).ToString("yyyy-MM-dd HH:mm:ss zzz")</dt>
+                <tr>
+                    <td>@claim.Type</td>
+                    <td>@claim.Value</td>
+                </tr>
             }
-            else
-            {
-                <dt>@claim.Value</dt>
-            }
-        }
-    </dl>
-</div>
+        </tbody>
+    </table>
+</fluent-card>
