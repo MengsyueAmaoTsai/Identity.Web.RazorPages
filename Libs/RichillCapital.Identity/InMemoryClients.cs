@@ -4,13 +4,40 @@ namespace RichillCapital.Identity.Web.IdentityServer;
 
 public static class InMemoryClients
 {
-    private static readonly ICollection<Secret> DefaultSecrets = 
+    private static readonly ICollection<Secret> DefaultSecrets =
     [
         new Secret("secret".Sha256()),
     ];
 
-    public static readonly IEnumerable<Client> Default = 
+    public static readonly IEnumerable<Client> Default =
     [
+        new Client
+        {
+            ClientId = "RichillCapital.Identity.Web.RazorPages",
+            ClientName = "RichillCapital Identity Web",
+            ClientSecrets = DefaultSecrets,
+
+            AllowedGrantTypes = GrantTypes.Code,
+
+            RequirePkce = true,
+            RequireClientSecret = true,
+            RequireConsent = false,
+
+            RedirectUris =
+            {
+                "https://localhost:9999/signin-oidc",
+            },
+            PostLogoutRedirectUris =
+            {
+                "https://localhost:9999/signout-callback-oidc",
+            },
+            AllowOfflineAccess = true,
+            AllowedScopes =
+            {
+                "openid",
+                "profile",
+            },
+        },
         new Client
         {
             ClientId = "RichillCapital.TraderStudio.Web.Blazor",
@@ -35,6 +62,7 @@ public static class InMemoryClients
             AllowedScopes =
             {
                 "openid",
+                "profile",
             },
         },
         new Client
@@ -58,7 +86,7 @@ public static class InMemoryClients
                 "richillcapital.trader-studio.desktop:/signout",
             },
             AllowOfflineAccess = true,
-            AllowedScopes = 
+            AllowedScopes =
             {
                 "openid",
             },
