@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 using RichillCapital.Domain;
 using RichillCapital.Domain.Common.Repositories;
+using RichillCapital.SharedKernel.Monads;
 
 namespace RichillCapital.Identity.Web.Pages.Users.SignUp;
 
@@ -25,16 +26,24 @@ public sealed class SignUpViewModel(
     [BindProperty]
     public required string Name { get; set; }
 
+    [BindProperty]
+    public required string PhoneNumber { get; set; }
+
     public async Task<IActionResult> OnPostAsync(CancellationToken cancellationToken)
     {
-        var emailResult = Domain.Email.From(Email);
+        var result = Result<(Domain.Email, UserName, Domain.PhoneNumber)>.Combine(
+            Domain.Email.From(Email),
+            UserName.From(Name),
+            Domain.PhoneNumber.From(PhoneNumber));
 
-        if (emailResult.IsFailure)
+        if (result.IsFailure)
         {
-            ModelState.AddModelError(emailResult.Error.Code, emailResult.Error.Message);
+            ModelState.AddModelError(result.Error.Code, result.Error.Message);
 
             return Page();
         }
+
+        var (email, name, phoneNumber) = result.Value;
 
         if (!(Password == ConfirmPassword))
         {
@@ -42,8 +51,6 @@ public sealed class SignUpViewModel(
 
             return Page();
         }
-
-        var email = emailResult.Value;
 
         var maybeUser = await _userRepository.FirstOrDefaultAsync(user => user.Email == email, cancellationToken);
 
@@ -54,7 +61,18 @@ public sealed class SignUpViewModel(
             return Page();
         }
 
-        var errorOrUser = Domain.User.Create(UserId.NewUserId(), email, Password, Name);
+        var errorOrUser = Domain.User.Create(
+            UserId.NewUserId(),
+            name,
+            email,
+            phoneNumber,
+            Password,
+            lockoutEnabled: false,
+            twoFactorEnabled: false,
+            emailConfirmed: false,
+            phoneNumberConfirmed: false,
+            0,
+            DateTimeOffset.UtcNow);
 
         if (errorOrUser.HasError)
         {

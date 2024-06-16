@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 using RichillCapital.Domain;
 using RichillCapital.Domain.Common.Repositories;
+using RichillCapital.SharedKernel.Monads;
 
 namespace RichillCapital.Identity.Web.Pages.Users;
 
@@ -33,16 +34,32 @@ public sealed class CreateUserViewModel(
             return Page();
         }
 
-        var emailResult = Domain.Email.From(Email);
+        var result = Result<(Domain.Email, UserName, Domain.PhoneNumber)>.Combine(
+            Domain.Email.From(Email),
+            UserName.From(Name),
+            Domain.PhoneNumber.From(PhoneNumber));
 
-        if (emailResult.IsFailure)
+        if (result.IsFailure)
         {
-            ModelState.AddModelError(emailResult.Error.Code, emailResult.Error.Message);
+            ModelState.AddModelError(result.Error.Code, result.Error.Message);
 
             return Page();
         }
 
-        var errorOrUser = Domain.User.Create(UserId.NewUserId(), emailResult.Value, "123", Name);
+        var (email, name, phoneNumber) = result.Value;
+
+        var errorOrUser = Domain.User.Create(
+            UserId.NewUserId(),
+            name,
+            email,
+            phoneNumber,
+            "123",
+            lockoutEnabled: false,
+            twoFactorEnabled: false,
+            emailConfirmed: false,
+            phoneNumberConfirmed: false,
+            0,
+            DateTimeOffset.UtcNow);
 
         if (errorOrUser.HasError)
         {

@@ -13,7 +13,8 @@ public sealed class UserProfileViewModel(
     IReadOnlyRepository<User> _userRepository) :
     PageModel
 {
-    public required UserModel User { get; set; }
+    public new required UserModel User { get; set; }
+
     public async Task<IActionResult> OnGetAsync(CancellationToken cancellationToken = default)
     {
         var maybeUser = await _userRepository.GetByIdAsync(_currentUser.Id, cancellationToken);
@@ -29,7 +30,7 @@ public sealed class UserProfileViewModel(
         {
             Id = user.Id.Value,
             Email = user.Email.Value,
-            Name = user.Name,
+            Name = user.Name.Value,
             AvatarUrl = string.Empty,
         };
 
