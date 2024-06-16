@@ -4,12 +4,18 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 
 using RichillCapital.Extensions.Options;
+using RichillCapital.Identity.Web.IdentityServer;
 using RichillCapital.UseCases.Common;
 
 namespace RichillCapital.Identity;
 
 public static class IdentityExtensions
 {
+    private static class UrlParameterNames
+    {
+        internal const string ReturnUrl = "returnUrl";
+    }
+
     public static IServiceCollection AddIdentityWebIdentity(this IServiceCollection services)
     {
         // Register options validator
@@ -25,31 +31,26 @@ public static class IdentityExtensions
         var identityOptions = scope.ServiceProvider.GetRequiredService<IOptions<IdentityOptions>>().Value;
 
         // Authentication
-        // services
-        //     .AddIdentityServer(options =>
-        //     {
-        //         options.Authentication.CookieAuthenticationScheme = RichillCapitalAuthenticationSchemes.Cookie;
-
-        //         options.IssuerUri = identityOptions.IssuerUri;
-        //         options.UserInteraction.LoginUrl = "/users/sign-in";
-        //         options.UserInteraction.LoginReturnUrlParameter = "returnUrl";
-        //     })
-        //     .AddInMemoryClients(InMemoryClients.Default)
-        //     .AddInMemoryIdentityResources(InMemoryIdentityResources.Default)
-        //     .AddDeveloperSigningCredential();
+        services
+            .AddIdentityServer(options =>
+            {
+                options.IssuerUri = identityOptions.IssuerUri;
+                options.UserInteraction.LoginUrl = "/users/sign-in";
+                options.UserInteraction.LoginReturnUrlParameter = UrlParameterNames.ReturnUrl;
+            })
+            .AddInMemoryClients(InMemoryClients.Default)
+            .AddInMemoryIdentityResources(InMemoryIdentityResources.Default)
+            .AddDeveloperSigningCredential();
 
         services
             .AddAuthentication(options =>
             {
-                options.DefaultScheme = RichillCapitalAuthenticationSchemes.Cookie;
+                options.DefaultScheme = RichillCapitalAuthenticationSchemes.DefaultCookieScheme;
             })
-            .AddCookie(RichillCapitalAuthenticationSchemes.Cookie, options =>
+            .AddCookie(RichillCapitalAuthenticationSchemes.DefaultCookieScheme, options =>
             {
-                var defaultCookieLifetime = TimeSpan.FromHours(8);
-
                 options.LoginPath = "/users/sign-in";
-                options.Cookie.Name = RichillCapitalAuthenticationSchemes.Cookie;
-                options.ExpireTimeSpan = defaultCookieLifetime;
+                options.Cookie.Name = RichillCapitalAuthenticationSchemes.DefaultCookieScheme;
             })
             .AddMicrosoftAccount("Microsoft", options =>
             {

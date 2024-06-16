@@ -78,7 +78,7 @@ public sealed class SignInViewModel(
                 new Claim("name", user.Name),
                 new Claim("role", "Unknown"),
             ],
-            RichillCapitalAuthenticationSchemes.Cookie));
+            RichillCapitalAuthenticationSchemes.DefaultCookieScheme));
 
         var properties = RememberMe ?
             new AuthenticationProperties

@@ -16,7 +16,7 @@ public sealed class SignOutViewModel(
     public async Task<IActionResult> OnPostAsync(
         CancellationToken _ = default)
     {
-        await HttpContext.SignOutAsync(RichillCapitalAuthenticationSchemes.Cookie);
+        await HttpContext.SignOutAsync(RichillCapitalAuthenticationSchemes.DefaultCookieScheme);
 
         _logger.LogInformation("User {userId} signed out", _currentUser.Id);
 
