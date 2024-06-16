@@ -4,7 +4,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 
 using RichillCapital.Extensions.Options;
-using RichillCapital.Identity.Web.IdentityServer;
 using RichillCapital.UseCases.Common;
 
 namespace RichillCapital.Identity;
@@ -29,6 +28,27 @@ public static class IdentityExtensions
         // Get options and configure Identity
         using var scope = services.BuildServiceProvider().CreateScope();
         var identityOptions = scope.ServiceProvider.GetRequiredService<IOptions<IdentityOptions>>().Value;
+
+        // Authentication
+        services
+            .AddIdentityServer(options =>
+            {
+                options.IssuerUri = identityOptions.IssuerUri;
+                options.UserInteraction.LoginUrl = "/identity/sign-in";
+            });
+
+        services
+            .AddAuthentication()
+            .AddMicrosoftAccount("Microsoft", options =>
+            {
+                options.ClientId = identityOptions.External.Microsoft.ClientId;
+                options.ClientSecret = identityOptions.External.Microsoft.ClientSecret;
+            })
+            .AddGoogle("Google", options =>
+            {
+                options.ClientId = identityOptions.External.Google.ClientId;
+                options.ClientSecret = identityOptions.External.Google.ClientSecret;
+            });
 
         // Current user context
         services.AddHttpContextAccessor();

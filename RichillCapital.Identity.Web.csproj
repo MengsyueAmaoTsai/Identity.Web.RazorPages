@@ -13,6 +13,7 @@
     <None Remove="Libs\**" />
   </ItemGroup>
 
+
   <ItemGroup>
     <ProjectReference Include="Libs\RichillCapital.Identity\RichillCapital.Identity.csproj" />
     <ProjectReference Include="Libs\RichillCapital.Logging\RichillCapital.Logging.csproj" />
@@ -23,4 +24,5 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.DataProtection.StackExchangeRedis" Version="8.0.6" />
   </ItemGroup>
+
 </Project>
