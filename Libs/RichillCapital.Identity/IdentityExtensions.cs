@@ -1,4 +1,6 @@
-﻿using FluentValidation;
+﻿using Duende.IdentityServer;
+
+using FluentValidation;
 
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
@@ -55,11 +57,13 @@ public static class IdentityExtensions
             })
             .AddMicrosoftAccount("Microsoft", options =>
             {
+                options.SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme;
                 options.ClientId = identityOptions.External.Microsoft.ClientId;
                 options.ClientSecret = identityOptions.External.Microsoft.ClientSecret;
             })
             .AddGoogle("Google", options =>
             {
+                options.SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme;
                 options.ClientId = identityOptions.External.Google.ClientId;
                 options.ClientSecret = identityOptions.External.Google.ClientSecret;
             });
