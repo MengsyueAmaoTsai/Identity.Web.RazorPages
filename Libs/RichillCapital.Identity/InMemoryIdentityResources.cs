@@ -7,6 +7,5 @@ internal static class InMemoryIdentityResources
     internal static readonly IEnumerable<IdentityResource> Default = 
     [
         new IdentityResources.OpenId(),
-        new IdentityResources.Profile(),
     ];
 }

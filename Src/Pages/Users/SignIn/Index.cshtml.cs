@@ -11,6 +11,7 @@ using RichillCapital.Domain.Common.Repositories;
 
 namespace RichillCapital.Identity.Web.Pages.Users.SignIn;
 
+
 [AllowAnonymous]
 public sealed class SignInViewModel(
     IAuthenticationSchemeProvider _authenticationSchemeProvider,
@@ -30,14 +31,13 @@ public sealed class SignInViewModel(
     [BindProperty]
     public bool RememberMe { get; init; }
 
-    public required IEnumerable<AuthenticationScheme> ExternalSchems { get; set; } = [];
+    public required IEnumerable<AuthenticationScheme> ExternalSchemes { get; set; } = [];
 
-    public async void OnGet()
+    public async Task<IActionResult> OnGetAsync()
     {
-        var allSchems = await _authenticationSchemeProvider.GetAllSchemesAsync();
-        var externalSchemes = allSchems.Where(scheme => !string.IsNullOrEmpty(scheme.DisplayName));
+        ExternalSchemes = await _authenticationSchemeProvider.GetExternalSchemesAsync();
 
-        ExternalSchems = externalSchemes;
+        return Page();
     }
 
     public async Task<IActionResult> OnPostAsync(CancellationToken cancellationToken = default)

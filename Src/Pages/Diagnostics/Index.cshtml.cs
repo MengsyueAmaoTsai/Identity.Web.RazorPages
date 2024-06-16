@@ -14,17 +14,14 @@ public class DiagnosticsViewModel(
 {
     public required AuthenticationProperties Properties { get; set; }
     public ICurrentUser CurrentUser => _currentUser;
-    public required IEnumerable<AuthenticationScheme> ExternalSchems { get; set; } = [];
+    public required IEnumerable<AuthenticationScheme> ExternalSchemes { get; set; } = [];
 
     public async Task<IActionResult> OnGetAsync()
     {
-        // Get external authentication schemes
-        var allSchems = await _authenticationSchemeProvider.GetAllSchemesAsync();
-        var externalSchemes = allSchems.Where(scheme => !string.IsNullOrEmpty(scheme.DisplayName));
-        ExternalSchems = externalSchemes;
+        ExternalSchemes = await _authenticationSchemeProvider.GetExternalSchemesAsync();
 
         var result = await HttpContext.AuthenticateAsync();
-        
+
         if (!result.Succeeded)
         {
             return RedirectToPage("/users/sign-in", new { ReturnUrl = "/" });

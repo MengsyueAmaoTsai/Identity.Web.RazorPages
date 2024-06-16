@@ -35,8 +35,6 @@ public static class InMemoryClients
             AllowedScopes =
             {
                 "openid",
-                "profile",
-                "offline_access",
             },
         },
         new Client
@@ -63,8 +61,6 @@ public static class InMemoryClients
             AllowedScopes = 
             {
                 "openid",
-                "profile",
-                "offline_access",
             },
             AllowAccessTokensViaBrowser = true,
         },
