@@ -16,11 +16,13 @@ public sealed class IdentityManageViewModel(
 {
     public required string StatusMessage { get; init; }
 
-    public required string UserName { get; set; }
+    public required bool HasPassword { get; set; }
 
     public required string PhoneNumber { get; set; }
+
     public async Task<IActionResult> OnGetAsync(CancellationToken cancellationToken = default)
     {
+        // Get current user
         var maybeUser = await _userRepository.GetByIdAsync(_currentUser.Id, cancellationToken);
 
         if (maybeUser.IsNull)
@@ -29,10 +31,7 @@ public sealed class IdentityManageViewModel(
         }
 
         var user = maybeUser.Value;
-
-        UserName = user.Name.Value;
-        PhoneNumber = user.PhoneNumber.Value;
-
+        
         return Page();
     }
 }

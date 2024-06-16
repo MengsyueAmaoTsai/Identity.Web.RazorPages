@@ -1,30 +1,32 @@
 ﻿@page "/identity/manage"
 @model IdentityManageViewModel
 @{
-    ViewData["Title"] = "Manage";
+    ViewData["Title"] = "Profile";
+    ViewData["ActivePage"] = "/index";
 }
 
 <h3>@ViewData["Title"]</h3>
 <partial name="_StatusMessage" for="StatusMessage" />
 
-<div class="row">
-    <div class="col-md-6">
-        <form id="profile-form" method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
-            <div class="form-floating mb-3">
-                <input asp-for="UserName" class="form-control" placeholder="Please choose your username." disabled />
-                <label asp-for="UserName" class="form-label"></label> 
-            </div>
-            <div class="form-floating mb-3">
-                <input asp-for="PhoneNumber" class="form-control" placeholder="Please enter your phone number." />
-                <label asp-for="PhoneNumber" class="form-label"></label>
-                <span asp-validation-for="PhoneNumber" class="text-danger"></span> 
-            </div>
-            <button id="update-profile-button" type="submit" class="w-100 btn btn-lg btn-primary">Save</button>
-        </form>
-    </div>
-</div>
 
+<dl>
+    <dt>Password:</dt>
+    <dd>
+        <a>Change</a>
+    </dd>
+    
+    <dt>External Authentication</dt>
+    <dd>
+        <a>Manage</a>
+    </dd>
+
+    <dt>Phone Number</dt>
+
+    <dt>Two-Factor Authentication</dt>
+
+    <dt>Authentication App</dt>
+
+</dl>
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 }
