@@ -3,10 +3,16 @@
 
 @if (CurrentUser.IsAuthenticated)
 {
-    <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/Index", new { area = "" })" method="post" id="logoutForm" class="navbar-right">
+    <form asp-area="Identity" 
+        asp-page="/identity/signOut" 
+        asp-route-returnUrl="@Url.Page("/index", new { area = "" })" 
+        method="post" 
+        id="logoutForm" 
+        class="navbar-right">
+
         <ul class="nav navbar-nav navbar-right">
             <li>
-                <a asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @CurrentUser.Id</a>
+                <a asp-area="Identity" asp-page="/identity/manage/index" title="Manage">Hello @CurrentUser.Id</a>
             </li>
 
             <li>
