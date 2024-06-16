@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -5,7 +6,9 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 namespace RichillCapital.Identity.Web.Pages.Identity;
 
 [AllowAnonymous]
-public sealed class SignUpViewModel : PageModel
+public sealed class SignUpViewModel(
+    IAuthenticationSchemeProvider _schemeProvider) : 
+    PageModel
 {
     [BindProperty(SupportsGet = true)]
     public required string ReturnUrl { get; init; }
@@ -18,4 +21,23 @@ public sealed class SignUpViewModel : PageModel
 
     [BindProperty]
     public required string ConfirmPassword { get; init; }
+
+    public required IEnumerable<AuthenticationScheme> ExternalSchemes { get; set; } = [];
+
+    public async Task<IActionResult> OnGetAsync(CancellationToken cancellationToken = default)
+    {
+        await InitializeAsync(cancellationToken);
+        return Page();
+    }
+
+    public async Task<IActionResult> OnPostAsync(CancellationToken cancellationToken = default)
+    {
+        await InitializeAsync(cancellationToken);
+        return Page();
+    }
+
+    private async Task InitializeAsync(CancellationToken cancellationToken = default)
+    {
+        ExternalSchemes = await _schemeProvider.GetExternalSchemesAsync();
+    }
 }
