@@ -30,40 +30,6 @@ public static class IdentityExtensions
         using var scope = services.BuildServiceProvider().CreateScope();
         var identityOptions = scope.ServiceProvider.GetRequiredService<IOptions<IdentityOptions>>().Value;
 
-        // Authentication
-        services
-            .AddIdentityServer(options =>
-            {
-                options.IssuerUri = identityOptions.IssuerUri;
-                options.UserInteraction.LoginUrl = "/users/sign-in";
-                options.UserInteraction.LoginReturnUrlParameter = UrlParameterNames.ReturnUrl;
-            })
-            .AddInMemoryClients(InMemoryClients.Default)
-            .AddInMemoryIdentityResources(InMemoryIdentityResources.Default)
-            .AddInMemoryApiResources(InMemoryApiResources.Default)
-            .AddDeveloperSigningCredential();
-
-        services
-            .AddAuthentication(options =>
-            {
-                options.DefaultScheme = RichillCapitalAuthenticationSchemes.DefaultCookieScheme;
-            })
-            .AddCookie(RichillCapitalAuthenticationSchemes.DefaultCookieScheme, options =>
-            {
-                options.LoginPath = "/users/sign-in";
-                options.Cookie.Name = RichillCapitalAuthenticationSchemes.DefaultCookieScheme;
-            })
-            .AddMicrosoftAccount("Microsoft", options =>
-            {
-                options.ClientId = "123";
-                options.ClientSecret = "123";
-            })
-            .AddGoogle("Google", options =>
-            {
-                options.ClientId = "123";
-                options.ClientSecret = "123";
-            });
-
         // Current user context
         services.AddHttpContextAccessor();
         services.AddScoped<ICurrentUser, CurrentWebUser>();
