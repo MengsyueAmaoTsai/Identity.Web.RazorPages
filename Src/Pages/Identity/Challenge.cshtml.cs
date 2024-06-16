@@ -29,7 +29,7 @@ public sealed class ChallengeViewModel(
             throw new Exception("Invalid return URL");
         }
 
-        var redirectUri = Url.Page("./identity/callback");
+        var redirectUri = Url.Page("./callback");
         _logger.LogInformation("Redirect Uri: {RedirectUri}", redirectUri);
 
         var properties = new AuthenticationProperties
@@ -42,6 +42,6 @@ public sealed class ChallengeViewModel(
             },
         };
 
-        return new ChallengeResult(AuthenticationProvider, properties);
+        return Challenge(properties, AuthenticationProvider);
     }
 }
