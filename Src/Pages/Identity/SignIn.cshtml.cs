@@ -1,7 +1,4 @@
-using System.Security.Claims;
-
 using Duende.IdentityServer;
-using Duende.IdentityServer.Events;
 using Duende.IdentityServer.Models;
 using Duende.IdentityServer.Services;
 
@@ -11,8 +8,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 using RichillCapital.Domain;
+using RichillCapital.Domain.Common.Identity;
 using RichillCapital.Domain.Common.Repositories;
-using RichillCapital.SharedKernel;
 using RichillCapital.SharedKernel.Monads;
 
 namespace RichillCapital.Identity.Web.Pages.Identity;
@@ -21,6 +18,7 @@ namespace RichillCapital.Identity.Web.Pages.Identity;
 public sealed class SignInViewModel(
     ILogger<SignInViewModel> _logger,
     IAuthenticationSchemeProvider _schemeProvider,
+    ISignInManager _signInManager,
     IReadOnlyRepository<User> _userRepository,
     IIdentityServerInteractionService _interactionService,
     IEventService _eventService) : PageModel
@@ -65,7 +63,7 @@ public sealed class SignInViewModel(
 
         var email = validationResult.Value;
 
-        var signInResult = await PasswordSignInAsync(email, Password, RememberMe, lockoutOnFailure: false);
+        var signInResult = await _signInManager.PasswordSignInAsync(email, Password, RememberMe, lockoutOnFailure: false);
 
         if (signInResult.IsFailure)
         {
@@ -122,52 +120,6 @@ public sealed class SignInViewModel(
     private async Task InitializeAsync(CancellationToken cancellationToken = default)
     {
         ExternalSchemes = await _schemeProvider.GetExternalSchemesAsync();
-    }
-
-    private async Task<Result<UserId>> PasswordSignInAsync(
-        Email email, 
-        string password, 
-        bool isPersistent, 
-        bool lockoutOnFailure,
-        CancellationToken cancellationToken = default)
-    {
-        var userResult = await GetByEmailAsync(email, cancellationToken);
-        
-        if (userResult.IsFailure)
-        {
-            return userResult.Error
-                .ToResult<UserId>();
-        }
-
-        var user = userResult.Value;
-
-        if (password != user.Password)
-        {
-            return Error
-                .Unauthorized("Users.InvalidCredentials", "Invalid credentials")
-                .ToResult<UserId>();
-        }
-
-        return user.Id.ToResult();
-    }
-
-    private async Task<Result<User>> GetByEmailAsync(
-        Email email, 
-        CancellationToken cancellationToken = default)
-    {
-        var maybeUser = await _userRepository
-            .FirstOrDefaultAsync(user => user.Email == email, cancellationToken);
-
-        if (maybeUser.IsNull)
-        {
-            return Error
-                .NotFound("Users.NotFound", $"User wiht email {email} not found")
-                .ToResult<User>();
-        }
-
-        var user = maybeUser.Value;
-
-        return user.ToResult();
     }
 }
 

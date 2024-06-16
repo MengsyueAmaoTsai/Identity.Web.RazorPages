@@ -3,6 +3,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 
+using RichillCapital.Domain.Common.Identity;
 using RichillCapital.Extensions.Options;
 using RichillCapital.Identity.Web.IdentityServer;
 using RichillCapital.UseCases.Common;
@@ -65,6 +66,9 @@ public static class IdentityExtensions
         // Current user context
         services.AddHttpContextAccessor();
         services.AddScoped<ICurrentUser, CurrentWebUser>();
+
+        // Sign in manager
+        services.AddScoped<ISignInManager, SignInManager>();
 
         return services;
     }
