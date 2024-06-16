@@ -38,7 +38,9 @@ public static class IdentityExtensions
             });
 
         services
-            .AddAuthentication()
+            .AddAuthentication(options =>
+            {
+            })
             .AddMicrosoftAccount("Microsoft", options =>
             {
                 options.ClientId = identityOptions.External.Microsoft.ClientId;
