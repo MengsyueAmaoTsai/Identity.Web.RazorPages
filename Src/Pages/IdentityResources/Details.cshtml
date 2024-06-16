@@ -1,0 +1,57 @@
+﻿@page "/identity-resources/{resourceId}"
+@model IdentityResourceDetailsViewModel
+@{
+    ViewData["Title"] = "Identity Resource Details";
+}
+
+<h1>
+    Identity Resource Details
+</h1>
+
+<table class="table">
+    <tbody>
+        <tr>
+            <th>Name</th>
+            <td>@Model.IdentityResource.Name</td>
+        </tr>
+
+        <tr>
+            <th>DisplayName</th>
+            <td>@Model.IdentityResource.DisplayName</td>
+        </tr>
+        <tr>
+            <th>Description</th>
+            <td>@Model.IdentityResource.Description</td>
+        </tr>
+
+        <tr>
+            <th>Enabled</th>
+            <td>@Model.IdentityResource.Enabled</td>
+        </tr>
+
+        <tr>
+            <th>Show In Discovery Document</th>
+            <td>@Model.IdentityResource.ShowInDiscoveryDocument</td>
+        </tr>
+
+        <tr>
+            <th>Required</th>
+            <td>@Model.IdentityResource.Required</td>
+        </tr>
+
+        <tr>
+            <th>Emphasize</th>
+            <td>@Model.IdentityResource.Emphasize</td>
+        </tr>
+
+        <tr>
+            <th>User Claims</th>
+            <td>values</td>
+        </tr>
+
+        <tr>
+            <th>Properties</th>
+            <td><a asp-page="/identityResources/properties" asp-route-resourceId="@Model.IdentityResource.Name">Manage</a></td>
+        </tr>
+    </tbody>
+</table>

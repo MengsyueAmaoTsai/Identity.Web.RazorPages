@@ -1,10 +1,10 @@
 ﻿using Duende.IdentityServer.Models;
 
-namespace RichillCapital.Identity.Web.IdentityServer;
+namespace RichillCapital.Identity;
 
-internal static class InMemoryIdentityResources
+public static class InMemoryIdentityResources
 {
-    internal static readonly IEnumerable<IdentityResource> Default = 
+    public static readonly IEnumerable<IdentityResource> Default = 
     [
         new IdentityResources.OpenId(),
     ];
