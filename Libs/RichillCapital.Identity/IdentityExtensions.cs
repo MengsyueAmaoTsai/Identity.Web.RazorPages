@@ -51,6 +51,7 @@ public static class IdentityExtensions
             .AddCookie(RichillCapitalAuthenticationSchemes.DefaultCookieScheme, options =>
             {
                 options.Cookie.Name = RichillCapitalAuthenticationSchemes.DefaultCookieScheme;
+                options.LoginPath = "/identity/sign-in";
             })
             .AddMicrosoftAccount("Microsoft", options =>
             {

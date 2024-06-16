@@ -67,7 +67,12 @@
                             <p>
                                 @foreach (var provider in Model.ExternalSchemes)
                                 {
-                                    <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
+                                    <a class="btn btn-primary" title="Log in using your @provider.DisplayName account"
+                                        asp-page="./challenge" 
+                                        asp-route-returnUrl="@Model.ReturnUrl" 
+                                        asp-route-authenticationProvider="@provider.Name">
+                                        Sign in with @provider.DisplayName
+                                    </a>
                                 }
                             </p>
                         </div>

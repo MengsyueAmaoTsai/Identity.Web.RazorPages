@@ -80,12 +80,12 @@ public sealed class SignInViewModel(
 
         var user = maybeUser.Value;
 
-        var properties = AllowRememberMe && RememberMe ? 
+        var properties = AllowRememberMe && RememberMe ?
             new AuthenticationProperties
             {
                 IsPersistent = true,
                 ExpiresUtc = DateTimeOffset.UtcNow.AddDays(30),
-            } : 
+            } :
             new AuthenticationProperties();
 
         var identityServerUser = new IdentityServerUser(user.Id.Value)
@@ -107,13 +107,13 @@ public sealed class SignInViewModel(
 
         if (context is null)
         {
-            return Url.IsLocalUrl(ReturnUrl) ? 
-                Redirect(ReturnUrl) : string.IsNullOrEmpty(ReturnUrl) ? 
+            return Url.IsLocalUrl(ReturnUrl) ?
+                Redirect(ReturnUrl) : string.IsNullOrEmpty(ReturnUrl) ?
                     Redirect("~/") : throw new Exception("invalid return URL");
         }
 
-        return context.IsNativeClient() ? 
-            this.LoadingPage(ReturnUrl) : 
+        return context.IsNativeClient() ?
+            this.LoadingPage(ReturnUrl) :
             Redirect(ReturnUrl);
     }
 

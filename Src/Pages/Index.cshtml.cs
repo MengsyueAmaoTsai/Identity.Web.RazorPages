@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace RichillCapital.Identity.Web.Pages;
 
-[AllowAnonymous]
+[Authorize]
 public class IndexViewModel :
     PageModel
 {
