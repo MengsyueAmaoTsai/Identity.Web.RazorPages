@@ -11,23 +11,28 @@
   <fluent-breadcrumb-item>About</fluent-breadcrumb-item>
 </fluent-breadcrumb>
 
-<fluent-card class="card-assembly-name">
-    <h3>Assembly Name</h3>
-    <h6>@ApplicationInfo.GetDisplayName()</h6>
+<fluent-card>
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Assembly Name</th>
+                <td>@ApplicationInfo.GetDisplayName()</td>
+            </tr>
+            
+            <tr>
+                <th>Assembly Version</th>
+                <td>@ApplicationInfo.GetAssemblyVersion()</td>
+            </tr>
+            
+            <tr>
+                <th>.NET Runtime Version</th>
+                <td>@ApplicationInfo.GetDotNetRuntimeVersion()</td>
+            </tr>
+            
+            <tr>
+                <th>Install Location</th>
+                <td>@ApplicationInfo.GetInstallLocation()</td>
+            </tr>
+        </tbody>
+    </table>
 </fluent-card>
-
-<fluent-card class="card-assembly-version">
-    <h3>Assembly Version</h3>
-    <h6>@ApplicationInfo.GetAssemblyVersion()</h6>
-</fluent-card>
-
-<fluent-card class="card-dotnet-runtime-info">
-    <h3>DotNet Runtime Version</h3>
-    <h6>@ApplicationInfo.GetDotNetRuntimeVersion()</h6>
-</fluent-card>
-
-<fluent-card class="card-install-location">
-    <h3>Install Location</h3>
-    <h6>@ApplicationInfo.GetInstallLocation()</h6>
-</fluent-card>
-
