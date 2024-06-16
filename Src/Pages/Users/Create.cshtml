@@ -7,18 +7,23 @@
 
 <h1>Create User</h1>
 
+
 <form method="post">
     <div>
         <label asp-for="Email"></label>
         <input asp-for="Email" class="form-control" />
     </div>
     
-    <label asp-for="Name"></label>
-    <input asp-for="Name" class="form-control" />
+    <div>
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control" />
+    </div>
 
-    <label asp-for="PhoneNumber"></label>
-    <input asp-for="PhoneNumber" class="form-control" />
-
+    <div>
+        <label asp-for="PhoneNumber"></label>
+        <input asp-for="PhoneNumber" class="form-control" />
+    </div>        
+        
     <button type="submit" class="btn btn-primary">Submit</button>
     <a class="btn btn-secondary" asp-page="./index">Back</a>
 </form>

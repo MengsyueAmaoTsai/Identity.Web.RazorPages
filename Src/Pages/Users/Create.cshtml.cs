@@ -16,7 +16,6 @@ public sealed class CreateUserViewModel(
     PageModel
 {
     [Display(Name = "E-Mail")]
-    [EmailAddress]
     [BindProperty]
     public required string Email { get; init; }
 
@@ -39,7 +38,7 @@ public sealed class CreateUserViewModel(
         if (emailResult.IsFailure)
         {
             ModelState.AddModelError(emailResult.Error.Code, emailResult.Error.Message);
-            
+
             return Page();
         }
 
@@ -53,7 +52,7 @@ public sealed class CreateUserViewModel(
 
         var user = errorOrUser.Value;
 
-        _userRepository.Add(user);  
+        _userRepository.Add(user);
 
         await _unitOfWork.SaveChangesAsync(cancellationToken);
 
