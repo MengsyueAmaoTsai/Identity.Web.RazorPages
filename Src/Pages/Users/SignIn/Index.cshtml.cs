@@ -64,7 +64,8 @@ public sealed class SignInViewModel(
             [
                 new Claim("sub", user.Id.Value),
                 new Claim(ClaimTypes.Email, user.Email.Value),
-                new Claim(ClaimTypes.Name, user.Name),
+                new Claim("name", user.Name),
+                new Claim("role", "Unknown"),
             ],
             RichillCapitalAuthenticationSchemes.Cookie));
 
