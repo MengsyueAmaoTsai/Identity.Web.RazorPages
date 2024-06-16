@@ -32,7 +32,7 @@ public static class IdentityExtensions
                 options.Authentication.CookieAuthenticationScheme = RichillCapitalAuthenticationSchemes.Cookie;
 
                 options.IssuerUri = identityOptions.IssuerUri;
-                options.UserInteraction.LoginUrl = "/users/signin";
+                options.UserInteraction.LoginUrl = "/users/sign-in";
                 options.UserInteraction.LoginReturnUrlParameter = "returnUrl";
             })
             .AddInMemoryClients(InMemoryClients.Default)
@@ -46,7 +46,7 @@ public static class IdentityExtensions
             })
             .AddCookie(RichillCapitalAuthenticationSchemes.Cookie, options =>
             {
-                options.LoginPath = "/users/signin";
+                options.LoginPath = "/users/sign-in";
             });
 
         // Current user context
