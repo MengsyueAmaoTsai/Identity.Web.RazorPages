@@ -1,3 +1,5 @@
+using System.Security.Claims;
+
 using Duende.IdentityServer;
 using Duende.IdentityServer.Events;
 using Duende.IdentityServer.Models;
@@ -92,8 +94,16 @@ public sealed class SignInViewModel(
         {
             DisplayName = user.Name.Value,
         };
-
         await HttpContext.SignInAsync(identityServerUser, properties);
+
+        //var claims = new List<Claim>
+        //{
+        //    new Claim("sub", user.Id.Value),
+        //    new Claim("name", user.Name.Value),
+        //    new Claim("email", user.Email.Value),
+        //};
+        //var principal = new ClaimsPrincipal(new ClaimsIdentity(claims, "idsrv"));
+        //await HttpContext.SignInAsync(principal, properties);
 
         var context = await _interactionService.GetAuthorizationContextAsync(ReturnUrl);
 
