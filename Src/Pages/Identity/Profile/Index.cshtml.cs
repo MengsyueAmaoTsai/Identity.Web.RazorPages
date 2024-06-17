@@ -6,10 +6,10 @@ using RichillCapital.Domain;
 using RichillCapital.Domain.Common.Repositories;
 using RichillCapital.UseCases.Common;
 
-namespace RichillCapital.Identity.Web.Pages.Identity;
+namespace RichillCapital.Identity.Web.Pages.Identity.Profile;
 
 [Authorize]
-public sealed class IdentityManageViewModel(
+public sealed class ProfileViewModel(
     ICurrentUser _currentUser,
     IReadOnlyRepository<User> _userRepository) :
     PageModel
@@ -19,6 +19,12 @@ public sealed class IdentityManageViewModel(
     public required bool HasPassword { get; set; }
 
     public required string PhoneNumber { get; set; }
+
+    public required bool EnabledTwoFactorAuthentication { get; set; }
+
+    public required bool BrowserRemembered { get; set; }
+
+    public required string AuthenticatorKey { get; set; }
 
     public async Task<IActionResult> OnGetAsync(CancellationToken cancellationToken = default)
     {
@@ -31,6 +37,10 @@ public sealed class IdentityManageViewModel(
         }
 
         var user = maybeUser.Value;
+
+        HasPassword = !string.IsNullOrEmpty(user.Password);
+        PhoneNumber = user.PhoneNumber.Value;
+        EnabledTwoFactorAuthentication = user.TwoFactorEnabled;
         
         return Page();
     }
