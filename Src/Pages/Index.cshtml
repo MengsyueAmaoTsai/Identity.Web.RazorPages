@@ -13,17 +13,34 @@
     Welcome to @ApplicationInfo.GetDisplayName()
 </h1>
 
+
 @if (CurrentUser.IsAuthenticated)
 {
     <h2>Claims</h2>
 
     <table class="table">
         <tbody>
+            <tr>
+                <th>Type</th>
+                <th>Value</th>
+            </tr>
             @foreach (var claim in Model.User.Claims)
             {
                 <tr>
                     <th>@claim.Type</th>
-                    <td>@claim.Value</td>
+                    @if (claim.Type == "auth_time")
+                    {
+                        long.TryParse(claim.Value, out var seconds);
+                        
+                        if (seconds != default)
+                        {
+                            <td>@DateTimeOffset.FromUnixTimeSeconds(seconds).ToString("yyyy-MM-dd HH:mm:ss")</td>       
+                        }
+                    }
+                    else
+                    {
+                        <td>@claim.Value</td>
+                    }
                 </tr>
             }
         </tbody>
@@ -33,11 +50,28 @@
 
     <table class="table">
         <tbody>
+            <tr>
+                <th>Key</th>
+                <th>Value</th>
+            </tr>
             @foreach (var property in Model.Properties.Items)
             {
                 <tr>
                     <th>@property.Key</th>
-                    <td>@property.Value</td>
+                    
+                    @if (property.Key == ".issued" || property.Key == ".expires")
+                    {
+                        DateTimeOffset.TryParse(property.Value ?? string.Empty, out var datetime);
+
+                        if (datetime != default)
+                        {
+                            <td>@datetime.ToString("yyyy-MM-dd HH:mm:ss")</td>
+                        }
+                    }
+                    else
+                    {
+                        <td>@property.Value</td>
+                    }
                 </tr>
             }
         </tbody>
