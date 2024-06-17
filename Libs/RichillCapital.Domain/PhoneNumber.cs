@@ -7,6 +7,8 @@ public sealed class PhoneNumber : SingleValueObject<string>
 {
     public const int MaxLength = 100;
 
+    public static readonly PhoneNumber Empty = new(string.Empty);
+
     private PhoneNumber(string value)
         : base(value)
     {
