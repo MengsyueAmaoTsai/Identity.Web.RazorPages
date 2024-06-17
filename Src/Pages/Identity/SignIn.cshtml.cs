@@ -1,5 +1,4 @@
 using Duende.IdentityServer;
-using Duende.IdentityServer.Models;
 using Duende.IdentityServer.Services;
 
 using Microsoft.AspNetCore.Authentication;
@@ -9,7 +8,6 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 using RichillCapital.Domain;
 using RichillCapital.Domain.Common.Identity;
-using RichillCapital.Domain.Common.Repositories;
 using RichillCapital.SharedKernel.Monads;
 
 namespace RichillCapital.Identity.Web.Pages.Identity;
@@ -18,8 +16,8 @@ namespace RichillCapital.Identity.Web.Pages.Identity;
 public sealed class SignInViewModel(
     ILogger<SignInViewModel> _logger,
     IAuthenticationSchemeProvider _schemeProvider,
+    IUserService _userService,
     ISignInManager _signInManager,
-    IReadOnlyRepository<User> _userRepository,
     IIdentityServerInteractionService _interactionService) : PageModel
 {
     [BindProperty(SupportsGet = true)]
@@ -75,7 +73,9 @@ public sealed class SignInViewModel(
 
         var userId = signInResult.Value;
 
-        var maybeUser = await _userRepository.GetByIdAsync(userId, cancellationToken).ThrowIfNull();
+        var maybeUser = await _userService
+            .GetByIdAsync(userId, cancellationToken)
+            .ThrowIfFailure();
 
         var user = maybeUser.Value;
 
