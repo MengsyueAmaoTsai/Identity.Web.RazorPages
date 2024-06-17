@@ -13,6 +13,10 @@
     <None Remove="Libs\**" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Remove="Src\Pages\Identity\Consent.cshtml" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <ProjectReference Include="Libs\RichillCapital.Identity\RichillCapital.Identity.csproj" />
@@ -23,6 +27,18 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.DataProtection.StackExchangeRedis" Version="8.0.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Src\Pages\Identity\Consent.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Src\Pages\Identity\Consent.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Src\Pages\Identity\Consent.cshtml" />
   </ItemGroup>
 
 </Project>

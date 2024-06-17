@@ -35,7 +35,7 @@ public sealed class SignOutViewModel(
         // if it's a local login we can ignore this workflow
         if (provider is not null && provider != IdentityServerConstants.LocalIdentityProvider)
         {
-            if (await HttpContext.GetSchemeSupportsSignOutAsync(provider))
+            if (await HttpContext.IsSchemeSupportsSignOutAsync(provider))
             {
                 // build a return URL so the upstream provider will redirect back
                 // to us after the user has logged out. this allows us to then
