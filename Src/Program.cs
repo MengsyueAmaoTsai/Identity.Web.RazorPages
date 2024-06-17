@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.DataProtection;
 
+using RichillCapital.Domain;
 using RichillCapital.Identity;
 using RichillCapital.Identity.Web.Pages;
 using RichillCapital.Identity.Web.Services;
@@ -12,6 +13,9 @@ using Serilog;
 using StackExchange.Redis;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Domain layer
+builder.Services.AddUserService();
 
 // Application Layer
 builder.Services.AddMediator();
