@@ -40,10 +40,20 @@ public sealed class SignOutViewModel(
                 // build a return URL so the upstream provider will redirect back
                 // to us after the user has logged out. this allows us to then
                 // complete our single sign-out processing.
-                string url = Url.Page("/identity/signedOut", new { LogOutId = logoutId }) ?? "/identity/signed-out";
+                string url = Url.Page(
+                    "/identity/signedOut", 
+                    new 
+                    { 
+                        LogOutId = logoutId 
+                    }) ?? "/identity/signed-out";
 
                 // this triggers a redirect to the external provider for sign-out
-                return SignOut(new AuthenticationProperties { RedirectUri = url }, provider);
+                return SignOut(
+                    new AuthenticationProperties 
+                    { 
+                        RedirectUri = url 
+                    }, 
+                    provider);
             }
         }
 

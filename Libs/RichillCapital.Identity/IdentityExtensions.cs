@@ -39,6 +39,7 @@ public static class IdentityExtensions
             {
                 options.IssuerUri = identityOptions.IssuerUri;
                 options.UserInteraction.LoginUrl = "/identity/sign-in";
+                options.UserInteraction.ErrorUrl = "/error";
             })
             .AddInMemoryClients(InMemoryClients.Default)
             .AddInMemoryIdentityResources(InMemoryIdentityResources.Default)
