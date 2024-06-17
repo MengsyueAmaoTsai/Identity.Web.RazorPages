@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 using RichillCapital.Domain;
-using RichillCapital.Domain.Common.Repositories;
 using RichillCapital.UseCases.Common;
 
 namespace RichillCapital.Identity.Web.Pages.Identity.Profile;
@@ -11,9 +10,10 @@ namespace RichillCapital.Identity.Web.Pages.Identity.Profile;
 [Authorize]
 public sealed class ProfileViewModel(
     ICurrentUser _currentUser,
-    IReadOnlyRepository<User> _userRepository) :
+    IUserService _userService) :
     PageModel
 {
+    [TempData]
     public required string StatusMessage { get; init; }
 
     public required bool HasPassword { get; set; }
@@ -28,15 +28,14 @@ public sealed class ProfileViewModel(
 
     public async Task<IActionResult> OnGetAsync(CancellationToken cancellationToken = default)
     {
-        // Get current user
-        var maybeUser = await _userRepository.GetByIdAsync(_currentUser.Id, cancellationToken);
+        var userResult = await _userService.GetByIdAsync(_currentUser.Id, cancellationToken);
 
-        if (maybeUser.IsNull)
+        if (userResult.IsFailure)
         {
-            return NotFound($"Unable to load user with ID '{_currentUser.Id}'.");
+            return NotFound(userResult.Error.Message);
         }
 
-        var user = maybeUser.Value;
+        var user = userResult.Value;
 
         HasPassword = !string.IsNullOrEmpty(user.Password);
         PhoneNumber = user.PhoneNumber.Value;

@@ -1,8 +1,30 @@
 @page "/identity/profile/two-factor-authentication"
+@using Microsoft.AspNetCore.Http.Features
 @model TwoFactorAuthenticationViewModel
 @{
     ViewData["Title"] = "Two-factor authentication";
     ViewData["ActivePage"] = "two-factor";
 }
 
-<h1>2FA Manage</h1>
+<partial name="_StatusMessage" for="StatusMessage" />
+<h3>@ViewData["Title"]</h3>
+
+@{
+    var consentFeature = HttpContext.Features.Get<ITrackingConsentFeature>();
+
+    @if (consentFeature?.CanTrack ?? true)
+    {
+        <h4>Authenticator app</h4>
+    }
+    else
+    {
+        <div class="alert alert-danger">
+            <strong>Privacy and cookie policy have not been accepted.</strong>
+            <p>You must accept the policy before you can enable two factor authentication.</p>
+        </div>
+    }
+}
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
