@@ -1,6 +1,7 @@
 using System.Security.Claims;
 
 using Duende.IdentityServer;
+using Duende.IdentityServer.Events;
 using Duende.IdentityServer.Services;
 
 using IdentityModel;
@@ -10,14 +11,14 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 using RichillCapital.Domain;
-using RichillCapital.Domain.Common.Repositories;
 using RichillCapital.SharedKernel.Monads;
 
 namespace RichillCapital.Identity.Web.Pages.Identity;
 
 public sealed class CallbackViewModel(
-    IRepository<User> _userRepository,
-    IIdentityServerInteractionService _interactionService) :
+    IUserService _userService,
+    IIdentityServerInteractionService _interactionService,
+    IEventService _eventService) :
     PageModel
 {
     public async Task<IActionResult> OnGetAsync(CancellationToken cancellationToken = default)
@@ -47,17 +48,16 @@ public sealed class CallbackViewModel(
 
         var (email, name) = validationResult.Value;
 
-        var maybeUser = await _userRepository
-            .FirstOrDefaultAsync(user => user.Email == email, cancellationToken);
+        var userResult = await _userService.GetByEmailAsync(email, cancellationToken);
 
-        if (maybeUser.IsNull)
+        if (userResult.IsFailure)
         {
             var claims = externalUser.Claims.ToList();
             claims.Remove(idClaim);
         }
 
-        var user = maybeUser.IsNull ? Domain.User
-            .Create(
+        var user = userResult.IsFailure ?
+            Domain.User.Create(
                 UserId.NewUserId(),
                 name,
                 email,
@@ -69,26 +69,27 @@ public sealed class CallbackViewModel(
                 phoneNumberConfirmed: false,
                 accessFailedCount: 0,
                 lockoutEnd: DateTimeOffset.UtcNow).Value :
-            maybeUser.Value;
+            userResult.Value;
 
-        var additionalLocalClaims = new List<Claim>();
-        var localSignInProps = new AuthenticationProperties();
+        var additionalClaims = new List<Claim>();
+        var properties = new AuthenticationProperties();
 
         CaptureExternalLoginContext(
             externalAuthenticationResult,
-            additionalLocalClaims,
-            localSignInProps);
+            additionalClaims,
+            properties);
 
         var provider = externalAuthenticationResult.Properties.Items["scheme"] ??
-            throw new InvalidOperationException("Null scheme in authentiation properties");
+            throw new InvalidOperationException("Null scheme in authentication properties");
 
-        var isuser = new IdentityServerUser(user.Id.Value)
+        var identityServerUser = new IdentityServerUser(user.Id.Value)
         {
             DisplayName = user.Name.Value,
             IdentityProvider = provider,
-            AdditionalClaims = additionalLocalClaims
+            AdditionalClaims = additionalClaims,
         };
-        await HttpContext.SignInAsync(isuser, localSignInProps);
+
+        await HttpContext.SignInAsync(identityServerUser, properties);
 
         // After sign in
         await HttpContext.SignOutAsync(IdentityServerConstants.ExternalCookieAuthenticationScheme);
@@ -97,12 +98,19 @@ public sealed class CallbackViewModel(
 
         var request = await _interactionService.GetAuthorizationContextAsync(returnUrl);
 
+        await _eventService.RaiseAsync(
+            new UserLoginSuccessEvent(
+                provider,
+                idClaim.Value,
+                user.Id.Value,
+                user.Name.Value,
+                true,
+                request?.Client.ClientId));
+
         if (request is not null)
         {
             if (request.IsNativeClient())
             {
-                // The client is native, so this change in how to
-                // return the response is for better UX for the end user.
                 return this.LoadingPage(returnUrl);
             }
         }
@@ -116,19 +124,19 @@ public sealed class CallbackViewModel(
         AuthenticationProperties properties)
     {
         ArgumentNullException.ThrowIfNull(
-            authenticateResult.Principal, 
+            authenticateResult.Principal,
             nameof(authenticateResult.Principal));
 
         // capture the idp used to login, so the session knows where the user came from
         localClaims.Add(new Claim(
-            JwtClaimTypes.IdentityProvider, 
-            authenticateResult.Properties?.Items["scheme"] ?? 
-                "unknown identity provider"));
+            JwtClaimTypes.IdentityProvider,
+            authenticateResult.Properties?.Items["scheme"] ??
+                "unknown"));
 
         // if the external system sent a session id claim, copy it over so we can use it for single sign-out
         var sessionId = authenticateResult.Principal.Claims
             .FirstOrDefault(claim => claim.Type == JwtClaimTypes.SessionId);
-        
+
         if (sessionId is not null)
         {
             localClaims.Add(new Claim(JwtClaimTypes.SessionId, sessionId.Value));
@@ -139,10 +147,10 @@ public sealed class CallbackViewModel(
 
         if (idToken is not null)
         {
-            properties.StoreTokens([new AuthenticationToken 
-            { 
-                Name = "id_token", 
-                Value = idToken 
+            properties.StoreTokens([new AuthenticationToken
+            {
+                Name = "id_token",
+                Value = idToken
             }]);
         }
     }
