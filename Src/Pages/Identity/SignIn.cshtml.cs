@@ -46,7 +46,9 @@ public sealed class SignInViewModel(
         return Page();
     }
 
-    public async Task<IActionResult> OnPostAsync(string action, CancellationToken cancellationToken = default)
+    public async Task<IActionResult> OnPostAsync(
+        string action,
+        CancellationToken cancellationToken = default)
     {
         var context = await _interactionService.GetAuthorizationContextAsync(ReturnUrl);
 
@@ -130,7 +132,7 @@ public sealed class SignInViewModel(
     }
 
     private async Task<IActionResult> HandleCancelAsync(
-        AuthorizationRequest request, 
+        AuthorizationRequest? request,
         CancellationToken cancellationToken = default)
     {
         var context = await _interactionService.GetAuthorizationContextAsync(ReturnUrl);
@@ -146,7 +148,7 @@ public sealed class SignInViewModel(
         // denied the consent (even if this client does not require consent).
         // this will send back an access denied OIDC error response to the client.
         await _interactionService.DenyAuthorizationAsync(
-            context, 
+            context,
             AuthorizationError.AccessDenied);
 
         // we can trust model.ReturnUrl since GetAuthorizationContextAsync returned non-null
