@@ -27,17 +27,17 @@ Task("Build")
             });
     });
 
-Task("AcceptanceTests")
+Task("UnitTests")
     .Does(() =>
     {
-        // DotNetTest(
-        //     "./Tests/RichillCapital.Api.AcceptanceTests",
-        //     new DotNetTestSettings
-        //     {
-        //         Configuration = buildConfiguration,
-        //         NoBuild = true,
-        //         NoRestore = true,
-        //     });
+        DotNetTest(
+            "./Tests/RichillCapital.Identity.Web.UnitTests",
+            new DotNetTestSettings
+            {
+                Configuration = buildConfiguration,
+                NoBuild = true,
+                NoRestore = true,
+            });
     });
 
 Task("Publish")
@@ -60,7 +60,7 @@ Task("Default")
     .IsDependentOn("Clean")
     .IsDependentOn("Restore")
     .IsDependentOn("Build")
-    .IsDependentOn("AcceptanceTests")
+    .IsDependentOn("UnitTests")
     .IsDependentOn("Publish");
 
 var target = Argument("target", "Default");

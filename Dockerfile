@@ -18,6 +18,8 @@ COPY ./Libs/RichillCapital.Logging/*.csproj ./Libs/RichillCapital.Logging/
 COPY ./Libs/RichillCapital.Persistence/*.csproj ./Libs/RichillCapital.Persistence/
 COPY ./Libs/RichillCapital.UseCases/*.csproj ./Libs/RichillCapital.UseCases/
 
+COPY ./Tests/RichillCapital.Identity.Web.UnitTests/*.csproj ./Tests/RichillCapital.Identity.Web.UnitTests/
+
 RUN dotnet cake --target restore 
 
 # Build and Publish Source Code
