@@ -8,6 +8,7 @@
 
 - [Learn Razor Pages](https://www.learnrazorpages.com/)
 - [ASP.NET Core RazorPages Tutorial (YouTube)](https://www.youtube.com/playlist?list=PL6n9fhu94yhX6J31qad0wSO1N_rgGbOPV)
+- [.Net Razor pages full course (Unread)](https://www.youtube.com/watch?v=QmoCAjYDYSI&ab_channel=RavindraDevrani)
 
 ## Site
 
