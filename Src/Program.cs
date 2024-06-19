@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.DataProtection;
 using RichillCapital.Domain;
 using RichillCapital.Identity;
 using RichillCapital.Identity.Web.Pages;
+using RichillCapital.Identity.Web.Middlewares;
 using RichillCapital.Identity.Web.Services;
 using RichillCapital.Logging;
 using RichillCapital.Persistence;
@@ -34,6 +35,7 @@ builder.Services.AddIdentityWebIdentity();
 builder.Services.AddApiService();
 
 // Presentation - RazorPages
+builder.Services.AddMiddlewares();
 builder.Services.AddPages();
 
 // Security
@@ -48,6 +50,8 @@ builder.Services
     .SetApplicationName("RichillCapital.Identity.Web");
 
 var app = builder.Build();
+
+app.UseDebuggingRequestMiddleware();
 
 if (!app.Environment.IsDevelopment())
 {
