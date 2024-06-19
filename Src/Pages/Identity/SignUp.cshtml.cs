@@ -6,8 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 
-using RichillCapital.Domain;
 using RichillCapital.Domain.Common.Repositories;
+using RichillCapital.Domain.Users;
 using RichillCapital.SharedKernel.Monads;
 
 namespace RichillCapital.Identity.Web.Pages.Identity;
@@ -45,7 +45,7 @@ public sealed class SignUpViewModel(
     public async Task<IActionResult> OnPostAsync(CancellationToken cancellationToken = default)
     {
         var validationResult = Result<(Email, UserName)>.Combine(
-            Domain.Email.From(Email),
+            Domain.Users.Email.From(Email),
             UserName.From(Name));
 
         if (validationResult.IsFailure)
@@ -71,18 +71,19 @@ public sealed class SignUpViewModel(
             return Page();
         }
 
-        var errorOrUser = Domain.User.Create(
+        var errorOrUser = Domain.Users.User.Create(
             UserId.NewUserId(),
             name,
             email,
             PhoneNumber.From("").Value,
             "123",
-            true,
-            true,
-            false,
-            false,
-            0,
-            DateTimeOffset.UtcNow);
+            lockoutEnabled: true,
+            twoFactorEnabled: true,
+            emailConfirmed: false,
+            phoneNumberConfirmed: false,
+            accessFailedCount: 0,
+            lockoutEnd: DateTimeOffset.UtcNow,
+            createdAt: DateTimeOffset.UtcNow);
 
 
         if (errorOrUser.HasError)

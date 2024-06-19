@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 using RichillCapital.Domain;
 using RichillCapital.Domain.Common.Repositories;
+using RichillCapital.Domain.Users;
 
 namespace RichillCapital.Identity.Web.Pages.Identity;
 
@@ -17,7 +18,7 @@ public sealed class ResendEmailConfirmationViewModel(
 
     public async Task<IActionResult> OnPostAsync(CancellationToken cancellationToken = default)
     {
-        var validationResult = Domain.Email.From(Email);
+        var validationResult = Domain.Users.Email.From(Email);
 
         if (validationResult.IsFailure)
         {

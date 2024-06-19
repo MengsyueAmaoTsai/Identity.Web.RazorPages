@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 using RichillCapital.Domain;
+using RichillCapital.Domain.Users;
 using RichillCapital.SharedKernel.Monads;
 
 namespace RichillCapital.Identity.Web.Pages.Identity;
@@ -57,18 +58,19 @@ public sealed class CallbackViewModel(
         }
 
         var user = userResult.IsFailure ?
-            Domain.User.Create(
+            Domain.Users.User.Create(
                 UserId.NewUserId(),
                 name,
                 email,
-                PhoneNumber.Empty,
+                PhoneNumber.From("23").Value,
                 "123",
                 lockoutEnabled: true,
                 twoFactorEnabled: true,
                 emailConfirmed: true,
                 phoneNumberConfirmed: false,
                 accessFailedCount: 0,
-                lockoutEnd: DateTimeOffset.UtcNow).Value :
+                lockoutEnd: DateTimeOffset.UtcNow,
+                createdAt: DateTimeOffset.UtcNow).Value :
             userResult.Value;
 
         var additionalClaims = new List<Claim>();

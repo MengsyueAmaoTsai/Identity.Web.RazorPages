@@ -1,12 +1,11 @@
 ﻿using RichillCapital.SharedKernel;
 using RichillCapital.SharedKernel.Monads;
 
-namespace RichillCapital.Domain;
+namespace RichillCapital.Domain.Users;
 
 public sealed class UserId : SingleValueObject<string>
 {
     private const string Prefix = "UID";
-
     public const int MaxLength = 10;
 
     private UserId(string value)

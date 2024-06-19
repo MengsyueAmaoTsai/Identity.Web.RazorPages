@@ -1,13 +1,14 @@
 ﻿using RichillCapital.Domain;
 using RichillCapital.Domain.Common.Identity;
 using RichillCapital.Domain.Common.Repositories;
+using RichillCapital.Domain.Users;
 using RichillCapital.SharedKernel;
 using RichillCapital.SharedKernel.Monads;
 
 namespace RichillCapital.Identity;
 
 internal sealed class SignInManager(
-    IReadOnlyRepository<User> _userRepository) : 
+    IReadOnlyRepository<User> _userRepository) :
     ISignInManager
 {
     public async Task<Result<UserId>> PasswordSignInAsync(

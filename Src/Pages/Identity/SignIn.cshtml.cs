@@ -57,7 +57,7 @@ public sealed class SignInViewModel(
             return await HandleCancelAsync(context, cancellationToken);
         }
 
-        var validationResult = Domain.Email.From(Email);
+        var validationResult = Domain.Users.Email.From(Email);
 
         if (validationResult.IsFailure)
         {

@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 using RichillCapital.Domain;
-using RichillCapital.Domain.Common.Repositories;
+using RichillCapital.Domain.Users;
 using RichillCapital.SharedKernel.Monads;
 using RichillCapital.UseCases.Common;
 
@@ -54,7 +54,7 @@ public sealed class ChangePasswordViewModel(
         }
 
         // await _signInManager.RefreshSignInAsync(maybeUser.Value);
-        
+
         StatusMessage = "Your password has been changed.";
 
         return RedirectToPage();

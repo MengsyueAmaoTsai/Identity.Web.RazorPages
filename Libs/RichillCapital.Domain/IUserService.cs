@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
 using RichillCapital.Domain.Common.Repositories;
+using RichillCapital.Domain.Users;
 using RichillCapital.SharedKernel;
 using RichillCapital.SharedKernel.Monads;
 

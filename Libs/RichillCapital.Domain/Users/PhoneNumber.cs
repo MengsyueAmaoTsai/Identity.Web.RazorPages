@@ -1,13 +1,11 @@
 using RichillCapital.SharedKernel;
 using RichillCapital.SharedKernel.Monads;
 
-namespace RichillCapital.Domain;
+namespace RichillCapital.Domain.Users;
 
 public sealed class PhoneNumber : SingleValueObject<string>
 {
     public const int MaxLength = 100;
-
-    public static readonly PhoneNumber Empty = new(string.Empty);
 
     private PhoneNumber(string value)
         : base(value)

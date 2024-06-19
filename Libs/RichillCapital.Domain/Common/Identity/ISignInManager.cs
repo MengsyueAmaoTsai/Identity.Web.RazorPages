@@ -1,4 +1,5 @@
-﻿using RichillCapital.SharedKernel.Monads;
+﻿using RichillCapital.Domain.Users;
+using RichillCapital.SharedKernel.Monads;
 
 namespace RichillCapital.Domain.Common.Identity;
 

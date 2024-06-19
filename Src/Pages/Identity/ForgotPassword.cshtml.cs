@@ -2,8 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-using RichillCapital.Domain;
 using RichillCapital.Domain.Common.Repositories;
+using RichillCapital.Domain.Users;
 
 namespace RichillCapital.Identity.Web.Pages.Identity;
 
@@ -17,7 +17,7 @@ public sealed class ForgotPasswordViewModel(
 
     public async Task<IActionResult> OnPostAsync(CancellationToken cancellationToken = default)
     {
-        var validationResult = Domain.Email.From(Email);
+        var validationResult = Domain.Users.Email.From(Email);
 
         if (validationResult.IsFailure)
         {
