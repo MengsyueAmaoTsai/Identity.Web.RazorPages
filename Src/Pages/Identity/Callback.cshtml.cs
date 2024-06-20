@@ -1,25 +1,15 @@
 using System.Security.Claims;
 
-using Duende.IdentityServer;
-using Duende.IdentityServer.Events;
-using Duende.IdentityServer.Services;
-
 using IdentityModel;
 
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-using RichillCapital.Domain;
-using RichillCapital.Domain.Users;
-using RichillCapital.SharedKernel.Monads;
 
 namespace RichillCapital.Identity.Web.Pages.Identity;
 
-public sealed class CallbackViewModel(
-    IUserService _userService,
-    IIdentityServerInteractionService _interactionService,
-    IEventService _eventService) :
+public sealed class CallbackViewModel() :
     PageModel
 {
     public async Task<IActionResult> OnGetAsync(CancellationToken cancellationToken = default)

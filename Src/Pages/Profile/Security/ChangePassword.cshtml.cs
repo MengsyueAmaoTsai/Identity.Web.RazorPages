@@ -9,7 +9,8 @@ namespace RichillCapital.Identity.Web.Pages.Profile.Security;
 
 public sealed class ChangePasswordViewModel(
     IUserManager _userManager,
-    ICurrentUser _currentUser) :
+    ICurrentUser _currentUser,
+    ISignInManager _signInManager) :
     PageModel
 {
     [BindProperty]
