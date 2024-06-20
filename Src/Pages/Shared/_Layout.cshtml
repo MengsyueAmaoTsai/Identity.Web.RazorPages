@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@using RichillCapital.UseCases.Common
+@inject ICurrentUser CurrentUser
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -12,18 +15,28 @@
 </head>
 
 <body>
-    <header>
-        <partial name="_TopNav" />
-    </header>
-
+    @if (CurrentUser.IsAuthenticated)
+    {
+        <header>
+            <partial name="_TopNav" />
+        </header>
+    }
+    
     <div class="container">
         <main role="main" class="pb-3">
             <div class="row">
-                <div class="col-md-2">
-                    <partial name="_SideNav" />
-                </div>
+                @if (CurrentUser.IsAuthenticated)
+                {
+                    <div class="col-md-2">
+                        <partial name="_SideNav" />
+                    </div>
 
-                <div class="col-md-8">
+                    <div class="col-md-8">
+                        @RenderBody()
+                    </div>
+                }
+                
+                <div class="col-md-12">
                     @RenderBody()
                 </div>
             </div>
