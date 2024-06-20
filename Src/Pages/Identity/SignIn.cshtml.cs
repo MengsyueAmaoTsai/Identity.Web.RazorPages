@@ -1,5 +1,4 @@
 using Duende.IdentityServer.Events;
-using Duende.IdentityServer.Models;
 using Duende.IdentityServer.Services;
 
 using Microsoft.AspNetCore.Authentication;
@@ -61,7 +60,7 @@ public sealed class SignInViewModel(
         var signInResult = await _signInManager.PasswordSignInAsync(
             email,
             Password,
-            isPersistent: RememberMe,
+            isPersistent: AllowRememberMe && RememberMe,
             lockoutOnFailure: true);
 
         if (signInResult.IsFailure)
@@ -82,8 +81,8 @@ public sealed class SignInViewModel(
             user.Email.Value,
             user.Id.Value,
             user.Name.Value,
-            clientId: context is null || context.Client is null ? 
-                string.Empty : 
+            clientId: context is null || context.Client is null ?
+                string.Empty :
                 context.Client.ClientId));
 
         if (context is null)

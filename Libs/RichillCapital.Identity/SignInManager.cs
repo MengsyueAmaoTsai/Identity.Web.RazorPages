@@ -1,6 +1,4 @@
-﻿using System.Security.Claims;
-
-using Duende.IdentityServer;
+﻿using Duende.IdentityServer;
 
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
