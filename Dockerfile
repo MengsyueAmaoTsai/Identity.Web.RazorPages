@@ -12,7 +12,6 @@ ARG APP_NAME=RichillCapital.Identity.Web
 
 COPY ./build.cake ./${APP_NAME}.sln ./${APP_NAME}.csproj ./
 
-COPY ./Libs/RichillCapital.Domain/*.csproj ./Libs/RichillCapital.Domain/
 COPY ./Libs/RichillCapital.Identity/*.csproj ./Libs/RichillCapital.Identity/
 COPY ./Libs/RichillCapital.Logging/*.csproj ./Libs/RichillCapital.Logging/
 COPY ./Libs/RichillCapital.Persistence/*.csproj ./Libs/RichillCapital.Persistence/
