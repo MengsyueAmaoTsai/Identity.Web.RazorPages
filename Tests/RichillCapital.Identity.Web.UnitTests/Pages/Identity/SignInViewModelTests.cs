@@ -71,7 +71,7 @@ public sealed class SignInViewModelTests
     }
 
     [Fact]
-    public async Task OnPostAsync_When_GivenInvalidInput_Should_ReturnPage()
+    public async Task OnPostSignInAsync_When_GivenInvalidInput_Should_ReturnPage()
     {
         IAuthenticationSchemeProvider schemeProvider = Substitute.For<IAuthenticationSchemeProvider>();
         ISignInManager signInManager = Substitute.For<ISignInManager>();
@@ -86,13 +86,13 @@ public sealed class SignInViewModelTests
             interactionService,
             eventService);
 
-        var result = await viewModel.OnPostAsync();
+        var result = await viewModel.OnPostSignInAsync();
 
         result.Should().BeOfType<PageResult>();
     }
 
     [Fact]
-    public async Task OnPostAsync_When_SignInResultIsFailure_Should_ReturnPage()
+    public async Task OnPostSignInAsync_When_SignInResultIsFailure_Should_ReturnPage()
     {
         IAuthenticationSchemeProvider schemeProvider = Substitute.For<IAuthenticationSchemeProvider>();
         ISignInManager signInManager = Substitute.For<ISignInManager>();
@@ -114,7 +114,7 @@ public sealed class SignInViewModelTests
             Arg.Any<bool>())
             .Returns(Result.Failure(Error.Invalid("Invalid credentials")));
 
-        var result = await viewModel.OnPostAsync();
+        var result = await viewModel.OnPostSignInAsync();
 
         await signInManager.Received(1).PasswordSignInAsync(
             Arg.Any<Email>(),
@@ -126,7 +126,7 @@ public sealed class SignInViewModelTests
     }
 
     [Fact]
-    public async Task OnPostAsync_When_AuthorizationRequestIsNullAndReturnUrlIsLocal_Should_RedirectToIndex()
+    public async Task OnPostSignInAsync_When_AuthorizationRequestIsNullAndReturnUrlIsLocal_Should_RedirectToIndex()
     {
         IAuthenticationSchemeProvider schemeProvider = Substitute.For<IAuthenticationSchemeProvider>();
         ISignInManager signInManager = Substitute.For<ISignInManager>();
@@ -168,7 +168,7 @@ public sealed class SignInViewModelTests
 
         urlHelper.IsLocalUrl(Arg.Any<string>()).Returns(true);
 
-        var result = await viewModel.OnPostAsync();
+        var result = await viewModel.OnPostSignInAsync();
 
         await signInManager.Received(1).PasswordSignInAsync(
             Arg.Any<Email>(),
@@ -186,7 +186,7 @@ public sealed class SignInViewModelTests
     }
 
     [Fact]
-    public async Task OnPostAsync_When_AuthorizationRequestIsNotNullAndIsNativeClient_Should_RedirectToPage()
+    public async Task OnPostSignInAsync_When_AuthorizationRequestIsNotNullAndIsNativeClient_Should_RedirectToPage()
     {
         IAuthenticationSchemeProvider schemeProvider = Substitute.For<IAuthenticationSchemeProvider>();
         ISignInManager signInManager = Substitute.For<ISignInManager>();
@@ -235,7 +235,7 @@ public sealed class SignInViewModelTests
 
         urlHelper.IsLocalUrl(Arg.Any<string>()).Returns(true);
 
-        var result = await viewModel.OnPostAsync();
+        var result = await viewModel.OnPostSignInAsync();
 
         await signInManager.Received(1).PasswordSignInAsync(
             Arg.Any<Email>(),
@@ -252,9 +252,8 @@ public sealed class SignInViewModelTests
         result.Should().BeOfType<RedirectToPageResult>();
     }
 
-
     [Fact]
-    public async Task OnPostAsync_When_AuthorizationRequestIsNotNullAndIsExternalClient_Should_RedirectToUrl()
+    public async Task OnPostSignInAsync_When_AuthorizationRequestIsNotNullAndIsExternalClient_Should_RedirectToUrl()
     {
         IAuthenticationSchemeProvider schemeProvider = Substitute.For<IAuthenticationSchemeProvider>();
         ISignInManager signInManager = Substitute.For<ISignInManager>();
@@ -303,7 +302,7 @@ public sealed class SignInViewModelTests
 
         urlHelper.IsLocalUrl(Arg.Any<string>()).Returns(true);
 
-        var result = await viewModel.OnPostAsync();
+        var result = await viewModel.OnPostSignInAsync();
 
         await signInManager.Received(1).PasswordSignInAsync(
             Arg.Any<Email>(),
@@ -321,7 +320,7 @@ public sealed class SignInViewModelTests
     }
 
     [Fact]
-    public async Task OnPostAsync_When_AuthorizationRequestIsNull_Should_RedirectToIndex()
+    public async Task OnPostCancelAsync_When_AuthorizationRequestIsNull_Should_RedirectToIndex()
     {
         IAuthenticationSchemeProvider schemeProvider = Substitute.For<IAuthenticationSchemeProvider>();
         ISignInManager signInManager = Substitute.For<ISignInManager>();
@@ -344,7 +343,7 @@ public sealed class SignInViewModelTests
     }
 
     [Fact]
-    public async Task OnPostAsync_When_AuthorizationRequestIsNotNull_Should_RedirectToUrl()
+    public async Task OnPostCancelAsync_When_AuthorizationRequestIsNotNull_Should_RedirectToUrl()
     {
         IAuthenticationSchemeProvider schemeProvider = Substitute.For<IAuthenticationSchemeProvider>();
         ISignInManager signInManager = Substitute.For<ISignInManager>();

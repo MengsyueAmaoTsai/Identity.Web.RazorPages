@@ -46,7 +46,7 @@ public sealed class SignInViewModel(
         return Page();
     }
 
-    public async Task<IActionResult> OnPostAsync(CancellationToken cancellationToken = default)
+    public async Task<IActionResult> OnPostSignInAsync(CancellationToken cancellationToken = default)
     {
         var validationResult = Domain.Users.Email.From(Email);
 
