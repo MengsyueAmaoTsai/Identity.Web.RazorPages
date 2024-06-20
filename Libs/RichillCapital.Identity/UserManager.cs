@@ -46,10 +46,10 @@ internal sealed class UserManager(
         return Result.Success;
     }
 
-    public Task<string> GenerateEmailConfirmationTokenAsync(
-        User user, 
+    public async Task<string> GenerateEmailConfirmationTokenAsync(
+        User user,
         CancellationToken cancellationToken = default) =>
-        throw new NotImplementedException();
+        await Task.FromResult(string.Empty);
 
     public async Task<Result<User>> GetByEmailAsync(
         Domain.Users.Email email,

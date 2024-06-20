@@ -24,18 +24,18 @@ public sealed class SignUpViewModel(
     public required string ReturnUrl { get; init; }
 
     [BindProperty]
-    public required string Name { get; init; }
+    public string Name { get; init; } = string.Empty;
 
     [BindProperty]
-    public required string Email { get; init; }
+    public string Email { get; init; } = string.Empty;
 
     [BindProperty]
-    public required string Password { get; init; }
+    public string Password { get; init; } = string.Empty;
 
     [BindProperty]
-    public required string ConfirmPassword { get; init; }
+    public string ConfirmPassword { get; init; } = string.Empty;
 
-    public required IEnumerable<AuthenticationScheme> ExternalSchemes { get; set; } = [];
+    public IEnumerable<AuthenticationScheme> ExternalSchemes { get; set; } = [];
 
     public async Task<IActionResult> OnGetAsync(CancellationToken cancellationToken = default)
     {
