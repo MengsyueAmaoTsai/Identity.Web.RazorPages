@@ -1,9 +1,14 @@
-
 @inject ICompositeViewEngine Engine
 
 <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
     <div class="container">
         <a class="navbar-brand" asp-page="/index" asp-area="">@ApplicationInfo.GetDisplayName()</a>
+
+        <a class="nav-link active" asp-page="/clients/index">Clients</a>
+        <a class="nav-link active" asp-page="/clients/index">Identity Resources</a>
+        <a class="nav-link active" asp-page="/clients/index">Api Scopes</a>
+
+        <a class="nav-link active" asp-page="/about">About</a>
 
         <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
             @{
