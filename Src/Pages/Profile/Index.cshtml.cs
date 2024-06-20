@@ -2,13 +2,10 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-using RichillCapital.UseCases.Common;
-
 namespace RichillCapital.Identity.Web.Pages.Profile;
 
 [Authorize]
-public sealed class ProfileViewModel(
-    ICurrentUser _currentUser) :
+public sealed class ProfileViewModel() :
     PageModel
 {
     [TempData]
