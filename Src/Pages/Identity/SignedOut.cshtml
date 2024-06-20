@@ -24,17 +24,9 @@
     }
 </div>
 
-@section scripts
+@section Scripts
 {
     @if (Model.AutomaticRedirectAfterSignOut)
-    {
-        <script src="~/js/signout-redirect.js"></script>
-    }
-}
-
-@section scripts
-{
-    @if (Model.View.AutomaticRedirectAfterSignOut)
     {
         <script src="~/js/signout-redirect.js"></script>
     }
