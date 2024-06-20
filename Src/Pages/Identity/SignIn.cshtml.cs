@@ -1,6 +1,4 @@
-using Duende.IdentityServer;
 using Duende.IdentityServer.Models;
-using Duende.IdentityServer.Services;
 
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
@@ -10,9 +8,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 namespace RichillCapital.Identity.Web.Pages.Identity;
 
 [AllowAnonymous]
-public sealed class SignInViewModel(
-    IAuthenticationSchemeProvider _schemeProvider,
-    IIdentityServerInteractionService _interactionService) : PageModel
+public sealed class SignInViewModel() : PageModel
 {
     [BindProperty(SupportsGet = true)]
     public required string ReturnUrl { get; init; }
@@ -43,12 +39,12 @@ public sealed class SignInViewModel(
         string action,
         CancellationToken cancellationToken = default)
     {
-        var context = await _interactionService.GetAuthorizationContextAsync(ReturnUrl);
+        // var context = await _interactionService.GetAuthorizationContextAsync(ReturnUrl);
 
-        if (action == "Cancel")
-        {
-            return await HandleCancelAsync(context, cancellationToken);
-        }
+        // if (action == "Cancel")
+        // {
+        //     return await HandleCancelAsync(context, cancellationToken);
+        // }
 
         // var validationResult = Domain.Users.Email.From(Email);
 
@@ -122,34 +118,34 @@ public sealed class SignInViewModel(
 
     private async Task InitializeAsync(CancellationToken _ = default)
     {
-        ExternalSchemes = await _schemeProvider.GetExternalSchemesAsync();
+        // ExternalSchemes = await _schemeProvider.GetExternalSchemesAsync();
     }
 
     private async Task<IActionResult> HandleCancelAsync(
         AuthorizationRequest? request,
         CancellationToken cancellationToken = default)
     {
-        if (request is null)
-        {
-            return Redirect("~/");
-        }
+        // if (request is null)
+        // {
+        //     return Redirect("~/");
+        // }
 
-        ArgumentNullException.ThrowIfNull(ReturnUrl, nameof(ReturnUrl));
+        // ArgumentNullException.ThrowIfNull(ReturnUrl, nameof(ReturnUrl));
 
         // if the user cancels, send a result back into IdentityServer as if they 
         // denied the consent (even if this client does not require consent).
         // this will send back an access denied OIDC error response to the client.
-        await _interactionService.DenyAuthorizationAsync(
-            request,
-            AuthorizationError.AccessDenied);
+        // await _interactionService.DenyAuthorizationAsync(
+        //     request,
+        //     AuthorizationError.AccessDenied);
 
         // we can trust model.ReturnUrl since GetAuthorizationContextAsync returned non-null
-        if (request.IsNativeClient())
-        {
-            // The client is native, so this change in how to
-            // return the response is for better UX for the end user.
-            return this.LoadingPage(ReturnUrl);
-        }
+        // if (request.IsNativeClient())
+        // {
+        //     // The client is native, so this change in how to
+        //     // return the response is for better UX for the end user.
+        //     return this.LoadingPage(ReturnUrl);
+        // }
 
         return Redirect(ReturnUrl ?? "~/");
     }
