@@ -37,6 +37,7 @@ internal sealed class SignInManager(
         bool lockoutOnFailure,
         CancellationToken cancellationToken = default)
     {
+
         //     var userResult = await GetByEmailAsync(email, cancellationToken);
 
         //     if (userResult.IsFailure)
@@ -83,6 +84,41 @@ internal sealed class SignInManager(
         //     var user = maybeUser.Value;
 
         //     return user.ToResult();
+
+
+        // Sign in to http context
+        // var maybeUser = await _userRepository
+        //     .FirstOrDefaultAsync(
+        //         user => user.Email == email,
+        //         cancellationToken)
+        //     .ThrowIfNull();
+
+        // var user = maybeUser.ValueOrDefault;
+
+        // var properties = AllowRememberMe && RememberMe ?
+        //     new AuthenticationProperties
+        //     {
+        //         IsPersistent = true,
+        //         ExpiresUtc = DateTimeOffset.UtcNow.AddDays(30),
+        //     } :
+        //     new AuthenticationProperties();
+
+        // var identityServerUser = new IdentityServerUser(user.Id.Value)
+        // {
+        //     DisplayName = user.Name.Value,
+        // };
+
+        // await HttpContext.SignInAsync(identityServerUser, properties);
+
+        // var claims = new List<Claim>
+        // {
+        //    new("sub", user.Id.Value),
+        //    new("name", user.Name.Value),
+        //    new("email", user.Email.Value),
+        // };
+
+        // var principal = new ClaimsPrincipal(new ClaimsIdentity(claims, "idsrv"));
+        // await HttpContext.SignInAsync(principal, properties);
         return Result.Success;
     }
 

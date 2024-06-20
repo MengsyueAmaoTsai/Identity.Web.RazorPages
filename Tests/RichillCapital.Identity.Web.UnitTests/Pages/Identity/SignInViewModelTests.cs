@@ -1,8 +1,11 @@
+using System.Linq.Expressions;
+
 using Duende.IdentityServer.Models;
 using Duende.IdentityServer.Services;
 
 using FluentAssertions;
 
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -11,6 +14,7 @@ using NSubstitute;
 using RichillCapital.Domain.Common.Repositories;
 using RichillCapital.Domain.Users;
 using RichillCapital.Identity.Web.Pages.Identity;
+using RichillCapital.SharedKernel;
 using RichillCapital.SharedKernel.Monads;
 
 namespace RichillCapital.Identity.Web.UnitTests.Pages.Identity;
@@ -24,10 +28,18 @@ public sealed class SignInViewModelTests
     [Fact]
     public void Constructor_Should_InitializeProperties()
     {
-        var interactionService = Substitute.For<IIdentityServerInteractionService>();
-        var signInManager = Substitute.For<ISignInManager>();
-        var userRepository = Substitute.For<IReadOnlyRepository<User>>();
-        var viewModel = new SignInViewModel(signInManager, userRepository, interactionService);
+        IAuthenticationSchemeProvider schemeProvider = Substitute.For<IAuthenticationSchemeProvider>();
+        ISignInManager signInManager = Substitute.For<ISignInManager>();
+        IReadOnlyRepository<User> userRepository = Substitute.For<IReadOnlyRepository<User>>();
+        IIdentityServerInteractionService interactionService = Substitute.For<IIdentityServerInteractionService>();
+        IEventService eventService = Substitute.For<IEventService>();
+
+        SignInViewModel viewModel = new(
+            schemeProvider,
+            signInManager,
+            userRepository,
+            interactionService,
+            eventService);
 
         viewModel.ReturnUrl.Should().BeNullOrEmpty();
         viewModel.Email.Should().BeNullOrEmpty();
@@ -40,143 +52,270 @@ public sealed class SignInViewModelTests
     [Fact]
     public async Task OnGetAsync_Should_ReturnPage()
     {
-        var interactionService = Substitute.For<IIdentityServerInteractionService>();
-        var signInManager = Substitute.For<ISignInManager>();
-        var userRepository = Substitute.For<IReadOnlyRepository<User>>();
-        var viewModel = new SignInViewModel(signInManager, userRepository, interactionService)
-        {
-            ReturnUrl = string.Empty,
-            Email = string.Empty,
-            Password = string.Empty,
-            RememberMe = false,
-            ExternalSchemes = [],
-            AllowRememberMe = false,
-        };
+        IAuthenticationSchemeProvider schemeProvider = Substitute.For<IAuthenticationSchemeProvider>();
+        ISignInManager signInManager = Substitute.For<ISignInManager>();
+        IReadOnlyRepository<User> userRepository = Substitute.For<IReadOnlyRepository<User>>();
+        IIdentityServerInteractionService interactionService = Substitute.For<IIdentityServerInteractionService>();
+        IEventService eventService = Substitute.For<IEventService>();
 
-        var result = await viewModel.OnGetAsync(CancellationToken.None);
+        SignInViewModel viewModel = new(
+            schemeProvider,
+            signInManager,
+            userRepository,
+            interactionService,
+            eventService);
 
-        result.Should().BeOfType<PageResult>();
-    }
-
-    [Fact]
-    public async Task OnPostAsync_When_InvalidInput_Should_ReturnPage()
-    {
-        var interactionService = Substitute.For<IIdentityServerInteractionService>();
-        var signInManager = Substitute.For<ISignInManager>();
-        var userRepository = Substitute.For<IReadOnlyRepository<User>>();
-        var viewModel = new SignInViewModel(signInManager, userRepository, interactionService)
-        {
-            Email = "invalid-email",
-            Password = "invalid-password",
-        };
-
-        var action = "SignIn";
-
-        var result = await viewModel.OnPostAsync(action, CancellationToken.None);
+        var result = await viewModel.OnGetAsync();
 
         result.Should().BeOfType<PageResult>();
     }
 
     [Fact]
-    public async Task OnPostAsync_When_SignInFailed_Should_ReturnPage()
+    public async Task OnPostAsync_When_GivenInvalidInput_Should_ReturnPage()
     {
-        var interactionService = Substitute.For<IIdentityServerInteractionService>();
-        var signInManager = Substitute.For<ISignInManager>();
-        var userRepository = Substitute.For<IReadOnlyRepository<User>>();
-        var viewModel = new SignInViewModel(signInManager, userRepository, interactionService);
+        IAuthenticationSchemeProvider schemeProvider = Substitute.For<IAuthenticationSchemeProvider>();
+        ISignInManager signInManager = Substitute.For<ISignInManager>();
+        IReadOnlyRepository<User> userRepository = Substitute.For<IReadOnlyRepository<User>>();
+        IIdentityServerInteractionService interactionService = Substitute.For<IIdentityServerInteractionService>();
+        IEventService eventService = Substitute.For<IEventService>();
 
-        var action = "SignIn";
+        SignInViewModel viewModel = new(
+            schemeProvider,
+            signInManager,
+            userRepository,
+            interactionService,
+            eventService);
 
-        var result = await viewModel.OnPostAsync(action, CancellationToken.None);
-
-        await signInManager.Received(1)
-            .PasswordSignInAsync(
-                Arg.Any<Email>(),
-                Arg.Any<string>(),
-                Arg.Any<bool>(),
-                Arg.Any<bool>());
+        var result = await viewModel.OnPostAsync();
 
         result.Should().BeOfType<PageResult>();
     }
 
     [Fact]
-    public async Task OnPostAsync_When_SignInSuccessAndIsLocalUrl_Should_RedirectToIndex()
+    public async Task OnPostAsync_When_SignInResultIsFailure_Should_ReturnPage()
     {
-        var interactionService = Substitute.For<IIdentityServerInteractionService>();
-        var userRepository = Substitute.For<IReadOnlyRepository<User>>();
-        var signInManager = Substitute.For<ISignInManager>();
+        IAuthenticationSchemeProvider schemeProvider = Substitute.For<IAuthenticationSchemeProvider>();
+        ISignInManager signInManager = Substitute.For<ISignInManager>();
+        IReadOnlyRepository<User> userRepository = Substitute.For<IReadOnlyRepository<User>>();
+        IIdentityServerInteractionService interactionService = Substitute.For<IIdentityServerInteractionService>();
+        IEventService eventService = Substitute.For<IEventService>();
 
-        interactionService.GetAuthorizationContextAsync(Arg.Any<string>())
-            .Returns(new AuthorizationRequest()
-            {
-                RedirectUri = "/return-url",
-            });
+        SignInViewModel viewModel = new(
+            schemeProvider,
+            signInManager,
+            userRepository,
+            interactionService,
+            eventService);
 
         signInManager.PasswordSignInAsync(
             Arg.Any<Email>(),
             Arg.Any<string>(),
             Arg.Any<bool>(),
-            Arg.Any<bool>()).
-            Returns(Task.FromResult(Result.Success));
+            Arg.Any<bool>())
+            .Returns(Result.Failure(Error.Invalid("Invalid credentials")));
 
-        var viewModel = new SignInViewModel(signInManager, userRepository, interactionService)
+        var result = await viewModel.OnPostAsync();
+
+        await signInManager.Received(1).PasswordSignInAsync(
+            Arg.Any<Email>(),
+            Arg.Any<string>(),
+            Arg.Any<bool>(),
+            Arg.Any<bool>());
+
+        result.Should().BeOfType<PageResult>();
+    }
+
+    [Fact]
+    public async Task OnPostAsync_When_AuthenticateRequestIsNullAndReturnUrlIsLocal_Should_RedirectToIndex()
+    {
+        IAuthenticationSchemeProvider schemeProvider = Substitute.For<IAuthenticationSchemeProvider>();
+        ISignInManager signInManager = Substitute.For<ISignInManager>();
+        IReadOnlyRepository<User> userRepository = Substitute.For<IReadOnlyRepository<User>>();
+        IIdentityServerInteractionService interactionService = Substitute.For<IIdentityServerInteractionService>();
+        IEventService eventService = Substitute.For<IEventService>();
+        IUrlHelper urlHelper = Substitute.For<IUrlHelper>();
+
+        SignInViewModel viewModel = new(
+            schemeProvider,
+            signInManager,
+            userRepository,
+            interactionService,
+            eventService)
         {
-            ReturnUrl = "/return-url",
-            Email = "valid-email",
-            Password = "valid-password",
+            ReturnUrl = "/test",
+            Url = urlHelper,
         };
 
-        var action = "SignIn";
+        signInManager.PasswordSignInAsync(
+            Arg.Any<Email>(),
+            Arg.Any<string>(),
+            Arg.Any<bool>(),
+            Arg.Any<bool>())
+            .Returns(Result.Success);
 
-        var result = await viewModel.OnPostAsync(action, CancellationToken.None);
+        var user = User.Create(
+            UserId.NewUserId(),
+            UserName.From("username").Value,
+            Email.From("email").Value,
+            false,
+            "password",
+            true,
+            0,
+            DateTimeOffset.UtcNow).Value;
 
-        await signInManager.Received(1)
-            .PasswordSignInAsync(
-                Arg.Any<Email>(),
-                Arg.Any<string>(),
-                Arg.Any<bool>(),
-                Arg.Any<bool>());
+        userRepository.FirstOrDefaultAsync(Arg.Any<Expression<Func<User, bool>>>(), Arg.Any<CancellationToken>())
+            .Returns(Maybe<User>.With(user));
+
+        urlHelper.IsLocalUrl(Arg.Any<string>()).Returns(true);
+
+        var result = await viewModel.OnPostAsync();
+
+        await signInManager.Received(1).PasswordSignInAsync(
+            Arg.Any<Email>(),
+            Arg.Any<string>(),
+            Arg.Any<bool>(),
+            Arg.Any<bool>());
+
+        await userRepository.Received(1).FirstOrDefaultAsync(
+            Arg.Any<Expression<Func<User, bool>>>(),
+            Arg.Any<CancellationToken>());
+
+        await interactionService.Received(1).GetAuthorizationContextAsync(Arg.Any<string>());
+
+        result.Should().BeOfType<RedirectResult>();
+    }
+
+    [Fact]
+    public async Task OnPostAsync_When_AuthenticateRequestIsNotNullAndIsNativeClient_Should_RedirectToPage()
+    {
+        IAuthenticationSchemeProvider schemeProvider = Substitute.For<IAuthenticationSchemeProvider>();
+        ISignInManager signInManager = Substitute.For<ISignInManager>();
+        IReadOnlyRepository<User> userRepository = Substitute.For<IReadOnlyRepository<User>>();
+        IIdentityServerInteractionService interactionService = Substitute.For<IIdentityServerInteractionService>();
+        IEventService eventService = Substitute.For<IEventService>();
+        IUrlHelper urlHelper = Substitute.For<IUrlHelper>();
+        var localUrl = "/test";
+
+        SignInViewModel viewModel = new(
+            schemeProvider,
+            signInManager,
+            userRepository,
+            interactionService,
+            eventService)
+        {
+            ReturnUrl = localUrl,
+            Url = urlHelper,
+        };
+
+        signInManager.PasswordSignInAsync(
+            Arg.Any<Email>(),
+            Arg.Any<string>(),
+            Arg.Any<bool>(),
+            Arg.Any<bool>())
+            .Returns(Result.Success);
+
+        var user = User.Create(
+            UserId.NewUserId(),
+            UserName.From("username").Value,
+            Email.From("email").Value,
+            false,
+            "password",
+            true,
+            0,
+            DateTimeOffset.UtcNow).Value;
+
+        userRepository.FirstOrDefaultAsync(Arg.Any<Expression<Func<User, bool>>>(), Arg.Any<CancellationToken>())
+            .Returns(Maybe<User>.With(user));
+
+        interactionService.GetAuthorizationContextAsync(Arg.Any<string>())
+            .Returns(new AuthorizationRequest()
+            {
+                RedirectUri = localUrl,
+            });
+
+        urlHelper.IsLocalUrl(Arg.Any<string>()).Returns(true);
+
+        var result = await viewModel.OnPostAsync();
+
+        await signInManager.Received(1).PasswordSignInAsync(
+            Arg.Any<Email>(),
+            Arg.Any<string>(),
+            Arg.Any<bool>(),
+            Arg.Any<bool>());
+
+        await userRepository.Received(1).FirstOrDefaultAsync(
+            Arg.Any<Expression<Func<User, bool>>>(),
+            Arg.Any<CancellationToken>());
+
+        await interactionService.Received(1).GetAuthorizationContextAsync(Arg.Any<string>());
 
         result.Should().BeOfType<RedirectToPageResult>();
     }
 
-    [Fact]
-    public async Task OnPostAsync_When_SignInSuccessAndIsExternalUrl_Should_RedirectToReturnUrl()
-    {
-        var interactionService = Substitute.For<IIdentityServerInteractionService>();
-        var userRepository = Substitute.For<IReadOnlyRepository<User>>();
-        var signInManager = Substitute.For<ISignInManager>();
 
-        interactionService.GetAuthorizationContextAsync(Arg.Any<string>())
-            .Returns(new AuthorizationRequest()
-            {
-                RedirectUri = "https://www.google.com",
-            });
+    [Fact]
+    public async Task OnPostAsync_When_AuthenticateRequestIsNotNullAndIsExternalClient_Should_RedirectToUrl()
+    {
+        IAuthenticationSchemeProvider schemeProvider = Substitute.For<IAuthenticationSchemeProvider>();
+        ISignInManager signInManager = Substitute.For<ISignInManager>();
+        IReadOnlyRepository<User> userRepository = Substitute.For<IReadOnlyRepository<User>>();
+        IIdentityServerInteractionService interactionService = Substitute.For<IIdentityServerInteractionService>();
+        IEventService eventService = Substitute.For<IEventService>();
+        IUrlHelper urlHelper = Substitute.For<IUrlHelper>();
+        var externalUrl = "https://localhost:10000";
+
+        SignInViewModel viewModel = new(
+            schemeProvider,
+            signInManager,
+            userRepository,
+            interactionService,
+            eventService)
+        {
+            ReturnUrl = externalUrl,
+            Url = urlHelper,
+        };
 
         signInManager.PasswordSignInAsync(
             Arg.Any<Email>(),
             Arg.Any<string>(),
             Arg.Any<bool>(),
-            Arg.Any<bool>()).
-            Returns(Task.FromResult(Result.Success));
+            Arg.Any<bool>())
+            .Returns(Result.Success);
 
-        var viewModel = new SignInViewModel(signInManager, userRepository, interactionService)
-        {
-            ReturnUrl = "/return-url",
-            Email = "valid-email",
-            Password = "valid-password",
-        };
+        var user = User.Create(
+            UserId.NewUserId(),
+            UserName.From("username").Value,
+            Email.From("email").Value,
+            false,
+            "password",
+            true,
+            0,
+            DateTimeOffset.UtcNow).Value;
 
-        var action = "SignIn";
+        userRepository.FirstOrDefaultAsync(Arg.Any<Expression<Func<User, bool>>>(), Arg.Any<CancellationToken>())
+            .Returns(Maybe<User>.With(user));
 
-        var result = await viewModel.OnPostAsync(action, CancellationToken.None);
+        interactionService.GetAuthorizationContextAsync(Arg.Any<string>())
+            .Returns(new AuthorizationRequest()
+            {
+                RedirectUri = externalUrl,
+            });
 
-        await signInManager.Received(1)
-            .PasswordSignInAsync(
-                Arg.Any<Email>(),
-                Arg.Any<string>(),
-                Arg.Any<bool>(),
-                Arg.Any<bool>());
+        urlHelper.IsLocalUrl(Arg.Any<string>()).Returns(true);
+
+        var result = await viewModel.OnPostAsync();
+
+        await signInManager.Received(1).PasswordSignInAsync(
+            Arg.Any<Email>(),
+            Arg.Any<string>(),
+            Arg.Any<bool>(),
+            Arg.Any<bool>());
+
+        await userRepository.Received(1).FirstOrDefaultAsync(
+            Arg.Any<Expression<Func<User, bool>>>(),
+            Arg.Any<CancellationToken>());
+
+        await interactionService.Received(1).GetAuthorizationContextAsync(Arg.Any<string>());
 
         result.Should().BeOfType<RedirectResult>();
     }

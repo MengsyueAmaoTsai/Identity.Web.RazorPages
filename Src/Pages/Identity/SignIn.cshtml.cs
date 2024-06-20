@@ -1,6 +1,4 @@
-using System.Security.Claims;
-
-using Duende.IdentityServer;
+using Duende.IdentityServer.Events;
 using Duende.IdentityServer.Models;
 using Duende.IdentityServer.Services;
 
@@ -10,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 using RichillCapital.Domain.Common.Repositories;
+using RichillCapital.Domain.Users;
 using RichillCapital.SharedKernel.Monads;
 
 
@@ -17,9 +16,11 @@ namespace RichillCapital.Identity.Web.Pages.Identity;
 
 [AllowAnonymous]
 public sealed class SignInViewModel(
+    IAuthenticationSchemeProvider _schemeProvider,
     ISignInManager _signInManager,
-    IReadOnlyRepository<Domain.Users.User> _userRepository,
-    IIdentityServerInteractionService _interactionService) :
+    IReadOnlyRepository<User> _userRepository,
+    IIdentityServerInteractionService _interactionService,
+    IEventService _eventService) :
     PageModel
 {
 
@@ -38,25 +39,15 @@ public sealed class SignInViewModel(
     public IEnumerable<AuthenticationScheme> ExternalSchemes { get; set; } = [];
     public bool AllowRememberMe { get; init; }
 
-    public async Task<IActionResult> OnGetAsync(CancellationToken cancellationToken = default)
+    public async Task<IActionResult> OnGetAsync(
+        CancellationToken cancellationToken = default)
     {
-        //await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
         await InitializeAsync(cancellationToken);
-
         return Page();
     }
 
-    public async Task<IActionResult> OnPostAsync(
-        string action,
-        CancellationToken cancellationToken = default)
+    public async Task<IActionResult> OnPostAsync(CancellationToken cancellationToken = default)
     {
-        var context = await _interactionService.GetAuthorizationContextAsync(ReturnUrl);
-
-        // if (action == "Cancel")
-        // {
-        //     return await HandleCancelAsync(context, cancellationToken);
-        // }
-
         var validationResult = Domain.Users.Email.From(Email);
 
         if (validationResult.IsFailure)
@@ -79,38 +70,21 @@ public sealed class SignInViewModel(
             return Page();
         }
 
-        // var maybeUser = await _userRepository
-        //     .FirstOrDefaultAsync(
-        //         user => user.Email == email,
-        //         cancellationToken)
-        //     .ThrowIfNull();
+        var maybeUser = await _userRepository
+            .FirstOrDefaultAsync(user => user.Email == email, cancellationToken)
+            .ThrowIfNull();
 
-        // var user = maybeUser.ValueOrDefault;
+        var user = maybeUser.Value;
 
-        // var properties = AllowRememberMe && RememberMe ?
-        //     new AuthenticationProperties
-        //     {
-        //         IsPersistent = true,
-        //         ExpiresUtc = DateTimeOffset.UtcNow.AddDays(30),
-        //     } :
-        //     new AuthenticationProperties();
+        var context = await _interactionService.GetAuthorizationContextAsync(ReturnUrl);
 
-        // var identityServerUser = new IdentityServerUser(user.Id.Value)
-        // {
-        //     DisplayName = user.Name.Value,
-        // };
-
-        // await HttpContext.SignInAsync(identityServerUser, properties);
-
-        // var claims = new List<Claim>
-        // {
-        //    new("sub", user.Id.Value),
-        //    new("name", user.Name.Value),
-        //    new("email", user.Email.Value),
-        // };
-
-        // var principal = new ClaimsPrincipal(new ClaimsIdentity(claims, "idsrv"));
-        // await HttpContext.SignInAsync(principal, properties);
+        await _eventService.RaiseAsync(new UserLoginSuccessEvent(
+            user.Email.Value,
+            user.Id.Value,
+            user.Name.Value,
+            clientId: context is null || context.Client is null ? 
+                string.Empty : 
+                context.Client.ClientId));
 
         if (context is null)
         {
@@ -126,35 +100,6 @@ public sealed class SignInViewModel(
 
     private async Task InitializeAsync(CancellationToken _ = default)
     {
-        // ExternalSchemes = await _schemeProvider.GetExternalSchemesAsync();
-    }
-
-    private async Task<IActionResult> HandleCancelAsync(
-        AuthorizationRequest? request,
-        CancellationToken cancellationToken = default)
-    {
-        // if (request is null)
-        // {
-        //     return Redirect("~/");
-        // }
-
-        // ArgumentNullException.ThrowIfNull(ReturnUrl, nameof(ReturnUrl));
-
-        // if the user cancels, send a result back into IdentityServer as if they 
-        // denied the consent (even if this client does not require consent).
-        // this will send back an access denied OIDC error response to the client.
-        // await _interactionService.DenyAuthorizationAsync(
-        //     request,
-        //     AuthorizationError.AccessDenied);
-
-        // we can trust model.ReturnUrl since GetAuthorizationContextAsync returned non-null
-        // if (request.IsNativeClient())
-        // {
-        //     // The client is native, so this change in how to
-        //     // return the response is for better UX for the end user.
-        //     return this.LoadingPage(ReturnUrl);
-        // }
-
-        return Redirect(ReturnUrl ?? "~/");
+        ExternalSchemes = await _schemeProvider.GetExternalSchemesAsync();
     }
 }
