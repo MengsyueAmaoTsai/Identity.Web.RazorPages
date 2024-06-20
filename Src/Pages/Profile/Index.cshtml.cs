@@ -2,8 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-using RichillCapital.Domain.Common.Repositories;
-using RichillCapital.Domain.Users;
 using RichillCapital.UseCases.Common;
 
 namespace RichillCapital.Identity.Web.Pages.Profile;
@@ -15,9 +13,9 @@ public sealed class ProfileViewModel(
     PageModel
 {
     [TempData]
-    public required string StatusMessage { get; init; }
+    public string StatusMessage { get; init; } = string.Empty;
 
-    public required string Email { get; set; }
+    public string Email { get; set; } = string.Empty;
 
     public async Task<IActionResult> OnGetAsync(CancellationToken cancellationToken = default)
     {
