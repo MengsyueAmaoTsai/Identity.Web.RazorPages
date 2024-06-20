@@ -4,52 +4,58 @@
     ViewData["Title"] = "Sign In";
 }
 
+<h2>@ViewData["Title"]</h2>
 
-<h1>@ViewData["Title"]</h1>
 <div class="row">
     <div class="col-md-4">
         <section>
             <form id="account" method="post">
-                <h2>Use a local account to log in.</h2>
+                <h3>Sign in with credentials</h3>
                 <hr />
+                
                 <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+                
                 <div class="form-floating mb-3">
-                    <input asp-for="Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
+                    <input asp-for="Email" class="form-control" autocomplete="email" aria-required="true" placeholder="example@domain.com" />
                     <label asp-for="Email" class="form-label">Email</label>
-                    <span asp-validation-for="Email" class="text-danger"></span>
+                    @* <span asp-validation-for="Email" class="text-danger"></span> *@
                 </div>
+                
                 <div class="form-floating mb-3">
                     <input asp-for="Password" class="form-control" autocomplete="current-password" aria-required="true" placeholder="password" />
                     <label asp-for="Password" class="form-label">Password</label>
-                    <span asp-validation-for="Password" class="text-danger"></span>
+                    @* <span asp-validation-for="Password" class="text-danger"></span> *@
                 </div>
+
                 <div class="checkbox mb-3">
                     <label asp-for="RememberMe" class="form-label">
                         <input class="form-check-input" asp-for="RememberMe" />
                         @Html.DisplayNameFor(m => m.RememberMe)
                     </label>
                 </div>
+
                 <div>
                     <button type="submit" name="action" value="SignIn" class="w-100 btn btn-lg btn-primary">Sign In</button>
                     <button type="submit" name="action" value="Cancel" class="w-100 btn btn-lg btn-primary">Cancel</button>
                 </div>
+
                 <div>
+                    <p>
+                        <a id="sign-up" asp-page="./signUp" asp-route-returnUrl="@Model.ReturnUrl">Sign up as a new user</a>
+                    </p>
                     <p>
                         <a id="forgot-password" asp-page="./forgotPassword">Forgot your password?</a>
                     </p>
-                    <p>
-                        <a asp-page="./signUp" asp-route-returnUrl="@Model.ReturnUrl">Sign up as a new user</a>
-                    </p>
-                    <p>
                         <a id="resend-confirmation" asp-page="./resendEmailConfirmation">Resend email confirmation</a>
                     </p>
                 </div>
             </form>
         </section>
     </div>
+
     <div class="col-md-6 col-md-offset-2">
         <section>
-            <h3>Use another service to log in.</h3>
+            <h3>Sign in with external providers.</h3>
             <hr />
             @{
                 if (!Model.ExternalSchemes.Any())
@@ -63,27 +69,26 @@
                 }
                 else
                 {
-                    <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
-                        <div>
-                            <p>
-                                @foreach (var provider in Model.ExternalSchemes)
-                                {
-                                    <a class="btn btn-primary" title="Log in using your @provider.DisplayName account"
-                                        asp-page="./challenge" 
-                                        asp-route-returnUrl="@Model.ReturnUrl" 
-                                        asp-route-authenticationProvider="@provider.Name">
-                                        Sign in with @provider.DisplayName
-                                    </a>
-                                }
-                            </p>
-                        </div>
-                    </form>
+                    <div>
+                        @foreach (var provider in Model.ExternalSchemes)
+                        {
+                            <a title="Log in using your @provider.DisplayName account"
+                                asp-page="./challenge" 
+                                asp-route-returnUrl="@Model.ReturnUrl" 
+                                asp-route-authenticationProvider="@provider.Name">
+                                <fluent-button appearance="accent">
+                                    Sign in with @provider.DisplayName
+                                </fluent-button>
+                            </a>
+                        }
+                    </div>
                 }
             }
         </section>
     </div>
 </div>
 
+@* 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
-}
+} *@

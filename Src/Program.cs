@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.DataProtection;
 
-using RichillCapital.Domain;
 using RichillCapital.Identity;
 using RichillCapital.Identity.Web.Pages;
 using RichillCapital.Identity.Web.Middlewares;

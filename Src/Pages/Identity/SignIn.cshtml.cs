@@ -7,16 +7,11 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-using RichillCapital.SharedKernel.Monads;
-
 namespace RichillCapital.Identity.Web.Pages.Identity;
 
 [AllowAnonymous]
 public sealed class SignInViewModel(
-    ILogger<SignInViewModel> _logger,
     IAuthenticationSchemeProvider _schemeProvider,
-    IUserService _userService,
-    ISignInManager _signInManager,
     IIdentityServerInteractionService _interactionService) : PageModel
 {
     [BindProperty(SupportsGet = true)]
@@ -48,12 +43,12 @@ public sealed class SignInViewModel(
         string action,
         CancellationToken cancellationToken = default)
     {
-        // var context = await _interactionService.GetAuthorizationContextAsync(ReturnUrl);
+        var context = await _interactionService.GetAuthorizationContextAsync(ReturnUrl);
 
-        // if (action == "Cancel")
-        // {
-        //     return await HandleCancelAsync(context, cancellationToken);
-        // }
+        if (action == "Cancel")
+        {
+            return await HandleCancelAsync(context, cancellationToken);
+        }
 
         // var validationResult = Domain.Users.Email.From(Email);
 
@@ -125,7 +120,7 @@ public sealed class SignInViewModel(
         return Page();
     }
 
-    private async Task InitializeAsync(CancellationToken cancellationToken = default)
+    private async Task InitializeAsync(CancellationToken _ = default)
     {
         ExternalSchemes = await _schemeProvider.GetExternalSchemesAsync();
     }
@@ -134,9 +129,7 @@ public sealed class SignInViewModel(
         AuthorizationRequest? request,
         CancellationToken cancellationToken = default)
     {
-        var context = await _interactionService.GetAuthorizationContextAsync(ReturnUrl);
-
-        if (context is null)
+        if (request is null)
         {
             return Redirect("~/");
         }
@@ -147,11 +140,11 @@ public sealed class SignInViewModel(
         // denied the consent (even if this client does not require consent).
         // this will send back an access denied OIDC error response to the client.
         await _interactionService.DenyAuthorizationAsync(
-            context,
+            request,
             AuthorizationError.AccessDenied);
 
         // we can trust model.ReturnUrl since GetAuthorizationContextAsync returned non-null
-        if (context.IsNativeClient())
+        if (request.IsNativeClient())
         {
             // The client is native, so this change in how to
             // return the response is for better UX for the end user.
