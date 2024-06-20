@@ -8,12 +8,14 @@ using RichillCapital.Domain.Users;
 using RichillCapital.SharedKernel;
 using RichillCapital.SharedKernel.Monads;
 
+using static Duende.IdentityServer.Models.IdentityResources;
+
 namespace RichillCapital.Identity;
 
 public interface ISignInManager
 {
     Task<Result> PasswordSignInAsync(
-        Email email,
+        Domain.Users.Email email,
         string password,
         bool isPersistent,
         bool lockoutOnFailure,
@@ -29,8 +31,18 @@ public interface ISignInManager
     Task<Result> SignOutAsync(CancellationToken cancellationToken = default);
 }
 
-public interface IUserService
+public interface IUserManager
 {
+    Task<Result> ChangePasswordAsync(
+        User user,
+        string currentPassword,
+        string newPassword,
+        CancellationToken cancellationToken = default);
+
+    Task<Result> ConfirmEmailAsync(User user, string token, CancellationToken cancellationToken = default);
+
+    Task<Result<User>> GetByEmailAsync(Domain.Users.Email email, CancellationToken cancellationToken = default);
+    Task<Result<User>> GetByIdAsync(UserId id, CancellationToken cancellationToken = default);
 }
 
 internal sealed class SignInManager(
@@ -39,7 +51,7 @@ internal sealed class SignInManager(
     ISignInManager
 {
     public async Task<Result> PasswordSignInAsync(
-        Email email,
+        Domain.Users.Email email,
         string password,
         bool isPersistent,
         bool lockoutOnFailure,
@@ -110,4 +122,43 @@ internal sealed class SignInManager(
 
         return Result.Success;
     }
+}
+
+internal sealed class UserManager(
+    IRepository<User> _userRepository,
+    IUnitOfWork _unitOfWork) :
+    IUserManager
+{
+    public async Task<Result> ChangePasswordAsync(
+        User user,
+        string currentPassword,
+        string newPassword,
+        CancellationToken cancellationToken = default)
+    {
+        return Result.Success;
+    }
+
+    public Task<Result> ConfirmEmailAsync(
+        User user,
+        string token,
+        CancellationToken cancellationToken = default)
+    {
+        throw new NotImplementedException();
+    }
+
+    public async Task<Result<User>> GetByEmailAsync(
+        Domain.Users.Email email,
+        CancellationToken cancellationToken = default) =>
+        await _userRepository
+            .FirstOrDefaultAsync(
+                user => user.Email == email,
+                cancellationToken)
+            .ToResult(Error.NotFound("Users.NotFound", $"User with email {email} was not found."));
+    
+    public async Task<Result<User>> GetByIdAsync(
+        UserId id, 
+        CancellationToken cancellationToken = default) =>
+        await _userRepository
+            .GetByIdAsync(id, cancellationToken)
+            .ToResult(Error.NotFound("Users.NotFound", $"User with id {id} was not found."));
 }

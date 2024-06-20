@@ -75,6 +75,9 @@ public static class IdentityExtensions
         // Sign in manager
         services.AddScoped<ISignInManager, SignInManager>();
 
+        // User Manager
+        services.AddScoped<IUserManager, UserManager>();
+
         return services;
     }
 }
