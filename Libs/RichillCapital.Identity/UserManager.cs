@@ -10,22 +10,40 @@ internal sealed class UserManager(
     IUnitOfWork _unitOfWork) :
     IUserManager
 {
-    public async Task<Result> ChangePasswordAsync(
+    public Task<Result> ChangePasswordAsync(
         User user,
         string currentPassword,
         string newPassword,
-        CancellationToken cancellationToken = default)
-    {
-        return Result.Success;
-    }
+        CancellationToken cancellationToken = default) =>
+        throw new NotImplementedException();
 
     public Task<Result> ConfirmEmailAsync(
         User user,
         string token,
+        CancellationToken cancellationToken = default) =>
+        throw new NotImplementedException();
+
+    public async Task<Result> CreateAsync(
+        User user, 
         CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        _userRepository.Add(user);
+
+        await _unitOfWork.SaveChangesAsync(cancellationToken);
+
+        return Result.Success;
     }
+
+    public Task<Result> CreateAsync(
+        User user,
+        string password,
+        CancellationToken cancellationToken = default) =>
+        throw new NotImplementedException();
+
+    public Task<string> GenerateEmailConfirmationTokenAsync(
+        User user, 
+        CancellationToken cancellationToken = default) =>
+        throw new NotImplementedException();
 
     public async Task<Result<User>> GetByEmailAsync(
         Domain.Users.Email email,

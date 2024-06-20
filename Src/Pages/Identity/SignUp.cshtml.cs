@@ -13,10 +13,11 @@ using RichillCapital.SharedKernel.Monads;
 namespace RichillCapital.Identity.Web.Pages.Identity;
 
 [AllowAnonymous]
+[ValidateAntiForgeryToken]
 public sealed class SignUpViewModel(
-    IRepository<User> _userRepository,
-    IUnitOfWork _unitOfWork,
-    IAuthenticationSchemeProvider _schemeProvider) :
+    IAuthenticationSchemeProvider _schemeProvider,
+    IReadOnlyRepository<User> _userRepository,
+    IUserManager _userManager) :
     PageModel
 {
     [BindProperty(SupportsGet = true)]
@@ -44,70 +45,67 @@ public sealed class SignUpViewModel(
 
     public async Task<IActionResult> OnPostAsync(CancellationToken cancellationToken = default)
     {
-        // var validationResult = Result<(Email, UserName)>.Combine(
-        //     Domain.Users.Email.From(Email),
-        //     UserName.From(Name));
+        var validationResult = Result<(UserName, Email)>.Combine(
+            UserName.From(Name),
+            Domain.Users.Email.From(Email));
 
-        // if (validationResult.IsFailure)
-        // {
-        //     ModelState.AddModelError(validationResult.Error.Code, validationResult.Error.Message);
-        //     await InitializeAsync(cancellationToken);
-        //     return Page();
-        // }
+        if (validationResult.IsFailure)
+        {
+            await InitializeAsync(cancellationToken);
+            return Page();
+        }
 
-        // var (email, name) = validationResult.Value;
+        var (name, email) = validationResult.Value;
 
-        // if (await _userRepository.AnyAsync(user => user.Email == email, cancellationToken))
-        // {
-        //     ModelState.AddModelError(nameof(Email), "Email is already taken.");
-        //     await InitializeAsync(cancellationToken);
-        //     return Page();
-        // }
+        if (await _userRepository.AnyAsync(user => user.Email == email, cancellationToken))
+        {
+            ModelState.AddModelError(nameof(Email), "Email is already taken.");
+            await InitializeAsync(cancellationToken);
+            return Page();
+        }
 
-        // if (Password != ConfirmPassword)
-        // {
-        //     ModelState.AddModelError(nameof(ConfirmPassword), "Passwords do not match.");
-        //     await InitializeAsync(cancellationToken);
-        //     return Page();
-        // }
+        var errorOrUser = Domain.Users.User.Create(
+            id: UserId.NewUserId(),
+            name: name,
+            email: email,
+            emailConfirmed: false,
+            passwordHash: Password,
+            lockoutEnabled: true,
+            accessFailedCount: 0,
+            createdAt: DateTimeOffset.UtcNow);
 
-        // var errorOrUser = Domain.Users.User.Create(
-        //     UserId.NewUserId(),
-        //     name,
-        //     email,
-        //     PhoneNumber.From("").Value,
-        //     "123",
-        //     lockoutEnabled: true,
-        //     twoFactorEnabled: true,
-        //     emailConfirmed: false,
-        //     phoneNumberConfirmed: false,
-        //     accessFailedCount: 0,
-        //     lockoutEnd: DateTimeOffset.UtcNow,
-        //     createdAt: DateTimeOffset.UtcNow);
+        if (errorOrUser.HasError)
+        {
+            ModelState.AddModelError(errorOrUser.Errors.First().Code, errorOrUser.Errors.First().Message);
+            await InitializeAsync(cancellationToken);
+            return Page();
+        }
 
+        var user = errorOrUser.Value;
 
-        // if (errorOrUser.HasError)
-        // {
-        //     ModelState.AddModelError(errorOrUser.Errors.First().Code, errorOrUser.Errors.First().Message);
-        //     await InitializeAsync(cancellationToken);
-        //     return Page();
-        // }
+        var result = await _userManager.CreateAsync(user, Password);
 
-        // var user = errorOrUser.Value;
+        if (result.IsFailure)
+        {
+            ModelState.AddModelError(result.Error.Code, result.Error.Message);
+            await InitializeAsync(cancellationToken);
+            return Page();
+        }
 
-        // _userRepository.Add(user);
-        // await _unitOfWork.SaveChangesAsync(cancellationToken);
+        var token = await _userManager.GenerateEmailConfirmationTokenAsync(user, cancellationToken);
+        var code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(token));
 
-        // var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-        // var code = "_userManager.GenerateEmailConfirmationTokenAsync(user)";
-
-        // code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-
-        // var callbackUrl = Url.Page(
-        //     "/identity/confirmEmail",
-        //     pageHandler: null,
-        //     values: new { area = "Identity", userId = user.Id.Value, code = code, returnUrl = ReturnUrl },
-        //     protocol: Request.Scheme)!;
+        var callbackUrl = Url.Page(
+            "/identity/confirmEmail",
+            pageHandler: null,
+            values: new 
+            { 
+                Area = "Identity", 
+                UserId = user.Id.Value, 
+                Code = code,
+                ReturnUrl,
+            },
+            protocol: Request.Scheme) ?? string.Empty;
 
         // await _emailSender.SendConfirmationLinkAsync(user, user.Email.Value, HtmlEncoder.Default.Encode(callbackUrl));
 

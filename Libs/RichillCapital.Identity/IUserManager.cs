@@ -12,7 +12,9 @@ public interface IUserManager
         CancellationToken cancellationToken = default);
 
     Task<Result> ConfirmEmailAsync(User user, string token, CancellationToken cancellationToken = default);
-
     Task<Result<User>> GetByEmailAsync(Domain.Users.Email email, CancellationToken cancellationToken = default);
     Task<Result<User>> GetByIdAsync(UserId id, CancellationToken cancellationToken = default);
+    Task<Result> CreateAsync(User user, CancellationToken cancellationToken = default);
+    Task<Result> CreateAsync(User user, string password, CancellationToken cancellationToken = default);
+    Task<string> GenerateEmailConfirmationTokenAsync(User user, CancellationToken cancellationToken = default);
 }
