@@ -95,17 +95,17 @@ public sealed class SignUpViewModel(
         var token = await _userManager.GenerateEmailConfirmationTokenAsync(user, cancellationToken);
         var code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(token));
 
-        var callbackUrl = Url.Page(
-            "/identity/confirmEmail",
-            pageHandler: null,
-            values: new 
-            { 
-                Area = "Identity", 
-                UserId = user.Id.Value, 
-                Code = code,
-                ReturnUrl,
-            },
-            protocol: Request.Scheme) ?? string.Empty;
+        //var callbackUrl = Url.Page(
+        //    "/identity/signIn",
+        //    pageHandler: null,
+        //    values: new 
+        //    { 
+        //        Area = "Identity", 
+        //        UserId = user.Id.Value, 
+        //        Code = code,
+        //        ReturnUrl,
+        //    },
+        //    protocol: Request.Scheme) ?? string.Empty;
 
         // await _emailSender.SendConfirmationLinkAsync(user, user.Email.Value, HtmlEncoder.Default.Encode(callbackUrl));
 
