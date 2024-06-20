@@ -20,14 +20,17 @@ public class ErrorViewModel() :
 
     public required string ErrorMessage { get; set; }
 
-    public IActionResult OnGetAsync()
+    public IActionResult OnGet()
     {
-        TraceId = Activity.Current?.Id ??
+        TraceId = Activity.Current is null ?
+            string.Empty :
             HttpContext.TraceIdentifier;
 
-        var exceptionFeature = HttpContext.Features.Get<IExceptionHandlerFeature>();
-
-        ErrorMessage = exceptionFeature?.Error.Message ?? "An error occurred while processing your request.";
+        if (HttpContext is not null)
+        {
+            var exceptionFeature = HttpContext.Features.Get<IExceptionHandlerFeature>();
+            ErrorMessage = exceptionFeature?.Error.Message ?? "An error occurred while processing your request.";
+        }
 
         return Page();
     }
