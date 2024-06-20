@@ -40,14 +40,5 @@ internal sealed class UserConfiguration :
                 email => email.Value,
                 value => Email.From(value).Value)
             .IsRequired();
-
-        builder
-            .Property(user => user.PhoneNumber)
-            .HasColumnName("phone_number")
-            .HasMaxLength(PhoneNumber.MaxLength)
-            .HasConversion(
-                phoneNumber => phoneNumber.Value,
-                value => PhoneNumber.From(value).Value)
-            .IsRequired();
     }
 }

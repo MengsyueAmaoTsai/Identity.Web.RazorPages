@@ -27,35 +27,35 @@ public sealed class ChangePasswordViewModel(
 
     public async Task<IActionResult> OnPostAsync(CancellationToken cancellationToken = default)
     {
-        if (!ModelState.IsValid)
-        {
-            return Page();
-        }
+        // if (!ModelState.IsValid)
+        // {
+        //     return Page();
+        // }
 
-        var userResult = await _userService.GetByIdAsync(_currentUser.Id, cancellationToken);
+        // var userResult = await _userService.GetByIdAsync(_currentUser.Id, cancellationToken);
 
-        if (userResult.IsFailure)
-        {
-            return NotFound(userResult.Error.Message);
-        }
+        // if (userResult.IsFailure)
+        // {
+        //     return NotFound(userResult.Error.Message);
+        // }
 
-        var user = userResult.Value;
+        // var user = userResult.Value;
 
-        var changePasswordResult = await _userService.ChangePasswordAsync(
-            user,
-            OldPassword,
-            NewPassword,
-            cancellationToken);
+        // var changePasswordResult = await _userService.ChangePasswordAsync(
+        //     user,
+        //     OldPassword,
+        //     NewPassword,
+        //     cancellationToken);
 
-        if (changePasswordResult.IsFailure)
-        {
-            ModelState.AddModelError(changePasswordResult.Error.Code, changePasswordResult.Error.Message);
-            return Page();
-        }
+        // if (changePasswordResult.IsFailure)
+        // {
+        //     ModelState.AddModelError(changePasswordResult.Error.Code, changePasswordResult.Error.Message);
+        //     return Page();
+        // }
 
         // await _signInManager.RefreshSignInAsync(maybeUser.Value);
 
-        StatusMessage = "Your password has been changed.";
+        // StatusMessage = "Your password has been changed.";
 
         return RedirectToPage();
     }

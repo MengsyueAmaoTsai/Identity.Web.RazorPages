@@ -5,7 +5,6 @@ using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 
-using RichillCapital.Domain.Common.Identity;
 using RichillCapital.Extensions.Options;
 using RichillCapital.Identity.Web.IdentityServer;
 using RichillCapital.UseCases.Common;

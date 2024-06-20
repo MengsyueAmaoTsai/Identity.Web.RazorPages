@@ -7,8 +7,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-using RichillCapital.Domain;
-using RichillCapital.Domain.Common.Identity;
 using RichillCapital.SharedKernel.Monads;
 
 namespace RichillCapital.Identity.Web.Pages.Identity;
@@ -50,59 +48,59 @@ public sealed class SignInViewModel(
         string action,
         CancellationToken cancellationToken = default)
     {
-        var context = await _interactionService.GetAuthorizationContextAsync(ReturnUrl);
+        // var context = await _interactionService.GetAuthorizationContextAsync(ReturnUrl);
 
-        if (action == "Cancel")
-        {
-            return await HandleCancelAsync(context, cancellationToken);
-        }
+        // if (action == "Cancel")
+        // {
+        //     return await HandleCancelAsync(context, cancellationToken);
+        // }
 
-        var validationResult = Domain.Users.Email.From(Email);
+        // var validationResult = Domain.Users.Email.From(Email);
 
-        if (validationResult.IsFailure)
-        {
-            ModelState.AddModelError(validationResult.Error.Code, validationResult.Error.Message);
-            _logger.LogWarning("Validation failed. {error}", validationResult.Error);
+        // if (validationResult.IsFailure)
+        // {
+        //     ModelState.AddModelError(validationResult.Error.Code, validationResult.Error.Message);
+        //     _logger.LogWarning("Validation failed. {error}", validationResult.Error);
 
-            await InitializeAsync(cancellationToken);
-            return Page();
-        }
+        //     await InitializeAsync(cancellationToken);
+        //     return Page();
+        // }
 
-        var email = validationResult.Value;
+        // var email = validationResult.Value;
 
-        var signInResult = await _signInManager.PasswordSignInAsync(email, Password, RememberMe, lockoutOnFailure: false);
+        // var signInResult = await _signInManager.PasswordSignInAsync(email, Password, RememberMe, lockoutOnFailure: false);
 
-        if (signInResult.IsFailure)
-        {
-            ModelState.AddModelError(signInResult.Error.Code, signInResult.Error.Message);
-            _logger.LogWarning("Sign in failed. {error}", signInResult.Error);
+        // if (signInResult.IsFailure)
+        // {
+        //     ModelState.AddModelError(signInResult.Error.Code, signInResult.Error.Message);
+        //     _logger.LogWarning("Sign in failed. {error}", signInResult.Error);
 
-            await InitializeAsync(cancellationToken);
-            return Page();
-        }
+        //     await InitializeAsync(cancellationToken);
+        //     return Page();
+        // }
 
-        var userId = signInResult.Value;
+        // var userId = signInResult.Value;
 
-        var maybeUser = await _userService
-            .GetByIdAsync(userId, cancellationToken)
-            .ThrowIfFailure();
+        // var maybeUser = await _userService
+        //     .GetByIdAsync(userId, cancellationToken)
+        //     .ThrowIfFailure();
 
-        var user = maybeUser.Value;
+        // var user = maybeUser.Value;
 
-        var properties = AllowRememberMe && RememberMe ?
-            new AuthenticationProperties
-            {
-                IsPersistent = true,
-                ExpiresUtc = DateTimeOffset.UtcNow.AddDays(30),
-            } :
-            new AuthenticationProperties();
+        // var properties = AllowRememberMe && RememberMe ?
+        //     new AuthenticationProperties
+        //     {
+        //         IsPersistent = true,
+        //         ExpiresUtc = DateTimeOffset.UtcNow.AddDays(30),
+        //     } :
+        //     new AuthenticationProperties();
 
-        var identityServerUser = new IdentityServerUser(user.Id.Value)
-        {
-            DisplayName = user.Name.Value,
-        };
+        // var identityServerUser = new IdentityServerUser(user.Id.Value)
+        // {
+        //     DisplayName = user.Name.Value,
+        // };
 
-        await HttpContext.SignInAsync(identityServerUser, properties);
+        // await HttpContext.SignInAsync(identityServerUser, properties);
 
         //var claims = new List<Claim>
         //{
@@ -114,16 +112,17 @@ public sealed class SignInViewModel(
         //await HttpContext.SignInAsync(principal, properties);
 
 
-        if (context is null)
-        {
-            return Url.IsLocalUrl(ReturnUrl) ?
-                Redirect(ReturnUrl) : string.IsNullOrEmpty(ReturnUrl) ?
-                    Redirect("~/") : throw new Exception("invalid return URL");
-        }
+        // if (context is null)
+        // {
+        //     return Url.IsLocalUrl(ReturnUrl) ?
+        //         Redirect(ReturnUrl) : string.IsNullOrEmpty(ReturnUrl) ?
+        //             Redirect("~/") : throw new Exception("invalid return URL");
+        // }
 
-        return context.IsNativeClient() ?
-            this.LoadingPage(ReturnUrl) :
-            Redirect(ReturnUrl);
+        // return context.IsNativeClient() ?
+        //     this.LoadingPage(ReturnUrl) :
+        //     Redirect(ReturnUrl);
+        return Page();
     }
 
     private async Task InitializeAsync(CancellationToken cancellationToken = default)

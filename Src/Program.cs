@@ -16,7 +16,7 @@ using StackExchange.Redis;
 var builder = WebApplication.CreateBuilder(args);
 
 // Domain layer
-builder.Services.AddUserService();
+// builder.Services.AddUserService();
 
 // Application Layer
 builder.Services.AddMediator();

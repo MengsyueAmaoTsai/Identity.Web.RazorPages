@@ -24,100 +24,103 @@ public sealed class CallbackViewModel(
 {
     public async Task<IActionResult> OnGetAsync(CancellationToken cancellationToken = default)
     {
-        var externalAuthenticationResult = await HttpContext.AuthenticateAsync(IdentityServerConstants.ExternalCookieAuthenticationScheme);
+        // var externalAuthenticationResult = await HttpContext.AuthenticateAsync(IdentityServerConstants.ExternalCookieAuthenticationScheme);
 
-        if (!externalAuthenticationResult.Succeeded)
-        {
-            throw new InvalidOperationException("External authentication failed.");
-        }
+        // if (!externalAuthenticationResult.Succeeded)
+        // {
+        //     throw new InvalidOperationException("External authentication failed.");
+        // }
 
-        var externalUser = externalAuthenticationResult.Principal ??
-            throw new InvalidOperationException("External authentication failed.");
+        // var externalUser = externalAuthenticationResult.Principal ??
+        //     throw new InvalidOperationException("External authentication failed.");
 
-        var idClaim = externalUser.FindFirst(ClaimTypes.NameIdentifier) ??
-            throw new InvalidOperationException("External authentication failed.");
+        // var idClaim = externalUser.FindFirst(ClaimTypes.NameIdentifier) ??
+        //     throw new InvalidOperationException("External authentication failed.");
 
-        var emailClaim = externalUser.FindFirst(ClaimTypes.Email) ??
-            throw new InvalidOperationException("External authentication failed.");
+        // var emailClaim = externalUser.FindFirst(ClaimTypes.Email) ??
+        //     throw new InvalidOperationException("External authentication failed.");
 
-        var nameClaim = externalUser.FindFirst(ClaimTypes.Name) ??
-            throw new InvalidOperationException("External authentication failed.");
+        // var nameClaim = externalUser.FindFirst(ClaimTypes.Name) ??
+        //     throw new InvalidOperationException("External authentication failed.");
 
-        var validationResult = Result<(Email, UserName)>.Combine(
-            Email.From(emailClaim.Value),
-            UserName.From(nameClaim.Value));
+        // var validationResult = Result<(Email, UserName)>.Combine(
+        //     Email.From(emailClaim.Value),
+        //     UserName.From(nameClaim.Value));
 
-        var (email, name) = validationResult.Value;
+        // var (email, name) = validationResult.Value;
 
-        var userResult = await _userService.GetByEmailAsync(email, cancellationToken);
+        // var userResult = await _userService.GetByEmailAsync(email, cancellationToken);
 
-        if (userResult.IsFailure)
-        {
-            var claims = externalUser.Claims.ToList();
-            claims.Remove(idClaim);
-        }
+        // if (userResult.IsFailure)
+        // {
+        //     var claims = externalUser.Claims.ToList();
+        //     claims.Remove(idClaim);
+        // }
 
-        var user = userResult.IsFailure ?
-            Domain.Users.User.Create(
-                UserId.NewUserId(),
-                name,
-                email,
-                PhoneNumber.From("23").Value,
-                "123",
-                lockoutEnabled: true,
-                twoFactorEnabled: true,
-                emailConfirmed: true,
-                phoneNumberConfirmed: false,
-                accessFailedCount: 0,
-                lockoutEnd: DateTimeOffset.UtcNow,
-                createdAt: DateTimeOffset.UtcNow).Value :
-            userResult.Value;
+        // var user = userResult.IsFailure ?
+        //     Domain.Users.User.Create(
+        //         UserId.NewUserId(),
+        //         name,
+        //         email,
+        //         PhoneNumber.From("23").Value,
+        //         "123",
+        //         lockoutEnabled: true,
+        //         twoFactorEnabled: true,
+        //         emailConfirmed: true,
+        //         phoneNumberConfirmed: false,
+        //         accessFailedCount: 0,
+        //         lockoutEnd: DateTimeOffset.UtcNow,
+        //         createdAt: DateTimeOffset.UtcNow).Value :
 
-        var additionalClaims = new List<Claim>();
-        var properties = new AuthenticationProperties();
 
-        CaptureExternalLoginContext(
-            externalAuthenticationResult,
-            additionalClaims,
-            properties);
+        //     userResult.Value;
 
-        var provider = externalAuthenticationResult.Properties.Items["scheme"] ??
-            throw new InvalidOperationException("Null scheme in authentication properties");
+        // var additionalClaims = new List<Claim>();
+        // var properties = new AuthenticationProperties();
 
-        var identityServerUser = new IdentityServerUser(user.Id.Value)
-        {
-            DisplayName = user.Name.Value,
-            IdentityProvider = provider,
-            AdditionalClaims = additionalClaims,
-        };
+        // CaptureExternalLoginContext(
+        //     externalAuthenticationResult,
+        //     additionalClaims,
+        //     properties);
 
-        await HttpContext.SignInAsync(identityServerUser, properties);
+        // var provider = externalAuthenticationResult.Properties.Items["scheme"] ??
+        //     throw new InvalidOperationException("Null scheme in authentication properties");
 
-        // After sign in
-        await HttpContext.SignOutAsync(IdentityServerConstants.ExternalCookieAuthenticationScheme);
+        // var identityServerUser = new IdentityServerUser(user.Id.Value)
+        // {
+        //     DisplayName = user.Name.Value,
+        //     IdentityProvider = provider,
+        //     AdditionalClaims = additionalClaims,
+        // };
 
-        var returnUrl = externalAuthenticationResult.Properties.Items["returnUrl"] ?? "~/";
+        // await HttpContext.SignInAsync(identityServerUser, properties);
 
-        var request = await _interactionService.GetAuthorizationContextAsync(returnUrl);
+        // // After sign in
+        // await HttpContext.SignOutAsync(IdentityServerConstants.ExternalCookieAuthenticationScheme);
 
-        await _eventService.RaiseAsync(
-            new UserLoginSuccessEvent(
-                provider,
-                idClaim.Value,
-                user.Id.Value,
-                user.Name.Value,
-                true,
-                request?.Client.ClientId));
+        // var returnUrl = externalAuthenticationResult.Properties.Items["returnUrl"] ?? "~/";
 
-        if (request is not null)
-        {
-            if (request.IsNativeClient())
-            {
-                return this.LoadingPage(returnUrl);
-            }
-        }
+        // var request = await _interactionService.GetAuthorizationContextAsync(returnUrl);
 
-        return Redirect(returnUrl);
+        // await _eventService.RaiseAsync(
+        //     new UserLoginSuccessEvent(
+        //         provider,
+        //         idClaim.Value,
+        //         user.Id.Value,
+        //         user.Name.Value,
+        //         true,
+        //         request?.Client.ClientId));
+
+        // if (request is not null)
+        // {
+        //     if (request.IsNativeClient())
+        //     {
+        //         return this.LoadingPage(returnUrl);
+        //     }
+        // }
+
+        // return Redirect(returnUrl);
+        return Page();
     }
 
     private static void CaptureExternalLoginContext(

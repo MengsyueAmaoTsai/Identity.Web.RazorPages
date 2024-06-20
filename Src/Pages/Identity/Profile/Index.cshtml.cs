@@ -2,15 +2,13 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-using RichillCapital.Domain;
 using RichillCapital.UseCases.Common;
 
 namespace RichillCapital.Identity.Web.Pages.Identity.Profile;
 
 [Authorize]
 public sealed class ProfileViewModel(
-    ICurrentUser _currentUser,
-    IUserService _userService) :
+    ICurrentUser _currentUser) :
     PageModel
 {
     [TempData]
@@ -28,19 +26,19 @@ public sealed class ProfileViewModel(
 
     public async Task<IActionResult> OnGetAsync(CancellationToken cancellationToken = default)
     {
-        var userResult = await _userService.GetByIdAsync(_currentUser.Id, cancellationToken);
+        // var userResult = await _userService.GetByIdAsync(_currentUser.Id, cancellationToken);
 
-        if (userResult.IsFailure)
-        {
-            return NotFound(userResult.Error.Message);
-        }
+        // if (userResult.IsFailure)
+        // {
+        //     return NotFound(userResult.Error.Message);
+        // }
 
-        var user = userResult.Value;
+        // var user = userResult.Value;
 
-        HasPassword = !string.IsNullOrEmpty(user.Password);
-        PhoneNumber = user.PhoneNumber.Value;
-        EnabledTwoFactorAuthentication = user.TwoFactorEnabled;
-        
+        // HasPassword = !string.IsNullOrEmpty(user.Password);
+        // PhoneNumber = user.PhoneNumber.Value;
+        // EnabledTwoFactorAuthentication = user.TwoFactorEnabled;
+
         return Page();
     }
 }
