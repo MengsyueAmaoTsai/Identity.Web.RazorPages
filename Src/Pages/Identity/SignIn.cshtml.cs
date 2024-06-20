@@ -90,7 +90,7 @@ public sealed class SignInViewModel(
         {
             return Url.IsLocalUrl(ReturnUrl) ?
                 Redirect(ReturnUrl) : string.IsNullOrEmpty(ReturnUrl) ?
-                    Redirect("~/") : throw new Exception("invalid return URL");
+                    RedirectToPage("/identity/profile/index") : throw new Exception("invalid return URL");
         }
 
         return context.IsNativeClient() ?
