@@ -6,41 +6,19 @@
 }
 
 <h3>@ViewData["Title"]</h3>
-
 <partial name="_StatusMessage" for="StatusMessage" />
 
-<table class="table">
-    <tbody>
-        <tr>
-            <th>Password</th>
-            <td><a asp-page="./changePassword">Change Password</a></td>
-        </tr>
-
-        <tr>
-            <th>Phone Number</th>
-            <td>
-                <p>
-                    Phone Numbers can used as a second factor of verification in two-factor authentication.
-                    See <a href="http://go.microsoft.com/fwlink/?LinkID=532713">this article</a>
-                    for details on setting up this ASP.NET application to support two-factor authentication using SMS.
-                </p>
-                <a asp-page="./changePassword">Update</a>
-            </td>
-        </tr>
-
-        <tr>
-            <th>External Logins</th>
-        </tr>
-
-        <tr>
-            <th>Two-Factor Authentication</th>
-        </tr>
-
-        <tr>
-            <th>Authentication App</th>
-        </tr>
-    </tbody>
-</table>
+<fluent-card>
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>E-Mail</th>
+                <td>mengsyue.tsai@outlook.com</td>
+                <td>The email address you use to sign in to Richill Capital</td>
+            </tr>
+        </tbody>
+    </table>
+</fluent-card>
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 }
