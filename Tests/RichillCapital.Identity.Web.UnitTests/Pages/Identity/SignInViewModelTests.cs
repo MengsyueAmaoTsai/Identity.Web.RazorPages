@@ -126,7 +126,7 @@ public sealed class SignInViewModelTests
     }
 
     [Fact]
-    public async Task OnPostAsync_When_AuthenticateRequestIsNullAndReturnUrlIsLocal_Should_RedirectToIndex()
+    public async Task OnPostAsync_When_AuthorizationRequestIsNullAndReturnUrlIsLocal_Should_RedirectToIndex()
     {
         IAuthenticationSchemeProvider schemeProvider = Substitute.For<IAuthenticationSchemeProvider>();
         ISignInManager signInManager = Substitute.For<ISignInManager>();
@@ -186,7 +186,7 @@ public sealed class SignInViewModelTests
     }
 
     [Fact]
-    public async Task OnPostAsync_When_AuthenticateRequestIsNotNullAndIsNativeClient_Should_RedirectToPage()
+    public async Task OnPostAsync_When_AuthorizationRequestIsNotNullAndIsNativeClient_Should_RedirectToPage()
     {
         IAuthenticationSchemeProvider schemeProvider = Substitute.For<IAuthenticationSchemeProvider>();
         ISignInManager signInManager = Substitute.For<ISignInManager>();
@@ -254,7 +254,7 @@ public sealed class SignInViewModelTests
 
 
     [Fact]
-    public async Task OnPostAsync_When_AuthenticateRequestIsNotNullAndIsExternalClient_Should_RedirectToUrl()
+    public async Task OnPostAsync_When_AuthorizationRequestIsNotNullAndIsExternalClient_Should_RedirectToUrl()
     {
         IAuthenticationSchemeProvider schemeProvider = Substitute.For<IAuthenticationSchemeProvider>();
         ISignInManager signInManager = Substitute.For<ISignInManager>();
@@ -315,6 +315,61 @@ public sealed class SignInViewModelTests
             Arg.Any<Expression<Func<User, bool>>>(),
             Arg.Any<CancellationToken>());
 
+        await interactionService.Received(1).GetAuthorizationContextAsync(Arg.Any<string>());
+
+        result.Should().BeOfType<RedirectResult>();
+    }
+
+    [Fact]
+    public async Task OnPostAsync_When_AuthorizationRequestIsNull_Should_RedirectToIndex()
+    {
+        IAuthenticationSchemeProvider schemeProvider = Substitute.For<IAuthenticationSchemeProvider>();
+        ISignInManager signInManager = Substitute.For<ISignInManager>();
+        IReadOnlyRepository<User> userRepository = Substitute.For<IReadOnlyRepository<User>>();
+        IIdentityServerInteractionService interactionService = Substitute.For<IIdentityServerInteractionService>();
+        IEventService eventService = Substitute.For<IEventService>();
+
+        var viewModel = new SignInViewModel(
+            schemeProvider,
+            signInManager,
+            userRepository,
+            interactionService,
+            eventService);
+
+        var result = await viewModel.OnPostCancelAsync();
+        
+        await interactionService.Received(1).GetAuthorizationContextAsync(Arg.Any<string>());
+
+        result.Should().BeOfType<RedirectResult>();
+    }
+
+    [Fact]
+    public async Task OnPostAsync_When_AuthorizationRequestIsNotNull_Should_RedirectToUrl()
+    {
+        IAuthenticationSchemeProvider schemeProvider = Substitute.For<IAuthenticationSchemeProvider>();
+        ISignInManager signInManager = Substitute.For<ISignInManager>();
+        IReadOnlyRepository<User> userRepository = Substitute.For<IReadOnlyRepository<User>>();
+        IIdentityServerInteractionService interactionService = Substitute.For<IIdentityServerInteractionService>();
+        IEventService eventService = Substitute.For<IEventService>();
+        var returnUrl = "https://test.com";
+        
+        var viewModel = new SignInViewModel(
+            schemeProvider,
+            signInManager,
+            userRepository,
+            interactionService,
+            eventService)
+        {
+            ReturnUrl = returnUrl,
+        };
+
+        interactionService.GetAuthorizationContextAsync(Arg.Any<string>())
+            .Returns(new AuthorizationRequest()
+            {
+                RedirectUri = returnUrl,
+            });
+
+        var result = await viewModel.OnPostCancelAsync();
         await interactionService.Received(1).GetAuthorizationContextAsync(Arg.Any<string>());
 
         result.Should().BeOfType<RedirectResult>();

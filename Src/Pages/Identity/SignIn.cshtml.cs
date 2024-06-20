@@ -1,4 +1,5 @@
 using Duende.IdentityServer.Events;
+using Duende.IdentityServer.Models;
 using Duende.IdentityServer.Services;
 
 using Microsoft.AspNetCore.Authentication;
@@ -100,5 +101,30 @@ public sealed class SignInViewModel(
     private async Task InitializeAsync(CancellationToken _ = default)
     {
         ExternalSchemes = await _schemeProvider.GetExternalSchemesAsync();
+    }
+
+    public async Task<IActionResult> OnPostCancelAsync(CancellationToken cancellationToken = default)
+    {
+        var request = await _interactionService.GetAuthorizationContextAsync(ReturnUrl);
+
+        if (request is null)
+        {
+            return Redirect("~/");
+        }
+
+        // if the user cancels, send a result back into IdentityServer as if they 
+        // denied the consent (even if this client does not require consent).
+        // this will send back an access denied OIDC error response to the client.
+        await _interactionService.DenyAuthorizationAsync(request, AuthorizationError.AccessDenied);
+
+        // we can trust model.ReturnUrl since GetAuthorizationContextAsync returned non-null
+        if (request.IsNativeClient())
+        {
+            // The client is native, so this change in how to
+            // return the response is for better UX for the end user.
+            return this.LoadingPage(ReturnUrl);
+        }
+
+        return Redirect(ReturnUrl);
     }
 }
