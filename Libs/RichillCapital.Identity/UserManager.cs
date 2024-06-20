@@ -34,11 +34,17 @@ internal sealed class UserManager(
         return Result.Success;
     }
 
-    public Task<Result> CreateAsync(
+    public async Task<Result> CreateAsync(
         User user,
         string password,
-        CancellationToken cancellationToken = default) =>
-        throw new NotImplementedException();
+        CancellationToken cancellationToken = default)
+    {
+        _userRepository.Add(user);
+
+        await _unitOfWork.SaveChangesAsync(cancellationToken);
+
+        return Result.Success;
+    }
 
     public Task<string> GenerateEmailConfirmationTokenAsync(
         User user, 
