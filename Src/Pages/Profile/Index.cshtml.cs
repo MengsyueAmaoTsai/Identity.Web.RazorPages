@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 using RichillCapital.UseCases.Common;
 
-namespace RichillCapital.Identity.Web.Pages.Identity.Profile;
+namespace RichillCapital.Identity.Web.Pages.Profile;
 
 [Authorize]
 public sealed class ProfileViewModel(

@@ -2,17 +2,13 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-using RichillCapital.Domain;
 using RichillCapital.Domain.Users;
 using RichillCapital.SharedKernel.Monads;
-using RichillCapital.UseCases.Common;
 
-namespace RichillCapital.Identity.Web.Pages.Identity.Profile;
+namespace RichillCapital.Identity.Web.Pages.Profile;
 
 [Authorize]
-public sealed class ChangePasswordViewModel(
-    ICurrentUser _currentUser,
-    IUserService _userService) : PageModel
+public sealed class ChangePasswordViewModel() : PageModel
 {
     [BindProperty]
     public required string OldPassword { get; init; }
