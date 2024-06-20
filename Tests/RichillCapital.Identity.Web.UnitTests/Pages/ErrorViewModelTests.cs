@@ -2,7 +2,7 @@ using FluentAssertions;
 
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-using RichillCapital.Identity.Web.Pages;
+using RichillCapital.Identity.Web.Pages.Error;
 
 namespace RichillCapital.Identity.Web.UnitTests.Pages;
 
