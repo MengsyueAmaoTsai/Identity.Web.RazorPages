@@ -18,15 +18,23 @@
         </div>
     }
 
-    @if (Model.SignOutIframeUrl != null)
+    @if (Model.SignOutIFrameUrl != null)
     {
-        <iframe width="0" height="0" class="signout" src="@Model.SignOutIframeUrl"></iframe>
+        <iframe width="0" height="0" class="signout" src="@Model.SignOutIFrameUrl"></iframe>
     }
 </div>
 
 @section scripts
 {
     @if (Model.AutomaticRedirectAfterSignOut)
+    {
+        <script src="~/js/signout-redirect.js"></script>
+    }
+}
+
+@section scripts
+{
+    @if (Model.View.AutomaticRedirectAfterSignOut)
     {
         <script src="~/js/signout-redirect.js"></script>
     }

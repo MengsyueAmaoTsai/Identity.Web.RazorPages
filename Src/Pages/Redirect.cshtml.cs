@@ -5,4 +5,5 @@ namespace RichillCapital.Identity.Web.Pages;
 public sealed class RedirectViewModel() :
     PageModel
 {
+    public required string RedirectUri { get; init; }
 }
