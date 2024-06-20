@@ -8,15 +8,15 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-using RichillCapital.SharedKernel.Monads;
 using RichillCapital.UseCases.Common;
 
 namespace RichillCapital.Identity.Web.Pages.Identity;
 
 [Authorize]
 public sealed class SignOutViewModel(
+    IIdentityServerInteractionService _interactionService,
     ICurrentUser _currentUser,
-    IIdentityServerInteractionService _interactionService) :
+    ISignInManager _signInManager) :
     PageModel
 {
     public async Task<IActionResult> OnPostAsync(string returnUrl, CancellationToken cancellationToken = default)
@@ -28,7 +28,12 @@ public sealed class SignOutViewModel(
             return RedirectToPage("/identity/singedOut", new { LogoutId = logoutId });
         }
 
-        var result = await SignOutAsync(cancellationToken);
+        var result = await _signInManager.SignOutAsync(cancellationToken);
+
+        if (result.IsFailure)
+        {
+            return Page();
+        }
 
         var provider = User.FindFirst(JwtClaimTypes.IdentityProvider)?.Value;
 
@@ -72,12 +77,5 @@ public sealed class SignOutViewModel(
             // request and the identity for the user gets updated.
             return RedirectToPage();
         }
-    }
-
-    private async Task<Result> SignOutAsync(
-        CancellationToken cancellationToken = default)
-    {
-        await HttpContext.SignOutAsync();
-        return Result.Success;
     }
 }

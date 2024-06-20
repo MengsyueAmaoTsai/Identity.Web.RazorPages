@@ -25,6 +25,8 @@ public interface ISignInManager
         bool isPersistent,
         bool lockoutOnFailure,
         CancellationToken cancellationToken = default);
+
+    Task<Result> SignOutAsync(CancellationToken cancellationToken = default);
 }
 
 public interface IUserService
@@ -95,5 +97,17 @@ internal sealed class SignInManager(
         CancellationToken cancellationToken = default)
     {
         throw new NotImplementedException();
+    }
+
+    public async Task<Result> SignOutAsync(CancellationToken cancellationToken = default)
+    {
+        if (_httpContextAccessor.HttpContext is null)
+        {
+            return Result.Failure(Error.Unexpected("HttpContext is null"));
+        }
+
+        await _httpContextAccessor.HttpContext.SignOutAsync();
+
+        return Result.Success;
     }
 }
