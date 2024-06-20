@@ -1,4 +1,11 @@
-﻿using RichillCapital.Domain.Common.Repositories;
+﻿using System.Security.Claims;
+
+using Duende.IdentityServer;
+
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Http;
+
+using RichillCapital.Domain.Common.Repositories;
 using RichillCapital.Domain.Users;
 using RichillCapital.SharedKernel;
 using RichillCapital.SharedKernel.Monads;
@@ -27,7 +34,8 @@ public interface IUserService
 }
 
 internal sealed class SignInManager(
-    IReadOnlyRepository<User> _userRepository) :
+    IReadOnlyRepository<User> _userRepository,
+    IHttpContextAccessor _httpContextAccessor) :
     ISignInManager
 {
     public async Task<Result> PasswordSignInAsync(
@@ -37,78 +45,37 @@ internal sealed class SignInManager(
         bool lockoutOnFailure,
         CancellationToken cancellationToken = default)
     {
+        // Find user by email
+        var maybeUser = await _userRepository
+            .FirstOrDefaultAsync(
+                user => user.Email == email,
+                cancellationToken);
 
-        //     var userResult = await GetByEmailAsync(email, cancellationToken);
+        var user = maybeUser.ValueOrDefault;
 
-        //     if (userResult.IsFailure)
-        //     {
-        //         return userResult.Error
-        //             .ToResult<UserId>();
-        //     }
+        // Check password
+        if (password != user.PasswordHash)
+        {
+            return Error
+                .Unauthorized("Users.InvalidCredentials", "Invalid credentials")
+                .ToResult();
+        }
 
-        //     var user = userResult.Value;
+        // Sign in user 
+        var properties = isPersistent ?
+            new AuthenticationProperties
+            {
+                IsPersistent = true,
+                ExpiresUtc = DateTimeOffset.UtcNow.AddDays(30),
+            } :
+            new AuthenticationProperties();
 
-        //     if (password != user.PasswordHash)
-        //     {
-        //         return Error
-        //             .Unauthorized("Users.InvalidCredentials", "Invalid credentials")
-        //             .ToResult<UserId>();
-        //     }
+        var identityServerUser = new IdentityServerUser(user.Id.Value)
+        {
+            DisplayName = user.Name.Value,
+        };
 
-        //     return user.Id.ToResult();
-        // }
-
-        // public Task<Result<UserId>> PasswordSignInAsync(
-        //     User user,
-        //     bool isPersistent,
-        //     bool lockoutOnFailure,
-        //     CancellationToken cancellationToken = default)
-        // {
-        //     throw new NotImplementedException();
-        // }
-
-        // private async Task<Result<User>> GetByEmailAsync(
-        //     Email email,
-        //     CancellationToken cancellationToken = default)
-        // {
-        //     var maybeUser = await _userRepository
-        //         .FirstOrDefaultAsync(user => user.Email == email, cancellationToken);
-
-        //     if (maybeUser.IsNull)
-        //     {
-        //         return Error
-        //             .NotFound("Users.NotFound", $"User wiht email {email} not found")
-        //             .ToResult<User>();
-        //     }
-
-        //     var user = maybeUser.Value;
-
-        //     return user.ToResult();
-
-
-        // Sign in to http context
-        // var maybeUser = await _userRepository
-        //     .FirstOrDefaultAsync(
-        //         user => user.Email == email,
-        //         cancellationToken)
-        //     .ThrowIfNull();
-
-        // var user = maybeUser.ValueOrDefault;
-
-        // var properties = AllowRememberMe && RememberMe ?
-        //     new AuthenticationProperties
-        //     {
-        //         IsPersistent = true,
-        //         ExpiresUtc = DateTimeOffset.UtcNow.AddDays(30),
-        //     } :
-        //     new AuthenticationProperties();
-
-        // var identityServerUser = new IdentityServerUser(user.Id.Value)
-        // {
-        //     DisplayName = user.Name.Value,
-        // };
-
-        // await HttpContext.SignInAsync(identityServerUser, properties);
+        await _httpContextAccessor.HttpContext.SignInAsync(identityServerUser, properties);
 
         // var claims = new List<Claim>
         // {
@@ -118,7 +85,7 @@ internal sealed class SignInManager(
         // };
 
         // var principal = new ClaimsPrincipal(new ClaimsIdentity(claims, "idsrv"));
-        // await HttpContext.SignInAsync(principal, properties);
+        // await _httpContextAccessor.HttpContext.SignInAsync(principal, properties);
         return Result.Success;
     }
 
