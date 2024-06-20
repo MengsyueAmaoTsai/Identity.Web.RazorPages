@@ -1,16 +1,25 @@
+using System.Security.Claims;
+
+using Duende.IdentityServer;
 using Duende.IdentityServer.Models;
+using Duende.IdentityServer.Services;
 
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
+using RichillCapital.Domain.Common.Repositories;
+using RichillCapital.SharedKernel.Monads;
+
 
 namespace RichillCapital.Identity.Web.Pages.Identity;
 
 [AllowAnonymous]
 public sealed class SignInViewModel(
-    ISignInManager _signInManager) :
+    ISignInManager _signInManager,
+    IReadOnlyRepository<Domain.Users.User> _userRepository,
+    IIdentityServerInteractionService _interactionService) :
     PageModel
 {
 
@@ -41,7 +50,7 @@ public sealed class SignInViewModel(
         string action,
         CancellationToken cancellationToken = default)
     {
-        // var context = await _interactionService.GetAuthorizationContextAsync(ReturnUrl);
+        var context = await _interactionService.GetAuthorizationContextAsync(ReturnUrl);
 
         // if (action == "Cancel")
         // {
@@ -70,13 +79,13 @@ public sealed class SignInViewModel(
             return Page();
         }
 
-        // var userId = signInResult.Value;
+        // var maybeUser = await _userRepository
+        //     .FirstOrDefaultAsync(
+        //         user => user.Email == email,
+        //         cancellationToken)
+        //     .ThrowIfNull();
 
-        // var maybeUser = await _userService
-        //     .GetByIdAsync(userId, cancellationToken)
-        //     .ThrowIfFailure();
-
-        // var user = maybeUser.Value;
+        // var user = maybeUser.ValueOrDefault;
 
         // var properties = AllowRememberMe && RememberMe ?
         //     new AuthenticationProperties
@@ -93,27 +102,26 @@ public sealed class SignInViewModel(
 
         // await HttpContext.SignInAsync(identityServerUser, properties);
 
-        //var claims = new List<Claim>
-        //{
-        //    new Claim("sub", user.Id.Value),
-        //    new Claim("name", user.Name.Value),
-        //    new Claim("email", user.Email.Value),
-        //};
-        //var principal = new ClaimsPrincipal(new ClaimsIdentity(claims, "idsrv"));
-        //await HttpContext.SignInAsync(principal, properties);
-
-
-        // if (context is null)
+        // var claims = new List<Claim>
         // {
-        //     return Url.IsLocalUrl(ReturnUrl) ?
-        //         Redirect(ReturnUrl) : string.IsNullOrEmpty(ReturnUrl) ?
-        //             Redirect("~/") : throw new Exception("invalid return URL");
-        // }
+        //    new("sub", user.Id.Value),
+        //    new("name", user.Name.Value),
+        //    new("email", user.Email.Value),
+        // };
 
-        // return context.IsNativeClient() ?
-        //     this.LoadingPage(ReturnUrl) :
-        //     Redirect(ReturnUrl);
-        return Page();
+        // var principal = new ClaimsPrincipal(new ClaimsIdentity(claims, "idsrv"));
+        // await HttpContext.SignInAsync(principal, properties);
+
+        if (context is null)
+        {
+            return Url.IsLocalUrl(ReturnUrl) ?
+                Redirect(ReturnUrl) : string.IsNullOrEmpty(ReturnUrl) ?
+                    Redirect("~/") : throw new Exception("invalid return URL");
+        }
+
+        return context.IsNativeClient() ?
+            this.LoadingPage(ReturnUrl) :
+            Redirect(ReturnUrl);
     }
 
     private async Task InitializeAsync(CancellationToken _ = default)
