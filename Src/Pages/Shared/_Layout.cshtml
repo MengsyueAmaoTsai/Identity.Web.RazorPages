@@ -1,8 +1,4 @@
-﻿@using Microsoft.AspNetCore.Mvc.ViewEngines
-@inject IWebHostEnvironment Environment
-@inject ICompositeViewEngine Engine
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -17,31 +13,7 @@
 
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">RichillCapital.Identity.Web</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    @{
-                        var result = Engine.FindView(ViewContext, "_SignInPartial", isMainPage: false);
-                    }
-                    @if (result.Success)
-                    {
-                        await Html.RenderPartialAsync("_SignInPartial");
-                    }
-                    else
-                    {
-                        throw new InvalidOperationException("The default Identity UI layout requires a partial view '_SignInPartial' " +
-                        "usually located at '/Pages/_SignInPartial' or at '/Views/Shared/_SignInPartial' to work. Based on your configuration " +
-                        $"we have looked at it in the following locations: {System.Environment.NewLine}{string.Join(System.Environment.NewLine, result.SearchedLocations)}.");
-                    }
-                </div>
-            </div>
-        </nav>
+        <partial name="_TopNav" />
     </header>
 
     <div class="container">
@@ -51,17 +23,13 @@
     </div>
 
     <footer class="border-top footer text-muted">
-        <div class="container">
-            <a href="/.well-known/openid-configuration">&copy; 2024 - RichillCapital</a>
-        </div>
+        <partial name="_Footer" />
     </footer>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-
     <script type="module" src="https://unpkg.com/@@fluentui/web-components"></script>
-
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
