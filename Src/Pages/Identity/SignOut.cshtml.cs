@@ -16,7 +16,7 @@ namespace RichillCapital.Identity.Web.Pages.Identity;
 [Authorize]
 public sealed class SignOutViewModel(
     ICurrentUser _currentUser,
-    IIdentityServerInteractionService _interactionService) : 
+    IIdentityServerInteractionService _interactionService) :
     PageModel
 {
     public async Task<IActionResult> OnPostAsync(string returnUrl, CancellationToken cancellationToken = default)
@@ -27,7 +27,7 @@ public sealed class SignOutViewModel(
         {
             return RedirectToPage("/identity/singedOut", new { LogoutId = logoutId });
         }
-            
+
         var result = await SignOutAsync(cancellationToken);
 
         var provider = User.FindFirst(JwtClaimTypes.IdentityProvider)?.Value;
@@ -41,18 +41,18 @@ public sealed class SignOutViewModel(
                 // to us after the user has logged out. this allows us to then
                 // complete our single sign-out processing.
                 string url = Url.Page(
-                    "/identity/signedOut", 
-                    new 
-                    { 
-                        LogOutId = logoutId 
+                    "/identity/signedOut",
+                    new
+                    {
+                        LogOutId = logoutId
                     }) ?? "/identity/signed-out";
 
                 // this triggers a redirect to the external provider for sign-out
                 return SignOut(
-                    new AuthenticationProperties 
-                    { 
-                        RedirectUri = url 
-                    }, 
+                    new AuthenticationProperties
+                    {
+                        RedirectUri = url
+                    },
                     provider);
             }
         }
