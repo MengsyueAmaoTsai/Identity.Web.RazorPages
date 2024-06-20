@@ -30,7 +30,12 @@ internal sealed class SignInManager(
     IReadOnlyRepository<User> _userRepository) :
     ISignInManager
 {
-    public async Task<Result> PasswordSignInAsync(Email email, string password, bool isPersistent, bool lockoutOnFailure, CancellationToken cancellationToken = default)
+    public async Task<Result> PasswordSignInAsync(
+        Email email,
+        string password,
+        bool isPersistent,
+        bool lockoutOnFailure,
+        CancellationToken cancellationToken = default)
     {
         //     var userResult = await GetByEmailAsync(email, cancellationToken);
 

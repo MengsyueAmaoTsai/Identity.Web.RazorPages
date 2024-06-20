@@ -5,27 +5,29 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
+
 namespace RichillCapital.Identity.Web.Pages.Identity;
 
 [AllowAnonymous]
-public sealed class SignInViewModel() : PageModel
+public sealed class SignInViewModel(
+    ISignInManager _signInManager) :
+    PageModel
 {
+
     [BindProperty(SupportsGet = true)]
-    public required string ReturnUrl { get; init; }
+    public string ReturnUrl { get; init; } = string.Empty;
 
     [BindProperty]
-    public required string Email { get; init; }
+    public string Email { get; init; } = string.Empty;
 
     [BindProperty]
-    public required string Password { get; init; }
+    public string Password { get; init; } = string.Empty;
 
     [BindProperty]
-    public required bool RememberMe { get; init; }
+    public bool RememberMe { get; init; }
 
-    public required IEnumerable<AuthenticationScheme> ExternalSchemes { get; set; } = [];
-
-
-    public required bool AllowRememberMe { get; init; } = false;
+    public IEnumerable<AuthenticationScheme> ExternalSchemes { get; set; } = [];
+    public bool AllowRememberMe { get; init; }
 
     public async Task<IActionResult> OnGetAsync(CancellationToken cancellationToken = default)
     {
@@ -46,29 +48,27 @@ public sealed class SignInViewModel() : PageModel
         //     return await HandleCancelAsync(context, cancellationToken);
         // }
 
-        // var validationResult = Domain.Users.Email.From(Email);
+        var validationResult = Domain.Users.Email.From(Email);
 
-        // if (validationResult.IsFailure)
-        // {
-        //     ModelState.AddModelError(validationResult.Error.Code, validationResult.Error.Message);
-        //     _logger.LogWarning("Validation failed. {error}", validationResult.Error);
+        if (validationResult.IsFailure)
+        {
+            await InitializeAsync(cancellationToken);
+            return Page();
+        }
 
-        //     await InitializeAsync(cancellationToken);
-        //     return Page();
-        // }
+        var email = validationResult.Value;
 
-        // var email = validationResult.Value;
+        var signInResult = await _signInManager.PasswordSignInAsync(
+            email,
+            Password,
+            isPersistent: RememberMe,
+            lockoutOnFailure: true);
 
-        // var signInResult = await _signInManager.PasswordSignInAsync(email, Password, RememberMe, lockoutOnFailure: false);
-
-        // if (signInResult.IsFailure)
-        // {
-        //     ModelState.AddModelError(signInResult.Error.Code, signInResult.Error.Message);
-        //     _logger.LogWarning("Sign in failed. {error}", signInResult.Error);
-
-        //     await InitializeAsync(cancellationToken);
-        //     return Page();
-        // }
+        if (signInResult.IsFailure)
+        {
+            await InitializeAsync(cancellationToken);
+            return Page();
+        }
 
         // var userId = signInResult.Value;
 
