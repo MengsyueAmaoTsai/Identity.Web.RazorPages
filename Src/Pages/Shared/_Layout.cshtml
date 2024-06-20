@@ -18,7 +18,15 @@
 
     <div class="container">
         <main role="main" class="pb-3">
-            @RenderBody()
+            <div class="row">
+                <div class="col-md-2">
+                    <partial name="_SideNav" />
+                </div>
+
+                <div class="col-md-8">
+                    @RenderBody()
+                </div>
+            </div>
         </main>
     </div>
 
