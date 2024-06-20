@@ -8,7 +8,7 @@ namespace RichillCapital.Identity.Web.Pages.Identity;
 
 [Authorize]
 public sealed class ConsentViewModel(
-    IIdentityServerInteractionService _interactionService) : 
+    IIdentityServerInteractionService _interactionService) :
     PageModel
 {
     [BindProperty]
@@ -18,14 +18,14 @@ public sealed class ConsentViewModel(
     public required string ClientUrl { get; set; }
     public required string ClientLogoUrl { get; set; }
     public required bool AllowRememberConsent { get; set; }
-    
+
     public async Task<IActionResult> OnGetAsync(CancellationToken cancellationToken = default)
     {
         var request = await _interactionService.GetAuthorizationContextAsync(ReturnUrl);
 
         if (request is null)
         {
-            return RedirectToPage("/error");
+            return RedirectToPage("/error/index");
         }
 
         ClientName = request.Client.ClientName ?? request.Client.ClientId;
@@ -42,7 +42,7 @@ public sealed class ConsentViewModel(
 
         if (request is null)
         {
-            return RedirectToPage("/error");
+            return RedirectToPage("/error/index");
         }
 
 
