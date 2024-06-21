@@ -4,6 +4,8 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+
+    <AssemblyVersion>0.0.0.0</AssemblyVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -18,11 +20,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Remove="Src\Pages\Identity\Consent.cshtml" />
-  </ItemGroup>
-
-
-  <ItemGroup>
     <ProjectReference Include="Libs\RichillCapital.Identity\RichillCapital.Identity.csproj" />
     <ProjectReference Include="Libs\RichillCapital.Logging\RichillCapital.Logging.csproj" />
     <ProjectReference Include="Libs\RichillCapital.Persistence\RichillCapital.Persistence.csproj" />
@@ -32,17 +29,4 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.DataProtection.StackExchangeRedis" Version="8.0.6" />
   </ItemGroup>
-
-  <ItemGroup>
-    <UpToDateCheckInput Remove="Src\Pages\Identity\Consent.cshtml" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <_ContentIncludedByDefault Remove="Src\Pages\Identity\Consent.cshtml" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="Src\Pages\Identity\Consent.cshtml" />
-  </ItemGroup>
-
 </Project>
