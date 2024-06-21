@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 using NSubstitute;
 
-using RichillCapital.Identity.Web.Pages.Identity;
+using RichillCapital.Identity.Web.Pages.Identity.SignOut;
 using RichillCapital.SharedKernel;
 using RichillCapital.SharedKernel.Monads;
 using RichillCapital.UseCases.Common;

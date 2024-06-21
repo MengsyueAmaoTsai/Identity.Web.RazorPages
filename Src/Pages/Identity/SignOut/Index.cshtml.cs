@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 using RichillCapital.UseCases.Common;
 
-namespace RichillCapital.Identity.Web.Pages.Identity;
+namespace RichillCapital.Identity.Web.Pages.Identity.SignOut;
 
 [Authorize]
 public sealed class SignOutViewModel(

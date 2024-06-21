@@ -2,8 +2,9 @@
 
 @if (CurrentUser.IsAuthenticated)
 {
-    <form asp-area="Identity" 
-        asp-page="/identity/signOut" 
+    <form 
+        asp-area="Identity" 
+        asp-page="/identity/signOut/index" 
         asp-route-returnUrl="@Url.Page("/index", new { area = "" })" 
         method="post" 
         id="logoutForm" 
@@ -15,7 +16,7 @@
             </li>
 
             <li class="nav-link active">
-                <a asp-page="/identity/signOut" title="Sign out">Sign Out</a>
+                <a asp-page="/identity/signOut/index" title="Sign out">Sign Out</a>
             </li>
         </ul>
     </form>
