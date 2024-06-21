@@ -12,7 +12,7 @@ using RichillCapital.Domain.Users;
 using RichillCapital.SharedKernel.Monads;
 
 
-namespace RichillCapital.Identity.Web.Pages.Identity;
+namespace RichillCapital.Identity.Web.Pages.Identity.SignIn;
 
 [AllowAnonymous]
 public sealed class SignInViewModel(

@@ -13,7 +13,7 @@ using NSubstitute;
 
 using RichillCapital.Domain.Common.Repositories;
 using RichillCapital.Domain.Users;
-using RichillCapital.Identity.Web.Pages.Identity;
+using RichillCapital.Identity.Web.Pages.Identity.SignIn;
 using RichillCapital.SharedKernel;
 using RichillCapital.SharedKernel.Monads;
 
@@ -336,7 +336,7 @@ public sealed class SignInViewModelTests
             eventService);
 
         var result = await viewModel.OnPostCancelAsync();
-        
+
         await interactionService.Received(1).GetAuthorizationContextAsync(Arg.Any<string>());
 
         result.Should().BeOfType<RedirectResult>();
@@ -351,7 +351,7 @@ public sealed class SignInViewModelTests
         IIdentityServerInteractionService interactionService = Substitute.For<IIdentityServerInteractionService>();
         IEventService eventService = Substitute.For<IEventService>();
         var returnUrl = "https://test.com";
-        
+
         var viewModel = new SignInViewModel(
             schemeProvider,
             signInManager,
