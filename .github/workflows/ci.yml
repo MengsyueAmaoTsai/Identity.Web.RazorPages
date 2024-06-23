@@ -13,9 +13,10 @@ on:
 env:
   CAKE_FILE: build.cake
   TARGET: Default
-  CONFIGuRATION: Debug
+  CONFIGURATION: Debug
   IMAGE_NAME: identity-web
   APPLICATION_NAME: RichillCapital.Identity.Web
+  PUBLISH_DIRECTORY: ./publish
 
 jobs:
   build:
@@ -35,7 +36,7 @@ jobs:
       uses: dotnet/nbgv@master
       id: nbgv    
 
-    - name: Determine the Build Version
+    - name: Get Version
       id: version
       run: echo "::set-output name=version::$(git describe --tags --abbrev=0 || date +'%Y%m%d')-${{ steps.nbgv.outputs.GitCommitIdShort }}"
 
@@ -46,7 +47,7 @@ jobs:
         target: ${{ env.TARGET }}
         verbosity: Diagnostic
         arguments: |
-          configuration: ${{ env.CONFIGuRATION }}
+          configuration: ${{ env.CONFIGURATION }}
     
     - name: Build Docker Image
       run: |
@@ -55,7 +56,7 @@ jobs:
     - name: Upload Artifact
       uses: actions/upload-artifact@v2
       with:
-        name: ${{ env.APPLICATION_NAME }}-${{ steps.version.outputs.version }}-${{ env.Configuration }}
-        path: ./publish          
+        name: ${{ env.APPLICATION_NAME }}-${{ steps.version.outputs.version }}-${{ env.CONFIGURATION }}
+        path: ${{ env.PUBLISH_DIRECTORY }}          
   
   
