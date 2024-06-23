@@ -14,7 +14,7 @@ internal sealed class UserConfiguration :
             .ToTable("users")
             .HasKey(user => user.Id);
 
-        builder
+        builder 
             .Property(user => user.Id)
             .HasColumnName("id")
             .HasMaxLength(UserId.MaxLength)
@@ -22,7 +22,7 @@ internal sealed class UserConfiguration :
                 id => id.Value,
                 value => UserId.From(value).Value)
             .IsRequired();
-
+        
         builder
             .Property(user => user.Name)
             .HasColumnName("name")
