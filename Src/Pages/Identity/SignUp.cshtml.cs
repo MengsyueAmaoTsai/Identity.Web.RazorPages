@@ -24,16 +24,16 @@ public sealed class SignUpViewModel(
     public required string ReturnUrl { get; init; }
 
     [BindProperty]
-    public string Name { get; init; } = string.Empty;
+    public required string Name { get; init; } 
 
     [BindProperty]
-    public string Email { get; init; } = string.Empty;
+    public required string Email { get; init; } 
 
     [BindProperty]
-    public string Password { get; init; } = string.Empty;
+    public required string Password { get; init; } 
 
     [BindProperty]
-    public string ConfirmPassword { get; init; } = string.Empty;
+    public required string ConfirmPassword { get; init; } 
 
     public IEnumerable<AuthenticationScheme> ExternalSchemes { get; set; } = [];
 

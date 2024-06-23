@@ -25,13 +25,13 @@ public sealed class SignInViewModel(
 {
 
     [BindProperty(SupportsGet = true)]
-    public string ReturnUrl { get; init; } = string.Empty;
+    public required string ReturnUrl { get; init; } 
 
     [BindProperty]
-    public string Email { get; init; } = string.Empty;
+    public required string Email { get; init; } 
 
     [BindProperty]
-    public string Password { get; init; } = string.Empty;
+    public required string Password { get; init; }
 
     [BindProperty]
     public bool RememberMe { get; init; }

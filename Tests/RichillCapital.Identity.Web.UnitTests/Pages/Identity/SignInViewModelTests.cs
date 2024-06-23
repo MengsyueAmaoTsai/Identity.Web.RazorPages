@@ -21,6 +21,8 @@ namespace RichillCapital.Identity.Web.UnitTests.Pages.Identity;
 
 public sealed class SignInViewModelTests
 {
+    private static readonly Email ValidEmail = Email.From("test@gmail.com").ThrowIfFailure().Value;
+
     public SignInViewModelTests()
     {
     }
@@ -39,7 +41,15 @@ public sealed class SignInViewModelTests
             signInManager,
             userRepository,
             interactionService,
-            eventService);
+            eventService)
+        {
+            ReturnUrl = string.Empty,
+            Email = string.Empty,
+            Password = string.Empty,
+            RememberMe = false,
+            ExternalSchemes = [],
+            AllowRememberMe = false,
+        };
 
         viewModel.ReturnUrl.Should().BeNullOrEmpty();
         viewModel.Email.Should().BeNullOrEmpty();
@@ -63,7 +73,15 @@ public sealed class SignInViewModelTests
             signInManager,
             userRepository,
             interactionService,
-            eventService);
+            eventService)
+        {
+            ReturnUrl = string.Empty,
+            Email = string.Empty,
+            Password = string.Empty,
+            RememberMe = false,
+            ExternalSchemes = [],
+            AllowRememberMe = false,
+        };
 
         var result = await viewModel.OnGetAsync();
 
@@ -84,7 +102,12 @@ public sealed class SignInViewModelTests
             signInManager,
             userRepository,
             interactionService,
-            eventService);
+            eventService)
+        {
+            Email = string.Empty,
+            Password = string.Empty,
+            ReturnUrl = string.Empty,
+        };
 
         var result = await viewModel.OnPostSignInAsync();
 
@@ -105,7 +128,12 @@ public sealed class SignInViewModelTests
             signInManager,
             userRepository,
             interactionService,
-            eventService);
+            eventService)
+        {
+            Email = ValidEmail.Value,
+            Password = "password",
+            ReturnUrl = "/test",
+        };
 
         signInManager.PasswordSignInAsync(
             Arg.Any<Email>(),
@@ -142,6 +170,8 @@ public sealed class SignInViewModelTests
             interactionService,
             eventService)
         {
+            Email = ValidEmail.Value,
+            Password = "password",
             ReturnUrl = "/test",
             Url = urlHelper,
         };
@@ -153,15 +183,18 @@ public sealed class SignInViewModelTests
             Arg.Any<bool>())
             .Returns(Result.Success);
 
-        var user = User.Create(
-            UserId.NewUserId(),
-            UserName.From("username").Value,
-            Email.From("email").Value,
-            false,
-            "password",
-            true,
-            0,
-            DateTimeOffset.UtcNow).Value;
+        var user = User
+            .Create(
+                UserId.NewUserId(),
+                UserName.From("username").Value,
+                ValidEmail,
+                false,
+                "password",
+                true,
+                0,
+                DateTimeOffset.UtcNow)
+            .ThrowIfError()
+            .Value;
 
         userRepository.FirstOrDefaultAsync(Arg.Any<Expression<Func<User, bool>>>(), Arg.Any<CancellationToken>())
             .Returns(Maybe<User>.With(user));
@@ -203,6 +236,8 @@ public sealed class SignInViewModelTests
             interactionService,
             eventService)
         {
+            Email = ValidEmail.Value,
+            Password = "password",
             ReturnUrl = localUrl,
             Url = urlHelper,
         };
@@ -214,15 +249,18 @@ public sealed class SignInViewModelTests
             Arg.Any<bool>())
             .Returns(Result.Success);
 
-        var user = User.Create(
-            UserId.NewUserId(),
-            UserName.From("username").Value,
-            Email.From("email").Value,
-            false,
-            "password",
-            true,
-            0,
-            DateTimeOffset.UtcNow).Value;
+        var user = User
+            .Create(
+                UserId.NewUserId(),
+                UserName.From("username").Value,
+                ValidEmail,
+                false,
+                "password",
+                true,
+                0,
+                DateTimeOffset.UtcNow)
+            .ThrowIfError()
+            .Value;
 
         userRepository.FirstOrDefaultAsync(Arg.Any<Expression<Func<User, bool>>>(), Arg.Any<CancellationToken>())
             .Returns(Maybe<User>.With(user));
@@ -270,26 +308,32 @@ public sealed class SignInViewModelTests
             interactionService,
             eventService)
         {
+            Email = ValidEmail.Value,
+            Password = "password",
             ReturnUrl = externalUrl,
             Url = urlHelper,
         };
 
-        signInManager.PasswordSignInAsync(
-            Arg.Any<Email>(),
-            Arg.Any<string>(),
-            Arg.Any<bool>(),
-            Arg.Any<bool>())
+        signInManager
+            .PasswordSignInAsync(
+                Arg.Any<Email>(),
+                Arg.Any<string>(),
+                Arg.Any<bool>(),
+                Arg.Any<bool>())
             .Returns(Result.Success);
 
-        var user = User.Create(
-            UserId.NewUserId(),
-            UserName.From("username").Value,
-            Email.From("email").Value,
-            false,
-            "password",
-            true,
-            0,
-            DateTimeOffset.UtcNow).Value;
+        var user = User
+            .Create(
+                UserId.NewUserId(),
+                UserName.From("username").Value,
+                ValidEmail,
+                false,
+                "password",
+                true,
+                0,
+                DateTimeOffset.UtcNow)
+            .ThrowIfError()
+            .Value;
 
         userRepository.FirstOrDefaultAsync(Arg.Any<Expression<Func<User, bool>>>(), Arg.Any<CancellationToken>())
             .Returns(Maybe<User>.With(user));
@@ -333,7 +377,12 @@ public sealed class SignInViewModelTests
             signInManager,
             userRepository,
             interactionService,
-            eventService);
+            eventService)
+        {
+            ReturnUrl = string.Empty,
+            Email = ValidEmail.Value,
+            Password = "password",
+        };
 
         var result = await viewModel.OnPostCancelAsync();
 
@@ -360,6 +409,8 @@ public sealed class SignInViewModelTests
             eventService)
         {
             ReturnUrl = returnUrl,
+            Email = ValidEmail.Value,
+            Password = "password",
         };
 
         interactionService.GetAuthorizationContextAsync(Arg.Any<string>())
