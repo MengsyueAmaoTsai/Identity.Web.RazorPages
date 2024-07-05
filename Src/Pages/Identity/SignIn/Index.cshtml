@@ -5,10 +5,26 @@
     ViewData["Title"] = "Sign In";
 }
 
-
 <img src="#">
 
 <div>Sign In</div>
+
+<!-- Only show on validation error -->
+<div>
+    Please entry a valid email address.
+</div>
+
+<div>
+    No user found with that email address. Please try another name or <a href="#">get a new Richill Capital acount</a>.
+</div>
+
+
+<div>
+    Please entry your password.
+</div>
+<div>
+    Your email address or password is incorrect. If you don't remember your password, please <a href="#">reset it immediately</a>.
+</div>
 
 <div>
     Continue to Application Name
@@ -19,8 +35,19 @@
 
 <input type="password" placeholder="Your password">
 
+<input type="checkbox">
+<label>Do you want to stay signed in?</label>
+
+<div>Stay signed in so you don't have to sign in again next time.</div>
+
 <div>
     Don't have an account? <a asp-page="/identity/signUp">Create one!</a>
+</div>
+<div>
+    <a href="#">Forgot your password?</a>
+</div>
+<div>
+    <a href="#">Alternative sign in methods.</a>
 </div>
 
 <a asp-page="/identity/forgotPassword">Can't access your account?</a>
@@ -32,3 +59,5 @@
     <a>Continue with Microsoft</a>
     <a>Continue with Google</a>
 </div>
+
+

@@ -6,15 +6,34 @@
 }
 
 <fluent-card>
-        
-    <div class="alert alert-danger">
-        @Model.ErrorMessage
+    <strong>Troubleshooting Details</strong>
+    
+    <div>Please send this information when contacting your system administrator.</div>
+
+    <a href="#">Copy this information to the clipboard.</a>
+   
+    <div>
+        <strong>Error Code:</strong>
+        50000
     </div>
 
-    @if (Model.TraceId is not null)
-    {
-        <p>
-            <strong>Trace ID:</strong> <code>@Model.TraceId</code>
-        </p>
-    }
+    <div>
+        <strong>Request Id:</strong>
+        @Guid.NewGuid()
+    </div>
+
+    <div>
+        <strong>Correlation Id:</strong>
+        @Guid.NewGuid()
+    </div>
+
+    <div>
+        <strong>Timestamp:</strong>
+        @DateTimeOffset.UtcNow.ToString("yyyy-MM-ddTHH:mm:ss.fffZ")
+    </div>
+
+    <div>
+        <strong>Details:</strong>
+        @Model.ErrorMessage
+    </div>
 </fluent-card>
