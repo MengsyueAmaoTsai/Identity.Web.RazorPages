@@ -1,39 +1,9 @@
 ﻿@page "/error"
 @model ErrorViewModel
-
 @{
     ViewData["Title"] = "Error";
 }
 
-<fluent-card>
-    <strong>Troubleshooting Details</strong>
-    
-    <div>Please send this information when contacting your system administrator.</div>
-
-    <a href="#">Copy this information to the clipboard.</a>
-   
-    <div>
-        <strong>Error Code:</strong>
-        @Model.ErrorCode
-    </div>
-
-    <div>
-        <strong>Request Id:</strong>
-        @Model.RequestId
-    </div>
-
-    <div>
-        <strong>Correlation Id:</strong>
-        @Model.CorrelationId
-    </div>
-
-    <div>
-        <strong>Timestamp:</strong>
-        @Model.Timestamp.ToString("yyyy-MM-ddTHH:mm:ss.fffZ")
-    </div>
-
-    <div>
-        <strong>Details:</strong>
-        @Model.ErrorMessage
-    </div>
-</fluent-card>
+<div>
+    <h2>Error</h2>
+</div>

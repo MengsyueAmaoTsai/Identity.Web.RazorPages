@@ -1,0 +1,11 @@
+﻿@page "/identity/reset-password"
+
+@model ResetPasswordViewModel
+
+@{
+    ViewData["Title"] = "Recover";
+}
+
+<div>
+    @await Html.PartialAsync("_ResetPasswordForm")
+</div>

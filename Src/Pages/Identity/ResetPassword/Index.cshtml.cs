@@ -5,10 +5,10 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using RichillCapital.Domain.Common.Repositories;
 using RichillCapital.Domain.Users;
 
-namespace RichillCapital.Identity.Web.Pages.Identity;
+namespace RichillCapital.Identity.Web.Pages.Identity.ResetPassword;
 
 [AllowAnonymous]
-public sealed class ForgotPasswordViewModel(
+public sealed class ResetPasswordViewModel(
     IReadOnlyRepository<User> _userRepository) :
     PageModel
 {
