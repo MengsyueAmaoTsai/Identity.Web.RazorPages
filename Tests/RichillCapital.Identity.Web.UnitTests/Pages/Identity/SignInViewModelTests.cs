@@ -109,7 +109,7 @@ public sealed class SignInViewModelTests
             ReturnUrl = string.Empty,
         };
 
-        var result = await viewModel.OnPostSignInAsync();
+        var result = await viewModel.OnPostAsync();
 
         result.Should().BeOfType<PageResult>();
     }
@@ -142,7 +142,7 @@ public sealed class SignInViewModelTests
             Arg.Any<bool>())
             .Returns(Result.Failure(Error.Invalid("Invalid credentials")));
 
-        var result = await viewModel.OnPostSignInAsync();
+        var result = await viewModel.OnPostAsync();
 
         await signInManager.Received(1).PasswordSignInAsync(
             Arg.Any<Email>(),
@@ -201,7 +201,7 @@ public sealed class SignInViewModelTests
 
         urlHelper.IsLocalUrl(Arg.Any<string>()).Returns(true);
 
-        var result = await viewModel.OnPostSignInAsync();
+        var result = await viewModel.OnPostAsync();
 
         await signInManager.Received(1).PasswordSignInAsync(
             Arg.Any<Email>(),
@@ -273,7 +273,7 @@ public sealed class SignInViewModelTests
 
         urlHelper.IsLocalUrl(Arg.Any<string>()).Returns(true);
 
-        var result = await viewModel.OnPostSignInAsync();
+        var result = await viewModel.OnPostAsync();
 
         await signInManager.Received(1).PasswordSignInAsync(
             Arg.Any<Email>(),
@@ -346,7 +346,7 @@ public sealed class SignInViewModelTests
 
         urlHelper.IsLocalUrl(Arg.Any<string>()).Returns(true);
 
-        var result = await viewModel.OnPostSignInAsync();
+        var result = await viewModel.OnPostAsync();
 
         await signInManager.Received(1).PasswordSignInAsync(
             Arg.Any<Email>(),

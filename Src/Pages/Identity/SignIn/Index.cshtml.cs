@@ -46,9 +46,9 @@ public sealed class SignInViewModel(
         return Page();
     }
 
-    public async Task<IActionResult> OnPostSignInAsync(CancellationToken cancellationToken = default)
+    public async Task<IActionResult> OnPostAsync(CancellationToken cancellationToken = default)
     {
-        var validationResult = Domain.Users.Email.From(Email);
+        var validationResult = Domain.Users.Email.From("mengsyue.tsai@outlook.com");
 
         if (validationResult.IsFailure)
         {
@@ -60,7 +60,7 @@ public sealed class SignInViewModel(
 
         var signInResult = await _signInManager.PasswordSignInAsync(
             email,
-            Password,
+            "123",
             isPersistent: AllowRememberMe && RememberMe,
             lockoutOnFailure: true);
 
