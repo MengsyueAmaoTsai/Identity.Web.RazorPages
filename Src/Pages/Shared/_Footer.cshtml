@@ -1,27 +1,62 @@
 ﻿@{
+    List<(string Name, string DisplayName, string Href)> footerLinks = [
+        ("Terms", "Services Agreement", "https://www.microsoft.com/en-us/servicesagreement/default.aspx"),
+        ("Privacy", "Privacy & cookies", "https://go.microsoft.com/fwlink/?LinkID=521839"),
+    ];
 }
 
-<div id="app-footer">
+<div id="footer" data-testid="footer" role="contentinfo">
     <div id="footer-links">
-        @* <partial name="_CopyRight" /> *@
-        <a id="terms" href="#" target="_blank">Service Agreement</a>
-        <a id="privacy" href="#" target="_blank">Privacy and Cookies</a>
+        @foreach (var link in footerLinks)
+        {
+            <a id="@link.Name.ToLowerInvariant()-link" href="@link.Href" target="_blank" rel="noreferrer noopener">
+                @link.DisplayName
+            </a>
+        }
     </div>
 </div>
 
 <style>
-    #app-footer {
+    #footer {
+        position: absolute;
+        width: 100%;
+        left: 0px;
+        bottom: 0px;
+        overflow-x: visible;
+        overflow-y: visible;
+        z-index: auto;
         clear: both;
         min-height: 28px;
-        z-index: auto;
-        overflow-y: visible;
-        overflow-x: visible;
-        bottom: 0px;
-        left: 0px;
-        width: 100%;
-        position: absolute;
-        box-sizing: border-box;
-        display: block;
-        unicode-bidi: isolate;
+    }
+
+    #footer-links {
+        margin-left: 0px;
+        margin-right: 0px;
+        margin-bottom: 0px;
+        margin-top: 0px;
+        font-size: 13px;
+        float: right;
+    }
+
+    #terms-link {
+        display: inline-block;
+        color: rgb(0, 0, 0);
+        font-size: 12px;
+        line-height: 28px;
+        white-space: nowrap;
+        margin-left: 8px;
+        margin-right: 8px;
+        text-decoration: none;
+    }
+
+    #privacy-link {
+        display: inline-block;
+        color: rgb(0, 0, 0);
+        font-size: 12px;
+        line-height: 28px;
+        white-space: nowrap;
+        margin-left: 8px;
+        margin-right: 8px;
+        text-decoration: none;
     }
 </style>

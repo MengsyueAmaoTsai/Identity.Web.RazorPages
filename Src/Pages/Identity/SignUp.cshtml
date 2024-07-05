@@ -1,5 +1,7 @@
 @page "/identity/sign-up"
+
 @model SignUpViewModel
+
 @{
     ViewData["Title"] = "Sign Up";
 }
@@ -8,17 +10,24 @@
     <div dir data-testid="direction-wrapper lightbox-layout" style="min-height: 1px;">
         <div data-testid="gamepad-navigation-warpper" 
             style="position: absolute; height: 100%; width: 100%; top: 0px; right: 0px; left: 0px; bottom: 0px; overflow-x: auto; overflow-y: auto;">
+            
             <div id="background-container" data-testid="background-container">
                 <div id="background-image" data-testid="background-image"></div>
             </div>
+
             <div id="outer" data-testid="outer" data-scrollable="true">
+
+                <!-- Content -->
                 <div id="middle">
                     <div id="inner">
                         <div id="lightbox-cover"></div>
                         <div>
-                            <img data-testid="accessible-image" src="https://logincdn.msftauth.net/shared/5/images/microsoft_logo_ee5c8d9fb6248c938fd0.svg" alt="RichillCapital" style="max-width: 256px; height: 24px;"/>
+                            <partial name="_AccessibleImage" />
+
                             <div id="page-content" data-testid="pagination-view" style="position: relative; min-height: 206px;">
+                                
                                 <form data-testid="post-redirect-form" aria-hidden="true" target="_top"></form>
+
                                 <div data-testid="route-animation">
                                     <form novalidate spellcheck="false" method="post" autocomplete="false" target="_top">
                                         <div 
@@ -29,30 +38,24 @@
                                         <div style="min-height: 1px; margin-left: 0px; margin-right: 0px;">
                                             <div style="overflow-wrap: break-word; white-space: pre-wrap;">
                                                 <div data-testid="input-component-wrapper" style="min-height: 1px; margin-left: 0px; margin-right: 0px;">
-                                                    <div style="display: flex; flex-direction: row;" dir>
-                                                        <div style="width: 100%; position: relative; margin-bottom: 16px; display: block; background-image: none;">
-                                                            <input 
-                                                                id="username-input" 
-                                                                name="新電子郵件地址" 
-                                                                placeholder="someone@example.com" 
-                                                                type="text" 
-                                                                maxlength="120" 
-                                                                aria-label="relative" 
-                                                                aria-describedby="username-collection-view-title username-input-error" 
-                                                                class value/>
-                                                        </div>
+                                                    <div role="alert" aria-live="assertive">
+                                                        <div id="useranme-input-error">Email address is required.</div>
                                                     </div>
+                                                    <partial name="_EmailInput" model="Email.From(Model.Email)" />
                                                 </div>
                                             </div>
                                         </div>
 
+                                        <!-- Input container-->
                                         <div data-testid="input-container">
                                             <div>
                                                 <div style="min-height: 1px; margin-left: 0px; margin-right: 0px;">
                                                     <div data-testid="text-button-container" style="position: absolute; width: 100%; bottom: 0px; text-align: right;">
                                                         <div style="display: inline-block">
                                                             <button id="next-button" type="submit" 
-                                                                aria-describedby="username-collection-view-title username-collection-view-description">Next</button>
+                                                                aria-describedby="username-collection-view-title username-collection-view-description">
+                                                                Next
+                                                            </button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -60,25 +63,19 @@
                                         </div>
                                     </form>
                                 </div>
-                                <iframe 
-                                    title="DeviceFingerPrinting" data-testid="device-finger-printing" 
+
+                                <iframe title="DeviceFingerPrinting" data-testid="device-finger-printing" 
                                     src="https://fpt.live.com/?session_id=a67e038ccf724affac76e98dbea93883&amp;CustomerId=33e01921-4d64-4f8c-a055-5bdaffd5e33d&amp;PageId=SU"
                                     style="position: absolute; visibility: hidden; border-top-width: 0px; border-right-width: 0px; border-left-width: 0px; border-bottom-width: 0px; float: left; color: rgb(0, 0, 0); width: 1px; height: 1px; left: -10000px; top: -10000px;"></iframe>
+
                                 <iframe data-testid="human-iframe" title="Human Iframe" src="https://msft.hsprotect.net/index.html" sandbox="allow-scripts allow-same-origin" aria-hidden="true" style="display: none;"></iframe>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div id="footer" data-testid="footer" role="contentinfo">
-                    <div id="footer-links">
-                        <a id="ftr-terms" href="https://www.microsoft.com/en-us/servicesagreement/default.aspx" target="_blank" rel="noreferrer noopener">
-                            Services Agreement
-                        </a>
-                        <a id="ftr-privacy" href="https://go.microsoft.com/fwlink/?LinkID=521839" target="_blank" rel="noreferrer noopener">
-                            Privacy &amp; cookies
-                        </a>
-                    </div>
-                </div>
+
+                <!-- Footer -->
+                <partial name="_Footer"/>
             </div>
         </div>
     </div>
@@ -179,33 +176,14 @@
         min-height: inherit;
     }
 
-    #username-input {
-        height: 36px;
-        width: 100%;
-        outline-style: none;
-        background-color: transparent;
-        border-top-style: solid;
-        border-right-style: solid;
-        border-left-style: solid;
-        border-bottom-style: solid;
-        border-bottom-right-radius: 0px;
-        border-bottom-left-radius: 0px;
-        border-top-right-radius: 0px;
-        border-top-left-radius: 0px;
-        border-top-width: 0px;
-        border-right-width: 0px;
-        border-left-width: 0px;
-        border-bottom-width: 1px;
-        border-top-color: rgb(102, 102, 102);
-        border-right-color: rgb(102, 102, 102);
-        border-left-color: rgb(102, 102, 102);
-        border-bottom-color: rgb(102, 102, 102);
-        padding-top: 6px;
-        padding-right: 10px;
-        padding-bottom: 6px;
-        padding-left: 0px;
+    #useranme-input-error {
+        color: rgb(232, 17, 35);
+        margin-top: 0px;
+        margin-right: 0px;
+        margin-left: 0px;
+        margin-bottom: 0px;
     }
-
+    
     #next-button {
         vertical-align: middle;
         position: relative;
@@ -234,48 +212,5 @@
         border-left-color: rgb(0, 103, 184);
         border-bottom-color: rgb(0, 103, 184);
         color: rgb(255, 255, 255);
-    }
-
-    #footer {
-        position: absolute;
-        width: 100%;
-        left: 0px;
-        bottom: 0px;
-        overflow-x: visible;
-        overflow-y: visible;
-        z-index: auto;
-        clear: both;
-        min-height: 28px;
-    }
-
-    #footer-links {
-        margin-left: 0px;
-        margin-right: 0px;
-        margin-bottom: 0px;
-        margin-top: 0px;
-        font-size: 13px;
-        float: right;
-    }
-
-    #ftr-terms {
-        display: inline-block;
-        color: rgb(0, 0, 0);
-        font-size: 12px;
-        line-height: 28px;
-        white-space: nowrap;
-        margin-left: 8px;
-        margin-right: 8px;
-        text-decoration: none;
-    }
-
-    #ftr-privacy {
-        display: inline-block;
-        color: rgb(0, 0, 0);
-        font-size: 12px;
-        line-height: 28px;
-        white-space: nowrap;
-        margin-left: 8px;
-        margin-right: 8px;
-        text-decoration: none;
     }
 </style>

@@ -1,0 +1,46 @@
+@model Result<Email>
+@{
+}
+
+<div class="email-input-container">
+    <div style="width: 100%; position: relative; margin-bottom: 16px; display: block; background-image: none;">
+        <input 
+            id="email-input" placeholder="someone@example.com" maxlength="120" aria-label="relative" 
+            aria-describedby="username-collection-view-title username-input-error"
+            asp-for="ValueOrDefault" name="emailAddress" type="text" />
+    </div>
+</div>
+
+<style>
+    .email-input-container {
+        display: flex;
+        flex-direction: row;
+    }
+
+    #email-input {
+        height: 36px;
+        width: 100%;
+        outline-style: none;
+        background-color: transparent;
+        border-top-style: solid;
+        border-right-style: solid;
+        border-left-style: solid;
+        border-bottom-style: solid;
+        border-bottom-right-radius: 0px;
+        border-bottom-left-radius: 0px;
+        border-top-right-radius: 0px;
+        border-top-left-radius: 0px;
+        border-top-width: 0px;
+        border-right-width: 0px;
+        border-left-width: 0px;
+        border-bottom-width: 1px;
+        border-top-color: rgb(102, 102, 102);
+        border-right-color: rgb(102, 102, 102);
+        border-left-color: rgb(102, 102, 102);
+        border-bottom-color: rgb(102, 102, 102);
+        padding-top: 6px;
+        padding-right: 10px;
+        padding-bottom: 6px;
+        padding-left: 0px;
+    }
+</style>
