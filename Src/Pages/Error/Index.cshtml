@@ -14,22 +14,22 @@
    
     <div>
         <strong>Error Code:</strong>
-        50000
+        @Model.ErrorCode
     </div>
 
     <div>
         <strong>Request Id:</strong>
-        @Guid.NewGuid()
+        @Model.RequestId
     </div>
 
     <div>
         <strong>Correlation Id:</strong>
-        @Guid.NewGuid()
+        @Model.CorrelationId
     </div>
 
     <div>
         <strong>Timestamp:</strong>
-        @DateTimeOffset.UtcNow.ToString("yyyy-MM-ddTHH:mm:ss.fffZ")
+        @Model.Timestamp.ToString("yyyy-MM-ddTHH:mm:ss.fffZ")
     </div>
 
     <div>

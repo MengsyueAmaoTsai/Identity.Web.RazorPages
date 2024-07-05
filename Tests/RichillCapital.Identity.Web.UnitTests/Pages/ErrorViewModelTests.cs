@@ -14,8 +14,11 @@ public sealed class ErrorViewModelTests
         var viewModel = new ErrorViewModel()
         {
             ErrorId = "errorId",
-            TraceId = "traceId",
             ErrorMessage = "errorMessage",
+            ErrorCode = "errorCode",
+            RequestId = "requestId",
+            CorrelationId = "correlationId",
+            Timestamp = DateTimeOffset.UtcNow,
         };
 
         var result = viewModel.OnGet();
