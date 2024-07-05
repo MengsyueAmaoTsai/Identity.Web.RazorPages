@@ -4,34 +4,3 @@
 @{
     ViewData["Title"] = "About";
 }
-
-<fluent-breadcrumb class="breadcrumb">
-  <fluent-breadcrumb-item href="/">Home</fluent-breadcrumb-item>
-  <fluent-breadcrumb-item>About</fluent-breadcrumb-item>
-</fluent-breadcrumb>
-
-<fluent-card>
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Assembly Name</th>
-                <td>@ApplicationInfo.GetDisplayName()</td>
-            </tr>
-            
-            <tr>
-                <th>Assembly Version</th>
-                <td>@ApplicationInfo.GetAssemblyVersion()</td>
-            </tr>
-            
-            <tr>
-                <th>.NET Runtime Version</th>
-                <td>@ApplicationInfo.GetDotNetRuntimeVersion()</td>
-            </tr>
-            
-            <tr>
-                <th>Install Location</th>
-                <td>@ApplicationInfo.GetInstallLocation()</td>
-            </tr>
-        </tbody>
-    </table>
-</fluent-card>
