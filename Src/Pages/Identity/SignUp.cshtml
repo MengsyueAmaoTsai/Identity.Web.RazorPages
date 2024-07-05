@@ -4,87 +4,278 @@
     ViewData["Title"] = "Sign Up";
 }
 
-<h1>@ViewData["Title"]</h1>
-
-<div class="row">
-    <div class="col-md-4">
-        <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
-            <h2>Create a new account.</h2>
-            <hr />
-            <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
-            <div class="form-floating mb-3">
-                <input asp-for="Name" class="form-control" autocomplete="username" aria-required="true" placeholder="Your name" />
-                <label asp-for="Name">Name</label>
-                <span asp-validation-for="Name" class="text-danger"></span>
+<div id="root" data-testid="app-boundary">
+    <div dir data-testid="direction-wrapper lightbox-layout" style="min-height: 1px;">
+        <div data-testid="gamepad-navigation-warpper" 
+            style="position: absolute; height: 100%; width: 100%; top: 0px; right: 0px; left: 0px; bottom: 0px; overflow-x: auto; overflow-y: auto;">
+            <div id="background-container" data-testid="background-container">
+                <div id="background-image" data-testid="background-image"></div>
             </div>
-
-            <div class="form-floating mb-3">
-                <input asp-for="Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
-                <label asp-for="Email">Email</label>
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
-            <div class="form-floating mb-3">
-                <input asp-for="Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
-                <label asp-for="Password">Password</label>
-                <span asp-validation-for="Password" class="text-danger"></span>
-            </div>
-            <div class="form-floating mb-3">
-                <input asp-for="ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
-                <label asp-for="ConfirmPassword">Confirm Password</label>
-                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
-            </div>
-
-            <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
-        </form>
-    </div>
-    
-    <div class="col-md-6 col-md-offset-2">
-        <section>
-            <h3>Use another service to register.</h3>
-            <hr />
-            @{
-                if (!Model.ExternalSchemes.Any())
-                {
-                    <div>
-                        <p>
-                            There are no external authentication services configured. See this <a href="https://go.microsoft.com/fwlink/?LinkID=532715">article
-                            about setting up this ASP.NET application to support logging in via external services</a>.
-                        </p>
-                    </div>
-                }
-                else
-                {
-                    <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
+            <div id="outer" data-testid="outer" data-scrollable="true">
+                <div id="middle">
+                    <div id="inner">
+                        <div id="lightbox-cover"></div>
                         <div>
-                            <p>
-                                @foreach (var provider in Model.ExternalSchemes!)
-                                {
-                                    <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
-                                }
-                            </p>
+                            <img data-testid="accessible-image" src="https://logincdn.msftauth.net/shared/5/images/microsoft_logo_ee5c8d9fb6248c938fd0.svg" alt="RichillCapital" style="max-width: 256px; height: 24px;"/>
+                            <div id="page-content" data-testid="pagination-view" style="position: relative; min-height: 206px;">
+                                <form data-testid="post-redirect-form" aria-hidden="true" target="_top"></form>
+                                <div data-testid="route-animation">
+                                    <form novalidate spellcheck="false" method="post" autocomplete="false" target="_top">
+                                        <div 
+                                            style="margin-top: 16px; margin-bottom: 12px; font-weight: 600; line-height: 28px; color: rgb(27, 27, 27); font-size: 1.5rem; padding-top: 0px; padding-bottom: 0px; padding-right: 0px; padding-left: 0px;">
+                                            <div><div id="username-collection-view-title" role="heading" aria-level="1">Sign Up</div></div>
+                                        </div>
+                                        
+                                        <div style="min-height: 1px; margin-left: 0px; margin-right: 0px;">
+                                            <div style="overflow-wrap: break-word; white-space: pre-wrap;">
+                                                <div data-testid="input-component-wrapper" style="min-height: 1px; margin-left: 0px; margin-right: 0px;">
+                                                    <div style="display: flex; flex-direction: row;" dir>
+                                                        <div style="width: 100%; position: relative; margin-bottom: 16px; display: block; background-image: none;">
+                                                            <input 
+                                                                id="username-input" 
+                                                                name="新電子郵件地址" 
+                                                                placeholder="someone@example.com" 
+                                                                type="text" 
+                                                                maxlength="120" 
+                                                                aria-label="relative" 
+                                                                aria-describedby="username-collection-view-title username-input-error" 
+                                                                class value/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div data-testid="input-container">
+                                            <div>
+                                                <div style="min-height: 1px; margin-left: 0px; margin-right: 0px;">
+                                                    <div data-testid="text-button-container" style="position: absolute; width: 100%; bottom: 0px; text-align: right;">
+                                                        <div style="display: inline-block">
+                                                            <button id="next-button" type="submit" 
+                                                                aria-describedby="username-collection-view-title username-collection-view-description">Next</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <iframe 
+                                    title="DeviceFingerPrinting" data-testid="device-finger-printing" 
+                                    src="https://fpt.live.com/?session_id=a67e038ccf724affac76e98dbea93883&amp;CustomerId=33e01921-4d64-4f8c-a055-5bdaffd5e33d&amp;PageId=SU"
+                                    style="position: absolute; visibility: hidden; border-top-width: 0px; border-right-width: 0px; border-left-width: 0px; border-bottom-width: 0px; float: left; color: rgb(0, 0, 0); width: 1px; height: 1px; left: -10000px; top: -10000px;"></iframe>
+                                <iframe data-testid="human-iframe" title="Human Iframe" src="https://msft.hsprotect.net/index.html" sandbox="allow-scripts allow-same-origin" aria-hidden="true" style="display: none;"></iframe>
+                            </div>
                         </div>
-                    </form>
-                } 
-            }
-        </section>
+                    </div>
+                </div>
+                <div id="footer" data-testid="footer" role="contentinfo">
+                    <div id="footer-links">
+                        <a id="ftr-terms" href="https://www.microsoft.com/en-us/servicesagreement/default.aspx" target="_blank" rel="noreferrer noopener">
+                            Services Agreement
+                        </a>
+                        <a id="ftr-privacy" href="https://go.microsoft.com/fwlink/?LinkID=521839" target="_blank" rel="noreferrer noopener">
+                            Privacy &amp; cookies
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
-<div>Sign Up</div>
+<style>
+    #root {
+        min-height: 1px;
+    }
 
-<p><b>mengsyue.tsai.1@gmail.com</b> is already a Microsoft account. Please use a different email address.</p>
+    #background-container {
+        background-color: rgb(242, 242, 242);
+        height: 100%;
+        width: 100%;
+        top: 0px;
+        left: 0px;
+        z-index: -1;
+        position: fixed;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position-x: 50%;
+        background-position-y: 50%;
+    }
 
-<input type="email" placeholder="example@domain.com">
+    #background-image {
+        height: 100%;
+        width: 100%;
+        top: 0px;
+        left: 0px;
+        z-index: -1;
+        position: fixed;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position-x: 50%;
+        background-position-y: 50%;
+        background-image: url(https://logincdn.msftauth.net/shared/5/images/2_bc3d32a696895f78c19d.svg);
+    }
 
-<button type="submit">Next</button>
+    #outer {
+        display: table;
+        bottom: 0px;
+        left: 0px;
+        right: 0px;
+        top: 0px;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+    }
 
-<div>Verify email</div>
-<div>Please enter the verification code we sent to <b>mengs.dev.0421@gmail.com</b>. If you didn't receive the email, check your spam folder or <a href="#">try again</a>.</div>
+    #middle {
+        display: table-cell;
+        vertical-align: middle;
+    }
 
-<input type="checkbox" >
-<div>I would like information, tips, and offers about Microsoft products and services.</div>
+    #inner {
+        margin-left: auto;
+        margin-right: auto;
+        position: relative;
+        max-width: 440px;
+        width: calc(100% - 40px);
+        padding-top: 44px;
+        padding-right: 44px;
+        padding-left: 44px;
+        padding-bottom: 44px;
+        margin-bottom: 28px;
+        background-color: rgb(255, 255, 255);
+        rgba(0, 0, 0, 0.2) 0px 2px 6px;
+        min-width: 320px;
+        min-height: 338px;
+        overflow-x: hidden;
+        overflow-y: hidden;
+        z-index: 1;
+        animation-name: f11ta6k4;
+        transition-timing-function: ease-in;
+        animation-timing-function: cubic-bezier(0.5, 0, 0.5, 1);
+        animation-duration: 0.3s;
+    }
 
-<div>By selecting <b>[Next]</b>, you agree to the Microsoft <a href="#">Services Agreement</a> and <a href="#">Privacy & Cookies policy</a>.</div>
-@section Scripts {
-    <partial name="_ValidationScriptsPartial" />
-}
+    #lightbox-cover {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        top: 0px;
+        left: 0px;
+        background-color: white;
+        opacity: 0;
+        z-index: -1;
+        transition: all 0.5s ease-in 0s;
+    }
+
+    #route-animation {
+        position: relative;
+        animation-duration: 0.25s;
+        animation-timing-function: cubic-bezier(0.5, 0, 0.5, 1);
+        animation-fill-mode: both;
+        transition-property: left;
+        animation-name: fr2e2iv;
+        min-height: inherit;
+    }
+
+    #username-input {
+        height: 36px;
+        width: 100%;
+        outline-style: none;
+        background-color: transparent;
+        border-top-style: solid;
+        border-right-style: solid;
+        border-left-style: solid;
+        border-bottom-style: solid;
+        border-bottom-right-radius: 0px;
+        border-bottom-left-radius: 0px;
+        border-top-right-radius: 0px;
+        border-top-left-radius: 0px;
+        border-top-width: 0px;
+        border-right-width: 0px;
+        border-left-width: 0px;
+        border-bottom-width: 1px;
+        border-top-color: rgb(102, 102, 102);
+        border-right-color: rgb(102, 102, 102);
+        border-left-color: rgb(102, 102, 102);
+        border-bottom-color: rgb(102, 102, 102);
+        padding-top: 6px;
+        padding-right: 10px;
+        padding-bottom: 6px;
+        padding-left: 0px;
+    }
+
+    #next-button {
+        vertical-align: middle;
+        position: relative;
+        overflow-x: hidden;
+        overflow-y: hidden;
+        text-align: center;
+        display: inline-block;
+        max-width: 100%;
+        white-space: nowrap;
+        border-top-style: none;
+        border-right-style: none;
+        border-left-style: none;
+        border-bottom-style: none;
+        min-height: 32px;
+        min-width: 108px;
+        line-height: normal;
+        padding-top: 4px;
+        padding-right: 12px;
+        padding-left: 12px;
+        padding-bottom: 4px;
+        text-overflow: ellipsis;
+        touch-action: manipulation;
+        background-color: rgb(0, 103, 184);
+        border-top-color: rgb(0, 103, 184);
+        border-right-color: rgb(0, 103, 184);
+        border-left-color: rgb(0, 103, 184);
+        border-bottom-color: rgb(0, 103, 184);
+        color: rgb(255, 255, 255);
+    }
+
+    #footer {
+        position: absolute;
+        width: 100%;
+        left: 0px;
+        bottom: 0px;
+        overflow-x: visible;
+        overflow-y: visible;
+        z-index: auto;
+        clear: both;
+        min-height: 28px;
+    }
+
+    #footer-links {
+        margin-left: 0px;
+        margin-right: 0px;
+        margin-bottom: 0px;
+        margin-top: 0px;
+        font-size: 13px;
+        float: right;
+    }
+
+    #ftr-terms {
+        display: inline-block;
+        color: rgb(0, 0, 0);
+        font-size: 12px;
+        line-height: 28px;
+        white-space: nowrap;
+        margin-left: 8px;
+        margin-right: 8px;
+        text-decoration: none;
+    }
+
+    #ftr-privacy {
+        display: inline-block;
+        color: rgb(0, 0, 0);
+        font-size: 12px;
+        line-height: 28px;
+        white-space: nowrap;
+        margin-left: 8px;
+        margin-right: 8px;
+        text-decoration: none;
+    }
+</style>

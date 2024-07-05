@@ -1,3 +1,27 @@
-﻿<div class="container">
-    <partial name="_CopyRight" />
+﻿@{
+}
+
+<div id="app-footer">
+    <div id="footer-links">
+        @* <partial name="_CopyRight" /> *@
+        <a id="terms" href="#" target="_blank">Service Agreement</a>
+        <a id="privacy" href="#" target="_blank">Privacy and Cookies</a>
+    </div>
 </div>
+
+<style>
+    #app-footer {
+        clear: both;
+        min-height: 28px;
+        z-index: auto;
+        overflow-y: visible;
+        overflow-x: visible;
+        bottom: 0px;
+        left: 0px;
+        width: 100%;
+        position: absolute;
+        box-sizing: border-box;
+        display: block;
+        unicode-bidi: isolate;
+    }
+</style>
