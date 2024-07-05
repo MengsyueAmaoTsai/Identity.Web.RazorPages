@@ -1,3 +1,5 @@
+using System.Diagnostics;
+
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
@@ -26,11 +28,11 @@ public class ErrorViewModel() :
         if (HttpContext is not null)
         {
             var exceptionFeature = HttpContext.Features.Get<IExceptionHandlerFeature>();
-            ErrorMessage = exceptionFeature?.Error.Message ?? 
+            ErrorMessage = exceptionFeature?.Error.Message ??
                 "An error occurred while processing your request.";
-            
+
             ErrorCode = HttpContext.Response.StatusCode.ToString() ?? string.Empty;
-            RequestId = HttpContext.Items["RequestId"] as string ?? string.Empty;
+            RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier;
             CorrelationId = HttpContext.Items["CorrelationId"] as string ?? string.Empty;
         }
 

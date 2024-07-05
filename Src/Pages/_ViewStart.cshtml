@@ -1,4 +1,6 @@
 ﻿@{
+}
+@* @{
     var page = ViewContext.HttpContext.Request.RouteValues["page"] as string ??
         throw new InvalidOperationException("The page route value is missing.");
 
@@ -11,4 +13,4 @@
         Layout = "_Layout";
     }
 }
-
+ *@
