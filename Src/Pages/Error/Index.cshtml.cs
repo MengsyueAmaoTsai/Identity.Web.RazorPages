@@ -7,9 +7,9 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace RichillCapital.Identity.Web.Pages.Error;
 
-[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-[IgnoreAntiforgeryToken]
 [AllowAnonymous]
+[IgnoreAntiforgeryToken]
+[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
 public class ErrorViewModel() :
     PageModel
 {
@@ -18,25 +18,34 @@ public class ErrorViewModel() :
     public required string CorrelationId { get; set; }
     public required DateTimeOffset Timestamp { get; set; }
 
-
     [BindProperty(Name = "errorId", SupportsGet = true)]
     public required string ErrorId { get; init; }
     public required string ErrorMessage { get; set; }
 
     public IActionResult OnGet()
     {
-        if (HttpContext is not null)
-        {
-            var exceptionFeature = HttpContext.Features.Get<IExceptionHandlerFeature>();
-            ErrorMessage = exceptionFeature?.Error.Message ??
-                "An error occurred while processing your request.";
+        var context = HttpContext;
 
-            ErrorCode = HttpContext.Response.StatusCode.ToString() ?? string.Empty;
-            RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier;
-            CorrelationId = HttpContext.Items["CorrelationId"] as string ?? string.Empty;
+        if (context is null)
+        {
+            return Page();
         }
 
+        if (!context.Request.Headers.TryGetValue("X-Correlation-ID", out var correlationId))
+        {
+            CorrelationId = Guid.NewGuid().ToString();
+        }
+
+        CorrelationId = correlationId!;
+        RequestId = Activity.Current?.Id ?? context.TraceIdentifier;
+        ErrorCode = context.Response.StatusCode.ToString();
         Timestamp = DateTimeOffset.UtcNow;
+
+        var exceptionFeature = HttpContext.Features.Get<IExceptionHandlerFeature>();
+
+        ErrorMessage = exceptionFeature?.Error.Message ??
+            "An error occurred while processing your request.";
+
         return Page();
     }
 }
