@@ -10,7 +10,7 @@ using RichillCapital.Domain.Common.Repositories;
 using RichillCapital.Domain.Users;
 using RichillCapital.SharedKernel.Monads;
 
-namespace RichillCapital.Identity.Web.Pages.Identity;
+namespace RichillCapital.Identity.Web.Pages.Identity.SignUp;
 
 [AllowAnonymous]
 [ValidateAntiForgeryToken]
@@ -24,16 +24,16 @@ public sealed class SignUpViewModel(
     public required string ReturnUrl { get; init; }
 
     [BindProperty]
-    public required string Name { get; init; } 
+    public required string Name { get; init; }
 
     [BindProperty]
-    public required string Email { get; init; } 
+    public required string Email { get; init; }
 
     [BindProperty]
-    public required string Password { get; init; } 
+    public required string Password { get; init; }
 
     [BindProperty]
-    public required string ConfirmPassword { get; init; } 
+    public required string ConfirmPassword { get; init; }
 
     public IEnumerable<AuthenticationScheme> ExternalSchemes { get; set; } = [];
 
