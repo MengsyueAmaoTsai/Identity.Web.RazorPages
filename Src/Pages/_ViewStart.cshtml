@@ -1,3 +1,14 @@
 ﻿@{
-    Layout = "_Layout";
+    var page = ViewContext.HttpContext.Request.RouteValues["page"] as string ??
+        throw new InvalidOperationException("The page route value is missing.");
+
+    if (page.ToLower().Contains("identity"))
+    {
+        Layout = "_IdentityLayout";
+    }
+    else
+    {
+        Layout = "_Layout";
+    }
 }
+
