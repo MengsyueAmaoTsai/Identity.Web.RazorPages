@@ -10,7 +10,7 @@ using NSubstitute;
 
 using RichillCapital.Domain.Common.Repositories;
 using RichillCapital.Domain.Users;
-using RichillCapital.Identity.Web.Pages.Identity;
+using RichillCapital.Identity.Web.Pages.Identity.SignUp;
 using RichillCapital.SharedKernel;
 using RichillCapital.SharedKernel.Monads;
 
@@ -102,14 +102,14 @@ public sealed class SignUpViewModelTests
 
         userRepository
             .AnyAsync(
-                Arg.Any<Expression<Func<User, bool>>>(), 
+                Arg.Any<Expression<Func<User, bool>>>(),
                 Arg.Any<CancellationToken>())
             .Returns(false);
 
         userManager
             .CreateAsync(
-                Arg.Any<User>(), 
-                Arg.Any<string>(), 
+                Arg.Any<User>(),
+                Arg.Any<string>(),
                 Arg.Any<CancellationToken>())
             .Returns(Result.Success);
 
