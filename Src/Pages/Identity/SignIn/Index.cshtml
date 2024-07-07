@@ -1,12 +1,30 @@
 @page "/identity/sign-in"
 
 @model SignInViewModel
+
 @{
     ViewData["Title"] = "Sign In";
 }
 
+
 <div>
-    <form method="post">
-        <button type="submit">Login</button>
-    </form>
+    <input type="email"/>
+</div>
+
+<div>
+    <div>
+        No account? 
+        <a asp-page="../signUp/index">Create one!</a>
+    </div>
+    <div>
+        <a asp-page="../resetPassword/index">Can't access your account?</a>
+    </div>
+</div>
+<div class="row-buttons">
+    <input class="button-secondary" type="button" value="Back" />
+    <input class="button-primary" type="submit" value="Next" />
+</div>
+
+<div>
+    Sign-in options
 </div>
