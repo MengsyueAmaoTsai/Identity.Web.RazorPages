@@ -6,9 +6,10 @@
     ViewData["Title"] = "Sign In";
 }
 
+<div>@ViewData["Title"]</div>
 
 <div>
-    <input type="email"/>
+    <input type="email" asp-for="EmailAddress"/>
 </div>
 
 <div>
@@ -20,10 +21,13 @@
         <a asp-page="../resetPassword/index">Can't access your account?</a>
     </div>
 </div>
-<div class="row-buttons">
-    <input class="button-secondary" type="button" value="Back" />
-    <input class="button-primary" type="submit" value="Next" />
-</div>
+
+<form method="post">
+    <div class="row-buttons">
+        <input class="button-secondary" type="button" value="Back" />
+        <input class="button-primary" type="submit" value="Next" />
+    </div>
+</form>
 
 <div>
     Sign-in options

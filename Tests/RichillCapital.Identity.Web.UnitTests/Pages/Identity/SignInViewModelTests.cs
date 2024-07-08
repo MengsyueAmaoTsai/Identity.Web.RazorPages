@@ -44,7 +44,7 @@ public sealed class SignInViewModelTests
             eventService)
         {
             ReturnUrl = string.Empty,
-            Email = string.Empty,
+            EmailAddress = string.Empty,
             Password = string.Empty,
             RememberMe = false,
             ExternalSchemes = [],
@@ -52,7 +52,7 @@ public sealed class SignInViewModelTests
         };
 
         viewModel.ReturnUrl.Should().BeNullOrEmpty();
-        viewModel.Email.Should().BeNullOrEmpty();
+        viewModel.EmailAddress.Should().BeNullOrEmpty();
         viewModel.Password.Should().BeNullOrEmpty();
         viewModel.RememberMe.Should().BeFalse();
         viewModel.ExternalSchemes.Should().BeEmpty();
@@ -76,7 +76,7 @@ public sealed class SignInViewModelTests
             eventService)
         {
             ReturnUrl = string.Empty,
-            Email = string.Empty,
+            EmailAddress = string.Empty,
             Password = string.Empty,
             RememberMe = false,
             ExternalSchemes = [],
@@ -104,7 +104,7 @@ public sealed class SignInViewModelTests
             interactionService,
             eventService)
         {
-            Email = string.Empty,
+            EmailAddress = string.Empty,
             Password = string.Empty,
             ReturnUrl = string.Empty,
         };
@@ -130,7 +130,7 @@ public sealed class SignInViewModelTests
             interactionService,
             eventService)
         {
-            Email = ValidEmail.Value,
+            EmailAddress = ValidEmail.Value,
             Password = "password",
             ReturnUrl = "/test",
         };
@@ -170,7 +170,7 @@ public sealed class SignInViewModelTests
             interactionService,
             eventService)
         {
-            Email = ValidEmail.Value,
+            EmailAddress = ValidEmail.Value,
             Password = "password",
             ReturnUrl = "/test",
             Url = urlHelper,
@@ -236,7 +236,7 @@ public sealed class SignInViewModelTests
             interactionService,
             eventService)
         {
-            Email = ValidEmail.Value,
+            EmailAddress = ValidEmail.Value,
             Password = "password",
             ReturnUrl = localUrl,
             Url = urlHelper,
@@ -308,7 +308,7 @@ public sealed class SignInViewModelTests
             interactionService,
             eventService)
         {
-            Email = ValidEmail.Value,
+            EmailAddress = ValidEmail.Value,
             Password = "password",
             ReturnUrl = externalUrl,
             Url = urlHelper,
@@ -380,7 +380,7 @@ public sealed class SignInViewModelTests
             eventService)
         {
             ReturnUrl = string.Empty,
-            Email = ValidEmail.Value,
+            EmailAddress = ValidEmail.Value,
             Password = "password",
         };
 
@@ -409,7 +409,7 @@ public sealed class SignInViewModelTests
             eventService)
         {
             ReturnUrl = returnUrl,
-            Email = ValidEmail.Value,
+            EmailAddress = ValidEmail.Value,
             Password = "password",
         };
 

@@ -1,4 +1,3 @@
-using Duende.IdentityServer.Events;
 using Duende.IdentityServer.Models;
 using Duende.IdentityServer.Services;
 
@@ -9,7 +8,6 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 using RichillCapital.Domain.Common.Repositories;
 using RichillCapital.Domain.Users;
-using RichillCapital.SharedKernel.Monads;
 
 
 namespace RichillCapital.Identity.Web.Pages.Identity.SignIn;
@@ -28,7 +26,7 @@ public sealed class SignInViewModel(
     public required string ReturnUrl { get; init; } 
 
     [BindProperty]
-    public required string Email { get; init; } 
+    public required string EmailAddress { get; init; } 
 
     [BindProperty]
     public required string Password { get; init; }
@@ -48,7 +46,7 @@ public sealed class SignInViewModel(
 
     public async Task<IActionResult> OnPostAsync(CancellationToken cancellationToken = default)
     {
-        var validationResult = Domain.Users.Email.From("mengsyue.tsai@outlook.com");
+        var validationResult = Email.From(EmailAddress);
 
         if (validationResult.IsFailure)
         {
@@ -58,44 +56,22 @@ public sealed class SignInViewModel(
 
         var email = validationResult.Value;
 
-        var signInResult = await _signInManager.PasswordSignInAsync(
-            email,
-            "123",
-            isPersistent: AllowRememberMe && RememberMe,
-            lockoutOnFailure: true);
+        var maybeUser = await _userRepository
+            .FirstOrDefaultAsync(user => user.Email == email, cancellationToken);
 
-        if (signInResult.IsFailure)
+        if (maybeUser.IsNull)
         {
             await InitializeAsync(cancellationToken);
             return Page();
         }
 
-        var maybeUser = await _userRepository
-            .FirstOrDefaultAsync(user => user.Email == email, cancellationToken)
-            .ThrowIfNull();
-
         var user = maybeUser.Value;
 
-        var context = await _interactionService.GetAuthorizationContextAsync(ReturnUrl);
-
-        await _eventService.RaiseAsync(new UserLoginSuccessEvent(
-            user.Email.Value,
-            user.Id.Value,
-            user.Name.Value,
-            clientId: context is null || context.Client is null ?
-                string.Empty :
-                context.Client.ClientId));
-
-        if (context is null)
+        return RedirectToPage("../enterPassword/index", new
         {
-            return Url.IsLocalUrl(ReturnUrl) ?
-                Redirect(ReturnUrl) : string.IsNullOrEmpty(ReturnUrl) ?
-                    RedirectToPage("/profile/index") : throw new Exception("invalid return URL");
-        }
-
-        return context.IsNativeClient() ?
-            this.LoadingPage(ReturnUrl) :
-            Redirect(ReturnUrl);
+            ReturnUrl,
+            EmailAddress = user.Email,
+        });
     }
 
     private async Task InitializeAsync(CancellationToken _ = default)
