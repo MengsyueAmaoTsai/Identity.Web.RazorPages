@@ -1,7 +1,27 @@
 ﻿@page
 
+@inject ICurrentUser CurrentUser
+
 @model IndexViewModel
 
 @{
     ViewData["Title"] = "Home";
 }
+
+<div>
+    <h1>Welcome, @CurrentUser.Id</h1>
+
+    <div>
+        <span>IsAuthenticated:</span>
+        <span>@CurrentUser.IsAuthenticated</span>
+    </div>
+    
+    <div>
+        <div>Claims</div>
+
+        @foreach (var claim in HttpContext.User.Claims)
+        {
+            <span>@claim.Type: @claim.Value</span>
+        }
+    </div>
+</div>

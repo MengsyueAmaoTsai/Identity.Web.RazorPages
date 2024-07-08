@@ -14,7 +14,8 @@ public class EnterPasswordViewModel(
     ISignInManager _signInManager,
     IReadOnlyRepository<User> _userRepository,
     IIdentityServerInteractionService _interactionService,
-    IEventService _eventService) : PageModel
+    IEventService _eventService) : 
+    PageModel
 {
     [BindProperty(SupportsGet = true)]
     public required string ReturnUrl { get; init; }
