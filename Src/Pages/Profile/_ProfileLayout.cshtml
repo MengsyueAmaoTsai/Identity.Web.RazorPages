@@ -31,7 +31,6 @@
     <partial name="_SiteHeader"/>
     
     <div>
-        <!-- Side Nav -->
         <div>
             @foreach (var item in menuItems)
             {
@@ -43,9 +42,14 @@
             }
         </div>
 
-        <partial name="_MessageBar" />
+        <div>
+            <partial name="_MessageBar" />
+            
+            @RenderBody()
+
+            <partial name="_SiteFooter" />
+        </div>
         
-        @RenderBody()
     </div>
 
     <script src="~/js/site.js" asp-append-version="true"></script>

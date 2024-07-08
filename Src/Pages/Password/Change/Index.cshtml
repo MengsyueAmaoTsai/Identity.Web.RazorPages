@@ -1,0 +1,30 @@
+@page "/password/change"
+
+@model PasswordChangeViewModel
+
+@{
+    ViewData["Title"] = "Change your password";
+}
+
+<div>
+    @ViewData["Title"]
+</div>
+
+<span>A strong password helps prevent unauthorized access to your email account.</span>
+
+<div>Current password</div>
+<div><input type="password"/></div>
+
+<div>New password</div>
+<div><input type="password"/></div>
+
+
+<div>Reenter password</div>
+<div><input type="password"/></div>
+
+<div><input type="checkbox"/></div>
+<div>Make me change my password every 72 days</div>
+
+
+<button>Save</button>
+<button>Cancel</button>
