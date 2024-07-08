@@ -5,29 +5,27 @@
 @{
     ViewData["Title"] = "Sign In";
 }
-
-<div>mengsyue.tsai@outlook.com</div>
-
-<div>Enter password</div>
-
-<div>
-    <input type="password" placeholder="Password" asp-for="Password"/>
-</div>
-
-<div>
-    <div>
-        <a asp-page="../signUp/index">Forgot password?</a>
-    </div>
-    <div>
-        <a asp-page="../resetPassword/index">Other way to sign in</a>
-    </div>
-</div>
-
 <form method="post">
+    <div>mengsyue.tsai@outlook.com</div>
+
+    <div>Enter password</div>
+
+    <div>
+        <input type="password" placeholder="Password" asp-for="Password"/>
+    </div>
+
+    <div>
+        <div>
+            <a asp-page="../signUp/index">Forgot password?</a>
+        </div>
+        <div>
+            <a asp-page="../resetPassword/index">Other way to sign in</a>
+        </div>
+    </div>
+
     <div class="row-buttons">
         <input class="button-primary" type="submit" value="Sign in" />
     </div>
-
 </form>
 
 <div>

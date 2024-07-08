@@ -5,7 +5,7 @@
     List<(string Title, string Page)> menuItems =
     [
         ("Account", "#"),
-        ("Your info", "#"),
+        ("Your info", "./info/index"),
         ("Services & subscriptions", "#"),
         ("Devices", ""),
         ("Security", ""),
@@ -36,7 +36,7 @@
             @foreach (var item in menuItems)
             {
                 <li>
-                    <a>
+                    <a asp-page="@item.Page">
                         <span>@item.Title</span>
                     </a>
                 </li>
