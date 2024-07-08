@@ -26,14 +26,7 @@ public sealed class SignInViewModel(
     [BindProperty]
     public required string EmailAddress { get; init; } 
 
-    [BindProperty]
-    public required string Password { get; init; }
-
-    [BindProperty]
-    public bool RememberMe { get; init; }
-
     public IEnumerable<AuthenticationScheme> ExternalSchemes { get; set; } = [];
-    public bool AllowRememberMe { get; init; }
 
     public async Task<IActionResult> OnGetAsync(
         CancellationToken cancellationToken = default)
