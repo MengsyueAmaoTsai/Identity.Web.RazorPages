@@ -15,10 +15,8 @@ namespace RichillCapital.Identity.Web.Pages.Identity.SignIn;
 [AllowAnonymous]
 public sealed class SignInViewModel(
     IAuthenticationSchemeProvider _schemeProvider,
-    ISignInManager _signInManager,
     IReadOnlyRepository<User> _userRepository,
-    IIdentityServerInteractionService _interactionService,
-    IEventService _eventService) :
+    IIdentityServerInteractionService _interactionService) :
     PageModel
 {
 
