@@ -9,7 +9,8 @@
 <div>@ViewData["Title"]</div>
 
 <div>
-    <input type="email" asp-for="EmailAddress"/>
+    <div class="alert-message"></div>
+    <div><input type="email" asp-for="EmailAddress" placeholder="Email, phone, or Skype" autocomplete="username"/></div>
 </div>
 
 <div>
@@ -32,3 +33,8 @@
 <div>
     Sign-in options
 </div>
+
+
+<style>
+ 
+</style>
