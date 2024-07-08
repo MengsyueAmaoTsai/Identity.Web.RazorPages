@@ -1,3 +1,21 @@
+@{
+    ViewData["Title"] = "Profile";
+    ViewData["ActivePage"] = "profile";
+
+    List<(string Title, string Page)> menuItems =
+    [
+        ("Account", "#"),
+        ("Your info", "#"),
+        ("Services & subscriptions", "#"),
+        ("Devices", ""),
+        ("Security", ""),
+        ("Privacy", ""),
+        ("Order history", ""),
+        ("Payment options", ""),
+        ("Address book", ""),
+    ];
+}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,7 +29,22 @@
 
 <body>
     <partial name="_SiteHeader"/>
-    @RenderBody()
+    
+    <div>
+        <!-- Side Nav -->
+        <div>
+            @foreach (var item in menuItems)
+            {
+                <li>
+                    <a>
+                        <span>@item.Title</span>
+                    </a>
+                </li>
+            }
+        </div>
+
+        @RenderBody()
+    </div>
 
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)

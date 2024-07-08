@@ -1,20 +1,20 @@
 ﻿@page "/profile"
 @model ProfileViewModel
-@{
-    ViewData["Title"] = "Profile";
-    ViewData["ActivePage"] = "profile";
-}
 
-<h3>@ViewData["Title"]</h3>
 
-<fluent-card>
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>E-Mail</th>
-                <td>@Model.Email</td>
-                <td>The email address you use to sign in to Richill Capital</td>
-            </tr>
-        </tbody>
-    </table>
-</fluent-card>
+<div>Your info</div>
+
+<!-- Change password button -->
+<a asp-page="./changePassword" style="text-decoration: none; box-shadow: none; display: inline-block;">
+    <div>
+        <span role="presentation" class="FullCircleMask" style="font-family: &quot;AMC Icons&quot;; font-size: 32px;"></span>
+        <span role="presentation" class="Permissions" style="font-family: &quot;AMC Icons&quot;; font-size: 16px;"></span>
+    </div>
+    <div>
+        <span>Change password</span>
+        <span>Security</span>
+    </div>
+</a>
+
+<style>
+</style>
