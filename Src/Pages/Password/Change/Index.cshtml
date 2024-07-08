@@ -4,27 +4,46 @@
 
 @{
     ViewData["Title"] = "Change your password";
+    Layout = "_ChangePasswordLayout";
 }
 
-<div>
-    @ViewData["Title"]
-</div>
+<form method="post">
+    <section>
+        <div>
+            <div>@ViewData["Title"]</div>
 
-<span>A strong password helps prevent unauthorized access to your email account.</span>
+            <div>A strong password helps prevent unauthorized access to your email account.</div>
 
-<div>Current password</div>
-<div><input type="password"/></div>
+            <div>
+                <label asp-for="CurrentPassword"></label>
+                <input asp-for="CurrentPassword" type="password" placeholder="Current password" maxlength="127" style=""/>
+                <div><a>Forgot your password?</a></div>
+            </div>
 
-<div>New password</div>
-<div><input type="password"/></div>
+            <div>
+                <div>
+                    <label asp-for="NewPassword"></label>
+                    <input asp-for="NewPassword" type="password" placeholder="New password" maxlength="127" style=""/>
+                    <p>8-character minimum; case sensitive</p>
+                </div>
 
+                <div>
+                    <label asp-for="ReenterPassword"></label>
+                    <input asp-for="ReenterPassword" type="password" placeholder="Reenter password" maxlength="127" style=""/>
+                </div>
 
-<div>Reenter password</div>
-<div><input type="password"/></div>
+                <div>
+                    <label>
+                        <input type="checkbox"/>
+                        <span>Make me change my password every 72 days</span>
+                    </label>
+                </div>
+            </div>
 
-<div><input type="checkbox"/></div>
-<div>Make me change my password every 72 days</div>
-
-
-<button>Save</button>
-<button>Cancel</button>
+            <div>
+                <input type="submit" value="Save"/>
+                <input type="button" value="Cancel"/>
+            </div>
+        </div>
+    </section>
+</form>
