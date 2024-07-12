@@ -24,5 +24,14 @@ public static class InMemoryIdentityResources
             Required = false,
             Emphasize = true,
         },
+        new IdentityResources.Email()
+        {
+            DisplayName = "Email",
+            Description = "Your email address",
+            Enabled = true,
+            ShowInDiscoveryDocument = true,
+            Required = false,
+            Emphasize = true,
+        },
     ];
 }

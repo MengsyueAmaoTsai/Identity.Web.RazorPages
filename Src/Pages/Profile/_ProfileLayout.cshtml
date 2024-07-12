@@ -29,30 +29,9 @@
 </head>
 
 <body>
-    <partial name="_SiteHeader"/>
-    
-    <div>
-        <div>
-            @foreach (var item in menuItems)
-            {
-                <li>
-                    <a asp-page="@item.Page">
-                        <span>@item.Title</span>
-                    </a>
-                </li>
-            }
-        </div>
-
-        <div>
-            <partial name="_MessageBar" />
-            
-            @RenderBody()
-
-            <partial name="_SiteFooter" />
-        </div>
-        
+    <div class="web-container">
+        @RenderBody()
     </div>
-
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>

@@ -37,6 +37,19 @@ builder.Services.AddApiService();
 builder.Services.AddMiddlewares();
 builder.Services.AddPages();
 
+builder.Services.AddCors(builder =>
+{
+    builder
+        .AddDefaultPolicy(policy =>
+        {
+            policy
+                .AllowAnyHeader()
+                .AllowAnyMethod()
+                .AllowAnyOrigin();
+        });
+});
+
+
 // Security
 // Get from {"Redis": "connectionString"}
 var connectionString = builder.Configuration["Redis"];
@@ -63,6 +76,8 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+app.UseCors();
 
 app.UseIdentityServer();
 // app.UseAuthentication();

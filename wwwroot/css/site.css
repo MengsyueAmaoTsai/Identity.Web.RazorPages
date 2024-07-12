@@ -1,39 +1,25 @@
-
-
-.button-primary {
-    color: #fff;
-    border-color: #0067b8;
-    background-color: #0067b8;
-    display: block;
-    width: 100%;
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, menu, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, main, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
 }
 
-.button.secondary {
-    display: inline-block;
-    min-width: 100px;
-    padding: 4px 12px 4px 12px;
-    margin-top: 4px;
-    margin-bottom: 4px;
-    position: relative;
-    max-width: 100%;
-    text-align: center;
-    white-space: nowrap;
-    overflow: hidden;
-    vertical-align: middle;
-    text-overflow: ellipsis;
-    touch-action: manipulation;
-    color: #000;
-    border-style: solid;
-    border-width: 2px;
-    border-color: transparent;
-    min-height: 32px;
-    border: none;
-    background-color: #ccc;
-    background-color: rgba(0, 0, 0, 0.2);
-    min-width: 108px;
-    line-height: normal;
-    margin-top: 0;
-    margin-bottom: 0;
-    display: block;
-    width: 100%;
+body, html {
+    height: 100%;
+}
+
+body {
+    line-height: 1.4;
+    word-break: break-word;
+}
+
+
+.web-container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: #f2f2f2;
 }

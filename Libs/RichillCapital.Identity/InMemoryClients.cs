@@ -139,17 +139,21 @@ public static class InMemoryClients
 
             RedirectUris =
             {
-                "https://localhost:9995/signin-oidc",
+                "https://localhost:9995/sign-in-callback",
+                "http://localhost:9995/sign-in-callback",
+                "https://admin.richillcapital.com/sign-in-callback",
             },
             PostLogoutRedirectUris =
             {
                 "https://localhost:9995/signout-callback-oidc",
+                "http://localhost:9995/signout-callback-oidc",
             },
             AllowOfflineAccess = true,
             AllowedScopes =
             {
                 "openid",
                 "profile",
+                "email",
             },
         },
 
