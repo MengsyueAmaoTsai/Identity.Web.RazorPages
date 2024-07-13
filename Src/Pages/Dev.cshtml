@@ -7,5 +7,247 @@
 }
 
 <div>
-    Development page
+    <div>
+        <img 
+            class="logo"
+            role="img"
+            pngsrc="https://aadcdn.msauth.net/shared/1.0/content/images/microsoft_logo_ea19b2112f4dfd8e90b4505ef7dcb4f9.png"
+            svgsrc="https://aadcdn.msauth.net/shared/1.0/content/images/microsoft_logo_564db913a7fa0ca42727161c6d031bef.svg"
+            src="https://aadcdn.msauth.net/shared/1.0/content/images/microsoft_logo_564db913a7fa0ca42727161c6d031bef.svg"
+            alt="Microsoft">
+    </div>
+
+    <div role="main">
+        <div>
+            <div>
+                <div>
+                    <!-- Header -->
+                    <div>
+                        <div>
+                            <div class="title">
+                                <div role="heading">@ViewData["Title"]</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Email input -->
+                    <div class="form-row">
+                        <div role="alert"></div>
+                        <div class="form-email">
+                            <div class="input-email-wrapper">
+                                <input class="input-email"
+                                        type="email"
+                                        maxlength="113"
+                                        autocomplete="on"
+                                        placeholder="Email, phone, or Skype" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Link area -->
+                    <div>
+                        <div class="form-links">
+                            <div class="link-container-outer">
+                                <div class="link-container">
+                                    <div class="link-sign-up-wrapper">
+                                        No account?
+                                        <a class="link-sign-up">Create one!</a>
+                                    </div>
+                                    <div class="link-reset-password-wrapper"><a class="link-reset-password" href="">Can't access your account?</a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Buttons -->
+                    <div class="buttons-container">
+                        <div class="button-wrapper">
+                            <form method="post" asp-page-handler="Back">
+                                <input class="button-secondary" type="submit" value="Back" />
+                            </form>
+                        </div>
+
+                        <div class="button-wrapper">
+                            <form method="post" asp-page-handler="Next">
+                                <input class="button-primary" type="submit" value="Next" />
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
+<style>
+    .logo {
+        border: 0;
+        vertical-align: middle;
+        max-width: 256px;
+        height: 24px;
+    }
+
+    .title {
+        line-height: 1.75rem;
+        color: #1b1b1b;
+        font-size: 1.5rem;
+        font-weight: 600;
+        padding: 0;
+        margin-top: 16px;
+        margin-bottom: 12px;
+        font-family: "Segoe UI", "Helvetica Neue", "Lucida Grande", "Roboto", "Ebrima", "Nirmala UI", "Gadugi", "Segoe Xbox Symbol", "Segoe UI Symbol", "Meiryo UI", "Khmer UI", "Tunga", "Lao UI", "Raavi", "Iskoola Pota", "Latha", "Leelawadee", "Microsoft YaHei UI", "Microsoft JhengHei UI", "Malgun Gothic", "Estrangelo Edessa", "Microsoft Himalaya", "Microsoft New Tai Lue", "Microsoft PhagsPa", "Microsoft Tai Le", "Microsoft Yi Baiti", "Mongolian Baiti", "MV Boli", "Myanmar Text", "Cambria Math";
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .form-row {
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .form-email {
+        width: 100%;
+        margin-bottom: 16px;
+    }
+
+    .input-email-wrapper {
+        width: 100%;
+        position: relative;
+    }
+
+    .input-email {
+        display: block;
+        width: 100%;
+        background-image: none;
+        direction: ltr;
+        text-align: left;
+        -webkit-border-radius: 0;
+        background-color: transparent;
+        border-top-width: 0;
+        border-left-width: 0;
+        border-right-width: 0;
+        padding-left: 0;
+        border-color: rgba(0, 0, 0, 0.6);
+        height: 36px;
+        outline: none;
+        padding: 6px 10px;
+        border-width: 1px;
+        border-style: solid;
+    }
+
+    .form-links {
+        margin-left: 0;
+        margin-right: 0;
+        display: inline-block;
+        width: 100%;
+        margin-bottom: 36px;
+    }
+    .link-container-outer {
+        position: relative;
+        min-height: 1px;
+        padding-left: 2px;
+        padding-right: 2px;
+    }
+
+    .link-container {
+        font-size: .8125rem;
+    }
+
+    .link-reset-password-wrapper {
+        margin-bottom: 16px;
+    }
+
+    .link-reset-sign-up-wrapper {
+        margin-bottom: 16px;
+    }
+
+    .link-sign-up {
+        background-color: transparent;
+        text-decoration: none;
+        color: #0067b8;
+        white-space: nowrap;
+    }
+
+    .link-reset-password {
+        font-size: .8125rem;
+        background-color: transparent;
+        text-decoration: none;
+        color: #0067b8;
+    }
+
+    .buttons-container {
+        min-height: 1px;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        text-align: right;
+        padding-left: 0;
+        padding-right: 0;
+        width: 100%;
+        float: left;
+    }
+
+    .button-wrapper {
+        display: inline-block;
+    }
+
+    .button-primary {
+        color: #fff;
+        border-color: #0067b8;
+        background-color: #0067b8;
+        display: inline-block;
+        min-width: 100px;
+        padding: 4px 12px 4px 12px;
+        margin-top: 4px;
+        margin-bottom: 4px;
+        position: relative;
+        max-width: 100%;
+        text-align: center;
+        white-space: nowrap;
+        overflow: hidden;
+        vertical-align: middle;
+        text-overflow: ellipsis;
+        touch-action: manipulation;
+        border-style: solid;
+        border-width: 2px;
+        border-color: transparent;
+        min-height: 32px;
+        border: none;
+        min-width: 108px;
+        line-height: normal;
+        margin-top: 0;
+        margin-bottom: 0;
+        display: block;
+        width: 100%;
+    }
+
+    .button-secondary {
+        display: inline-block;
+        min-width: 100px;
+        padding: 4px 12px 4px 12px;
+        margin-top: 4px;
+        margin-bottom: 4px;
+        position: relative;
+        max-width: 100%;
+        text-align: center;
+        white-space: nowrap;
+        overflow: hidden;
+        vertical-align: middle;
+        text-overflow: ellipsis;
+        touch-action: manipulation;
+        color: #000;
+        border-style: solid;
+        border-width: 2px;
+        border-color: transparent;
+        min-height: 32px;
+        border: none;
+        background-color: #ccc;
+        background-color: rgba(0, 0, 0, 0.2);
+        min-width: 108px;
+        line-height: normal;
+        margin-top: 0;
+        margin-bottom: 0;
+        display: block;
+        width: 100%;
+    }
+</style>
