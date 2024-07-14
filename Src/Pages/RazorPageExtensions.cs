@@ -5,7 +5,9 @@ internal static class RazorPageExtensions
     internal static IServiceCollection AddPages(this IServiceCollection services)
     {
         services
-            .AddRazorPages()
+            .AddRazorPages(options =>
+            {
+            })
             .WithRazorPagesRoot("/Src/Pages");
 
         return services;
