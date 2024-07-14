@@ -57,7 +57,7 @@ var connectionString = builder.Configuration["Redis"];
 builder.Services
     .AddDataProtection()
     .PersistKeysToStackExchangeRedis(
-        ConnectionMultiplexer.Connect(connectionString),
+        ConnectionMultiplexer.Connect(connectionString!),
         "DataProtection-Keys")
     .SetApplicationName("RichillCapital.Identity.Web");
 
@@ -65,11 +65,16 @@ var app = builder.Build();
 
 app.UseDebuggingRequestMiddleware();
 
-if (!app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment())
+{
+    app.UseDeveloperExceptionPage();
+}
+else
 {
     app.UseExceptionHandler("/error");
     app.UseHsts();
 }
+
 
 app.UseHttpsRedirection();
 
