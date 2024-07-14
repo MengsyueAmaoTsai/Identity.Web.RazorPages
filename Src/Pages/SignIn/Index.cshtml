@@ -2,11 +2,11 @@
 @model SignInViewModel 
 
 @{
-    ViewData["Title"] = "Sign in to your account";
+    ViewData["Title"] = "Sign in";
 }
 
 <div>
-    <form method="post" class="sign-in-form" spellcheck="false" autocomplete="off">
+    <form method="post" class="sign-in-form" spellcheck="false" autocomplete="off" novalidate>
         <div class="outer">
             <div class="main-section">
                 <div class="middle">
@@ -26,18 +26,18 @@
                         <div role="main">
                             <div class="pagination-view">
                                 <div class="form-row form-title">
-                                    <div role="heading">Sign in</div>
+                                    <div role="heading">@ViewData["Title"]</div>
                                 </div>
 
                                 <div class="form-row">
                                     <div role="alert">
-                                        <span class="email-error" asp-validation-for="EmailAddress"></span>
-                                        @* <div class="email-error" asp-validation-summary="ModelOnly"></div> *@
+                                        @* <span class="email-error" asp-validation-for="EmailAddress"></span> *@
+                                        <div class="email-error" asp-validation-summary="All"></div>
                                     </div>
 
                                     <div class="form-group">
                                         <div class="email-address-wrapper">
-                                            <input class="email-address" type="email" placeholder="Email, phone, or Skype" maxlength="113">
+                                            <input asp-for="EmailAddress" class="email-address" type="email" placeholder="Email, phone, or Skype" maxlength="113">
                                         </div>
                                     </div>
                                 </div>
@@ -310,5 +310,10 @@
         display: inline-block;
         margin-left: 8px;
         margin-right: 8px;
+    }
+
+    .validation-summary ul {
+        list-style-type: none; /* �����I�Ÿ� */
+        padding: 0; /* ��������Z */
     }
 </style>

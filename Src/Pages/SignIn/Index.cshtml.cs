@@ -2,17 +2,20 @@ using System.ComponentModel.DataAnnotations;
 
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.AspNetCore.Mvc.ViewFeatures;
+
+using RichillCapital.Domain.Common.Repositories;
+using RichillCapital.Domain.Users;
 
 namespace RichillCapital.Identity.Web.Pages.SignIn;
 
 public sealed class SignInViewModel(
-    ILogger<SignInViewModel> _logger) : PageModel
+    IReadOnlyRepository<User> _userRepository) : 
+    PageModel
 {
     private static class Errors
     {
         internal const string InvalidEmailAddress = "Enter a valid email address, phone number, or Skype name.";
+        internal const string UserNotFound = "We couldn't find an account with that username. Try another, or get a new Microsoft account.";
     }
 
     [BindProperty(SupportsGet = true)]
@@ -20,8 +23,7 @@ public sealed class SignInViewModel(
 
     [BindProperty]
     [Required(ErrorMessage = Errors.InvalidEmailAddress)]
-    [EmailAddress(ErrorMessage = Errors.InvalidEmailAddress)]
-    public required string EmailAddress { get; init; }
+    public string EmailAddress { get; init; } = string.Empty;
 
     public IActionResult OnGet()
     {
@@ -33,27 +35,32 @@ public sealed class SignInViewModel(
         return Page();
     }
 
-    public IActionResult OnPost()
+    public async Task<IActionResult> OnPostAsync(CancellationToken cancellationToken = default)
     {
         if (!ModelState.IsValid)
         {
-            _logger.LogError("\nModel state is not valid");
-
-            foreach (var state in ModelState.Values)
-            {
-                _logger.LogInformation("\nValidationState: {state}", state.ValidationState);
-
-                foreach (var error in state.Errors)
-                {
-                    _logger.LogError("\nError. \n\tException: {exception}\n\tErrorMessage: {message}", error.Exception, error.ErrorMessage);
-                }
-            }
-
             return Page();
         }
 
-        _logger.LogInformation("User signed in with email address: {EmailAddress}", EmailAddress);
+        var emailResult = Email.From(EmailAddress);
 
-        return Page();
+        if (emailResult.IsFailure)
+        {
+            ModelState.AddModelError(emailResult.Error.Code, emailResult.Error.Message);
+            return Page();
+        }
+
+        var email = emailResult.Value;
+        var maybeUser = await _userRepository.FirstOrDefaultAsync(
+            user => user.Email == email,
+            cancellationToken);
+
+        if (maybeUser.IsNull)
+        {
+            ModelState.AddModelError(Errors.UserNotFound, Errors.UserNotFound);
+            return Page();
+        }
+
+        return RedirectToPage("/password/index");
     }
 }
