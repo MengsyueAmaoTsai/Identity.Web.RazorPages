@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace RichillCapital.Identity.Web.Pages;
 
-internal static class PageModeExtensions
+internal static class PageModelExtensions
 {
     internal static RedirectToPageResult LoadingPage(
         this PageModel page,
