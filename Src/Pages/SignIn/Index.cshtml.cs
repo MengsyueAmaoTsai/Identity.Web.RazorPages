@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations;
+
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -9,5 +11,7 @@ public sealed class SignInViewModel : PageModel
     public required string ReturnUrl { get; init; }
 
     [BindProperty]
+    [Required]
+    [EmailAddress]
     public required string EmailAddress { get; init; }
 }
