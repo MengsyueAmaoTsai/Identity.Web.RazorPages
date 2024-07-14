@@ -14,7 +14,7 @@ public sealed class StaySignedInViewModel(
     ISignInManager _signInManager,
     IReadOnlyRepository<User> _userRepository,
     IIdentityServerInteractionService _interactionService,
-    IEventService _eventService) : 
+    IEventService _eventService) :
     PageModel
 {
     [BindProperty(SupportsGet = true)]
@@ -26,10 +26,9 @@ public sealed class StaySignedInViewModel(
     [BindProperty]
     public required bool DontShowAgain { get; init; }
 
-    [BindProperty]
-    public required bool StaySignedIn { get; init; }
-
-    public async Task<IActionResult> OnPostAsync(CancellationToken cancellationToken = default)
+    public async Task<IActionResult> OnPostAsync(
+        bool staySignedIn,
+        CancellationToken cancellationToken = default)
     {
         var email = Email
             .From(EmailAddress)
@@ -41,7 +40,7 @@ public sealed class StaySignedInViewModel(
         var signInResult = await _signInManager.PasswordSignInAsync(
             email,
             password,
-            isPersistent: StaySignedIn,
+            isPersistent: staySignedIn,
             lockoutOnFailure: true);
 
         if (signInResult.IsFailure)
