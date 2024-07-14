@@ -14,7 +14,7 @@ public sealed class SignInViewModel(
 {
     private static class Errors
     {
-        internal const string InvalidEmailAddress = "Enter a valid email address, phone number, or Skype name.";
+        internal const string EmailRequired = "Enter a valid email address, phone number, or Skype name.";
         internal const string UserNotFound = "We couldn't find an account with that username. Try another, or get a new Microsoft account.";
     }
 
@@ -22,7 +22,7 @@ public sealed class SignInViewModel(
     public required string ReturnUrl { get; init; }
 
     [BindProperty]
-    [Required(ErrorMessage = Errors.InvalidEmailAddress)]
+    [Required(ErrorMessage = Errors.EmailRequired)]
     public string EmailAddress { get; init; } = string.Empty;
 
     public IActionResult OnGet()

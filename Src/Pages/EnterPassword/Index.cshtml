@@ -19,6 +19,10 @@
                 @await Html.PartialAsync("_FormTitle", formTitle)
 
                 <div class="form-row">
+                    <div role="alert">
+                        <div class="password-error" asp-validation-summary="All"></div>
+                    </div>
+                    
                     <div>
                         <div class="password-input-wrapper">
                             <input class="password-input" type="password" placeholder="Password" asp-for="Password" maxlength="120" autocomplete="current-password"/>
@@ -46,6 +50,10 @@
     </div>
 </div>
 
+@section Scripts {
+    <partial name="_ValidationScripts" />
+}
+
 <style>
     .page-content {
         position: relative;
@@ -66,6 +74,14 @@
         min-height: 1px;
         margin-left: 0px;
         margin-right: 0px;
+    }
+
+    .password-error {
+        position: relative;
+        min-height: 1px;
+        padding-left: 2px;
+        padding-right: 2px;
+        color: #E81123;
     }
 
     .password-input-wrapper {
