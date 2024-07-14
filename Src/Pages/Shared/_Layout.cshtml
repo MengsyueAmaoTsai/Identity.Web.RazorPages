@@ -10,9 +10,17 @@
 </head>
 
 <body>
-    @RenderBody()
+    <div class="web-root-container">
+        @RenderBody()
+    </div>
+
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
 
+<style>
+    .web-root-container {
+        min-height: 1px;
+    }
+</style>

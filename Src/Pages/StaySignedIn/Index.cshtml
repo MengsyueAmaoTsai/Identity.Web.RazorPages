@@ -1,0 +1,300 @@
+@page "/stay-signed-in"
+
+@model StaySignedInViewModel
+
+@{
+    ViewData["Title"] = "Stay signed in?";
+}
+
+<div class="gamepad-navigation-wrapper">
+    @await Html.PartialAsync("_BackgroundImage")
+
+    <div class="outer">
+        <div class="middle">
+            <div>
+                <div>
+                    <div>
+                        <div class="inner">
+                            <div class="lightbox-cover"></div>
+                            
+                            <div>
+                                @await Html.PartialAsync("_FormImage")
+                                @await Html.PartialAsync("_IdentityBanner", Model.EmailAddress)
+
+                                <div class="page-content">
+                                    <form id="post-redirect-form"></form>
+
+                                    <div class="form-wrapper-animation">
+                                        <form method="post" spellcheck="false" autocomplete="off">
+                                            <div class="form-title-wrapper">
+                                                <div role="heading">@ViewData["Title"]</div>
+                                            </div>
+
+                                            <div class="form-description-wrapper">
+                                                <div class="form-description">Stay signed in so you don't have to sign in again next time.</div>
+                                            </div>
+
+                                            <div>
+                                                <div class="dont-show-again-row">
+                                                    <div class="dont-show-again-wrapper">
+                                                        <label class="dont-show-again-text" asp-for="DontShowAgain">
+                                                            <input class="dont-show-again" type="checkbox" asp-for="DontShowAgain">
+                                                            <span>Don't show this again</span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+
+                                                <div class="button-container-row">
+                                                    <div class="button-container">
+                                                        <div class="decline-button-wrapper">
+                                                            <button class="decline-button" type="submit" name="StaySignedIn" value="false">No</button>
+                                                        </div>
+                                                        
+                                                        <div class="accept-button-wrapper">
+                                                            <button class="accept-button" type="submit" name="StaySignedIn" value="true">Yes</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+        </div>
+    </div>
+</div>
+
+<style>
+    .gamepad-navigation-wrapper {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        top: 0px;
+        right: 0px;
+        left: 0px;
+        bottom: 0px;
+        overflow-x: auto;
+        overflow-y: auto;
+    }
+
+    .outer {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        top: 0px;
+        right: 0px;
+        left: 0px;
+        bottom: 0px;
+        display: table;
+    }
+
+    .middle {
+        vertical-align: middle;
+        display: table-cell;
+    }
+
+    .inner {
+        margin-left: auto;
+        margin-right: auto;
+        position: relative;
+        max-width: 440px;
+        width: calc(100% - 40px);
+        padding-top: 44px;
+        padding-right: 44px;
+        padding-left: 44px;
+        padding-bottom: 44px;
+        margin-bottom: 28px;
+        background-color: rgb(255, 255, 255);
+        box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 6px;
+        min-width: 320px;
+    }
+
+    .lightbox-cover {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        top: 0px;
+        left: 0px;
+        background-color: white;
+        opacity: 0;
+        z-index: -1;
+    }
+    
+    .form-wrapper-animation {
+        position: relative;
+        animation-duration: 0.25s;
+        animation-timing-function: cubic-bezier(0.5, 0, 0.5, 1);
+        animation-fill-mode: both;
+        transition-property: left;
+        min-height: inherit;
+        animation-name: myAnimation;
+    }
+
+    .page-content {
+        position: relative;
+        min-height: 170px;
+    }
+
+    .form-title-wrapper {
+        margin-top: 16px;
+        margin-bottom: 12px;
+        font-weight: 600;
+        line-height: 28px;
+        color: rgb(27, 27, 27);
+        font-size: 1.5rem;
+        padding-top: 0px;
+        padding-left: 0px;
+        padding-right: 0px;
+        padding-bottom: 0px;
+    }
+
+    .form-description-wrapper {
+        min-height: 1px;
+        margin-left: 0px;
+        margin-right: 0px;
+        margin-bottom: 12px;
+        margin-top: 16px;
+        padding-top: 0px;
+        padding-right: 0px;
+        padding-left: 0px;
+        padding-bottom: 0px;
+    }
+
+    .form-description {
+        margin-top: 0px;
+        overflow-wrap: break-word;
+        white-space: pre-wrap;
+    }
+
+    .dont-show-again-row {
+        min-height: 1px;
+        margin-left: 0px;
+        margin-right: 0px;
+        display: inline-block;
+        width: 100%;
+        margin-bottom: 36px;
+    }
+
+    .dont-show-again-wrapper {
+        position: relative;
+        margin-bottom: 16px;
+        margin-top: 12px;
+        display: block;
+    }
+
+    .dont-show-again-text {
+        min-height: 20px;
+        padding-left: 28px;
+        cursor: pointer;
+        display: inline-block;
+        max-width: 100%;
+    }
+
+    .dont-show-again {
+        font-weight: inherit;
+        font-family: inherit;
+        font-size: inherit;
+        line-height: inherit;
+        max-width: 100%;
+        margin: 0px;
+        width: 20px;
+        height: 20px;
+        box-sizing: border-box;
+        padding: 0px;
+        position: absolute;
+        margin-left: -28px;
+    }
+
+    .button-container-row {
+        min-height: 1px;
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+
+    .button-container {
+        position: absolute;
+        width: 100%;
+        bottom: 0px;
+        text-align: right;
+    }
+    
+    .decline-button {
+        font-weight: inherit;
+        font-family: inherit;
+        font-size: inherit;
+        margin: 0px;
+        vertical-align: middle;
+        position: relative;
+        overflow-x: hidden;
+        overflow-y: hidden;
+        text-align: center;
+        display: inline-block;
+        max-width: 100%;
+        color: rgb(0, 0, 0);
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        min-height: 32px;
+        border-top-style: none;
+        border-right-style: none;
+        border-left-style: none;
+        border-bottom-style: none;
+        min-width: 108px;
+        line-height: normal;
+        padding-top: 4px;
+        padding-right: 12px;
+        padding-left: 12px;
+        padding-bottom: 4px;
+        touch-action: manipulation;
+        background-color: rgba(0, 0, 0, 0.2);
+    }
+
+    .decline-button-wrapper {
+        display: inline-block;
+        margin-right: 4px;
+    }
+
+    .accept-button-wrapper {
+        display: inline-block;
+    }
+
+    .accept-button {
+        font-weight: inherit;
+        font-family: inherit;
+        font-size: inherit;
+        margin: 0px;
+        vertical-align: middle;
+        position: relative;
+        overflow-x: hidden;
+        overflow-y: hidden;
+        text-align: center;
+        display: inline-block;
+        max-width: 100%;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        min-height: 32px;
+        border-top-style: none;
+        border-right-style: none;
+        border-left-style: none;
+        border-bottom-style: none;
+        min-width: 108px;
+        line-height: normal;
+        padding-top: 4px;
+        padding-right: 12px;
+        padding-left: 12px;
+        padding-bottom: 4px;
+        touch-action: manipulation;
+        background-color: rgb(0, 103, 184);
+        border-top-color: rgb(0, 103, 184);
+        border-right-color: rgb(0, 103, 184);
+        border-left-color: rgb(0, 103, 184);
+        border-bottom-color: rgb(0, 103, 184);
+        color: rgb(255, 255, 255);
+    }
+</style>
