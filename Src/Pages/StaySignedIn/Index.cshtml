@@ -6,127 +6,54 @@
     ViewData["Title"] = "Stay signed in?";
 }
 
-<div class="gamepad-navigation-wrapper">
-    @await Html.PartialAsync("_BackgroundImage")
+<div>
+    @await Html.PartialAsync("_FormImage")
+    @await Html.PartialAsync("_IdentityBanner", Model.EmailAddress)
 
-    <div class="outer">
-        <div class="middle">
-            <div>
+    <div class="page-content">
+        <form id="post-redirect-form"></form>
+
+        <div class="form-wrapper-animation">
+            <form method="post" spellcheck="false" autocomplete="off">
+                @await Html.PartialAsync("_FormTitle", ViewData["Title"])
+
+                <div class="form-description-wrapper">
+                    <div class="form-description">Stay signed in so you don't have to sign in again next time.</div>
+                </div>
+
                 <div>
-                    <div>
-                        <div class="inner">
-                            <div class="lightbox-cover"></div>
-                            
-                            <div>
-                                @await Html.PartialAsync("_FormImage")
-                                @await Html.PartialAsync("_IdentityBanner", Model.EmailAddress)
+                    <div class="dont-show-again-row">
+                        <div class="dont-show-again-wrapper">
+                            <label class="dont-show-again-text" asp-for="DontShowAgain">
+                                <input class="dont-show-again" type="checkbox" asp-for="DontShowAgain">
+                                <span>Don't show this again</span>
+                            </label>
+                        </div>
+                    </div>
 
-                                <div class="page-content">
-                                    <form id="post-redirect-form"></form>
+                    <div class="button-container-row">
+                        <div class="button-container">
+                            <div class="button-secondary-wrapper">
+                                <button class="button-secondary" type="submit" name="StaySignedIn" value="false">No</button>
+                            </div>
 
-                                    <div class="form-wrapper-animation">
-                                        <form method="post" spellcheck="false" autocomplete="off">
-                                            <div class="form-title-wrapper">
-                                                <div role="heading">@ViewData["Title"]</div>
-                                            </div>
-
-                                            <div class="form-description-wrapper">
-                                                <div class="form-description">Stay signed in so you don't have to sign in again next time.</div>
-                                            </div>
-
-                                            <div>
-                                                <div class="dont-show-again-row">
-                                                    <div class="dont-show-again-wrapper">
-                                                        <label class="dont-show-again-text" asp-for="DontShowAgain">
-                                                            <input class="dont-show-again" type="checkbox" asp-for="DontShowAgain">
-                                                            <span>Don't show this again</span>
-                                                        </label>
-                                                    </div>
-                                                </div>
-
-                                                <div class="button-container-row">
-                                                    <div class="button-container">
-                                                        <div class="decline-button-wrapper">
-                                                            <button class="decline-button" type="submit" name="StaySignedIn" value="false">No</button>
-                                                        </div>
-                                                        
-                                                        <div class="accept-button-wrapper">
-                                                            <button class="accept-button" type="submit" name="StaySignedIn" value="true">Yes</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
+                            <div class="button-primary-wrapper">
+                                <button class="button-primary" type="submit" name="StaySignedIn" value="true">Yes</button>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-
-        <div class="footer">
+            </form>
         </div>
     </div>
 </div>
 
 <style>
-    .gamepad-navigation-wrapper {
-        position: absolute;
-        height: 100%;
-        width: 100%;
-        top: 0px;
-        right: 0px;
-        left: 0px;
-        bottom: 0px;
-        overflow-x: auto;
-        overflow-y: auto;
-    }
-
-    .outer {
-        position: absolute;
-        height: 100%;
-        width: 100%;
-        top: 0px;
-        right: 0px;
-        left: 0px;
-        bottom: 0px;
-        display: table;
-    }
-
-    .middle {
-        vertical-align: middle;
-        display: table-cell;
-    }
-
-    .inner {
-        margin-left: auto;
-        margin-right: auto;
+    .page-content {
         position: relative;
-        max-width: 440px;
-        width: calc(100% - 40px);
-        padding-top: 44px;
-        padding-right: 44px;
-        padding-left: 44px;
-        padding-bottom: 44px;
-        margin-bottom: 28px;
-        background-color: rgb(255, 255, 255);
-        box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 6px;
-        min-width: 320px;
+        min-height: 170px;
     }
 
-    .lightbox-cover {
-        position: absolute;
-        height: 100%;
-        width: 100%;
-        top: 0px;
-        left: 0px;
-        background-color: white;
-        opacity: 0;
-        z-index: -1;
-    }
-    
     .form-wrapper-animation {
         position: relative;
         animation-duration: 0.25s;
@@ -135,11 +62,6 @@
         transition-property: left;
         min-height: inherit;
         animation-name: myAnimation;
-    }
-
-    .page-content {
-        position: relative;
-        min-height: 170px;
     }
 
     .form-title-wrapper {
@@ -210,91 +132,5 @@
         padding: 0px;
         position: absolute;
         margin-left: -28px;
-    }
-
-    .button-container-row {
-        min-height: 1px;
-        margin-left: 0px;
-        margin-right: 0px;
-    }
-
-    .button-container {
-        position: absolute;
-        width: 100%;
-        bottom: 0px;
-        text-align: right;
-    }
-    
-    .decline-button {
-        font-weight: inherit;
-        font-family: inherit;
-        font-size: inherit;
-        margin: 0px;
-        vertical-align: middle;
-        position: relative;
-        overflow-x: hidden;
-        overflow-y: hidden;
-        text-align: center;
-        display: inline-block;
-        max-width: 100%;
-        color: rgb(0, 0, 0);
-        white-space: nowrap;
-        text-overflow: ellipsis;
-        min-height: 32px;
-        border-top-style: none;
-        border-right-style: none;
-        border-left-style: none;
-        border-bottom-style: none;
-        min-width: 108px;
-        line-height: normal;
-        padding-top: 4px;
-        padding-right: 12px;
-        padding-left: 12px;
-        padding-bottom: 4px;
-        touch-action: manipulation;
-        background-color: rgba(0, 0, 0, 0.2);
-    }
-
-    .decline-button-wrapper {
-        display: inline-block;
-        margin-right: 4px;
-    }
-
-    .accept-button-wrapper {
-        display: inline-block;
-    }
-
-    .accept-button {
-        font-weight: inherit;
-        font-family: inherit;
-        font-size: inherit;
-        margin: 0px;
-        vertical-align: middle;
-        position: relative;
-        overflow-x: hidden;
-        overflow-y: hidden;
-        text-align: center;
-        display: inline-block;
-        max-width: 100%;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-        min-height: 32px;
-        border-top-style: none;
-        border-right-style: none;
-        border-left-style: none;
-        border-bottom-style: none;
-        min-width: 108px;
-        line-height: normal;
-        padding-top: 4px;
-        padding-right: 12px;
-        padding-left: 12px;
-        padding-bottom: 4px;
-        touch-action: manipulation;
-        background-color: rgb(0, 103, 184);
-        border-top-color: rgb(0, 103, 184);
-        border-right-color: rgb(0, 103, 184);
-        border-left-color: rgb(0, 103, 184);
-        border-bottom-color: rgb(0, 103, 184);
-        color: rgb(255, 255, 255);
     }
 </style>

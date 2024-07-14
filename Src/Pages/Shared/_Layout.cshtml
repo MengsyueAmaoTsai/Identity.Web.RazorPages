@@ -11,7 +11,27 @@
 
 <body>
     <div class="web-root-container">
-        @RenderBody()
+        <div class="gamepad-navigation-wrapper">
+            @await Html.PartialAsync("_BackgroundImage")
+
+            <div class="outer">
+                <div class="middle">
+                    <div>
+                        <div>
+                            <div>
+                                <div class="inner">
+                                    <div class="lightbox-cover"></div>
+                                    @RenderBody()
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="footer">
+                </div>
+            </div>
+        </div>
     </div>
 
     <script src="~/js/site.js" asp-append-version="true"></script>
@@ -22,5 +42,60 @@
 <style>
     .web-root-container {
         min-height: 1px;
+    }
+
+    .gamepad-navigation-wrapper {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        top: 0px;
+        right: 0px;
+        left: 0px;
+        bottom: 0px;
+        overflow-x: auto;
+        overflow-y: auto;
+    }
+
+    .outer {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        top: 0px;
+        right: 0px;
+        left: 0px;
+        bottom: 0px;
+        display: table;
+    }
+
+    .middle {
+        vertical-align: middle;
+        display: table-cell;
+    }
+
+    .inner {
+        margin-left: auto;
+        margin-right: auto;
+        position: relative;
+        max-width: 440px;
+        width: calc(100% - 40px);
+        padding-top: 44px;
+        padding-right: 44px;
+        padding-left: 44px;
+        padding-bottom: 44px;
+        margin-bottom: 28px;
+        background-color: rgb(255, 255, 255);
+        box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 6px;
+        min-width: 320px;
+    }
+
+    .lightbox-cover {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        top: 0px;
+        left: 0px;
+        background-color: white;
+        opacity: 0;
+        z-index: -1;
     }
 </style>

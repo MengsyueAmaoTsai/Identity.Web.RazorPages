@@ -1,0 +1,49 @@
+@page "/enter-password"
+
+@model EnterPasswordViewModel 
+
+@{
+    var formTitle = "Enter password";
+    
+    ViewData["Title"] = "Sign in";
+}
+
+<div>
+    @await Html.PartialAsync("_FormImage")
+    @await Html.PartialAsync("_IdentityBanner", Model.EmailAddress)
+
+    <div class="page-content">
+        <form id="post-redirect-form"></form>
+        <div class="form-wrapper-animation">
+            <form method="post" spellcheck="false" autocomplete="off">
+                @await Html.PartialAsync("_FormTitle", formTitle)
+
+                <div class="button-container-row">
+                    <div class="button-container">
+                        <div class="button-primary-wrapper">
+                            <button class="button-primary" type="submit">Sign in</butto>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<style>
+    .page-content {
+        position: relative;
+        min-height: 170px;
+    }
+
+    .form-wrapper-animation {
+        position: relative;
+        animation-duration: 0.25s;
+        animation-timing-function: cubic-bezier(0.5, 0, 0.5, 1);
+        animation-fill-mode: both;
+        transition-property: left;
+        min-height: inherit;
+        animation-name: myAnimation;
+    }
+</style>

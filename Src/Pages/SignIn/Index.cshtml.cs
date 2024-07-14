@@ -9,7 +9,7 @@ using RichillCapital.Domain.Users;
 namespace RichillCapital.Identity.Web.Pages.SignIn;
 
 public sealed class SignInViewModel(
-    IReadOnlyRepository<User> _userRepository) : 
+    IReadOnlyRepository<User> _userRepository) :
     PageModel
 {
     private static class Errors
@@ -61,6 +61,10 @@ public sealed class SignInViewModel(
             return Page();
         }
 
-        return RedirectToPage("/password/index");
+        return RedirectToPage("/enterPassword/index", new
+        {
+            ReturnUrl,
+            EmailAddress = email.Value,
+        });
     }
 }
