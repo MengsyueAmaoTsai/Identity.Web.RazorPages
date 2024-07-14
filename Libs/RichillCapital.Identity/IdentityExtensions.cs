@@ -13,6 +13,9 @@ namespace RichillCapital.Identity;
 
 public static class IdentityExtensions
 {
+    private const string ErrorPath = "/error";
+    private const string SignInPath = "/sign-in";
+
     private static class UrlParameterNames
     {
         internal const string ReturnUrl = "returnUrl";
@@ -37,8 +40,8 @@ public static class IdentityExtensions
             .AddIdentityServer(options =>
             {
                 options.IssuerUri = identityOptions.IssuerUri;
-                options.UserInteraction.LoginUrl = "/identity/sign-in";
-                options.UserInteraction.ErrorUrl = "/error";
+                options.UserInteraction.LoginUrl = SignInPath;
+                options.UserInteraction.ErrorUrl = ErrorPath;
             })
             .AddInMemoryClients(InMemoryClients.Default)
             .AddInMemoryIdentityResources(InMemoryIdentityResources.Default)
@@ -53,7 +56,7 @@ public static class IdentityExtensions
             .AddCookie(RichillCapitalAuthenticationSchemes.DefaultCookieScheme, options =>
             {
                 options.Cookie.Name = RichillCapitalAuthenticationSchemes.DefaultCookieScheme;
-                options.LoginPath = "/identity/sign-in";
+                options.LoginPath = SignInPath;
             })
             .AddMicrosoftAccount("Microsoft", options =>
             {
