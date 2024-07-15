@@ -3,15 +3,52 @@
 @model SignUpViewModel
 
 @{
-    Layout = "_Layout";
+    Layout = "_DefaultLayout";
     ViewData["Title"] = "Sign up";
 }
 
 <div>
-    <form method="post">
-        <button type="submit">Next</button>
-    </form>
+    <div id="PageId" hidden>i6209</div>
+
+    <div id="Root">
+        <div data-testid="AppBoundary">
+            <div dir data-testid="DirectionWrapper LightboxLayout" style="min-height: 1px;">
+                <div data-testid="GamepadNavigationWrapper" class="gamepad-navigation-wrapper">
+                    <div 
+                        id="BackgroundContainer" 
+                        data-testid="BackgroundContainer" 
+                        class="background-container" 
+                        role="presentation"
+                        style="background-color: rgb(242, 242, 242);">
+                        <div 
+                            data-testid="BackgroundImage" 
+                            id="BackgroundImage" 
+                            class="background-image" 
+                            style="background-image: url('https://logincdn.msftauth.net/shared5/js/../images/2_bc3d32a696895f78c19d.svg');">
+
+                        </div>
+                    </div>
+
+                    <div id="Outer" data-testid="Outer" class="outer" role="presentation" data-scrollable="true">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="ModalRoot"></div>
 </div>
 
+<script>
+</script>
+
 <style>
+    body {
+        font-weight: 400;
+        font-family: "Segoe UI", -apple-system, "Helvetica Neue", "Lucida Grande", Roboto, Ebrima, "Nirmala UI", Gadugi, "Segoe Xbox Symbol", "Segoe UI Symbol", "Meiryo UI", "Khmer UI", Tunga, "Lao UI", Raavi, "Iskoola Pota", Latha, Leelawadee, "Microsoft YaHei UI", "Microsoft JhengHei UI", "Malgun Gothic", "Estrangelo Edessa", "Microsoft Himalaya", "Microsoft New Tai Lue", "Microsoft PhagsPa", "Microsoft Tai Le", "Microsoft Yi Baiti", "Mongolian Baiti", "MV Boli", "Myanmar Text", "Cambria Math";
+        font-size: 0.9375rem;
+        line-height: 1.25rem;
+        margin: 0px;
+        background-color: rgb(255, 255, 255);
+    }    
 </style>
