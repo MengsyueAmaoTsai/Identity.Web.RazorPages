@@ -1,0 +1,17 @@
+@page "/sign-in/stay-signed-in"
+
+@model StaySignedInViewModel
+
+@{
+    ViewData["Title"] = "Stay signed in";
+}
+
+<div>
+    <form method="post">
+        
+        <input asp-for="DoNotShowThisAgain" type="checkbox">
+
+        <button type="submit" name="StaySignedIn" value="false">No</button>
+        <button type="submit" name="StaySignedIn" value="true">Yes</button>
+    </form>
+</div>

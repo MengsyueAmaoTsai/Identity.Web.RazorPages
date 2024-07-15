@@ -41,6 +41,8 @@ public static class IdentityExtensions
             {
                 options.IssuerUri = identityOptions.IssuerUri;
                 options.UserInteraction.LoginUrl = SignInPath;
+                options.UserInteraction.LoginReturnUrlParameter = UrlParameterNames.ReturnUrl;
+
                 options.UserInteraction.ErrorUrl = ErrorPath;
             })
             .AddInMemoryClients(InMemoryClients.Default)
