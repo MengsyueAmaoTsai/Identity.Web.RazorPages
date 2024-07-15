@@ -66,7 +66,7 @@ public sealed class SignUpInfoViewModel(
         }
 
         var signInResult = await _signInManager.PasswordSignInAsync(
-            user,
+            email,
             password,
             isPersistent: true,
             lockoutOnFailure: true,

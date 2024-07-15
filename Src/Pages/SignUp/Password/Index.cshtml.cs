@@ -36,7 +36,7 @@ public sealed class SignUpPasswordViewModel :
             return Page();
         }
 
-        if (Password.Length < 8 || !Password.Any(char.IsUpper) || !Password.Any(char.IsLower) || !Password.Any(char.IsDigit) || !Password.Any(char.IsSymbol))
+        if (Password.Length < 8)
         {
             ModelState.AddModelError(
                 "Password",
