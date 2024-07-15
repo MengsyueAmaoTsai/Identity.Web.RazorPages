@@ -10,6 +10,7 @@ using RichillCapital.SharedKernel.Monads;
 namespace RichillCapital.Identity.Web.Pages.StaySignedIn;
 
 public sealed class StaySignedInViewModel(
+    ILogger<StaySignedInViewModel> _logger,
     ISignInManager _signInManager,
     IReadOnlyRepository<User> _userRepository,
     IIdentityServerInteractionService _interactionService,
@@ -29,12 +30,12 @@ public sealed class StaySignedInViewModel(
         {
             throw new ArgumentNullException(nameof(ReturnUrl));
         }
-        
+
         if (string.IsNullOrWhiteSpace(EmailAddress))
         {
             throw new ArgumentNullException(nameof(EmailAddress));
         }
-        
+
         if (!TempData.TryGetValue("Password", out _))
         {
             throw new ArgumentNullException("Password");
@@ -53,6 +54,8 @@ public sealed class StaySignedInViewModel(
             .ValueOrDefault;
 
         var password = TempData["Password"] as string ?? string.Empty;
+
+        _logger.LogInformation("Signing in user with password {password}.", password);
 
         var signInResult = await _signInManager.PasswordSignInAsync(
             email,

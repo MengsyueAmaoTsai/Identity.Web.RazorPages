@@ -6,7 +6,8 @@ using RichillCapital.Domain.Users;
 namespace RichillCapital.Identity.Web.Pages.SignUp;
 
 public sealed class SignUpViewModel(
-    IReadOnlyRepository<User> _userRepository) : 
+    ILogger<SignUpViewModel> _logger,
+    IReadOnlyRepository<User> _userRepository) :
     IdentityViewModel
 {
     [BindProperty]
@@ -26,6 +27,7 @@ public sealed class SignUpViewModel(
     {
         if (!ModelState.IsValid)
         {
+            _logger.LogInformation("Model state is invalid.");
             return Page();
         }
 
@@ -34,7 +36,7 @@ public sealed class SignUpViewModel(
         if (emailResult.IsFailure)
         {
             ModelState.AddModelError(
-                emailResult.Error.Code, 
+                emailResult.Error.Code,
                 emailResult.Error.Message);
 
             return Page();
@@ -49,9 +51,10 @@ public sealed class SignUpViewModel(
         if (maybeUser.HasValue)
         {
             ModelState.AddModelError(
-                "Conflict", 
+                "Conflict",
                 "Email already used.");
 
+            _logger.LogError("Email already used.");
             return Page();
         }
 
@@ -59,7 +62,7 @@ public sealed class SignUpViewModel(
     }
 
     private IActionResult RedirectToCreatePasswordPage() => RedirectToPage(
-        "/signUp/password/index", 
+        "/signUp/password/index",
         new
         {
             ReturnUrl,
