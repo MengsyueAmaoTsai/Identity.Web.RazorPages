@@ -23,7 +23,7 @@ public sealed class BirthDateViewModel(
     [BindProperty]
     public required BirthDateModel BirthDate { get; set; } = BirthDateModel.CreateDefault();
 
-    public required IEnumerable<SelectListItem> Regions = 
+    public required IEnumerable<SelectListItem> Regions =
     [
         new SelectListItem { Value = "Taiwan", Text = "Taiwan" },
         new SelectListItem { Value = "United States", Text = "United States" },
@@ -37,12 +37,12 @@ public sealed class BirthDateViewModel(
         });
 
     public required IEnumerable<SelectListItem> Days = Enumerable.Range(1, 31)
-        .Select(day => new SelectListItem 
-        { 
-            Value = day.ToString(), 
-            Text = day.ToString() 
+        .Select(day => new SelectListItem
+        {
+            Value = day.ToString(),
+            Text = day.ToString()
         });
-    
+
     public IActionResult OnGet()
     {
         if (string.IsNullOrEmpty(ReturnUrl))
@@ -120,8 +120,8 @@ public sealed class BirthDateViewModel(
         }
 
         var signInResult = await _signInManager.SignInAsync(
-            user, 
-            isPersistent: false, 
+            user,
+            isPersistent: false,
             cancellationToken: cancellationToken);
 
         if (signInResult.IsFailure)
@@ -129,8 +129,10 @@ public sealed class BirthDateViewModel(
             return RedirectToErrorPage();
         }
 
-        return RedirectToProfilePage();
+        return RedirectToSignUpSuccessPage();
     }
+
+    private IActionResult RedirectToSignUpSuccessPage() => RedirectToPage("/signUp/success");
 }
 
 public sealed record BirthDateModel
