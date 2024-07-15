@@ -2,7 +2,6 @@ using Duende.IdentityServer.Events;
 using Duende.IdentityServer.Services;
 
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 
 using RichillCapital.Domain.Common.Repositories;
 using RichillCapital.Domain.Users;
@@ -15,16 +14,24 @@ public sealed class StaySignedInViewModel(
     IReadOnlyRepository<User> _userRepository,
     IIdentityServerInteractionService _interactionService,
     IEventService _eventService) :
-    PageModel
+    IdentityViewModel
 {
-    [BindProperty(SupportsGet = true)]
-    public required string ReturnUrl { get; init; }
 
     [BindProperty(SupportsGet = true)]
     public required string EmailAddress { get; init; }
 
     [BindProperty]
     public required bool DontShowAgain { get; init; }
+
+    public IActionResult OnGet()
+    {
+        if (string.IsNullOrWhiteSpace(ReturnUrl))
+        {
+            throw new ArgumentNullException(nameof(ReturnUrl));
+        }
+
+        return Page();
+    }
 
     public async Task<IActionResult> OnPostAsync(
         bool staySignedIn,

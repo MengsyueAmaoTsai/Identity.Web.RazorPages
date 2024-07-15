@@ -1,7 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 
 using RichillCapital.Domain.Common.Repositories;
 using RichillCapital.Domain.Users;
@@ -10,16 +9,13 @@ namespace RichillCapital.Identity.Web.Pages.SignIn;
 
 public sealed class SignInViewModel(
     IReadOnlyRepository<User> _userRepository) :
-    PageModel
+    IdentityViewModel
 {
     private static class Errors
     {
         internal const string EmailRequired = "Enter a valid email address, phone number, or Skype name.";
         internal const string UserNotFound = "We couldn't find an account with that username. Try another, or get a new Microsoft account.";
     }
-
-    [BindProperty(SupportsGet = true)]
-    public required string ReturnUrl { get; init; }
 
     [BindProperty]
     [Required(ErrorMessage = Errors.EmailRequired)]
