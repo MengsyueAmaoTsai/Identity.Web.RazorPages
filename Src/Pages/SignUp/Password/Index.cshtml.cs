@@ -4,6 +4,12 @@ namespace RichillCapital.Identity.Web.Pages.SignUp;
 
 public sealed class SignUpPasswordViewModel : IdentityViewModel
 {
+    [BindProperty(SupportsGet = true)]
+    public required string EmailAddress { get; init; }
+
+    [BindProperty]
+    public required string Password { get; init; }
+
     public IActionResult OnGet()
     {
         if (string.IsNullOrEmpty(ReturnUrl))
@@ -11,14 +17,34 @@ public sealed class SignUpPasswordViewModel : IdentityViewModel
             throw new ArgumentNullException(nameof(ReturnUrl));
         }
 
+        if (string.IsNullOrEmpty(EmailAddress))
+        {
+            throw new ArgumentNullException(nameof(EmailAddress));
+        }
+
         return Page();
     }
 
     public IActionResult OnPost()
     {
-        return RedirectToPage("/signUp/birthday", new
+        if (!ModelState.IsValid)
         {
-            ReturnUrl,
-        });
+            return Page();
+        }
+
+        TempData["Password"] = Password;
+
+        return RedirectToCreateProfilePage();
+    }
+
+    private IActionResult RedirectToCreateProfilePage()
+    {
+        return RedirectToPage(
+            "/signUp/birthDate/index",
+            new 
+            {
+                ReturnUrl,
+                EmailAddress,
+            });
     }
 }

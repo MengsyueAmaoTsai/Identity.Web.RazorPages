@@ -1,5 +1,3 @@
-using System.ComponentModel.DataAnnotations;
-
 using Microsoft.AspNetCore.Mvc;
 
 using RichillCapital.Domain.Common.Repositories;
@@ -11,14 +9,7 @@ public sealed class SignUpViewModel(
     IReadOnlyRepository<User> _userRepository) : 
     IdentityViewModel
 {
-    private static class Errors
-    {
-        internal const string EmailRequired = "";
-        internal const string UserNotFound = "";
-    }
-
     [BindProperty]
-    [Required(ErrorMessage = Errors.EmailRequired)]
     public required string EmailAddress { get; init; }
 
     public IActionResult OnGet()
@@ -59,15 +50,19 @@ public sealed class SignUpViewModel(
         {
             ModelState.AddModelError(
                 "Conflict", 
-                Errors.UserNotFound);
+                "Email already used.");
 
             return Page();
         }
-        
-        return RedirectToPage("/signUp/password", new
+
+        return RedirectToCreatePasswordPage();
+    }
+
+    private IActionResult RedirectToCreatePasswordPage() => RedirectToPage(
+        "/signUp/password/index", 
+        new
         {
             ReturnUrl,
             EmailAddress,
         });
-    }
 }

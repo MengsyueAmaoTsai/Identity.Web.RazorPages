@@ -45,6 +45,21 @@ public sealed class BirthDateViewModel(
     
     public IActionResult OnGet()
     {
+        if (string.IsNullOrEmpty(ReturnUrl))
+        {
+            throw new ArgumentNullException(nameof(ReturnUrl));
+        }
+
+        if (string.IsNullOrEmpty(EmailAddress))
+        {
+            throw new ArgumentNullException(nameof(EmailAddress));
+        }
+
+        if (!TempData.TryGetValue("Password", out _))
+        {
+            throw new ArgumentNullException("Password");
+        }
+
         return Page();
     }
 
@@ -117,7 +132,6 @@ public sealed class BirthDateViewModel(
         return RedirectToProfilePage();
     }
 }
-
 
 public sealed record BirthDateModel
 {

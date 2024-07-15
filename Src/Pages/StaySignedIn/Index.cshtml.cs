@@ -29,6 +29,16 @@ public sealed class StaySignedInViewModel(
         {
             throw new ArgumentNullException(nameof(ReturnUrl));
         }
+        
+        if (string.IsNullOrWhiteSpace(EmailAddress))
+        {
+            throw new ArgumentNullException(nameof(EmailAddress));
+        }
+        
+        if (!TempData.TryGetValue("Password", out _))
+        {
+            throw new ArgumentNullException("Password");
+        }
 
         return Page();
     }
@@ -52,7 +62,7 @@ public sealed class StaySignedInViewModel(
 
         if (signInResult.IsFailure)
         {
-            return RedirectToPage("/error/index");
+            throw new InvalidOperationException(signInResult.Error.Message);
         }
 
         var maybeUser = await _userRepository
@@ -75,7 +85,7 @@ public sealed class StaySignedInViewModel(
         {
             return Url.IsLocalUrl(ReturnUrl) ?
                 Redirect(ReturnUrl) : string.IsNullOrEmpty(ReturnUrl) ?
-                    RedirectToPage("/profile/index") : throw new Exception("invalid return URL");
+                    RedirectToProfilePage() : throw new Exception("invalid return URL");
         }
 
         return context.IsNativeClient() ?
