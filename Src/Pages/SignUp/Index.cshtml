@@ -8,36 +8,10 @@
 }
 
 <div>
-    @await Html.PartialAsync("_FormImage")
-
-    <div class="page-content">
-        <form id="post-redirect-form"></form>
-
-        <div class="route-animation">
-            <form spellcheck="false" autocomplete="off" method="post" target="_top">
-                @await Html.PartialAsync("_FormTitle", ViewData["Title"])
-
-                <div class="row">
-                    <div style="white-space: pre-wrap; overflow-wrap: break-word;">
-                        <div class="input-component-wrapper"></div>
-                    </div>
-                </div>
-                <div class="row"></div>
-            </form>
-        </div>
-    </div>
+    <form method="post">
+        <button type="submit">Next</button>
+    </form>
 </div>
 
 <style>
-    .row {
-        min-height: 1px;
-        margin-left: 0px;
-        margin-right: 0px;
-    }
-
-    .input-component-wrapper {
-        min-height: 1px;
-        margin-left: 0px;
-        margin-right: 0px;
-    }
 </style>
