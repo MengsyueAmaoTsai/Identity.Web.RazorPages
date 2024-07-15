@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations;
+
 using Microsoft.AspNetCore.Mvc;
 
 using RichillCapital.Domain.Common.Repositories;
@@ -11,6 +13,8 @@ public sealed class SignUpViewModel(
     IdentityViewModel
 {
     [BindProperty]
+    [Required(ErrorMessage = "An email address is required")]
+    [EmailAddress(ErrorMessage = "Enter the email address in the format someone@example.com.")]
     public required string EmailAddress { get; init; }
 
     public IActionResult OnGet()
@@ -42,6 +46,7 @@ public sealed class SignUpViewModel(
             return Page();
         }
 
+
         var email = emailResult.Value;
 
         var maybeUser = await _userRepository.FirstOrDefaultAsync(
@@ -52,7 +57,7 @@ public sealed class SignUpViewModel(
         {
             ModelState.AddModelError(
                 "Conflict",
-                "Email already used.");
+                "Someone already has this email address. Try another name or <a>claim one of these that's available</a>");
 
             _logger.LogError("Email already used.");
             return Page();

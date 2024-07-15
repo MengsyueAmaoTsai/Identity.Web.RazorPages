@@ -40,6 +40,10 @@
                                                         <div style="min-height: 1px; margin-left: 0px; margin-right: 0px;">
                                                             <div style="overflow-wrap: break-word; white-space: pre-wrap;">
                                                                 <div style="min-height: 1px; margin-left: 0px; margin-right: 0px;">
+                                                                    <div role="alert">
+                                                                        <div class="email-error" asp-validation-summary="All"></div>
+                                                                    </div>
+
                                                                     <div style="display: flex; flex-direction: row;">
                                                                         <div style="width: 100%; position: relative; margin-bottom: 16px; display: block; background-image: none;">
                                                                             <input id="EmailInput" class="email-input" type="text" asp-for="EmailAddress" placeholder="someone@example.com" maxlength="120"/>
@@ -86,11 +90,18 @@
     </div>
 </div>
 
-
 <script>
 </script>
 
 <style>
+    .email-error {
+        color: rgb(232, 17, 35);
+        margin-top: 0px;
+        margin-right: 0px;
+        margin-left: 0px;
+        margin-bottom: 0px;
+    }
+
     a {
         color: rgb(0, 103, 184);
         text-decoration: none;
