@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>RichillCapital Identity | @ViewData["Title"] | Profile</title>
+
+    <link rel="stylesheet" href="~/css/styles.css" asp-append-version="true" />
+</head>
+
+<body>
+    <div id="PageWrapper">
+        <div id="ProfileHeader">
+        </div>
+
+        <div id="MainContentLanding">
+            <div id="HomeLanding">
+                <div id="root">
+                    <div class="body-163">
+                        <div class="body-164">
+                            <div class="css-165">
+                                <div style="visibility: visible; display: contents;">
+                                    <div class="css-237">
+                                        <div class="body-164">
+                                            <div class="css-162">
+                                                <div class="ms-Stack css-301"></div>
+                                                <div style="position: fixed; height: calc(100% - 48px); z-index: 5;">
+                                                    <div class="root-302" role="presentation">
+                                                        <nav role="navigation" class="navWrapper-303">
+                                                            <div id="nav-73" class="navWrapper-304">
+                                                                <div role="presentation">
+                                                                    <ul role="menubar" class="navGroup-305">
+                                                                        <div role="group">
+                                                                            <li role="presentation">Hello</li>
+                                                                        </div>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </nav>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        
+                                        @RenderBody()
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
+
+<style>
+    html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, menu, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, main, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        font-size: 100%;
+        font: inherit;
+        vertical-align: baseline;
+    }
+    article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section {
+        display: block;
+    }
+    body {
+        line-height: 1.4;
+        word-break: break-word;
+    }
+
+    body, html {
+        height: 100%;
+    }
+
+    #PageWrapper {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        background-color: #F2F2F2;
+    }
+
+    #ProfileHeader {
+        z-index: 10;
+        position: sticky;
+        width: 100%;
+        top: 0;
+    }
+
+    #MainContentLanding {
+        display: flex;
+        flex-direction: column;
+        overflow-y: auto;
+        height: 100%;
+        outline: none;
+    }
+
+    .body-163 {
+        color: rgb(36, 36, 36);
+        background: rgb(255, 255, 255);
+        font-family: "Segoe UI", "Segoe UI Web (West European)", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
+        font-weight: 400;
+        font-size: 14px;
+        -webkit-font-smoothing: antialiased;
+    }
+    .body-164 {
+        color: rgb(50, 49, 48);
+        background: rgb(242, 242, 242);
+        font-family: "Segoe UI Variable Text", "Segoe UI", "Segoe UI Web (West European)", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
+        font-weight: 400;
+        font-size: 14px;
+        -webkit-font-smoothing: antialiased;
+    }
+
+    .css-165 {
+        display: flex;
+        flex-flow: row;
+        width: auto;
+        height: auto;
+        box-sizing: border-box;
+        justify-content: space-between;
+        background-color: rgb(242, 242, 242);
+    }
+
+    .css-237 {
+        display: flex;
+        flex-flow: row;
+        width: 100%;
+        height: auto;
+        box-sizing: border-box;
+        min-height: 100vh;
+    }    
+
+    .body-164 {
+        color: rgb(50, 49, 48);
+        background: rgb(242, 242, 242);
+        font-family: "Segoe UI Variable Text", "Segoe UI", "Segoe UI Web (West European)", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
+        font-weight: 400;
+        font-size: 14px;
+        -webkit-font-smoothing: antialiased;
+    }    
+
+    .css-162 {
+        display: flex;
+        flex-flow: column;
+        width: auto;
+        height: auto;
+        box-sizing: border-box;
+    }    
+    .root-302 {
+        position: relative;
+        z-index: 1;
+        flex: 0 0 auto;
+        height: 100%;
+    }
+
+    .navWrapper-303 {
+        overflow: hidden;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        padding-left: 10px;
+        padding-top: 24px;
+    }    
+
+    .navContainer-304 {
+        width: calc(280px + var(--scrollbar-width));
+        background-color: rgb(242, 242, 242);
+        color: rgb(50, 49, 48);
+        transition-property: width;
+        transition-duration: 0s;
+        font-size: 14px;
+        overflow: hidden scroll;
+        margin-inline-end: calc(var(--scrollbar-width)* -1);
+        height: 100%;
+        max-height: 100%;
+        max-width: 250px;
+        user-select: none;
+    }   
+
+    .navGroup-305 {
+        margin: 0px;
+        padding: 0px;
+        list-style: none;
+    }     
+</style>

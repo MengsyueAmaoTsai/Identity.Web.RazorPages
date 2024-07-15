@@ -4,12 +4,20 @@
 
 @{
     ViewData["Title"] = "Profile";
+    Layout = "_ProfileLayout";
+
+    List<(string Text, string Page)> sideNavItems = [
+        ("Overview", "/profile/index"),
+        ("Your info", "/profile/index"),
+        ("Services & subscriptions", "/profile/index"),
+    ]; 
 }
 
 <div>
-    Profile
-
     <div>
         <a asp-page="/signOut/index">Sign out</a>
     </div>
 </div>
+
+<style>
+</style>
