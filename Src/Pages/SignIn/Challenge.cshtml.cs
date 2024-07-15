@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace RichillCapital.Identity.Web.Pages.Identity;
+namespace RichillCapital.Identity.Web.Pages.SignIn;
 
 public sealed class ChallengeViewModel(
     ILogger<ChallengeViewModel> _logger,
