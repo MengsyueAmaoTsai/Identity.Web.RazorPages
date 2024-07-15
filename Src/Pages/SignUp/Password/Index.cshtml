@@ -1,0 +1,20 @@
+@page "/sign-up/password"
+
+@model SignUpPasswordViewModel
+
+@{
+    ViewData["Title"] = "Sign up";
+}
+
+<div>
+    <form method="post">
+        <div asp-validation-summary="All"></div>
+        <input asp-for="Password" type="password">
+        
+        <button type="submit">Sign up</button>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ClientValidation" />
+}

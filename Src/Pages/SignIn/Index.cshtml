@@ -11,6 +11,12 @@
         <div asp-validation-summary="All"></div>
         <input asp-for="EmailAddress" type="email">
 
+        <a 
+            asp-page="/signUp/index" 
+            asp-route-returnUrl="@Model.ReturnUrl">
+            Create one!
+        </a>
+
         <input type="submit" value="Next">
     </form>
 </div>
