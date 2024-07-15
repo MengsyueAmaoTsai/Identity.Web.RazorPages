@@ -8,15 +8,29 @@
 
 <div>
     <form method="post">
+        <h2>@ViewData["Title"]</h2>
+                
         <div asp-validation-summary="All"></div>
-        <input asp-for="EmailAddress" type="email">
+        <input asp-for="EmailAddress" type="email" placeholder="Email address">
 
-        <a 
-            asp-page="/signUp/index" 
-            asp-route-returnUrl="@Model.ReturnUrl">
-            Create one!
-        </a>
+        <div>
+            No account? 
+            <a 
+                asp-page="/signUp/index" 
+                asp-route-returnUrl="@Model.ReturnUrl">
+                Create one!
+            </a>
+        </div>
 
+        <div>
+            <a 
+                asp-page="/password/reset/index"
+                asp-route-returnUrl="@Model.ReturnUrl">
+                Can't access your account?
+            </a>
+        </div>
+
+        <input type="button" value="Back">
         <input type="submit" value="Next">
     </form>
 </div>

@@ -9,8 +9,29 @@
 <div>
     <form method="post">
         <div asp-validation-summary="All"></div>
-        <input asp-for="Password" type="password">
+        
+        <input 
+            asp-for="Password" 
+            type="password" 
+            placeholder="Password">
 
+        <div>
+            <a 
+                asp-page=""
+                asp-route-returnUrl="@Model.ReturnUrl"
+                asp-route-emailAddress="@Model.EmailAddress">
+                Forgot password?
+            </a>
+        </div>
+
+        <div>
+            <a
+                asp-page=""
+                asp-route-returnUrl="@Model.ReturnUrl">
+                Other ways to sign in
+            </a>
+        </div>
+                
         <button type="submit">Sign in</button>
     </form>
 </div>
