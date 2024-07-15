@@ -3,9 +3,41 @@
 @model PasswordResetViewModel
 
 @{
-    ViewData["Title"] = "Reset Password";
+    Layout = "_Layout";
+    ViewData["Title"] = "Recover your account";
 }
 
 <div>
-    Reset password
+    @await Html.PartialAsync("_FormImage")
+    @await Html.PartialAsync("_IdentityBanner", @ViewData["Title"])
+
+    <div class="page-content">
+        <form id="post-redirect-form"></form>
+
+        <div class="form-wrapper-animation">
+            <form method="post" spellcheck="false" autocomplete="off">
+                @await Html.PartialAsync("_FormTitle", ViewData["Title"])
+
+                <div class="form-description-wrapper">
+                    <div class="form-description">We can help you reset your password and security info. First, enter your Microsoft account and follow the instructions below.</div>
+                </div>
+
+                <div class="button-container-row">
+                    <div class="button-container">
+                        <div class="button-secondary-wrapper">
+                            <button class="button-secondary" type="button">Cancel</button>
+                        </div>
+
+                        <div class="button-primary-wrapper">
+                            <button class="button-primary" type="submit">Next</button>
+                        </div>                                
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
+
+
+<style>
+</style>
