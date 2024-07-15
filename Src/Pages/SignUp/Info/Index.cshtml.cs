@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 using RichillCapital.Domain.Users;
@@ -5,6 +6,7 @@ using RichillCapital.SharedKernel.Monads;
 
 namespace RichillCapital.Identity.Web.Pages.SignUp.Info;
 
+[AllowAnonymous]
 public sealed class SignUpInfoViewModel(
     IUserManager _userManager,
     ISignInManager _signInManager) :

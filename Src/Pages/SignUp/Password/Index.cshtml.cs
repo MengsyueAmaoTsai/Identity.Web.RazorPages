@@ -1,9 +1,11 @@
 using System.ComponentModel.DataAnnotations;
 
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace RichillCapital.Identity.Web.Pages.SignUp.Password;
 
+[AllowAnonymous]
 public sealed class SignUpPasswordViewModel :
     IdentityViewModel
 {

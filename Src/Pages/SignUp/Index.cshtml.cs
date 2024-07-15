@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 using RichillCapital.Domain.Common.Repositories;
@@ -7,6 +8,7 @@ using RichillCapital.Domain.Users;
 
 namespace RichillCapital.Identity.Web.Pages.SignUp;
 
+[AllowAnonymous]
 public sealed class SignUpViewModel(
     IReadOnlyRepository<User> _userRepository) :
     IdentityViewModel
