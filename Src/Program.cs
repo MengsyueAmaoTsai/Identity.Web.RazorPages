@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.DataProtection;
 using RichillCapital.Identity;
 using RichillCapital.Identity.Web.Pages;
 using RichillCapital.Identity.Web.Middlewares;
-using RichillCapital.Identity.Web.Services;
 using RichillCapital.Logging;
 using RichillCapital.Persistence;
 using RichillCapital.UseCases;
@@ -31,7 +30,6 @@ builder.Services.AddDatabase();
 builder.Services.AddIdentityWebIdentity();
 
 // Infrastructure - Services
-builder.Services.AddApiService();
 
 // Presentation - RazorPages
 builder.Services.AddMiddlewares();
