@@ -5,128 +5,75 @@
 @{
     ViewData["Title"] = "Profile";
     Layout = "_ProfileLayout";
-
-    List<(string Text, string Page)> sideNavItems = [
-        ("Overview", "/profile/index"),
-        ("Your info", "/profile/index"),
-        ("Services & subscriptions", "/profile/index"),
-    ]; 
 }
 
 <div>
-    <div id="SiteHeader">
-        <div style="display: flex; flex-flow: column; width: auto; height: auto; box-sizing: border-box;">
-            <div style="text-overflow: ellipsis; height: 48px;">
-                <div class="nav-header">
-                    <div id="HeaderLeft">
-                        @await Html.PartialAsync("_AppLauncher")
-                    </div>
+    @await Html.PartialAsync("_Header")
 
-                    <div id="HeaderCenter">
-                        <div style="width: 100%;">
-                            <div>
-                                <div style="position: relative;">
-                                    <div>
-                                        <div id="Region0">
-                                            <div id="CenterStart">
-                                                @await Html.PartialAsync("_Brand")
-                                            </div>
-                                            <div id="CenterMiddle"></div>
-                                            <div id="CenterEnd"></div>
-                                        </div>
-                                    </div>
+    <div id="MainContentLanding">
+        <div id="HomeLanding">
+            <div>
+                <div class="body-163">
+                    <div class="body-164">
+                        <div class="css-165">
+                            <div style="text-overflow: ellipsis; visibility: visible; display: contents;">
+                                <div class="css-237">
+                                    @await Html.PartialAsync("_SideNav")
+                                    <div id="PageContent"></div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    
-                    <div id="HeaderRight">
-                    </div>
                 </div>
             </div>
         </div>
+        <div id="SiteFooter"></div>
     </div>
 </div>
 
 <style>
-    #SiteHeader {
-        z-index: 10;
-        position: sticky;
-        width: 100%;
-        top: 0;
+    #MainContentLanding {
+        display: flex;
+        flex-direction: column;
+        overflow-y: auto;
+        height: 100%;
     }
 
-    .nav-header {
-        width: 100%;
-        height: 50px;
-        display: flex;
-        border-spacing: 0;
-        white-space: nowrap;
-        line-height: normal;
-        width: 100%;
-        height: 50px;
-        display: flex;
-        border-spacing: 0;
-        white-space: nowrap;
-        line-height: normal;
-        background-color: #006fc9;
-        background-position: left top;
-        background-repeat-x: repeat;
-        background-image: none;
-        height: 48px;
-        line-height: 48px;
-    }
+    .body-163 {
+        color: rgb(36, 36, 36);
+        background: rgb(255, 255, 255);
+        font-family: "Segoe UI", "Segoe UI Web (West European)", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
+        font-weight: 400;
+        font-size: 14px;
+        -webkit-font-smoothing: antialiased;
+    }    
 
-    #HeaderRight {
-        display: flex;
-        flex: 0 0 auto;    
-        display: flex;
-        flex: 0 0 auto;
-        color: #f2f2f2;
-        background-color: #006fc9;
-    }
+    .body-164 {
+        color: rgb(50, 49, 48);
+        background: rgb(242, 242, 242);
+        font-family: "Segoe UI Variable Text", "Segoe UI", "Segoe UI Web (West European)", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
+        font-weight: 400;
+        font-size: 14px;
+        -webkit-font-smoothing: antialiased;
+    }    
 
-    #HeaderLeft {
-        align-items: center;
+    .css-165 {
+        display: flex;
+        flex-flow: row;
+        width: auto;
+        height: auto;
+        box-sizing: border-box;
         justify-content: space-between;
-        margin: 0;
-        padding: 0;
-        text-align: center;
-        height: 100%;
+        background-color: rgb(242, 242, 242);        
     }
 
-    #HeaderCenter {
+    .css-237 {
         display: flex;
-        flex: 1 0 auto;
-        height: 100%;
-        width: calc(100% - 96px);
-    }
-
-    #Region0 {
-        height: 48px;
-        display: flex;
-    }
-
-    #CenterStart {
-        height: 48px;
-        display: flex;
-        flex: 0 1 auto;
-        justify-content: flex-start;    
-    }
-
-    #CenterMiddle {
-        height: 48px;
-        display: flex;
-        overflow: hidden;
-        flex: 1 1 auto;
-        justify-content: flex-start;
-        min-width: 32px;
-    }
-
-    #CenterEnd {
-        height: 48px;
-        display: flex;
-        justify-content: flex-end;
-    }
+        flex-flow: row;
+        width: 100%;
+        height: auto;
+        box-sizing: border-box;
+        min-height: 100vh;
+    }   
 
 </style>
