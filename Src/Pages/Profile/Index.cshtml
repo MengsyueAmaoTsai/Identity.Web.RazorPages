@@ -14,10 +14,58 @@
 }
 
 <div>
-    <div>
-        <a asp-page="/signOut/index">Sign out</a>
+    <div id="SiteHeader">
+        <div style="display: flex; flex-flow: column; width: auto; height: auto; box-sizing: border-box;">
+            <div style="text-overflow: ellipsis; height: 48px;">
+                <div class="nav-header">
+                    <div id="HeaderLeft">
+                        @await Html.PartialAsync("_AppLauncher")
+                    </div>
+                    
+                    <div id="HeaderCenter"></div>
+                    <div id="HeaderRight">
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
 <style>
+    #SiteHeader {
+        z-index: 10;
+        position: sticky;
+        width: 100%;
+        top: 0;
+    }
+
+    .nav-header {
+        width: 100%;
+        height: 50px;
+        display: flex;
+        border-spacing: 0;
+        white-space: nowrap;
+        line-height: normal;
+        width: 100%;
+        height: 50px;
+        display: flex;
+        border-spacing: 0;
+        white-space: nowrap;
+        line-height: normal;
+        background-color: #006fc9;
+        background-position: left top;
+        background-repeat-x: repeat;
+        background-image: none;
+        height: 48px;
+        line-height: 48px;
+    }
+
+    #HeaderRight {
+        display: flex;
+        flex: 0 0 auto;    
+        display: flex;
+        flex: 0 0 auto;
+        color: #f2f2f2;
+        background-color: #006fc9;
+    }
 </style>
