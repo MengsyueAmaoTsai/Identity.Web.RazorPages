@@ -63,6 +63,6 @@ public sealed class StaySignedInViewModel(
             return ErrorPage();
         }
 
-        return ProfilePage();
+        return IndexPage();
     }
 }

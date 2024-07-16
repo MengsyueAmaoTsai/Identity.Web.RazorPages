@@ -10,8 +10,8 @@ public abstract class ViewModel : PageModel
         return RedirectToPage("/errors/index");
     }
 
-    protected IActionResult ProfilePage()
+    protected IActionResult IndexPage()
     {
-        return RedirectToPage("/profile/index");
+        return RedirectToPage("/index");
     }
 }

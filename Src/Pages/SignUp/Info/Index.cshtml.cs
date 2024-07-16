@@ -79,6 +79,6 @@ public sealed class SignUpInfoViewModel(
             return ErrorPage();
         }
 
-        return ProfilePage();
+        return IndexPage();
     }
 }
