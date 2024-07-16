@@ -1,0 +1,32 @@
+﻿@model string
+
+<span class="title-wrapper">
+    <h1 class="title-text">@ViewData["Title"]</h1>
+</span>
+
+<style>
+    .title-wrapper {
+        text-overflow: ellipsis;
+        font-size: 24px;
+        overflow: hidden;
+        box-sizing: content-box;
+        white-space: normal;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 1;
+        line-height: 1.4;
+    }
+
+    .title-text {
+        font-family: "Segoe UI Variable Text", "Segoe UI", "Segoe UI Web (West European)", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
+        -webkit-font-smoothing: antialiased;
+        font-size: 24px;
+        font-weight: 600;
+        color: rgb(50, 49, 48);
+        display: block;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        line-height: 1.4;
+    }
+</style>
