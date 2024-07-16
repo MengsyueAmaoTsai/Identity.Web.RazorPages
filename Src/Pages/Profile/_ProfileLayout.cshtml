@@ -10,7 +10,9 @@
 </head>
 
 <body>
-    @RenderBody()
+    <div class="WebContainer">
+        @RenderBody()
+    </div>
 
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
@@ -28,9 +30,11 @@
         font: inherit;
         vertical-align: baseline;
     }
+
     article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section {
         display: block;
     }
+
     body {
         line-height: 1.4;
         word-break: break-word;
@@ -40,114 +44,6 @@
         height: 100%;
     }
 
-    #PageWrapper {
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        background-color: #F2F2F2;
+    #WebContainer {
     }
-
-    #ProfileHeader {
-        z-index: 10;
-        position: sticky;
-        width: 100%;
-        top: 0;
-    }
-
-    #MainContentLanding {
-        display: flex;
-        flex-direction: column;
-        overflow-y: auto;
-        height: 100%;
-        outline: none;
-    }
-
-    .body-163 {
-        color: rgb(36, 36, 36);
-        background: rgb(255, 255, 255);
-        font-family: "Segoe UI", "Segoe UI Web (West European)", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
-        font-weight: 400;
-        font-size: 14px;
-        -webkit-font-smoothing: antialiased;
-    }
-    .body-164 {
-        color: rgb(50, 49, 48);
-        background: rgb(242, 242, 242);
-        font-family: "Segoe UI Variable Text", "Segoe UI", "Segoe UI Web (West European)", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
-        font-weight: 400;
-        font-size: 14px;
-        -webkit-font-smoothing: antialiased;
-    }
-
-    .css-165 {
-        display: flex;
-        flex-flow: row;
-        width: auto;
-        height: auto;
-        box-sizing: border-box;
-        justify-content: space-between;
-        background-color: rgb(242, 242, 242);
-    }
-
-    .css-237 {
-        display: flex;
-        flex-flow: row;
-        width: 100%;
-        height: auto;
-        box-sizing: border-box;
-        min-height: 100vh;
-    }    
-
-    .body-164 {
-        color: rgb(50, 49, 48);
-        background: rgb(242, 242, 242);
-        font-family: "Segoe UI Variable Text", "Segoe UI", "Segoe UI Web (West European)", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
-        font-weight: 400;
-        font-size: 14px;
-        -webkit-font-smoothing: antialiased;
-    }    
-
-    .css-162 {
-        display: flex;
-        flex-flow: column;
-        width: auto;
-        height: auto;
-        box-sizing: border-box;
-    }    
-    .root-302 {
-        position: relative;
-        z-index: 1;
-        flex: 0 0 auto;
-        height: 100%;
-    }
-
-    .navWrapper-303 {
-        overflow: hidden;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        padding-left: 10px;
-        padding-top: 24px;
-    }    
-
-    .navContainer-304 {
-        width: calc(280px + var(--scrollbar-width));
-        background-color: rgb(242, 242, 242);
-        color: rgb(50, 49, 48);
-        transition-property: width;
-        transition-duration: 0s;
-        font-size: 14px;
-        overflow: hidden scroll;
-        margin-inline-end: calc(var(--scrollbar-width)* -1);
-        height: 100%;
-        max-height: 100%;
-        max-width: 250px;
-        user-select: none;
-    }   
-
-    .navGroup-305 {
-        margin: 0px;
-        padding: 0px;
-        list-style: none;
-    }     
 </style>
