@@ -1,0 +1,379 @@
+@model Email
+
+@{
+    List<(string Text, string Page)> commandLinks =
+    [
+        ("Sign-in preference", "/index"),
+        ("Link your phone to your PC", "/index"),
+        ("Close account", "/index")
+    ];
+}
+
+<section id="AccountInfoSection">
+    <div class="root-251">
+        <div class="data-wrapper">
+            <div class="css-194">
+                <div class="section-header">
+                    <div>
+                        <div class="css-196">
+                            <div class="css-197">
+                                <div class="css-198">
+                                    <div class="css-406">
+                                        <span class="section-header-title">User info</span>
+                                        <a asp-page="/index" class="section-link">Edit info</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-body">
+                    <div role="list">
+                        <div role="presentation">
+                            <div role="presentation">
+                                <div role="presentation">
+                                    <div role="listitem" class="section-body-item">
+                                        <div>
+                                            <div class="css-196">
+                                                <div class="css-197">
+                                                    <div class="css-287">
+                                                        <div class="css-292">
+                                                            <div class="css-410">
+                                                                <span class="css-411">Email address</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="css-292">
+                                                            <div class="css-410">
+                                                                <span class="css-199">@Model.Value</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="css-292">
+                                                            <div class="css-410">
+                                                                <span class="css-411">The email address you use to sign in to Richill Capital</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="css-292">
+                                                            <div class="css-162">
+                                                                <div class="css-412">
+                                                                    <div class="css-196">
+                                                                        <div class="css-281">
+                                                                            <a class="section-link">Communication preferences</a>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div role="presentation">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-footer">
+                    <div class="section-footer-content">
+                        <div class="section-footer-inner">
+                            <div class="command-links-wrapper">
+                                <div class="command-links">
+                                    @foreach (var link in commandLinks)
+                                    {
+                                        <div class="command-link-wrapper">
+                                            <a class="section-link" asp-page="@link.Page">@link.Text</a>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    #AccountInfoSection {
+        text-overflow: ellipsis;
+        margin-top: 16px;
+    }
+
+    .root-251 {
+        font-family: "Segoe UI Variable Text", "Segoe UI", "Segoe UI Web (West European)", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
+        -webkit-font-smoothing: antialiased;
+        font-size: 14px;
+        font-weight: 400;
+        position: relative;
+        height: auto;
+        width: 100%;
+    }
+
+    .data-wrapper {
+        position: static;
+        inset: 0px;
+        opacity: 1;
+        background: none transparent;
+        border: none;
+        transition: opacity 200ms ease 0s;
+    }
+
+    .css-194 {
+        display: flex;
+        flex-flow: column;
+        width: auto;
+        height: auto;
+        box-sizing: border-box;
+        box-shadow: rgba(0, 0, 0, 0.133) 0px 1.6px 3.6px 0px, rgba(0, 0, 0, 0.11) 0px 0.3px 0.9px 0px;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    .section-header {
+        text-overflow: ellipsis;
+        display: flex;
+        flex-flow: column;
+        width: auto;
+        height: auto;
+        box-sizing: border-box;
+        flex-grow: 1;
+        justify-content: center;
+        background-color: rgb(255, 255, 255);
+        border-bottom: 1px solid rgb(242, 242, 242);
+        min-height: 48px;
+    }
+
+    .css-196 {
+        display: flex;
+        flex-flow: row;
+        width: auto;
+        height: auto;
+        box-sizing: border-box;
+        flex-grow: 1;
+        align-items: center;
+    }
+
+    .css-197 {
+        font-family: "Segoe UI Variable Text", "Segoe UI", "Segoe UI Web (West European)", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
+        -webkit-font-smoothing: antialiased;
+        font-size: 14px;
+        font-weight: 400;
+        flex-basis: auto;
+        height: auto;
+        width: auto;
+        flex-grow: 1;
+    }
+
+    .css-198 {
+        display: flex;
+        flex-flow: column;
+        width: auto;
+        height: auto;
+        box-sizing: border-box;
+        padding: 8px 0px 8px 16px;
+    }
+
+    .css-406 {
+        display: flex;
+        flex-flow: row;
+        width: auto;
+        height: auto;
+        box-sizing: border-box;
+        flex-grow: 1;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0px 8px 0px 0px;
+    }
+
+    .css-410 {
+        display: flex;
+        flex-flow: column;
+        width: auto;
+        height: auto;
+        box-sizing: border-box;
+        align-items: flex-start;
+    }
+
+    .css-199 {
+        font-family: "Segoe UI Variable Text", "Segoe UI", "Segoe UI Web (West European)", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
+        -webkit-font-smoothing: antialiased;
+        font-size: 14px;
+        font-weight: 600;
+        color: rgb(50, 49, 48);
+        display: inline;
+        line-height: 1.4;
+    }
+
+    .css-162 {
+        display: flex;
+        flex-flow: column;
+        width: auto;
+        height: auto;
+        box-sizing: border-box;
+    }
+
+    .css-412 {
+        display: flex;
+        flex-flow: column;
+        width: auto;
+        height: auto;
+        box-sizing: border-box;
+        align-items: flex-end;
+        padding: 0px 16px 0px 0px;
+    }
+
+    .css-281 {
+        display: flex;
+        flex-flow: column;
+        width: auto;
+        height: auto;
+        box-sizing: border-box;
+        flex-grow: 1;
+        align-items: flex-start;
+    }
+
+    .section-header-title {
+        font-family: "Segoe UI Variable Text", "Segoe UI", "Segoe UI Web (West European)", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
+        -webkit-font-smoothing: antialiased;
+        font-size: 14px;
+        font-weight: 600;
+        color: rgb(50, 49, 48);
+        display: inline;
+        line-height: 1.4;
+        text-overflow: ellipsis;
+    }
+
+    .section-body-item {
+        display: flex;
+        flex-flow: column;
+        width: auto;
+        height: auto;
+        box-sizing: border-box;
+        flex-grow: 1;
+        justify-content: center;
+        background-color: rgb(255, 255, 255);
+        padding: 8px 0px 8px 16px;
+        border-bottom: 1px solid rgb(242, 242, 242);
+        min-height: 48px;
+    }
+
+    .css-287 {
+        display: flex;
+        flex-flow: row;
+        width: auto;
+        height: auto;
+        box-sizing: border-box;
+        align-items: center;
+    }
+
+    .css-292 {
+        font-family: "Segoe UI Variable Text", "Segoe UI", "Segoe UI Web (West European)", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
+        -webkit-font-smoothing: antialiased;
+        font-size: 14px;
+        font-weight: 400;
+        flex-basis: auto;
+        height: auto;
+        width: calc(25% - 12px);
+        flex-shrink: 0;
+    }
+
+    .css-411 {
+        font-family: "Segoe UI Variable Text", "Segoe UI", "Segoe UI Web (West European)", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
+        -webkit-font-smoothing: antialiased;
+        font-size: 14px;
+        font-weight: 400;
+        color: rgb(96, 94, 92);
+        display: inline;
+        line-height: 1.4;
+    }
+    .section-footer {
+        text-overflow: ellipsis;
+        display: flex;
+        flex-flow: column;
+        width: auto;
+        height: auto;
+        box-sizing: border-box;
+        justify-content: center;
+        box-shadow: rgba(0, 0, 0, 0.133) 0px 3.2px 7.2px 0px, rgba(0, 0, 0, 0.11) 0px 0.6px 1.8px 0px;
+        border-radius: 0px 0px 4px 4px;
+        padding: 8px 16px;
+        background-color: rgb(250, 250, 250);
+    }
+
+    .section-footer-content {
+        text-overflow: ellipsis;
+        flex-wrap: wrap;
+        width: auto;
+        overflow: visible;
+        height: auto;
+        display: flex;
+        margin: 9px 0px;
+    }
+
+    .section-footer-inner {
+        text-overflow: ellipsis;
+        display: flex;
+        flex-flow: column;
+        width: auto;
+        height: auto;
+        box-sizing: border-box;
+        justify-content: center;
+        box-shadow: rgba(0, 0, 0, 0.133) 0px 3.2px 7.2px 0px, rgba(0, 0, 0, 0.11) 0px 0.6px 1.8px 0px;
+        border-radius: 0px 0px 4px 4px;
+        padding: 8px 16px;
+        background-color: rgb(250, 250, 250);
+    }
+
+    .command-links-wrapper {
+        margin: 0px;
+        text-overflow: ellipsis;
+        max-width: 100%;
+        flex-wrap: wrap;
+        width: auto;
+        overflow: visible;
+        height: auto;
+        display: flex;
+    }
+
+    .command-links {
+        display: flex;
+        flex-flow: wrap;
+        margin: 0px -8px;
+        overflow: visible;
+        box-sizing: border-box;
+        width: calc(100% + 16px);
+        max-width: 100vw;
+        height: 100%;
+    }
+
+    .command-link-wrapper {
+        font-family: "Segoe UI Variable Text", "Segoe UI", "Segoe UI Web (West European)", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
+        -webkit-font-smoothing: antialiased;
+        font-size: 14px;
+        font-weight: 400;
+        flex-basis: auto;
+        height: auto;
+        width: auto;
+        flex-shrink: 1;
+        margin: 0px 8px;
+        text-overflow: ellipsis;
+        max-width: calc(100% - 16px);
+    }
+
+    .section-link {
+        font-family: "Segoe UI Variable Text", "Segoe UI", "Segoe UI Web (West European)", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
+        -webkit-font-smoothing: antialiased;
+        font-size: 14px;
+        font-weight: 400;
+        color: rgb(0, 111, 201);
+        outline: none;
+        text-decoration: none;
+        line-height: 1.4;
+    }
+</style>
