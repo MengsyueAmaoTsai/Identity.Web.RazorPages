@@ -1,43 +1,34 @@
+
 @{
-    List<(string Text, string Page)> sideNavItems = [
-        ("Overview", "/profile/index"),
-        ("Your info", "/profile/index"),
-        ("Services & subscriptions", "/profile/index"),
-        ("Devices", "/profile/index"),
-        ("Security", "/profile/index"),
-        ("Privacy", "/profile/index"),
-        ("Order history", "/profile/index"),
-        ("Payment options", "/profile/index"),
-        ("Address book", "/profile/index"),
-    ]; 
+    ViewData["Title"] = "Profile";
+    Layout = "_ProfileLayout";
+
+    List<(string Text, string Page, string Image)> items = 
+    [
+        ("Overview", "/profile/index", ""),
+        ("Services & subscriptions", "/profile/devices/index", ""),
+        ("Devices", "/profile/devices/index", ""),
+        ("Security", "/profile/security/index", ""),
+    ];
 }
 
 <div id="SideNav">
-    <div class="css-162">
-        <div></div>
-        <div style="position: fixed; height: calc(100% - 48px); z-index: 5;">
-            <div class="root-302" role="presentation">
-                <nav role="navigation" class="nav-wrapper">
-                    <div class="nav-container">
+    <div style="display: flex; flex-flow: column; width: auto; height: auto; box-sizing: border-box;">
+        <div style="position: fixed; height: calc(100% - 48px); z-index: 5; text-overflow: ellipsis;">
+            <div class="side-nav-root">
+                <nav role="navigation" class="side-nav-wrapper">
+                    <div class="side-nav-container">
                         <div role="presentation">
-                            <ul role="menubar" class="nav-group">
+                            <ul class="side-nav-items">
                                 <div role="group">
-                                    <li role="presentation"></li>
-                                    @foreach (var item in sideNavItems)
+                                    <li role="presentation">
+                                        @await Html.PartialAsync("_ProfileButton")
+                                    </li>
+
+                                    @foreach (var item in items)
                                     {
-                                        <li class="nav-item" role="presentation">
-                                            <div class="tooltip" role="none">
-                                                <a asp-page="@item.Page" class="nav-item-link" role="menuitem">
-                                                    <div class="nav-item-icon-wrapper">
-                                                        <i class="nav-item-icon"></i>
-                                                    </div>
-                                                    <div class="nav-item-text-wrapper">
-                                                        <span class="nav-item-text-container">
-                                                            <span class="nav-item-text">@item.Text</span>
-                                                        </span>
-                                                    </div>
-                                                </a>
-                                            </div>
+                                        <li class="side-nav-item-wrapper" role="presentation">
+                                            @await Html.PartialAsync("_SideNavItem", item)
                                         </li>
                                     }
                                 </div>
@@ -50,6 +41,8 @@
     </div>
 </div>
 
+
+
 <style>
     #SideNav {
         color: rgb(50, 49, 48);
@@ -57,26 +50,17 @@
         font-family: "Segoe UI Variable Text", "Segoe UI", "Segoe UI Web (West European)", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
         font-weight: 400;
         font-size: 14px;
-        -webkit-font-smoothing: antialiased;
-        text-overflow: ellipsis;        
+        -webkit-font-smoothing: antialiased;    
+        text-overflow: ellipsis;    
     }
 
-    .css-162 {
-        display: flex;
-        flex-flow: column;
-        width: auto;
-        height: auto;
-        box-sizing: border-box;
-    }
-
-    .root-302 {
+    .side-nav-root {
         position: relative;
         z-index: 1;
         flex: 0 0 auto;
         height: 100%;
-    }     
-
-    .nav-wrapper {
+    }
+    .side-nav-wrapper {
         overflow: hidden;
         height: 100%;
         display: flex;
@@ -85,7 +69,7 @@
         padding-top: 24px;
     }
 
-    .nav-container {
+    .side-nav-container {
         width: calc(280px + var(--scrollbar-width));
         background-color: rgb(242, 242, 242);
         color: rgb(50, 49, 48);
@@ -97,94 +81,18 @@
         height: 100%;
         max-height: 100%;
         max-width: 250px;
-        user-select: none;
-        }
+        user-select: none;        
     }
 
-    .nav-group {
+    .side-nav-items {
         margin: 0px;
         padding: 0px;
         list-style: none;
     }
 
-    .nav-item {
-        margin: 0px;
-        padding: 0px;
+    .side-nav-item-wrapper {
+        margin: 0;
+        padding: 0;
+        list-style: none;
     }
-
-    .tooltip {
-        display: flex;
-    }
-
-    .nav-item-link {
-        font-family: "Segoe UI", "Segoe UI Web (West European)", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
-        -webkit-font-smoothing: antialiased;
-        font-size: 14px;
-        font-weight: 400;
-        outline: transparent;
-        position: relative;
-        min-height: 40px;
-        color: rgb(50, 49, 48);
-        text-decoration: none;
-        display: flex;
-        flex-flow: row;
-        align-items: center;
-        cursor: pointer;
-        width: 220px;
-        background: rgb(255, 255, 255);
-        border: none;
-        padding: 0px;
-        text-align: inherit;
-        margin-bottom: 6px;
-        margin-right: 8px;
-        border-radius: 4px;
-        box-shadow: rgba(0, 0, 0, 0.133) 0px 1.6px 3.6px 0px, rgba(0, 0, 0, 0.11) 0px 0.3px 0.9px 0px;
-    }
-
-    .nav-item-icon-wrapper {
-        display: flex;
-        flex: 0 0 48px;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .nav-item-icon {
-        display: flex;
-        -webkit-font-smoothing: antialiased;
-        font-style: normal;
-        font-weight: normal;
-        speak: none;
-        font-family: "AMC Icons";
-        font-size: 16px;
-        color: rgb(0, 100, 181);
-    }
-
-    .nav-item-text-wrapper {
-        flex: 1 1 auto;
-        text-overflow: ellipsis;
-        overflow-x: hidden;
-        white-space: nowrap;
-        color: rgb(50, 49, 48);
-        pointer-events: none;
-    }
-
-    .nav-item-text-container {
-        overflow: hidden;
-        box-sizing: content-box;
-        white-space: normal;
-        display: -webkit-box;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 1;
-        font-size: 14px;
-    }
-
-    .nav-item-text {
-        font-family: "Segoe UI Variable Text", "Segoe UI", "Segoe UI Web (West European)", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
-        -webkit-font-smoothing: antialiased;
-        font-size: 14px;
-        font-weight: 600;
-        color: rgb(50, 49, 48);
-        display: inline;
-        line-height: 1.4;
-    }    
 </style>
