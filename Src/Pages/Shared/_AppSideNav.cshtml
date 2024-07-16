@@ -1,0 +1,189 @@
+@{
+    List<(string Text, string Page, string ImageSource)> sideNavItems =
+    [
+        ("Overview", "/index", ""),
+        ("Your info", "/index", ""),
+        ("Services & subscriptions", "/index", ""),
+        ("Devices", "/index", ""),
+        ("Security", "/index", ""),
+        ("Privacy", "/index", ""),
+        ("Order hisotry", "/index", ""),
+        ("Payment options", "/index", ""),
+        ("Address book", "/index", ""),
+    ];
+}
+
+<div id="SideNav">
+    <div class="side-nav-root">
+        <div class="css-309"></div>
+        
+        <div style="position: fixed; height: calc(100% - 48px); z-index: 5;">
+            <div class="side-nav-outer" role="presentation">
+                <nav role="navigation" class="side-nav-wrapper">
+                    <div class="side-nav-container">
+                        <div role="presentation">
+                            <ul role="menubar" class="side-nav-items">
+                                <div role="group">
+                                    <li role="presentation">
+                                    </li>
+
+                                    @foreach (var item in sideNavItems)
+                                    {
+                                        <li role="presentation" class="side-nav-item">
+                                            <div style="display: flex;" role="none">
+                                                <a role="menuitem" asp-page="@item.Page" class="side-nav-item-link">
+                                                    <div role="presentation" class="side-nav-item-icon-container">
+                                                        <i class="side-nav-item-icon"></i>
+                                                    </div>
+                                                    <div class="side-nav-item-text-container">
+                                                        <span class="side-nav-item-text-wrapper">
+                                                            <span class="side-nav-item-text">@item.Text</span>
+                                                        </span>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </li>
+                                    }
+                                </div>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    #SideNav {
+        color: rgb(50, 49, 48);
+        background: rgb(242, 242, 242);
+        font-family: "Segoe UI Variable Text", "Segoe UI", "Segoe UI Web (West European)", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
+        font-weight: 400;
+        font-size: 14px;
+        -webkit-font-smoothing: antialiased;
+        text-overflow: ellipsis;
+    }
+
+    .side-nav-root {
+        display: flex;
+        flex-flow: column;
+        width: auto;
+        height: auto;
+        box-sizing: border-box;
+    }
+
+    .side-nav-outer {
+        position: relative;
+        z-index: 1;
+        flex: 0 0 auto;
+        height: 100%;
+    }
+
+    .side-nav-wrapper {
+        overflow: hidden;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        padding-left: 10px;
+        padding-top: 24px;
+    }
+
+    .side-nav-container {
+        width: calc(280px + var(--scrollbar-width));
+        background-color: rgb(242, 242, 242);
+        color: rgb(50, 49, 48);
+        transition-property: width;
+        transition-duration: 0s;
+        font-size: 14px;
+        overflow: hidden scroll;
+        margin-inline-end: calc(var(--scrollbar-width)* -1);
+        height: 100%;
+        max-height: 100%;
+        max-width: 250px;
+        user-select: none;
+    }
+
+    .side-nav-items {
+        margin: 0px;
+        padding: 0px;
+        list-style: none;
+    }
+
+    .side-nav-item {
+        margin: 0px;
+        padding: 0px;
+    }
+
+    .side-nav-item-link {
+        font-family: "Segoe UI", "Segoe UI Web (West European)", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
+        -webkit-font-smoothing: antialiased;
+        font-size: 14px;
+        font-weight: 400;
+        outline: transparent;
+        position: relative;
+        min-height: 40px;
+        color: rgb(50, 49, 48);
+        text-decoration: none;
+        display: flex;
+        flex-flow: row;
+        align-items: center;
+        cursor: pointer;
+        width: 220px;
+        background: rgb(255, 255, 255);
+        border: none;
+        padding: 0px;
+        text-align: inherit;
+        margin-bottom: 6px;
+        margin-right: 8px;
+        border-radius: 4px;
+        box-shadow: rgba(0, 0, 0, 0.133) 0px 1.6px 3.6px 0px, rgba(0, 0, 0, 0.11) 0px 0.3px 0.9px 0px;
+    }
+
+    .side-nav-item-icon-container {
+        display: flex;
+        flex: 0 0 48px;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .side-nav-item-icon {
+        display: flex;
+        -webkit-font-smoothing: antialiased;
+        font-style: normal;
+        font-weight: normal;
+        speak: none;
+        font-family: "AMC Icons";
+        font-size: 16px;
+        color: rgb(0, 100, 181);
+    }
+
+    .side-nav-item-text-container {
+        flex: 1 1 auto;
+        text-overflow: ellipsis;
+        overflow-x: hidden;
+        white-space: nowrap;
+        color: rgb(50, 49, 48);
+        pointer-events: none;
+    }
+
+    .side-nav-item-text-wrapper {
+        overflow: hidden;
+        box-sizing: content-box;
+        white-space: normal;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 1;
+        font-size: 14px;
+    }
+
+    .side-nav-item-text {
+        font-family: "Segoe UI Variable Text", "Segoe UI", "Segoe UI Web (West European)", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
+        -webkit-font-smoothing: antialiased;
+        font-size: 14px;
+        font-weight: 600;
+        color: rgb(50, 49, 48);
+        display: inline;
+        line-height: 1.4;
+    }
+</style>
