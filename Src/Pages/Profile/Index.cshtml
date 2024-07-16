@@ -2,78 +2,10 @@
 
 @model ProfileViewModel
 
+
 @{
     ViewData["Title"] = "Profile";
     Layout = "_ProfileLayout";
 }
 
-<div>
-    @await Html.PartialAsync("_Header")
-
-    <div id="MainContentLanding">
-        <div id="HomeLanding">
-            <div>
-                <div class="body-163">
-                    <div class="body-164">
-                        <div class="css-165">
-                            <div style="text-overflow: ellipsis; visibility: visible; display: contents;">
-                                <div class="css-237">
-                                    @await Html.PartialAsync("_SideNav")
-                                    <div id="PageContent"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div id="SiteFooter"></div>
-    </div>
-</div>
-
-<style>
-    #MainContentLanding {
-        display: flex;
-        flex-direction: column;
-        overflow-y: auto;
-        height: 100%;
-    }
-
-    .body-163 {
-        color: rgb(36, 36, 36);
-        background: rgb(255, 255, 255);
-        font-family: "Segoe UI", "Segoe UI Web (West European)", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
-        font-weight: 400;
-        font-size: 14px;
-        -webkit-font-smoothing: antialiased;
-    }    
-
-    .body-164 {
-        color: rgb(50, 49, 48);
-        background: rgb(242, 242, 242);
-        font-family: "Segoe UI Variable Text", "Segoe UI", "Segoe UI Web (West European)", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
-        font-weight: 400;
-        font-size: 14px;
-        -webkit-font-smoothing: antialiased;
-    }    
-
-    .css-165 {
-        display: flex;
-        flex-flow: row;
-        width: auto;
-        height: auto;
-        box-sizing: border-box;
-        justify-content: space-between;
-        background-color: rgb(242, 242, 242);        
-    }
-
-    .css-237 {
-        display: flex;
-        flex-flow: row;
-        width: 100%;
-        height: auto;
-        box-sizing: border-box;
-        min-height: 100vh;
-    }   
-
-</style>
+@await Html.PartialAsync("_ProfileButton");

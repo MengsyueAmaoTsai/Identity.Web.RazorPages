@@ -1,4 +1,3 @@
-using RichillCapital.Domain;
 using RichillCapital.Domain.Users;
 
 namespace RichillCapital.UseCases.Common;
