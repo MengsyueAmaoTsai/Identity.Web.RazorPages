@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <div class="WebContainer">
+    <div id="WebRoot">
         @RenderBody()
     </div>
 
@@ -44,6 +44,10 @@
         height: 100%;
     }
 
-    #WebContainer {
+    #WebRoot {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        background-color: #F2F2F2;
     }
 </style>
