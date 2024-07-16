@@ -21,8 +21,25 @@
                     <div id="HeaderLeft">
                         @await Html.PartialAsync("_AppLauncher")
                     </div>
+
+                    <div id="HeaderCenter">
+                        <div style="width: 100%;">
+                            <div>
+                                <div style="position: relative;">
+                                    <div>
+                                        <div id="Region0">
+                                            <div id="CenterStart">
+                                                @await Html.PartialAsync("_Brand")
+                                            </div>
+                                            <div id="CenterMiddle"></div>
+                                            <div id="CenterEnd"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     
-                    <div id="HeaderCenter"></div>
                     <div id="HeaderRight">
                     </div>
                 </div>
@@ -68,4 +85,48 @@
         color: #f2f2f2;
         background-color: #006fc9;
     }
+
+    #HeaderLeft {
+        align-items: center;
+        justify-content: space-between;
+        margin: 0;
+        padding: 0;
+        text-align: center;
+        height: 100%;
+    }
+
+    #HeaderCenter {
+        display: flex;
+        flex: 1 0 auto;
+        height: 100%;
+        width: calc(100% - 96px);
+    }
+
+    #Region0 {
+        height: 48px;
+        display: flex;
+    }
+
+    #CenterStart {
+        height: 48px;
+        display: flex;
+        flex: 0 1 auto;
+        justify-content: flex-start;    
+    }
+
+    #CenterMiddle {
+        height: 48px;
+        display: flex;
+        overflow: hidden;
+        flex: 1 1 auto;
+        justify-content: flex-start;
+        min-width: 32px;
+    }
+
+    #CenterEnd {
+        height: 48px;
+        display: flex;
+        justify-content: flex-end;
+    }
+
 </style>
