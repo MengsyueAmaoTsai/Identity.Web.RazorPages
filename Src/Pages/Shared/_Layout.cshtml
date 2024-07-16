@@ -11,7 +11,8 @@
 
 <body>
     <div id="WebRoot">
-        <div id="AppHeader">app header</div>
+        @await Html.PartialAsync("_AppHeader")
+        
         @RenderBody()
     </div>
 
