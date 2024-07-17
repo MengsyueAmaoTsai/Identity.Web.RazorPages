@@ -7,8 +7,7 @@
                     <div id="HeaderLeft">
                         <div style="height: 100%; line-height: 48px; display: flex;">
                             <button id="AppLauncher" type="button" role="button">
-                                <span class="app-launcher-icon" role="presentation">
-                                </span>
+                                <span class="app-launcher-icon" role="presentation"></span>
                             </button>
                         </div>
                     </div>
@@ -22,7 +21,9 @@
                                             <div id="CenterStart">
                                                 @await Html.PartialAsync("_AppHeaderBrand")
                                             </div>
+
                                             <div id="CenterMiddle"></div>
+                                            
                                             <div id="CenterEnd"></div>
                                         </div>
                                     </div>
@@ -31,7 +32,9 @@
                         </div>
                     </div>
                     
-                    <div id="HeaderRight"></div>
+                    <div id="HeaderRight">
+                        @await Html.PartialAsync("_UniversalMe")
+                    </div>
                 </div>
             </div>
         </div>
