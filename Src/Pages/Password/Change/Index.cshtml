@@ -5,3 +5,137 @@
 @{
     ViewData["Title"] = "Change your password";
 }
+
+<form method="post" novalidate>
+    <div id="UpdatePassword">
+        <section class="form-section">
+            <div class="section-body">
+                <div id="UpdatePasswordTitle" class="form-title" role="heading">
+                    @ViewData["Title"]
+                </div>
+
+                <div class="section-body-row">
+                    <div class="form-description">A strong password helps prevent unauthorized access to your email account.</div>
+                </div>
+
+                <div class="section-body-row">
+                    <div class="current-password-group">
+                        <label asp-for="CurrentPassword"></label>
+                        <span asp-validation-for="CurrentPassword"></span>
+                        <input asp-for="CurrentPassword" type="password" />
+                        <div>Forgot your password?</div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="section-body-row">
+                        <div class="new-password-group">
+                            <label asp-for="NewPassword"></label>
+                            <span asp-validation-for="NewPassword"></span>
+                            <input asp-for="NewPassword" type="password" />
+                            <p>8-character minimum; case sensitive</p>
+                        </div>
+                    </div>
+
+                    <div class="section-body-row">
+                        <div class="reenter-password-group">
+                            <label asp-for="ReenterPassword"></label>
+                            <span asp-validation-for="ReenterPassword"></span>
+                            <input asp-for="ReenterPassword" type="password" />
+                        </div>
+                    </div>
+
+                    <div class="section-body-row">
+                        <div class="change-password-group">
+                            <input asp-for="ChangePasswordEvery72Days" type="checkbox" />
+                            <label asp-for="ChangePasswordEvery72Days"></label>
+                        </div>
+                    </div>
+                </div>
+                
+
+                <div class="section-body-row">
+                    <input type="submit" role="button" value="Save" />
+                    <input type="button" role="button" value="Cancel" />
+                </div>
+            </div>
+        </section>
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ClientValidation" />
+}
+
+<style>
+    h1, h2, h3, h4, h5, h6, .text-headline, .text-header, .text-subheader, .text-title, .text-subtitle, .text-body, .text-base, .text-caption, .text-caption-alt, .text-subcaption, p {
+        margin-bottom: 20px;
+        margin-top: 20px;
+        margin-bottom: 1.25rem;
+        margin-top: 1.25rem;
+    }
+
+    .form-title {
+        font-size: 34px;
+        line-height: 40px;
+        font-weight: 200;
+        font-size: 2.125rem;
+        line-height: 2.5rem;
+        padding-bottom: 3.1812px;
+        padding-top: 3.1812px;
+    }
+
+    .form-description {
+        position: relative;
+        min-height: 1px;
+        padding-left: 2px;
+        padding-right: 2px;
+        float: left;
+        width: 100%;
+        margin-bottom: 12px;
+    }
+
+    .current-password-group {
+        position: relative;
+        min-height: 1px;
+        padding-left: 2px;
+        padding-right: 2px;
+        float: left;
+        width: 100%;
+        margin-bottom: 12px;
+        max-width: 640px;
+    }
+
+    .new-password-group {
+        margin-bottom: 12px;
+        max-width: 640px;
+    }
+    .reenter-password-group {
+        margin-bottom: 12px;
+        max-width: 640px;
+    }
+
+    .change-password-group {
+        position: relative;
+        display: block;
+        margin-top: 12px;
+        margin-bottom: 12px;
+    }
+
+    .form-section {
+        margin-top: 0;
+    }
+
+    .section-body {
+        margin-right: auto;
+        margin-left: auto;
+        padding-left: 2px;
+        padding-right: 2px;
+        width: 100%;
+    }
+
+    .section-body-row {
+        margin-left: -2px;
+        margin-right: -2px;
+    }
+</style>
