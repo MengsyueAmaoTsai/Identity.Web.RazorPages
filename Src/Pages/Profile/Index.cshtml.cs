@@ -5,10 +5,10 @@ using RichillCapital.Domain.Common.Repositories;
 using RichillCapital.Domain.Users;
 using RichillCapital.UseCases.Common;
 
-namespace RichillCapital.Identity.Web.Pages;
+namespace RichillCapital.Identity.Web.Pages.Profile;
 
 [Authorize]
-public class IndexViewModel(
+public class ProfileViewModel(
     ICurrentUser _currentUser,
     IReadOnlyRepository<User> _userRepository) :
     ViewModel
