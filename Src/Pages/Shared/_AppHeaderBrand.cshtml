@@ -1,0 +1,48 @@
+@{
+    var applicationName = "Richill Capital Identity";
+}
+
+<div class="brand-container">
+    <div class="brand-link-wrapper">
+        <div class="brand-link-wrapper">
+            <a class="brand-link" asp-page="/index">
+                @applicationName
+            </a>
+        </div>
+    </div>
+</div>
+
+<style>
+    .brand-container {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        font: inherit;
+        vertical-align: baseline;
+        height: 100%;
+        line-height: 48px;
+        display: flex;
+    }
+
+    .brand-link-wrapper {
+        display: inherit;
+        flex: inherit;
+        justify-content: inherit;
+        order: inherit;
+        align-self: inherit;
+        min-width: inherit;
+    }
+
+    .brand-link {
+        font-family: "Segoe UI", "Segoe UI Web (West European)", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
+        -webkit-font-smoothing: antialiased;
+        font-size: inherit;
+        font-weight: 600;
+        outline: none;
+        padding-left: 8px;
+        padding-right: 20px;
+        color: rgb(242, 242, 242);
+        background: rgb(0, 111, 201);
+        text-decoration: none;
+    }
+</style>
