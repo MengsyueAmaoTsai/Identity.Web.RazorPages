@@ -56,6 +56,7 @@
 
     <div class="page-content">
         <div class="sections-container">
+            @await Html.PartialAsync("_PersonalInfoSection")
             @await Html.PartialAsync("_UserInfoSection", Model.CurrentUser.Email)
         </div>
     </div>
