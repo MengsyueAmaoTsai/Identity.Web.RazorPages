@@ -55,8 +55,12 @@
                 
 
                 <div class="section-body-row">
-                    <input type="submit" role="button" value="Save" />
-                    <input type="button" role="button" value="Cancel" />
+                    <div class="button-group">
+                        <div class="button-group">
+                            <input class="save-button" type="submit" role="button" value="Save" />
+                            <input class="cancel-button" type="button" role="button" value="Cancel" />
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -110,6 +114,7 @@
         margin-bottom: 12px;
         max-width: 640px;
     }
+
     .reenter-password-group {
         margin-bottom: 12px;
         max-width: 640px;
@@ -120,6 +125,11 @@
         display: block;
         margin-top: 12px;
         margin-bottom: 12px;
+    }
+
+    .button-group {
+        margin-top: 20px;
+        margin-bottom: 20px;
     }
 
     .form-section {
@@ -137,5 +147,11 @@
     .section-body-row {
         margin-left: -2px;
         margin-right: -2px;
+    }
+
+    .save-button {
+    }
+
+    .cancel-button {
     }
 </style>
