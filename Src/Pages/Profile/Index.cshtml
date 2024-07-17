@@ -7,63 +7,106 @@
 }
 
 <div>
-    <div class="page-header">
-        <div class="page-header-inner">
-            <div class="page-header-left">
-                <div class="css-177">
-                    <div>
-                        <div>
-                            <div style="position: relative">
-                                <div>
-                                    <div role="navigation" class="root-178">
+    Side bar
+</div>
+
+<div class="css-238">
+    <main id="MainContentLading" role="main">
+        <div class="css-239">
+            <div style="text-overflow: ellipsis; padding: 0px 0px 4px; min-height: 100vg;">
+                <div class="css-240">
+                    <div class="page-header">
+                        <div class="page-header-inner">
+                            <div class="page-header-left">
+                                <div class="css-177">
+                                    <div>
                                         <div>
-                                            <ol class="list-179">
-                                                <li class="list-item-180">
-                                                    <div class="css-284">
-                                                        <span class="page-header-title-wrapper">
-                                                            <h1 class="page-header-title">Your info</h1>
-                                                        </span>
+                                            <div style="position: relative">
+                                                <div>
+                                                    <div role="navigation" class="root-178">
+                                                        <div>
+                                                            <ol class="list-179">
+                                                                <li class="list-item-180">
+                                                                    <div class="css-284">
+                                                                        <span class="page-header-title-wrapper">
+                                                                            <h1 class="page-header-title">Your info</h1>
+                                                                        </span>
+                                                                    </div>
+                                                                </li>
+                                                            </ol>
+                                                        </div>
                                                     </div>
-                                                </li>
-                                            </ol>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="page-header-right">
+                                <div class="css-176">
+                                    <div class="root-251">
+                                        <div class="data-wrapper">
+                                            <div class="css-254">
+                                                <div class="css-397">
+                                                    @await Html.PartialAsync("_ChangePasswordButton")
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
 
-            <div class="page-header-right">
-                <div class="css-176">
-                    <div class="root-251">
-                        <div class="data-wrapper">
-                            <div class="css-254">
-                                <div class="css-397">
-                                    @await Html.PartialAsync("_ChangePasswordButton")
-                                </div>
-                            </div>
+                    <div class="page-middle">
+                        @await Html.PartialAsync("_MessageBar")
+                    </div>
+
+                    <div class="page-content">
+                        <div class="sections-container">
+                            @await Html.PartialAsync("_PersonalInfoSection")
+                            @await Html.PartialAsync("_UserInfoSection", Model.CurrentUser.Email)
                         </div>
                     </div>
                 </div>
             </div>
+            <footer></footer>
         </div>
-    </div>
-
-    <div class="page-middle">
-        @await Html.PartialAsync("_MessageBar")
-    </div>
-
-    <div class="page-content">
-        <div class="sections-container">
-            @await Html.PartialAsync("_PersonalInfoSection")
-            @await Html.PartialAsync("_UserInfoSection", Model.CurrentUser.Email)
-        </div>
-    </div>
+    </main>
 </div>
 
 <style>
+    .css-238 {
+        display: flex;
+        flex-flow: column;
+        width: 100vw;
+        height: auto;
+        box-sizing: border-box;
+        overflow-x: hidden;
+        min-height: 100vh;
+    }    
+    #MainContentLading {
+        text-overflow: ellipsis;
+        outline: none;
+    }
+
+    .css-239 {
+        display: flex;
+        flex-flow: column;
+        width: 100%;
+        height: auto;
+        box-sizing: border-box;
+        justify-content: flex-start;
+        flex: 2 1 0%;
+    }    
+    .css-240 {
+        display: flex;
+        flex-flow: column;
+        width: auto;
+        height: auto;
+        box-sizing: border-box;        
+    }
     .page-header {
         flex-wrap: wrap;
         width: 100%;
