@@ -4,6 +4,12 @@
 
 @{
     ViewData["Title"] = "Sign up";
+
+    List<(string Text, string Page)> footerLinks =
+    [
+        ("Terms of use", "/index"),
+        ("Privacy & cookies", "/index"),
+    ];
 }
 
 
@@ -78,6 +84,12 @@
                     </div>
 
                     <div class="footer">
+                        <div class="footer-links">
+                            @foreach (var link in footerLinks)
+                            {
+                                <a class="footer-link" asp-page="@link.Page" target="_blank">@link.Text</a>
+                            }
+                        </div>
                     </div>
                 </div>
             </div>
@@ -307,5 +319,30 @@
         border-left-color: rgb(0, 103, 184);
         border-bottom-color: rgb(0, 103, 184);
         color: rgb(255, 255, 255);
+    }
+
+    .footer {
+        position: absolute;
+        width: 100%;
+        left: 0px;
+        bottom: 0px;
+        overflow-x: visible;
+        overflow-y: visible;
+        z-index: auto;
+        clear: both;
+        min-height: 28px;
+    }
+
+    .footer-links {
+        margin-left: 0px;
+        margin-right: 0px;
+        margin-bottom: 0px;
+        margin-top: 0px;
+        font-size: 13px;
+        float: right;
+    }
+
+    .footer-link {
+
     }
 </style>
