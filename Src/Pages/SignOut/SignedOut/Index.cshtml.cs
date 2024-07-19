@@ -1,16 +1,19 @@
+using Duende.IdentityServer.Services;
+
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace RichillCapital.Identity.Web.Pages.SignOut.SignedOut;
 
 [AllowAnonymous]
-public sealed class SignedOutViewModel : ViewModel
+public sealed class SignedOutViewModel(
+    IIdentityServerInteractionService _interactionService) : 
+    ViewModel
 {
-    [BindProperty(Name = "postLogoutRedirectUri", SupportsGet = true)]
-    public required string PostLogoutRedirectUri { get; init; }
-
-    public IActionResult OnGet()
+    public async Task<IActionResult> OnGet(string signOutId)
     {
+        var context = await _interactionService.GetLogoutContextAsync(signOutId);
+
         return Page();
     }
 }
