@@ -14,12 +14,45 @@
             <div class="dropdown-body">
                 <div class="dropdown-body-inner">
                     <div class="current-user-info">
-                        <div class="company-image"></div>
+                        <div class="company-image">
+                            <div class="company-image-inner">
+                                <div class="company-image-text">Microsoft</div>
+                            </div>
+                        </div>
                         <div class="head-spacer"></div>
-                        <div class="user-info"></div>
-                        <a class="sign-out-link" role="button" target="_top">Sign out</a>
+                        <div class="user-info">
+                            <a class="profile-picture-link" target="_blank" role="button">
+                                <div class="profile-picture-dropdown"></div>
+                            </a>
+                            <div class="user-info-details">
+                                <div class="current-user-name">Mengsyue Tsai</div>
+                                <div class="current-user-email">mengsyue.tsai@outlook.com</div>
+                                <div class="my-account-container">
+                                    <a class="my-account-link" asp-page="/index">My Richill Capital account</a>
+                                    <span class="my-account-description">Review and manage your Richill Capital account</span>
+                                </div>
+                                <div class="commands">
+                                    <a asp-page="/profile/index" class="command-link" target="_top">My profile</a>
+                                </div>
+                            </div>
+                        </div>
+                        <a class="sign-out-link" asp-page="/signOut/index" role="button" target="_top">Sign out</a>
                     </div>
-                    <div class="other-accounts"></div>
+
+                    <div class="other-accounts">
+                        <ul class="account-list">
+                            <li style="box-sizing: content-box;">
+                                <div class="account-list-item">
+                                    <a class="sign-in-action" target="_top">
+                                        <div class="sign-in-action-picture" role="presentation"></div>
+                                        <div class="sign-in-action-info">
+                                            <div class="sign-in-action-info-text">Sign in with a different account</div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
@@ -87,7 +120,11 @@
         box-sizing: border-box;
         opacity: 1;
         visibility: visible;
-        transition-delay: 0s;                      
+        transition-delay: 0s;             
+        width: 320px;
+        max-width: : 100vw;   
+        box-shadow: 0 24px 54px rgba(0, 0, 0, .15), 0 4.5px 13.5px rgba(0, 0, 0, .08);    
+        inset: 48px: auto auto -272px;          
     }
 
     .dropdown-body-inner {
@@ -170,6 +207,91 @@
         border-top: 1px solid rgba(0, 0, 0, .08);
     }
 
+    .account-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        box-sizing: content-box;
+    }
+
+    .account-list-item {
+        height: 60px;
+        position: relative;
+        font-family: "Segoe UI", "Segoe UI Web Regular", "Segoe UI Symbol", "Helvetica Neue", "BBAlpha Sans", "S60 Sans", Arial, sans-serif;
+        line-height: normal;
+        box-sizing: border-box;        
+    }
+    
+    .sign-in-action {
+        box-sizing: border-box;
+        min-width: auto;
+        min-height: auto;
+        border-style: none;
+        border-width: 0;
+        padding: 0;
+        margin: 0;
+        outline-style: none !important;
+        background-color: transparent;
+        text-decoration: none;
+        text-align: left;
+        font-family: "Segoe UI", "Segoe UI Web Regular", "Segoe UI Symbol", "Helvetica Neue", "BBAlpha Sans", "S60 Sans", Arial, sans-serif;
+        width: 100%;
+        height: 100%;
+        cursor: pointer;
+        display: flex;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;                
+        color: inherit;
+        background-color: rgba(0, 0, 0, .04);
+    }
+
+    .sign-in-action-picture {
+        background-image: url(data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64' stroke='%23707070'%3E%3Cg class='mectrl_stroke' stroke-width='1.9' fill='none'%3E%3Ccircle cx='32' cy='32' r='30.25'/%3E%3Cg transform='matrix(1.1 0 0 1.1 8.8 5.61)'%3E%3Ccircle class='mectrl_stroke' cx='20' cy='16' r='7'/%3E%3Cpath class='mectrl_stroke' d='M30 35h10m-5-5v10M30.833 32.09A11 11 0 009 34'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E);
+        position: relative;
+        width: 100%;
+        border-radius: 50%;
+        overflow: hidden;
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;    
+        font-family: "Segoe UI", "Segoe UI Web Regular", "Segoe UI Symbol", "Helvetica Neue", "BBAlpha Sans", "S60 Sans", Arial, sans-serif;
+        line-height: normal;
+        box-sizing: border-box;
+        float: left;
+        margin-left: 16px;
+        margin-right: 12px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        width: 40px;
+        height: 40px;        
+    }
+
+    .sign-in-action-info {
+        font-size: 12px;
+        font-family: "Segoe UI", "Segoe UI Web Regular", "Segoe UI Symbol", "Helvetica Neue", "BBAlpha Sans", "S60 Sans", Arial, sans-serif;
+        line-height: normal;
+        box-sizing: border-box;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-right: 48px;
+        -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+        min-width: 0;
+        width: 0;
+    }
+
+    .sign-in-action-info-text {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-family: "Segoe UI", "Segoe UI Web Regular", "Segoe UI Symbol", "Helvetica Neue", "BBAlpha Sans", "S60 Sans", Arial, sans-serif;
+        line-height: normal;
+        box-sizing: border-box;
+        font-size: 12px;    
+    }
+
     .company-image {
         padding-left: 14px;
         padding-right: 14px;
@@ -184,6 +306,35 @@
         -ms-grid-column: 1;
         -ms-grid-column-span: 1;
         grid-column: 1 / 2;
+    }
+
+    .company-image-inner {
+        overflow: hidden;
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-image: url(data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='108' height='23'%3E%3Cpath d='M44.836 4.6v13.8h-2.4V7.583H42.4L38.119 18.4h-1.588L32.142 7.583h-.028V18.4H29.9V4.6h3.436L37.3 14.83h.057L41.545 4.6zm2 1.049a1.268 1.268 0 01.419-.967 1.411 1.411 0 011-.39 1.392 1.392 0 011.02.4 1.3 1.3 0 01.405.957 1.249 1.249 0 01-.414.953 1.428 1.428 0 01-1.011.385A1.4 1.4 0 0147.25 6.6a1.263 1.263 0 01-.41-.949M49.41 18.4h-2.329V8.507h2.329zm7.064-1.694a3.225 3.225 0 001.145-.24 4.808 4.808 0 001.155-.636V18a4.659 4.659 0 01-1.266.481 6.9 6.9 0 01-1.554.163 4.707 4.707 0 01-4.918-4.907 5.644 5.644 0 011.4-3.932 5.054 5.054 0 013.955-1.545 5.42 5.42 0 011.324.169 4.4 4.4 0 011.063.39v2.232a4.73 4.73 0 00-1.1-.611 3.187 3.187 0 00-1.15-.217 2.918 2.918 0 00-2.223.9 3.366 3.366 0 00-.847 2.415 3.217 3.217 0 00.813 2.339 2.938 2.938 0 002.209.837m8.931-8.363a2.892 2.892 0 01.5.039 2.025 2.025 0 01.376.1v2.357a2.075 2.075 0 00-.535-.255 2.649 2.649 0 00-.851-.12 1.811 1.811 0 00-1.449.722 3.47 3.47 0 00-.592 2.223V18.4h-2.335V8.507h2.329v1.559h.039a2.731 2.731 0 01.962-1.266 2.615 2.615 0 011.55-.457m1 5.254a5.355 5.355 0 011.387-3.887 5.1 5.1 0 013.85-1.434 4.741 4.741 0 013.623 1.381 5.208 5.208 0 011.3 3.729 5.259 5.259 0 01-1.385 3.83 5.02 5.02 0 01-3.773 1.424 4.931 4.931 0 01-3.652-1.352 4.984 4.984 0 01-1.349-3.688m2.426-.076a3.53 3.53 0 00.7 2.367 2.5 2.5 0 002.011.818 2.344 2.344 0 001.934-.818 3.78 3.78 0 00.664-2.425 3.649 3.649 0 00-.688-2.411 2.39 2.39 0 00-1.929-.813 2.441 2.441 0 00-1.988.852 3.707 3.707 0 00-.707 2.43m11.2-2.416a1 1 0 00.317.785 5.431 5.431 0 001.405.716 4.768 4.768 0 011.959 1.256 2.608 2.608 0 01.563 1.689 2.718 2.718 0 01-1.073 2.243 4.565 4.565 0 01-2.9.846 6.962 6.962 0 01-1.362-.149 6.036 6.036 0 01-1.265-.38v-2.29a5.74 5.74 0 001.367.7 4.009 4.009 0 001.328.26 2.37 2.37 0 001.164-.221.792.792 0 00.375-.741 1.027 1.027 0 00-.389-.813 5.772 5.772 0 00-1.478-.766 4.56 4.56 0 01-1.828-1.212 2.657 2.657 0 01-.539-1.713 2.706 2.706 0 011.063-2.2 4.245 4.245 0 012.764-.862 6.669 6.669 0 011.164.116 5.131 5.131 0 011.078.3v2.214a4.943 4.943 0 00-1.078-.53 3.61 3.61 0 00-1.222-.221 1.776 1.776 0 00-1.035.26.822.822 0 00-.37.712m5.241 2.493a5.355 5.355 0 011.386-3.89 5.1 5.1 0 013.85-1.434 4.741 4.741 0 013.623 1.381 5.208 5.208 0 011.3 3.729 5.259 5.259 0 01-1.385 3.83 5.02 5.02 0 01-3.773 1.424 4.931 4.931 0 01-3.652-1.352 4.984 4.984 0 01-1.349-3.688m2.426-.076a3.535 3.535 0 00.7 2.367 2.506 2.506 0 002.012.818 2.344 2.344 0 001.934-.818 3.78 3.78 0 00.664-2.425 3.649 3.649 0 00-.688-2.411 2.391 2.391 0 00-1.93-.813 2.44 2.44 0 00-1.987.852 3.707 3.707 0 00-.707 2.43m15.464-3.109H99.7V18.4h-2.359v-7.988h-1.655V8.507h1.655V7.13a3.425 3.425 0 011.016-2.555 3.56 3.56 0 012.6-1 5.949 5.949 0 01.751.043 3.025 3.025 0 01.577.13v2.016a2.381 2.381 0 00-.4-.164 2.106 2.106 0 00-.664-.1 1.405 1.405 0 00-1.126.457 2.015 2.015 0 00-.395 1.356v1.194h3.469V6.283l2.338-.712v2.936h2.358v1.905h-2.358v4.629a1.954 1.954 0 00.332 1.29 1.329 1.329 0 001.045.375 1.569 1.569 0 00.486-.1 2.271 2.271 0 00.5-.231V18.3a2.765 2.765 0 01-.736.231 5.072 5.072 0 01-1.015.105 2.889 2.889 0 01-2.209-.784 3.341 3.341 0 01-.736-2.363z' fill='%23737373'/%3E%3Cpath fill='%23f25022' d='M0 0h10.931v10.931H0z'/%3E%3Cpath fill='%237fba00' d='M12.069 0H23v10.931H12.069z'/%3E%3Cpath fill='%2300a4ef' d='M0 12.069h10.931V23H0z'/%3E%3Cpath fill='%23ffb900' d='M12.069 12.069H23V23H12.069z'/%3E%3C/svg%3E);
+        font-family: "Segoe UI", "Segoe UI Web Regular", "Segoe UI Symbol", "Helvetica Neue", "BBAlpha Sans", "S60 Sans", Arial, sans-serif;
+        line-height: normal;
+        box-sizing: border-box;
+        height: 16px;
+        float: left;
+        margin-right: 4px;
+        width: 80px;        
+    }
+
+    .company-image-text {
+        clip: rect(1px, 1px, 1px, 1px);
+        clip-path: inset(50%);
+        height: 1px;
+        width: 1px;
+        margin: -1px;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        font-family: "Segoe UI", "Segoe UI Web Regular", "Segoe UI Symbol", "Helvetica Neue", "BBAlpha Sans", "S60 Sans", Arial, sans-serif;
+        line-height: normal;
+        box-sizing: border-box;
     }
 
     .head-spacer {
@@ -245,5 +396,155 @@
         padding: 15px 14px;
         color: #333;
         background-color: #fff;
+    }
+
+    .profile-picture-link {
+        position: relative;
+        min-width: auto;
+        min-height: auto;
+        border-style: none;
+        border-width: 0;
+        outline-style: none !important;
+        background-color: transparent;
+        text-decoration: none;
+        text-align: left;
+        font-family: "Segoe UI", "Segoe UI Web Regular", "Segoe UI Symbol", "Helvetica Neue", "BBAlpha Sans", "S60 Sans", Arial, sans-serif;
+        cursor: pointer;        
+        color: #333;
+        padding: 0;
+        display: block;
+        border-radius: 50%;
+        overflow: hidden;
+        width: 88px;
+        height: 88px;
+        margin-left: 16px;
+        margin-right: 20px;
+        margin-top: 20px;
+        margin-bottom: 20px;            
+    }
+
+    .profile-picture-dropdown {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        overflow: hidden;
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
+        font-family: "Segoe UI", "Segoe UI Web Regular", "Segoe UI Symbol", "Helvetica Neue", "BBAlpha Sans", "S60 Sans", Arial, sans-serif;
+        line-height: normal;
+        box-sizing: border-box;
+        background-image: url(data:image/jpeg;base64,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);    
+    }
+
+    .user-info-details {
+        font-family: "Segoe UI", "Segoe UI Web Regular", "Segoe UI Symbol", "Helvetica Neue", "BBAlpha Sans", "S60 Sans", Arial, sans-serif;
+        line-height: normal;
+        box-sizing: border-box;
+        padding: 0;
+        font-size: 13px;
+        -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+        min-width: 0;
+        width: 0;
+        padding-right: 12px;            
+    }
+
+    .current-user-name {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-family: "Segoe UI", "Segoe UI Web Regular", "Segoe UI Symbol", "Helvetica Neue", "BBAlpha Sans", "S60 Sans", Arial, sans-serif;
+        line-height: normal;
+        box-sizing: border-box;
+        padding: 1px;
+        font-size: 18px;
+        font-weight: 700;
+        margin-top: 0;
+    }
+
+    .current-user-email {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-family: "Segoe UI", "Segoe UI Web Regular", "Segoe UI Symbol", "Helvetica Neue", "BBAlpha Sans", "S60 Sans", Arial, sans-serif;
+        line-height: normal;
+        box-sizing: border-box;
+        padding: 1px;
+        margin-top: 3px;
+        font-size: 13px;
+    }
+
+    .my-account-container {
+        font-family: "Segoe UI", "Segoe UI Web Regular", "Segoe UI Symbol", "Helvetica Neue", "BBAlpha Sans", "S60 Sans", Arial, sans-serif;
+        line-height: normal;
+        box-sizing: border-box;
+        padding: 1px;
+        margin-top: 4px;
+    }
+
+    .my-account-link {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        box-sizing: border-box;
+        height: auto;
+        min-width: auto;
+        min-height: auto;
+        border-style: none;
+        border-width: 0;
+        padding: 0;
+        margin: 0;
+        outline-style: none !important;
+        text-align: left;
+        font-family: "Segoe UI", "Segoe UI Web Regular", "Segoe UI Symbol", "Helvetica Neue", "BBAlpha Sans", "S60 Sans", Arial, sans-serif;
+        cursor: pointer;
+        display: block;
+        max-width: fit-content;
+        color: #0078d6;
+        background-color: inherit;
+        text-decoration: underline;
+    }
+
+    .my-account-description {
+        box-sizing: border-box;
+        display: none;
+    }
+
+    .commands {
+        position: relative;
+        font-family: "Segoe UI", "Segoe UI Web Regular", "Segoe UI Symbol", "Helvetica Neue", "BBAlpha Sans", "S60 Sans", Arial, sans-serif;
+        line-height: normal;
+        box-sizing: border-box;
+        margin-top: 4px;
+        padding: 0;
+    }
+
+    .command-link {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        box-sizing: border-box;
+        height: auto;
+        min-width: auto;
+        min-height: auto;
+        border-style: none;
+        border-width: 0;
+        margin: 0;
+        outline-style: none !important;
+        text-align: left;
+        font-family: "Segoe UI", "Segoe UI Web Regular", "Segoe UI Symbol", "Helvetica Neue", "BBAlpha Sans", "S60 Sans", Arial, sans-serif;
+        cursor: pointer;
+        padding: 1px;
+        font-size: 13px;
+        margin-right: 34px;
+        display: block;
+        max-width: -moz-fit-content;
+        max-width: fit-content;
+        color: #0078d6;
+        background-color: inherit;
+        text-decoration: underline;
     }
 </style>
