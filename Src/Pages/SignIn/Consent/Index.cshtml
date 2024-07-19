@@ -7,22 +7,39 @@
 }
 
 
-
-<div>
+<form method="post">
     <input type="text" asp-for="Description"/>
     
     <input type="checkbox" asp-for="RememberMyDecision" />
     <label asp-for="RememberMyDecision"></label>
-
-    <button type="button" name="Consent" value="true">Yes</button>
-    <button type="button" name="Consent" value="false">No</button>
-</div>
+    
+    <button name="Consent" value="true">Yes</button>
+    <button name="Consent" value="false">No</button>
+</form>
 
 <section id="DebugSection">
     <div>ClientName: @Model.ClientName</div>
     <div>ClientUrl: @Model.ClientUrl</div>
     <div>ClientLogUrl: @Model.ClientLogoUri</div>
     <div>AllowRememberConsent: @Model.AllowRememberConsent</div>
+
+    <div>IdentityResources:</div>
+    @foreach (var resource in Model.IdentityResources)
+    {
+        <div>@resource</div>
+    }
+
+    <div>ApiResources:</div>
+    @foreach (var resource in Model.ApiResources)
+    {
+        <div>@resource</div>
+    }
+
+    <div>ApiScopes:</div>
+    @foreach (var scope in Model.ApiScopes)
+    {
+        <div>@scope</div>
+    }
 </section>    
 
 <script>

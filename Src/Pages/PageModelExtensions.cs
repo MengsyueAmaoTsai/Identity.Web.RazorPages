@@ -9,9 +9,14 @@ internal static class PageModelExtensions
         this PageModel page,
         string redirectUri)
     {
-        // page.HttpContext.Response.StatusCode = 200;
-        // page.HttpContext.Response.Headers["Location"] = "";
+        page.HttpContext.Response.StatusCode = 200;
+        page.HttpContext.Response.Headers.Location = "";
 
-        return page.RedirectToPage("/redirect/index", new { RedirectUri = redirectUri });
+        return page.RedirectToPage(
+            "/redirect/index",
+            new
+            {
+                RedirectUri = redirectUri
+            });
     }
 }
