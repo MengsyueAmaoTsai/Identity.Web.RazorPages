@@ -6,6 +6,8 @@
     ViewData["Title"] = "Consent";
 }
 
+
+
 <div>
     <input type="text" asp-for="Description"/>
     
@@ -15,6 +17,13 @@
     <button type="button" name="Consent" value="true">Yes</button>
     <button type="button" name="Consent" value="false">No</button>
 </div>
+
+<section id="DebugSection">
+    <div>ClientName: @Model.ClientName</div>
+    <div>ClientUrl: @Model.ClientUrl</div>
+    <div>ClientLogUrl: @Model.ClientLogoUri</div>
+    <div>AllowRememberConsent: @Model.AllowRememberConsent</div>
+</section>    
 
 <script>
 </script>

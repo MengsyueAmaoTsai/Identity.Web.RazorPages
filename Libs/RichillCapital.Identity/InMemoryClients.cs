@@ -22,7 +22,7 @@ public static class InMemoryClients
 
             RequirePkce = true,
             RequireClientSecret = true,
-            RequireConsent = false,
+            RequireConsent = true,
 
             RedirectUris =
             {
@@ -50,7 +50,7 @@ public static class InMemoryClients
 
             RequirePkce = true,
             RequireClientSecret = true,
-            RequireConsent = false,
+            RequireConsent = true,
 
             RedirectUris =
             {
@@ -78,7 +78,7 @@ public static class InMemoryClients
 
             RequirePkce = true,
             RequireClientSecret = true,
-            RequireConsent = false,
+            RequireConsent = true,
 
             RedirectUris =
             {
@@ -107,7 +107,7 @@ public static class InMemoryClients
 
             RequirePkce = true,
             RequireClientSecret = true,
-            RequireConsent = false,
+            RequireConsent = true,
 
             RedirectUris =
             {
@@ -135,7 +135,7 @@ public static class InMemoryClients
 
             RequirePkce = true,
             RequireClientSecret = true,
-            RequireConsent = false,
+            RequireConsent = true,
 
             RedirectUris =
             {
@@ -167,7 +167,7 @@ public static class InMemoryClients
 
             RequirePkce = true,
             RequireClientSecret = true,
-            RequireConsent = false,
+            RequireConsent = true,
 
             RedirectUris =
             {
@@ -195,7 +195,7 @@ public static class InMemoryClients
 
             RequirePkce = true,
             RequireClientSecret = false,
-            RequireConsent = false,
+            RequireConsent = true,
 
             RedirectUris =
             {
