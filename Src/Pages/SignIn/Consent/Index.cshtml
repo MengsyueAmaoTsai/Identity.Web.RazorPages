@@ -1,0 +1,23 @@
+@page "/sign-in/consent"
+
+@model SignInConsentViewModel
+
+@{
+    ViewData["Title"] = "Consent";
+}
+
+<div>
+    <input type="text" asp-for="Description"/>
+    
+    <input type="checkbox" asp-for="RememberMyDecision" />
+    <label asp-for="RememberMyDecision"></label>
+
+    <button type="button" name="Consent" value="true">Yes</button>
+    <button type="button" name="Consent" value="false">No</button>
+</div>
+
+<script>
+</script>
+
+<style>
+</style>

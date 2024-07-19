@@ -15,6 +15,7 @@ public static class IdentityExtensions
 {
     private const string ErrorPath = "/error";
     private const string SignInPath = "/sign-in";
+    private const string ConsentPath = "/sign-in/consent";
 
     private static class UrlParameterNames
     {
@@ -40,10 +41,13 @@ public static class IdentityExtensions
             .AddIdentityServer(options =>
             {
                 options.IssuerUri = identityOptions.IssuerUri;
+                options.UserInteraction.ErrorUrl = ErrorPath;
+
                 options.UserInteraction.LoginUrl = SignInPath;
                 options.UserInteraction.LoginReturnUrlParameter = UrlParameterNames.ReturnUrl;
 
-                options.UserInteraction.ErrorUrl = ErrorPath;
+                options.UserInteraction.ConsentUrl = ConsentPath;
+                options.UserInteraction.ConsentReturnUrlParameter = UrlParameterNames.ReturnUrl;
             })
             .AddInMemoryClients(InMemoryClients.Default)
             .AddInMemoryIdentityResources(InMemoryIdentityResources.Default)
