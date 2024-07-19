@@ -15,11 +15,15 @@ public static class IdentityExtensions
 {
     private const string ErrorPath = "/error";
     private const string SignInPath = "/sign-in";
+    private const string SignUpPath = "/sign-up";
+    private const string SignOutPath = "/sign-out";
     private const string ConsentPath = "/sign-in/consent";
 
     private static class UrlParameterNames
     {
+        internal const string ErrorId = "errorId";
         internal const string ReturnUrl = "returnUrl";
+        internal const string SignOutId = "signOutId";
     }
 
     public static IServiceCollection AddIdentityWebIdentity(this IServiceCollection services)
@@ -41,13 +45,21 @@ public static class IdentityExtensions
             .AddIdentityServer(options =>
             {
                 options.IssuerUri = identityOptions.IssuerUri;
+
                 options.UserInteraction.ErrorUrl = ErrorPath;
+                options.UserInteraction.ErrorIdParameter = UrlParameterNames.ErrorId;
+
+                options.UserInteraction.CreateAccountUrl = SignUpPath;
+                options.UserInteraction.CreateAccountReturnUrlParameter = UrlParameterNames.ReturnUrl;
 
                 options.UserInteraction.LoginUrl = SignInPath;
                 options.UserInteraction.LoginReturnUrlParameter = UrlParameterNames.ReturnUrl;
 
                 options.UserInteraction.ConsentUrl = ConsentPath;
                 options.UserInteraction.ConsentReturnUrlParameter = UrlParameterNames.ReturnUrl;
+
+                options.UserInteraction.LogoutUrl = SignOutPath;
+                options.UserInteraction.LogoutIdParameter = UrlParameterNames.SignOutId;
             })
             .AddInMemoryClients(InMemoryClients.Default)
             .AddInMemoryIdentityResources(InMemoryIdentityResources.Default)
