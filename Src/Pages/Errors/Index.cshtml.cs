@@ -5,7 +5,7 @@ using RichillCapital.SharedKernel;
 
 namespace RichillCapital.Identity.Web.Pages.Errors;
 
-public sealed class ErrorsViewModel : PageModel
+public sealed class ErrorsViewModel() : PageModel
 {
     public required string RequestId { get; init; }
     public required string CorrelationId { get; init; }

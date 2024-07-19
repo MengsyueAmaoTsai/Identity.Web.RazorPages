@@ -93,6 +93,7 @@ public static class InMemoryClients
             {
                 "openid",
                 "profile",
+                "email",
             },
         },
 
@@ -122,6 +123,7 @@ public static class InMemoryClients
             {
                 "openid",
                 "profile",
+                "email",
             },
         },
 
@@ -182,6 +184,7 @@ public static class InMemoryClients
             {
                 "openid",
                 "profile",
+                "email",
             },
         },
         new Client
