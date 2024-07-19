@@ -1,9 +1,17 @@
-@page "/profile"
+﻿@page "/profile"
 
 @model ProfileViewModel
 
 @{
     ViewData["Title"] = "Your profile";
+
+    List<(string Text, string Page)> contentFooterLinks =
+    [
+        ("Privacy & cookies", "/index"),
+        ("Terms of use", "/index"),
+        ("Feedback", "/index"),
+        ("Richill Capital 2024", "/index"),
+    ];
 }
 
 <div>
@@ -71,7 +79,27 @@
                     </div>
                 </div>
             </div>
-            <footer></footer>
+
+            <footer id="ContentFooter">
+                <div class="content-footer-base">
+                    <a></a>
+                    <a></a>
+                    <a></a>
+                    <nav class="content-footer-links">
+                        <ul class="content-footer-link-list">
+                            @foreach (var link in contentFooterLinks)
+                            {
+                                <li class="content-footer-links-item">
+                                    <a asp-page="@link.Page" class="content-footer-link">
+                                        @link.Text
+                                    </a>
+                                </li>
+                            }
+                            <li></li>
+                        </ul>
+                    </nav>
+                </div>
+            </footer>
         </div>
     </main>
 </div>
@@ -270,5 +298,65 @@
         width: auto;
         height: auto;
         box-sizing: border-box;
+    }
+
+    #ContentFooter {
+        text-overflow: ellipsis;
+        -ms-text-size-adjust: 100%;
+        -webkit-text-size-adjust: 100%;
+        box-sizing: border-box;
+        font-size: 15px;
+        font-family: 'Segoe UI', SegoeUI, "Helvetica Neue", Helvetica, Arial, sans-serif;
+        color: #000;
+        min-width: 280px;
+        background: #f2f2f2;
+        margin-top: 0;
+    }
+
+    .content-footer-base {
+        box-sizing: inherit;
+        background: #f2f2f2;
+        margin: 0 auto;
+        max-width: calc(1600px + 10%);
+        padding: 30px 5% 16px;
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+
+    .content-footer-links {
+        box-sizing: inherit;
+        display: block;
+    }
+
+    .content-footer-link-list {
+        box-sizing: inherit;
+        padding: 0;
+        list-style: none;
+        padding-left: 0;
+        list-style-type: none;
+        font-size: 11px;
+        line-height: 16px;
+        float: right;
+        margin: 3px 0;
+        color: #616161;
+    }
+
+    .content-footer-links-item {
+        box-sizing: inherit;
+        margin: 0;
+        padding: 0 24px 4px 0;
+        display: inline-block;
+    }
+
+    .content-footer-link {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        font: inherit;
+        box-sizing: inherit;
+        background-color: transparent;
+        text-decoration: none;
+        color: inherit;
+        vertical-align: baseline;
     }
 </style>
