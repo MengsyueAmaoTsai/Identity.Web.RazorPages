@@ -1,7 +1,7 @@
 ﻿<div>
     <div class="universal-me-root">
         <div class="dropdown">
-            <button class="avatar-button" type="button">
+            <button class="avatar-button" type="button" onclick="toggleDropdown()">
                 <div class="avatar-button-container">
                     <span class="screen-reader-text">Account manager for</span>
                     <div class="top-header">
@@ -25,6 +25,13 @@
         </div>
     </div>
 </div>
+
+<script>
+    const toggleDropdown = () => {
+        const dropdownBody = document.querySelector('.dropdown-body');
+        dropdownBody.classList.toggle('expanded');
+    }
+</script>
 
 <style>
     .universal-me-root {
@@ -69,6 +76,18 @@
         width: 320px;
         max-width: 100vw;
         inset: 48px auto auto -272px;
+    }
+
+    .dropdown-body.expanded {
+        position: absolute;
+        z-index: 1000000;
+        transition: visibility 0s linear 120ms, opacity 120ms ease;      
+        font-family: "Segoe UI", "Segoe UI Web Regular", "Segoe UI Symbol", "Helvetica Neue", "BBAlpha Sans", "S60 Sans", Arial, sans-serif;
+        line-height: normal;
+        box-sizing: border-box;
+        opacity: 1;
+        visibility: visible;
+        transition-delay: 0s;                      
     }
 
     .dropdown-body-inner {
