@@ -10,4 +10,8 @@
     <ProjectReference Include="..\RichillCapital.UseCases\RichillCapital.UseCases.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Persistence\" />
+  </ItemGroup>
+
 </Project>
