@@ -9,7 +9,7 @@ public sealed class SignInViewModel(
     ILogger<SignInViewModel> _logger) :
     ViewModel
 {
-    [BindProperty(SupportsGet = true)]
+    [BindProperty(Name = "returnUrl", SupportsGet = true)]
     public required string ReturnUrl { get; init; }
 
     [BindProperty]
@@ -32,9 +32,8 @@ public sealed class SignInViewModel(
         }
 
         var email = emailResult.Value;
-
         _logger.LogInformation("ReturnUrl: {returnUrl}, Email: {email}", ReturnUrl, email);
-        return SignInPassword();
+        return SignInPassword(ReturnUrl, email);
     }
 
     public IActionResult OnPostBack()

@@ -8,10 +8,10 @@ public sealed class SignInPasswordViewModel(
     ILogger<SignInPasswordViewModel> _logger) :
     ViewModel
 {
-    [BindProperty(SupportsGet = true)]
+    [BindProperty(Name = "returnUrl", SupportsGet = true)]
     public required string ReturnUrl { get; init; }
 
-    [BindProperty(SupportsGet = true)]
+    [BindProperty(Name = "emailAddress", SupportsGet = true)]
     public required string EmailAddress { get; init; }
 
     [BindProperty]
@@ -19,6 +19,7 @@ public sealed class SignInPasswordViewModel(
 
     public IActionResult OnPostAsync()
     {
-        return SignInStaySignedIn();
+        TempData["Password"] = Password;
+        return SignInStaySignedIn(ReturnUrl, EmailAddress);
     }
 }
