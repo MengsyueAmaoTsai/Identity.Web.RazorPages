@@ -15,6 +15,12 @@ public sealed class SignInViewModel(
     [BindProperty]
     public required string EmailAddress { get; init; }
 
+    public IActionResult OnGet()
+    {
+        _logger.LogInformation("ReturnUrl: {returnUrl}", ReturnUrl);
+        return Page();
+    }
+
     public IActionResult OnPost()
     {
         var emailResult = Email.From(EmailAddress);
@@ -25,6 +31,15 @@ public sealed class SignInViewModel(
             return Page();
         }
 
+        var email = emailResult.Value;
+
+        _logger.LogInformation("ReturnUrl: {returnUrl}, Email: {email}", ReturnUrl, email);
         return SignInPassword();
+    }
+
+    public IActionResult OnPostBack()
+    {
+        _logger.LogInformation("Back");
+        return Page();
     }
 }

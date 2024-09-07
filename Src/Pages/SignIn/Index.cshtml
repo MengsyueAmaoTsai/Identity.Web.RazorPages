@@ -4,38 +4,20 @@
 @{
     ViewData["Title"] = "Sign in";
 }
-@* 
-<div>
-    <img 
-        class="logo" 
-        role="img"
-        src="https://aadcdn.msauth.net/shared/1.0/content/images/microsoft_logo_564db913a7fa0ca42727161c6d031bef.svg">
-</div>
 
-<div role="main">
+<form method="post">
+    <div>Sign in</div>
 
-</div>
+    <input asp-for="EmailAddress" type="email" autocomplete="username" spellcheck="false" placeholder="Email address">
 
-<div>
+    <div>No account? <a>Create one!</a></div>
+    <a>Can't access your account?</a>
+
     <div>
-        <img src="https://aadcdn.msauth.net/shared/1.0/content/images/signin-options_3e3f6b73c3f310c31d2c4d131a8ab8c6.svg">
+        <button asp-page-handler="Back" type="button">Back</button>
+        <button asp-page-handler="Next" type="submit">Next</button>
     </div>
-    <div>
-        <div>Sign-in options</div>
-    </div>
-</div> *@
-
-<div>Sign in</div>
-
-<input asp-for="EmailAddress" type="email" autocomplete="username" spellcheck="false" placeholder="Email address">
-
-<div>No account? <a>Create one!</a></div>
-<a>Can't access your account?</a>
-
-<div>
-    <button>Back</button>
-    <button>Next</button>
-</div>
+</form>
 
 <div>Sign-in options</div>
 
