@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,10 +16,12 @@ public sealed class SignInPasswordViewModel(
     public required string EmailAddress { get; init; }
 
     [BindProperty]
+    [Required(ErrorMessage = "Please enter the password for your Microsoft account.")]
     public required string Password { get; init; }
 
     public IActionResult OnPostAsync()
     {
+        // invalid password: Your account or password is incorrect. If you don't remember your password, <a>reset it now.</a>
         TempData["Password"] = Password;
         return SignInStaySignedIn(ReturnUrl, EmailAddress);
     }

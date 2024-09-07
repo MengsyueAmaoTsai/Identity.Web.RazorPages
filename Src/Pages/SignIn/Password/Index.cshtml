@@ -3,10 +3,20 @@
 @{
 }
 
-<div>
-    <form method="post">
-        <input type="password">
+<form method="post">
+    <div>Enter password</div>
 
-        <button type="submit">Sign in</button>
-    </form>
-</div>
+    <div asp-validation-summary="All"></div>
+    <span asp-validation-for="Password"></span>
+    <input asp-for="Password" type="password" autocomplete="off" spellcheck="false">
+    
+    <a>Forgot password?</a>
+    <a>Other ways to sign in</a>
+
+    <button type="submit">Sign in</button>
+</form>
+
+
+@section Scripts {
+    <partial name="_ClientValidation" />
+}

@@ -3,5 +3,10 @@
 @{
 }
 
-<div>
-</div>
+<form>
+    <div>Stay signed in?</div>
+    <div>Stay signed in so you don't have to sign in again next time.</div>
+    
+    <label asp-for="StaySignedIn"></label>
+    <input asp-for="StaySignedIn" type="checkbox">
+</form>
