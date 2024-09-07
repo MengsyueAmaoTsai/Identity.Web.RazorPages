@@ -7,7 +7,7 @@ namespace RichillCapital.Domain.Abstractions;
 public interface ISignInManager
 {
     Task<Result> PasswordSignInAsync(
-        string email,
+        Email email,
         string password,
         bool isPersistent,
         bool lockoutOnFailure,

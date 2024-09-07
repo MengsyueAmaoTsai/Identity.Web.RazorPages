@@ -2,12 +2,14 @@ using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RichillCapital.Domain;
+using RichillCapital.Domain.Abstractions;
 
 namespace RichillCapital.Identity.Web.Pages.SignIn;
 
 [AllowAnonymous]
 public sealed class SignInViewModel(
-    ILogger<SignInViewModel> _logger) :
+    ILogger<SignInViewModel> _logger,
+    IUserManager _userManager) :
     ViewModel
 {
     [BindProperty(Name = "returnUrl", SupportsGet = true)]
@@ -27,7 +29,7 @@ public sealed class SignInViewModel(
         return Page();
     }
 
-    public IActionResult OnPost()
+    public async Task<IActionResult> OnPostAsync(CancellationToken cancellationToken = default)
     {
         _logger.LogInformation("Processing sign-in for ReturnUrl: {ReturnUrl}", ReturnUrl);
 
@@ -35,12 +37,34 @@ public sealed class SignInViewModel(
 
         if (emailResult.IsFailure)
         {
-            _logger.LogWarning("Sign-in failed due to invalid email format. Email: {EmailAddress}", EmailAddress);
+            _logger.LogWarning(
+                "Sign-in failed due to invalid email format. Email: {EmailAddress}",
+                EmailAddress);
+
             return Page();
         }
 
         var email = emailResult.Value;
-        _logger.LogInformation("Sign-in succeeded for Email: {Email}, redirecting to password entry.", email);
+
+        var userResult = await _userManager.FindByEmailAsync(email, cancellationToken);
+
+        if (userResult.IsFailure)
+        {
+            _logger.LogWarning(
+                "Sign-in failed because the email does not exist. Email: {EmailAddress}",
+                EmailAddress);
+
+            ModelState.AddModelError(
+                userResult.Error.Code,
+                "We couldn't find an account with that username. Try another, or get a new Microsoft account.");
+
+            return Page();
+        }
+
+        _logger.LogInformation(
+            "Sign-in succeeded for Email: {Email}, redirecting to password entry.",
+            email);
+
         return SignInPassword(ReturnUrl, email);
     }
 
