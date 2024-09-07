@@ -1,7 +1,9 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace RichillCapital.Identity.Web.Pages.SignIn.StaySignedIn;
 
+[AllowAnonymous]
 public sealed class SignInStaySignedInViewModel(
     ILogger<SignInStaySignedInViewModel> _logger) :
     ViewModel
