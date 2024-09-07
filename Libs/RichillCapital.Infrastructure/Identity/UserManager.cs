@@ -100,10 +100,10 @@ internal sealed class UserManager(
         return Result.Success;
     }
 
-    private Result VerifyPassword
-        (User user,
-        string? password) =>
-        _passwordHasher.VerifyHashedPassword(user.PasswordHash, password);
+    private Result VerifyPassword(
+        User user,
+        string password) =>
+        _passwordHasher.VerifyHashedPassword(user, user.PasswordHash, password);
 
     public Task<Result> AccessFailedAsync(
         User user,
@@ -165,7 +165,7 @@ internal sealed class UserManager(
             }
         }
 
-        var hashResult = _passwordHasher.Hash(newPassword!);
+        var hashResult = _passwordHasher.HasPassword(user, newPassword!);
 
         if (hashResult.IsFailure)
         {

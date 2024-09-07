@@ -21,6 +21,7 @@ public sealed class SignInStaySignedInViewModel(
     [BindProperty]
     public required bool DoNotShowThisAgain { get; init; }
 
+    [BindProperty]
     public required bool StaySignedIn { get; init; }
 
     public async Task<IActionResult> OnPostAsync(

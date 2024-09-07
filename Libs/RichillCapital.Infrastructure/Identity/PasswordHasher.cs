@@ -1,3 +1,4 @@
+using RichillCapital.Domain;
 using RichillCapital.Domain.Abstractions;
 using RichillCapital.SharedKernel;
 using RichillCapital.SharedKernel.Monads;
@@ -7,9 +8,11 @@ namespace RichillCapital.Infrastructure.Identity;
 internal sealed class PasswordHasher :
     IPasswordHasher
 {
-    public Result<string> Hash(string password) => Result<string>.With(password);
+    public Result<string> HasPassword(User user, string password) => 
+        Result<string>.With(password);
 
     public Result VerifyHashedPassword(
+        User user,
         string hashedPassword,
         string providedPassword)
     {
