@@ -8,7 +8,21 @@ public abstract class ViewModel : PageModel
 {
     protected IActionResult Home() => RedirectToPage("/index");
     protected IActionResult Error() => RedirectToPage("/error");
-    protected IActionResult SignIn() => RedirectToPage("/signIn/index");
+
+    protected IActionResult SignIn(string returnUrl) => RedirectToPage(
+        "/signIn/index",
+        new
+        {
+            returnUrl,
+        });
+
+    protected IActionResult SignUp(string returnUrl) => RedirectToPage(
+        "/signUp/index",
+        new
+        {
+            returnUrl,
+        });
+
     protected IActionResult SignInPassword(string returnUrl, Email email) => RedirectToPage(
         "/signIn/password/index",
         new
@@ -23,5 +37,13 @@ public abstract class ViewModel : PageModel
         {
             returnUrl,
             emailAddress,
+        });
+
+    protected IActionResult SignUpCreatePassword(string returnUrl, Email email) => RedirectToPage(
+        "/signUp/createPassword/index",
+        new
+        {
+            returnUrl,
+            EmailAddress = email.Value,
         });
 }

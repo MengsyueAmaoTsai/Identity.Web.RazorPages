@@ -4,4 +4,14 @@
     ViewData["Title"] = "Sign up";
 }
 
-<h1>Sign up</h1>
+<form method="post">
+    <span asp-validation-for="EmailAddress"></span>
+    <input asp-for="EmailAddress" type="email">
+
+    <button type="submit">Next</button>
+</form>
+
+
+@section Scripts {
+    <partial name="_ClientValidation" />
+}

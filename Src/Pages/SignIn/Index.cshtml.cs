@@ -16,8 +16,8 @@ public sealed class SignInViewModel(
     public required string ReturnUrl { get; init; }
 
     [BindProperty]
-    [EmailAddress(ErrorMessage = "Enter a valid email address.")]
     [Required(ErrorMessage = "Enter a valid email address.")]
+    [EmailAddress(ErrorMessage = "Enter a valid email address.")]
     public required string EmailAddress { get; init; }
 
     public IActionResult OnGet()

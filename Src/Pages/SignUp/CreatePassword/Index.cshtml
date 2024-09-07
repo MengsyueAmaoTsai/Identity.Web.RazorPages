@@ -1,0 +1,25 @@
+@page "/sign-up/create-password"
+@model SignUpCreatePasswordViewModel
+
+@{
+    ViewData["Title"] = "Create a password";
+}
+
+<form method="post">
+    <h1>@ViewData["Title"]</h1>
+    <div>Enter the password you would like to use with your account.</div>
+
+    <span asp-validation-for="Password"></span>
+    <input asp-for="Password" type="password" placeholder="Create password">
+    
+    <input type="checkbox"/>
+    <input type="checkbox"/>
+
+    <div>Choosing Next means that you agree to the Microsoft Services Agreement and privacy and cookies statement.</div>
+
+    <button type="submit">Next</button>
+</form>
+
+@section Scripts {
+    <partial name="_ClientValidation" />
+}
