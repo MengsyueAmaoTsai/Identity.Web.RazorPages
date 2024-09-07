@@ -1,19 +1,6 @@
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-
 namespace RichillCapital.Identity.Web.Pages;
 
-public class IndexModel : PageModel
+public sealed class HomeViewModel() : 
+    ViewModel
 {
-    private readonly ILogger<IndexModel> _logger;
-
-    public IndexModel(ILogger<IndexModel> logger)
-    {
-        _logger = logger;
-    }
-
-    public void OnGet()
-    {
-
-    }
 }
