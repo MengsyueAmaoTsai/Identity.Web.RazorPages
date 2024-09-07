@@ -41,6 +41,7 @@ public sealed class SignInViewModel(
                 "Sign-in failed due to invalid email format. Email: {EmailAddress}",
                 EmailAddress);
 
+            ModelState.AddModelError(nameof(EmailAddress), emailResult.Error.Message);
             return Page();
         }
 
@@ -55,7 +56,7 @@ public sealed class SignInViewModel(
                 EmailAddress);
 
             ModelState.AddModelError(
-                userResult.Error.Code,
+                nameof(EmailAddress),
                 "We couldn't find an account with that username. Try another, or get a new Microsoft account.");
 
             return Page();

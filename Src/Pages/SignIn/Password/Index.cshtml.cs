@@ -41,8 +41,8 @@ public sealed class SignInPasswordViewModel(
                 checkPasswordResult.Error);
 
             ModelState.AddModelError(
-                "Password",
-                "Your account or password is incorrect. If you don't remember your password, <a>reset it now.</a>");
+                nameof(Password),
+                "Your account or password is incorrect. If you don't remember your password, reset it now.");
 
             return Page();
         }
