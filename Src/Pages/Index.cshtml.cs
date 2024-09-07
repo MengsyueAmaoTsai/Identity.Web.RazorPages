@@ -1,6 +1,9 @@
+using Microsoft.AspNetCore.Authorization;
+
 namespace RichillCapital.Identity.Web.Pages;
 
-public sealed class HomeViewModel() : 
+[Authorize]
+public sealed class HomeViewModel() :
     ViewModel
 {
 }
