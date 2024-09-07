@@ -1,11 +1,17 @@
+using RichillCapital.Infrastructure.Logging;
 using RichillCapital.Infrastructure.Persistence;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Infrastructure layer - Logging
+builder.WebHost.UseCustomLogger();
+builder.Services.AddSerilog();
 
 // Infrastructure layer - Persistence
 builder.Services.AddDatabase();
 
-// Persentation layer
+// Presentation layer
 builder.Services
     .AddRazorPages()
     .WithRazorPagesRoot("/Src/Pages");
