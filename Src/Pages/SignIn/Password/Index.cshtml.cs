@@ -1,12 +1,16 @@
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using RichillCapital.Domain;
+using RichillCapital.Domain.Abstractions;
+using RichillCapital.SharedKernel.Monads;
 
 namespace RichillCapital.Identity.Web.Pages.SignIn.Password;
 
 [AllowAnonymous]
 public sealed class SignInPasswordViewModel(
-    ILogger<SignInPasswordViewModel> _logger) :
+    ILogger<SignInPasswordViewModel> _logger,
+    IUserManager _userManager) :
     ViewModel
 {
     [BindProperty(Name = "returnUrl", SupportsGet = true)]
@@ -19,9 +23,30 @@ public sealed class SignInPasswordViewModel(
     [Required(ErrorMessage = "Please enter the password for your Microsoft account.")]
     public required string Password { get; init; }
 
-    public IActionResult OnPostAsync()
+    public async Task<IActionResult> OnPostAsync(
+        CancellationToken _ = default)
     {
-        // invalid password: Your account or password is incorrect. If you don't remember your password, <a>reset it now.</a>
+        var email = Email.From(EmailAddress).ThrowIfFailure().Value;
+
+        var userResult = await _userManager.FindByEmailAsync(email);
+        var user = userResult.ThrowIfFailure().Value;
+
+        var checkPasswordResult = _userManager.CheckPassword(user, Password);
+
+        if (checkPasswordResult.IsFailure)
+        {
+            _logger.LogWarning(
+                "Failed to check password for user with email address {EmailAddress}. {error}",
+                email,
+                checkPasswordResult.Error);
+
+            ModelState.AddModelError(
+                "Password",
+                "Your account or password is incorrect. If you don't remember your password, <a>reset it now.</a>");
+
+            return Page();
+        }
+
         TempData["Password"] = Password;
         return SignInStaySignedIn(ReturnUrl, EmailAddress);
     }

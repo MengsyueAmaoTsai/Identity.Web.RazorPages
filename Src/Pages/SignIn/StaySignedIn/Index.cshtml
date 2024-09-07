@@ -7,6 +7,9 @@
     <div>Stay signed in?</div>
     <div>Stay signed in so you don't have to sign in again next time.</div>
     
-    <label asp-for="StaySignedIn"></label>
-    <input asp-for="StaySignedIn" type="checkbox">
+    <label asp-for="DoNotShowThisAgain"></label>
+    <input asp-for="DoNotShowThisAgain" type="checkbox">
+
+    <button type="submit" name="StaySignedIn" value="false">No</button>
+    <button type="submit" name="StaySignedIn" value="true">Yes</button>
 </form>

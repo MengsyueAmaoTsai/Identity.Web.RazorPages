@@ -22,7 +22,7 @@ public static class IdentityExtensions
                 });
 
         services.AddHttpContextAccessor();
-        services.AddScoped<IPasswordHasher, PasswordHasher>();
+        services.AddSingleton<IPasswordHasher, PasswordHasher>();
         services.AddScoped<IUserManager, UserManager>();
         services.AddScoped<ISignInManager, SignInManager>();
 

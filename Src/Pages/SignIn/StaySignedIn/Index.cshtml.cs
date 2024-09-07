@@ -15,6 +15,8 @@ public sealed class SignInStaySignedInViewModel(
     public required string EmailAddress { get; init; }
 
     [BindProperty]
+    public required bool DoNotShowThisAgain { get; init; }
+
     public required bool StaySignedIn { get; init; }
 
     public IActionResult OnPost()
