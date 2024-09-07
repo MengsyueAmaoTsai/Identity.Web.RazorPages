@@ -9,17 +9,17 @@ public sealed class User : Entity<UserId>
         string name,
         Email email,
         string passwordHash,
-        DateTimeOffset createdTimeUtc) 
+        DateTimeOffset createdTimeUtc)
         : base(id)
     {
         Name = name;
         Email = email;
         PasswordHash = passwordHash;
-        CreateTimeUtc = createdTimeUtc;
+        CreatedTimeUtc = createdTimeUtc;
     }
 
     public string Name { get; private set; }
     public Email Email { get; private set; }
     public string PasswordHash { get; private set; }
-    public DateTimeOffset CreateTimeUtc { get; private set; }
+    public DateTimeOffset CreatedTimeUtc { get; private set; }
 }
