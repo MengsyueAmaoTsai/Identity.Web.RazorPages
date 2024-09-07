@@ -9,8 +9,9 @@
     <div>Sign in</div>
 
     <input asp-for="EmailAddress" type="email" autocomplete="username" spellcheck="false" placeholder="Email address">
+    <span asp-validation-for="EmailAddress"></span>
 
-    <div>No account? <a>Create one!</a></div>
+    <div>No account? <a asp-page="/signUp/index">Create one!</a></div>
     <a>Can't access your account?</a>
 
     <div>
@@ -59,3 +60,7 @@ img {
     height: 24px;
 }
 </style>
+
+@section Scripts {
+    <partial name="_ClientValidation" />
+}
