@@ -6,4 +6,16 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Libs\**" />
+    <Content Remove="Libs\**" />
+    <EmbeddedResource Remove="Libs\**" />
+    <None Remove="Libs\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="Libs\RichillCapital.Infrastructure\RichillCapital.Infrastructure.csproj" />
+    <ProjectReference Include="Libs\RichillCapital.UseCases\RichillCapital.UseCases.csproj" />
+  </ItemGroup>
+
 </Project>
