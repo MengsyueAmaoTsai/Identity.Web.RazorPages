@@ -13,6 +13,9 @@ internal sealed class UserConfiguration : IEntityTypeConfiguration<User>
             .HasKey(user => user.Id);
 
         builder
+            .HasIndex(user => user.Email);
+
+        builder
             .Property(user => user.Id)
             .HasMaxLength(UserId.MaxLength)
             .HasConversion(
@@ -27,5 +30,19 @@ internal sealed class UserConfiguration : IEntityTypeConfiguration<User>
                 email => email.Value,
                 value => Email.From(value).ThrowIfFailure().Value)
             .IsRequired();
+
+        builder.HasData([
+            CreateUser("1", "Richill Capital", "mengsyue.tsai@outlook.com", "among7201"),
+            CreateUser("2", "Mengsyue Amao Tsai", "mengsyue.tsai@gmail.com", "among7201"),
+        ]);
     }
+
+    private static User CreateUser(string id, string name, string email, string passwordHash) =>
+        User
+            .Create(
+                UserId.From(id).ThrowIfFailure().Value,
+                name,
+                Email.From(email).ThrowIfFailure().Value,
+                passwordHash)
+            .ThrowIfError().Value;
 }
