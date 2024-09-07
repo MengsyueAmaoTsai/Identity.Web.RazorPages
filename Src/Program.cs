@@ -1,17 +1,22 @@
+using RichillCapital.Infrastructure.Persistence;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// Infrastructure layer - Persistence
+builder.Services.AddDatabase();
+
+// Persentation layer
 builder.Services
     .AddRazorPages()
     .WithRazorPagesRoot("/Src/Pages");
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+app.ResetDatabase();
+
 if (!app.Environment.IsDevelopment())
 {
-    app.UseExceptionHandler("/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+    app.UseExceptionHandler("/error");
     app.UseHsts();
 }
 

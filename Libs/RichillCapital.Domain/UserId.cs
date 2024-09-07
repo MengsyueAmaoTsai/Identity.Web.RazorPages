@@ -1,6 +1,5 @@
-﻿namespace RichillCapital.Domain
+﻿namespace RichillCapital.Domain;
+
+public sealed class UserId
 {
-    public class UserId
-    {
-    }
 }
