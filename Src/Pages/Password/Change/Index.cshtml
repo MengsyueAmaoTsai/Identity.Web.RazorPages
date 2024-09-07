@@ -1,0 +1,17 @@
+@page "/password/change"
+@model PasswordChangeViewModel
+@{
+}
+
+<form method="post">
+    <input asp-for="CurrentPassword" type="password">
+    <input asp-for="NewPassword" type="password">
+    <input asp-for="ReenterPassword" type="password">
+
+    Make me change my password every 72 days
+    <input type="checkbox">
+
+    <button type="submit">Save</button>
+
+    <button type="button">Cancel</button> 
+</form>

@@ -23,6 +23,8 @@ public abstract class ViewModel : PageModel
             returnUrl,
         });
 
+    protected IActionResult Profile() => RedirectToPage("/profile/index");
+
     protected IActionResult SignInPassword(string returnUrl, Email email) => RedirectToPage(
         "/signIn/password/index",
         new
@@ -46,4 +48,6 @@ public abstract class ViewModel : PageModel
             returnUrl,
             EmailAddress = email.Value,
         });
+
+    protected IActionResult PasswordChange() => RedirectToPage("/password/change/index");
 }
