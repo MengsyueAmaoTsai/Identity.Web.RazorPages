@@ -9,6 +9,14 @@ public abstract class ViewModel : PageModel
     protected IActionResult Home() => RedirectToPage("/index");
     protected IActionResult Error() => RedirectToPage("/error/index");
 
+    protected IActionResult Redirecting(string redirectUri)
+    {
+        HttpContext.Response.StatusCode = 200;
+        HttpContext.Response.Headers["Location"] = "";
+
+        return RedirectToPage("/redirect/index", new { RedirectUri = redirectUri });
+    }
+
     protected IActionResult SignInPassword(string returnUrl, Email email) => RedirectToPage(
         "/signIn/password/index",
         new

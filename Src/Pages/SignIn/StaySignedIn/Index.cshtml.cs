@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RichillCapital.Domain;
 using RichillCapital.Domain.Abstractions;
+using RichillCapital.Infrastructure.Identity.Server;
 using RichillCapital.SharedKernel.Monads;
 
 namespace RichillCapital.Identity.Web.Pages.SignIn.StaySignedIn;
@@ -70,10 +71,10 @@ public sealed class SignInStaySignedInViewModel(
             throw new Exception("invalid return URL");
         }
 
-        // if (context.IsNativeClient())
-        // {
-        // return RedirectingPage(ReturnUrl);
-        // }
+        if (context.IsNativeClient())
+        {
+            return Redirecting(ReturnUrl);
+        }
 
         return Redirect(ReturnUrl);
     }

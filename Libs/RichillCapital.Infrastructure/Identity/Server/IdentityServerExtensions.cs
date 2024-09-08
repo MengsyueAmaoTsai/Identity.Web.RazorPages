@@ -1,3 +1,4 @@
+using Duende.IdentityServer.Models;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace RichillCapital.Infrastructure.Identity.Server;
@@ -21,4 +22,8 @@ public static class IdentityServerExtensions
 
         return services;
     }
+
+    public static bool IsNativeClient(this AuthorizationRequest context) =>
+        !context.RedirectUri.StartsWith("https", StringComparison.Ordinal) && 
+        !context.RedirectUri.StartsWith("http", StringComparison.Ordinal);
 }
