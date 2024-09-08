@@ -5,14 +5,55 @@
     Layout = "_AnonymousLayout";
 }
 
-<form method="post">
-    <span asp-validation-for="EmailAddress"></span>
-    <input asp-for="EmailAddress" type="email">
-
-    <button type="submit">Next</button>
+<form method="post" target="_top" spellcheck="false" autocomplete="off">
+    <div class="form-header">
+        <div>
+            <div role="heading">@ViewData["Title"]</div>
+        </div>
+    </div>
+    
+    <div class="form-body">
+    </div>
+    
+    <div class="form-footer">
+    </div>
 </form>
 
 
 @section Scripts {
     <partial name="_ClientValidation" />
 }
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-weight: 400;
+    font-family: "Segoe UI", -apple-system, "Helvetica Neue", "Lucida Grande", Roboto, Ebrima, "Nirmala UI", Gadugi, "Segoe Xbox Symbol", "Segoe UI Symbol", "Meiryo UI", "Khmer UI", Tunga, "Lao UI", Raavi, "Iskoola Pota", Latha, Leelawadee, "Microsoft YaHei UI", "Microsoft JhengHei UI", "Malgun Gothic", "Estrangelo Edessa", "Microsoft Himalaya", "Microsoft New Tai Lue", "Microsoft PhagsPa", "Microsoft Tai Le", "Microsoft Yi Baiti", "Mongolian Baiti", "MV Boli", "Myanmar Text", "Cambria Math";
+    font-size: 0.9375rem;
+    line-height: 1.25rem;
+    margin: 0px;
+    background-color: rgb(255, 255, 255);
+}
+
+.form-header {
+    margin-top: 16px;
+    margin-bottom: 12px;
+    font-weight: 600;
+    line-height: 28px;
+    color: rgb(27, 27, 27);
+    font-size: 1.5rem;
+    padding-top: 0px;
+    padding-bottom: 0px;    
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.form-body {
+}
+
+.form-footer { 
+}
+</style>
