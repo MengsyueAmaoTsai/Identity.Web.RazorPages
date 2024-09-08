@@ -9,22 +9,6 @@ public abstract class ViewModel : PageModel
     protected IActionResult Home() => RedirectToPage("/index");
     protected IActionResult Error() => RedirectToPage("/error/index");
 
-    protected IActionResult SignIn(string returnUrl) => RedirectToPage(
-        "/signIn/index",
-        new
-        {
-            returnUrl,
-        });
-
-    protected IActionResult SignUp(string returnUrl) => RedirectToPage(
-        "/signUp/index",
-        new
-        {
-            returnUrl,
-        });
-
-    protected IActionResult Profile() => RedirectToPage("/profile/index");
-
     protected IActionResult SignInPassword(string returnUrl, Email email) => RedirectToPage(
         "/signIn/password/index",
         new
@@ -65,6 +49,4 @@ public abstract class ViewModel : PageModel
             emailAddress,
             name,
         });
-
-    protected IActionResult PasswordChange() => RedirectToPage("/password/change/index");
 }

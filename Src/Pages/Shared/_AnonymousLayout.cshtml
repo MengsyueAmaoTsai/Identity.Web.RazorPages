@@ -1,4 +1,14 @@
-﻿<!DOCTYPE html>
+﻿@{
+    var disabledIdentityBannerPaths = new HashSet<string>
+    {
+        "/sign-in",
+        "/sign-up",
+    };
+
+    var identityBannerVisible = !disabledIdentityBannerPaths.Contains(Context.Request.Path);
+}
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -28,7 +38,11 @@
 
                                             <div>
                                                 <img class="form-logo" src="https://logincdn.msftauth.net/shared/5/images/microsoft_logo_ee5c8d9fb6248c938fd0.svg">
-                                                @await Html.PartialAsync("_IdentityBanner")
+                                                
+                                                @if (identityBannerVisible)
+                                                {
+                                                    @await Html.PartialAsync("_IdentityBanner");
+                                                }
 
                                                 <div class="page-content">
                                                     <div class="route-animation">
