@@ -1,4 +1,10 @@
 {
   "dotnet.defaultSolution": "./RichillCapital.Identity.Web.sln",
-  "cSpell.words": ["Antiforgery", "ASPNETCORE", "Hasher", "Serilog"]
+  "cSpell.words": [
+    "Antiforgery",
+    "ASPNETCORE",
+    "Birthdate",
+    "Hasher",
+    "Serilog"
+  ]
 }

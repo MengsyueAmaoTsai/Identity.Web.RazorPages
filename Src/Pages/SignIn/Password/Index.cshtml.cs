@@ -47,7 +47,7 @@ public sealed class SignInPasswordViewModel(
             return Page();
         }
 
-        TempData.Add("Password", Password);
+        TempData["Password"] = Password;
         return SignInStaySignedIn(ReturnUrl, EmailAddress);
     }
 }

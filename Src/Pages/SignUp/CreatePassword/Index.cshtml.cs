@@ -22,7 +22,7 @@ public sealed class SignUpCreatePasswordViewModel(
 
     public IActionResult OnPost()
     {
-        TempData.Add("CreatePassword", Password);
-        return Page();
+        TempData["Password"] = Password;
+        return SignUpName(ReturnUrl, EmailAddress);
     }
 }
