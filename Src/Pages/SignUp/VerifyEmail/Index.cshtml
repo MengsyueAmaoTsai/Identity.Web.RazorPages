@@ -1,0 +1,27 @@
+@page "/sign-up/verify-email"
+@model SignUpVerifyEmailViewModel
+
+@{
+    ViewData["Title"] = "Enter code";
+    Layout = "_AnonymousLayout";
+}
+
+<form method="post">
+    <div class="form-header">
+        <div>
+            <div role="heading">Verify email</div>
+        </div>
+    </div>
+
+    <div>
+        Enter the code we sent to richillcapital.0903@gmail.com. If you didn't get the email, check your junk folder or try again.
+    </div>
+    
+    <div>
+        <span asp-validation-for="EmailVerificationCode"></span>
+        <input asp-for="EmailVerificationCode" type="text" placeholder="Enter code">
+    </div>
+
+    <div>
+    </div>
+</form>
