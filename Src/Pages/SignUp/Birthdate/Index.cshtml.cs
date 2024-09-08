@@ -19,6 +19,6 @@ public sealed class SignUpBirthdateViewModel(
 
     public IActionResult OnPost()
     {
-        return Page();
+        return SignUpVerifyEmail();
     }
 }
