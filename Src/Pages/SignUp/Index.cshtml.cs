@@ -27,10 +27,7 @@ public sealed class SignUpViewModel(
 
         if (emailResult.IsFailure)
         {
-            _logger.LogWarning(
-                "Sign-up failed due to invalid email format. Email: {EmailAddress}",
-                EmailAddress);
-
+            _logger.LogWarning("{error}", emailResult.Error);
             ModelState.AddModelError("EmailAddress", emailResult.Error.Message);
             return Page();
         }

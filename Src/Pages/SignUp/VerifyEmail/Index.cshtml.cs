@@ -1,16 +1,19 @@
-using System.ComponentModel.DataAnnotations;
+using Duende.IdentityServer.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RichillCapital.Domain;
 using RichillCapital.Domain.Abstractions;
 using RichillCapital.Identity.Web.Pages;
+using RichillCapital.Infrastructure.Identity.Server;
 using RichillCapital.SharedKernel.Monads;
+using System.ComponentModel.DataAnnotations;
 
 [AllowAnonymous]
 public sealed class SignUpVerifyEmailViewModel(
     ILogger<SignUpVerifyEmailViewModel> _logger,
     IUserManager _userManager,
-    ISignInManager _signInManager) :
+    ISignInManager _signInManager,
+    IIdentityServerInteractionService _interactionService) :
     ViewModel
 {
     [BindProperty(Name = "returnUrl", SupportsGet = true)]
@@ -23,36 +26,9 @@ public sealed class SignUpVerifyEmailViewModel(
     [Required(ErrorMessage = "This information is required.")]
     public required string EmailVerificationCode { get; init; }
 
-    public async Task<IActionResult> OnGetAsync()
-    {
-        // Generate email confirmation code and send email to user
-        var errorOrUser = RichillCapital.Domain.User.Create(
-            UserId.NewUserId(),
-            string.Empty,
-            Email.From(EmailAddress).ThrowIfFailure().Value,
-            false,
-            TempData["Password"] as string ?? string.Empty);
-
-        if (errorOrUser.HasError)
-        {
-            return Error();
-        }
-
-        var user = errorOrUser.Value;
-
-        await _userManager.CreateAsync(user, TempData["Password"] as string ?? string.Empty);
-
-        var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-        _logger.LogInformation("Generate confirmation code: {code}", code);
-
-        // Send email to user
-        return Page();
-    }
-
     public async Task<IActionResult> OnPostAsync(CancellationToken cancellationToken = default)
     {
         // if invalid : That code didn't work. Check the code and try again.
-
         var email = Email.From(EmailAddress).ThrowIfFailure().Value;
 
         var userResult = await _userManager.FindByEmailAsync(email, cancellationToken).ThrowIfFailure();
@@ -63,13 +39,50 @@ public sealed class SignUpVerifyEmailViewModel(
 
         if (confirmResult.IsFailure)
         {
-            ModelState.AddModelError(string.Empty, "That code didn't work. Check the code and try again.");
+            ModelState.AddModelError(
+                "EmailVerificaitionCode", 
+                "That code didn't work. Check the code and try again.");
 
             return Page();
         }
 
-        // Sign in user
+        var user = userResult.Value;
 
-        return Page();
+        var signInResult = await _signInManager.PasswordSignInAsync(
+            email: user.Email,
+            password: user.PasswordHash,
+            isPersistent: false,
+            lockoutOnFailure: false,
+            cancellationToken);
+
+        if (signInResult.IsFailure)
+        {
+            return Error();
+        }
+
+        // Redirect
+        var context = await _interactionService.GetAuthorizationContextAsync(ReturnUrl);
+
+        if (context is null)
+        {
+            if (Url.IsLocalUrl(ReturnUrl))
+            {
+                return Redirect(ReturnUrl);
+            }
+
+            if (string.IsNullOrEmpty(ReturnUrl))
+            {
+                return Redirect("~/");
+            }
+
+            throw new Exception("invalid return URL");
+        }
+
+        if (context.IsNativeClient())
+        {
+            return Redirecting(ReturnUrl);
+        }
+
+        return Redirect(ReturnUrl);
     }
 }
