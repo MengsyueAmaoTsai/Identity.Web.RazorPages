@@ -23,6 +23,6 @@ public sealed class SignUpCreatePasswordViewModel(
     public IActionResult OnPost()
     {
         TempData["Password"] = Password;
-        return SignUpName(ReturnUrl, EmailAddress);
+        return SignUpBirthdate(ReturnUrl, EmailAddress);
     }
 }

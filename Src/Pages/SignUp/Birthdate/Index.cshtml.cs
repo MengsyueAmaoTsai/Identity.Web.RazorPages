@@ -14,9 +14,6 @@ public sealed class SignUpBirthdateViewModel(
     [BindProperty(Name = "emailAddress", SupportsGet = true)]
     public required string EmailAddress { get; init; }
 
-    [BindProperty(Name = "name", SupportsGet = true)]
-    public required string Name { get; init; }
-
     public IActionResult OnPost()
     {
         return SignUpVerifyEmail();

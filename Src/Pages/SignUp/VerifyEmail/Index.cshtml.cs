@@ -19,9 +19,6 @@ public sealed class SignUpVerifyEmailViewModel(
     [BindProperty(Name = "emailAddress", SupportsGet = true)]
     public required string EmailAddress { get; init; }
 
-    [BindProperty(Name = "name", SupportsGet = true)]
-    public required string Name { get; init; }
-
     [BindProperty]
     [Required(ErrorMessage = "This information is required.")]
     public required string EmailVerificationCode { get; init; }
@@ -31,7 +28,7 @@ public sealed class SignUpVerifyEmailViewModel(
         // Generate email confirmation code and send email to user
         var errorOrUser = RichillCapital.Domain.User.Create(
             UserId.NewUserId(),
-            Name,
+            string.Empty,
             Email.From(EmailAddress).ThrowIfFailure().Value,
             false,
             TempData["Password"] as string ?? string.Empty);

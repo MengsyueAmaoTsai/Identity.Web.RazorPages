@@ -33,13 +33,12 @@ public abstract class ViewModel : PageModel
             EmailAddress = email.Value,
         });
 
-    protected IActionResult SignUpBirthdate(string returnUrl, string emailAddress, string name) => RedirectToPage(
+    protected IActionResult SignUpBirthdate(string returnUrl, string emailAddress) => RedirectToPage(
         "/signUp/birthdate/index",
         new
         {
             returnUrl,
             emailAddress,
-            name,
         });
 
     protected IActionResult SignUpVerifyEmail() =>
