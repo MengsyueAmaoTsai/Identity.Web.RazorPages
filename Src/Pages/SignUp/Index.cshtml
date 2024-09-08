@@ -36,9 +36,13 @@
                                                         <div class="form-body">
                                                             <div style="overflow-wrap: break-word; white-space: pre-wrap;">
                                                                 <div style="min-height: 1px; margin-left: 0px; margin-right: 0px;">
+                                                                    <div role="alert">
+                                                                        <span class="email-error" asp-validation-for="EmailAddress"></span>
+                                                                    </div>
+
                                                                     <div style="display: flex; flex-direction: row;">
                                                                         <div class="emai-input-container">
-                                                                            <input class="email-input" placeholder="someone@example.com" type="text"/>
+                                                                            <input asp-for="EmailAddress" class="email-input" placeholder="someone@example.com" type="text"/>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -73,7 +77,6 @@
         </div>
     </div>
 </div>
-
 
 @section Scripts {
     <partial name="_ClientValidation" />
@@ -230,6 +233,13 @@ button, input, select, textarea {
     margin-right: 0px;
 }
 
+.email-error {
+    color: rgb(232, 17, 35);
+    margin-top: 0px;
+    margin-left: 0px;
+    margin-bottom: 0px;
+    margin-right: 0px;
+}
 .emai-input-container {
     width: 100%;
     margin-bottom: 16px;
