@@ -32,8 +32,13 @@ internal sealed class UserConfiguration : IEntityTypeConfiguration<User>
             .IsRequired();
 
         builder.HasData([
-            CreateUser("1", "Richill Capital", "mengsyue.tsai@outlook.com", "among7201"),
-            CreateUser("2", "Mengsyue Amao Tsai", "mengsyue.tsai@gmail.com", "among7201"),
+            CreateUser("1", "Richill Capital", "mengsyue.tsai@outlook.com", "123"),
+            CreateUser("2", "Mengsyue Amao Tsai", "mengsyue.tsai@gmail.com", "123"),
+            CreateUser("3", "Trader Studio Web User", "trader-studio-web@richillcapital.com", "123"),
+            CreateUser("4", "Admin Web User", "admin-web@richillcapital.com", "123"),
+            CreateUser("5", "Community Web User", "community-web@richillcapital.com", "123"),
+            CreateUser("6", "Research Web User", "research-web@richillcapital.com", "123"),
+            CreateUser("7", "Exchange Web User", "exchange-web@richillcapital.com", "123"),
         ]);
     }
 
