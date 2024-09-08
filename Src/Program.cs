@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.DataProtection;
 using RichillCapital.Infrastructure.Identity;
 using RichillCapital.Infrastructure.Identity.Server;
 using RichillCapital.Infrastructure.Logging;
@@ -21,6 +22,10 @@ builder.Services.AddDatabase();
 builder.Services
     .AddRazorPages()
     .WithRazorPagesRoot("/Src/Pages");
+
+builder.Services
+    .AddDataProtection()
+    .PersistKeysToFileSystem(new DirectoryInfo(builder.Environment.ContentRootPath));
 
 var app = builder.Build();
 
