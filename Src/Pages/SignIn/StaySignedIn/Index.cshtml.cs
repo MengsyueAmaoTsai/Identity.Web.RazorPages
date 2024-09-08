@@ -1,3 +1,4 @@
+using Duende.IdentityServer.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RichillCapital.Domain;
@@ -9,7 +10,8 @@ namespace RichillCapital.Identity.Web.Pages.SignIn.StaySignedIn;
 [AllowAnonymous]
 public sealed class SignInStaySignedInViewModel(
     ILogger<SignInStaySignedInViewModel> _logger,
-    ISignInManager _signInManager) :
+    ISignInManager _signInManager,
+    IIdentityServerInteractionService _interactionService) :
     ViewModel
 {
     [BindProperty(SupportsGet = true)]
@@ -51,26 +53,26 @@ public sealed class SignInStaySignedInViewModel(
             EmailAddress,
             StaySignedIn);
 
-        // var context = await _interactionService.GetAuthorizationContextAsync(ReturnUrl);
+        var context = await _interactionService.GetAuthorizationContextAsync(ReturnUrl);
 
-        // if (context is null)
-        // {
-        if (Url.IsLocalUrl(ReturnUrl))
+        if (context is null)
         {
-            return Redirect(ReturnUrl);
-        }
+            if (Url.IsLocalUrl(ReturnUrl))
+            {
+                return Redirect(ReturnUrl);
+            }
 
-        if (string.IsNullOrEmpty(ReturnUrl))
-        {
-            return Redirect("~/");
-        }
+            if (string.IsNullOrEmpty(ReturnUrl))
+            {
+                return Redirect("~/");
+            }
 
-        throw new Exception("invalid return URL");
-        // }
+            throw new Exception("invalid return URL");
+        }
 
         // if (context.IsNativeClient())
         // {
-        //     return RedirectingPage(ReturnUrl);
+        // return RedirectingPage(ReturnUrl);
         // }
 
         return Redirect(ReturnUrl);

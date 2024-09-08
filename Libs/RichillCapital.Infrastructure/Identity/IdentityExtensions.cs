@@ -1,3 +1,4 @@
+using Duende.IdentityServer.Models;
 using Microsoft.Extensions.DependencyInjection;
 using RichillCapital.Domain.Abstractions;
 
@@ -9,6 +10,7 @@ public static class IdentityExtensions
     {
         var authenticationBuilder = services.AddAuthentication(options =>
         {
+            options.DefaultAuthenticateScheme = CustomAuthenticationSchemes.CookieDefault;
         });
 
         authenticationBuilder
@@ -27,5 +29,21 @@ public static class IdentityExtensions
         services.AddScoped<ISignInManager, SignInManager>();
 
         return services;
+    }
+}
+
+internal static class InMemoryClients
+{
+    public static IEnumerable<Client> GetClients()
+    {
+        return new List<Client>
+        {
+            new() {
+                ClientId = "client",
+                ClientSecrets = { new Secret("secret".Sha256()) },
+                AllowedGrantTypes = GrantTypes.ClientCredentials,
+                AllowedScopes = { "api1" }
+            }
+        };
     }
 }

@@ -1,4 +1,5 @@
 using RichillCapital.Infrastructure.Identity;
+using RichillCapital.Infrastructure.Identity.Server;
 using RichillCapital.Infrastructure.Logging;
 using RichillCapital.Infrastructure.Persistence;
 using Serilog;
@@ -11,6 +12,7 @@ builder.Services.AddSerilog();
 
 // Infrastructure layer - Identity
 builder.Services.AddCustomIdentity();
+builder.Services.AddIdentityServerServices();
 
 // Infrastructure layer - Persistence
 builder.Services.AddDatabase();
@@ -35,6 +37,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseIdentityServer();
 app.UseAuthorization();
 
 app.MapRazorPages();
