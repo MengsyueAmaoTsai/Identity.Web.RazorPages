@@ -1,9 +1,9 @@
-using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RichillCapital.Domain;
 using RichillCapital.Domain.Abstractions;
 using RichillCapital.SharedKernel.Monads;
+using System.ComponentModel.DataAnnotations;
 
 namespace RichillCapital.Identity.Web.Pages.SignIn.Password;
 
@@ -26,19 +26,11 @@ public sealed class SignInPasswordViewModel(
     public async Task<IActionResult> OnPostAsync(
         CancellationToken _ = default)
     {
-        var email = Email.From(EmailAddress).ThrowIfFailure().Value;
-
-        var userResult = await _userManager.FindByEmailAsync(email);
-        var user = userResult.ThrowIfFailure().Value;
-
-        var checkPasswordResult = _userManager.CheckPassword(user, Password);
+        var checkPasswordResult = await VerifyPasswordAsync(EmailAddress, Password);
 
         if (checkPasswordResult.IsFailure)
         {
-            _logger.LogWarning(
-                "Failed to check password for user with email address {EmailAddress}. {error}",
-                email,
-                checkPasswordResult.Error);
+            _logger.LogWarning("{error}", checkPasswordResult.Error);
 
             ModelState.AddModelError(
                 nameof(Password),
@@ -49,5 +41,31 @@ public sealed class SignInPasswordViewModel(
 
         TempData["Password"] = Password;
         return SignInStaySignedIn(ReturnUrl, EmailAddress);
+    }
+
+    private async Task<Result> VerifyPasswordAsync(
+        string emailAddress, 
+        string password,
+        CancellationToken cancellationToken = default)
+    {
+        var emailResult = Email.From(emailAddress);
+
+        if (emailResult.IsFailure)
+        {
+            return Result.Failure(emailResult.Error);
+        }
+
+        var email = emailResult.Value;
+
+        var userResult = await _userManager.FindByEmailAsync(email);
+
+        if (userResult.IsFailure)
+        {
+            return Result.Failure(userResult.Error);
+        }
+
+        var user = userResult.Value;
+
+        return _userManager.CheckPassword(user, password);
     }
 }

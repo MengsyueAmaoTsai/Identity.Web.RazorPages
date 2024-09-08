@@ -30,29 +30,24 @@ public sealed class SignInStaySignedInViewModel(
     public async Task<IActionResult> OnPostAsync(
         CancellationToken cancellationToken = default)
     {
+        var password = TempData["Password"]?.ToString() ?? string.Empty;
+
         var signInResult = await _signInManager.PasswordSignInAsync(
             email: Email.From(EmailAddress).ThrowIfFailure().Value,
-            password: TempData["Password"]?.ToString() ?? string.Empty,
+            password: password,
             isPersistent: StaySignedIn,
             lockoutOnFailure: true,
             cancellationToken);
 
         if (signInResult.IsFailure)
         {
-            _logger.LogWarning(
-                "Sign-in failed for email address {emailAddress}. Reason: {reason}",
-                EmailAddress,
-                signInResult.Error.Message);
-
+            _logger.LogWarning("{error}", signInResult.Error);
+            
             ModelState.AddModelError(string.Empty, signInResult.Error.Message);
             return Page();
         }
 
         TempData.Remove("Password");
-        _logger.LogInformation(
-            "User with email address {emailAddress} signed in successfully, stay signed in: {staySignedIn}",
-            EmailAddress,
-            StaySignedIn);
 
         var context = await _interactionService.GetAuthorizationContextAsync(ReturnUrl);
 
@@ -67,7 +62,7 @@ public sealed class SignInStaySignedInViewModel(
             {
                 return Redirect("~/");
             }
-
+            
             throw new Exception("invalid return URL");
         }
 
