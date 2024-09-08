@@ -12,4 +12,6 @@ public interface IUserManager
     Task<Result> AccessFailedAsync(User user, CancellationToken cancellationToken = default);
     Task<bool> IsLockedOutAsync(User user, CancellationToken cancellationToken = default);
     Task<Result> ChangePasswordAsync(User user, string currentPassword, string newPassword);
+    Task<Result<string>> GenerateEmailConfirmationTokenAsync(User user);
+    Task<Result<string>> GenerateUserTokenAsync(User user, string tokenProvider, string purpose);
 }

@@ -17,4 +17,7 @@ public sealed class UserId : SingleValueObject<string>
         Result<string>
             .With(value)
             .Then(id => new UserId(id));
+
+    public static UserId NewUserId() =>
+        From(Guid.NewGuid().ToString()).Value;
 }

@@ -187,4 +187,25 @@ internal sealed class UserManager(
         await _unitOfWork.SaveChangesAsync();
         return Result.Success;
     }
+
+    public Task<Result<string>> GenerateEmailConfirmationTokenAsync(User user) =>
+        GenerateUserTokenAsync(user, string.Empty, string.Empty);
+
+    public async Task<Result<string>> GenerateUserTokenAsync(
+        User user,
+        string tokenProvider,
+        string purpose)
+    {
+        if (string.IsNullOrEmpty(tokenProvider))
+        {
+            return Result<string>.Failure(Error.Invalid($"{nameof(tokenProvider)} cannot be null or empty."));
+        }
+
+        // if (!_tokenProviders.TryGetValue(tokenProvider, out var provider))
+        // {
+        //     throw new NotSupportedException(Resources.FormatNoTokenProvider(nameof(TUser), tokenProvider));
+        // }
+
+        return Result<string>.With("0000");
+    }
 }

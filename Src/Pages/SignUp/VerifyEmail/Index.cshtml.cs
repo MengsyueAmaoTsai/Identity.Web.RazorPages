@@ -1,11 +1,15 @@
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using RichillCapital.Domain;
+using RichillCapital.Domain.Abstractions;
 using RichillCapital.Identity.Web.Pages;
+using RichillCapital.SharedKernel.Monads;
 
 [AllowAnonymous]
 public sealed class SignUpVerifyEmailViewModel(
-    ILogger<SignUpVerifyEmailViewModel> _logger) :
+    ILogger<SignUpVerifyEmailViewModel> _logger,
+    IUserManager _userManager) :
     ViewModel
 {
     [BindProperty(Name = "returnUrl", SupportsGet = true)]
@@ -20,6 +24,28 @@ public sealed class SignUpVerifyEmailViewModel(
     [BindProperty]
     [Required(ErrorMessage = "This information is required.")]
     public required string EmailVerificationCode { get; init; }
+
+    public async Task<IActionResult> OnGetAsync()
+    {
+        // Generate email confirmation code and send email to user
+        var errorOrUser = RichillCapital.Domain.User.Create(
+            UserId.NewUserId(),
+            Name,
+            Email.From(EmailAddress).ThrowIfFailure().Value,
+            false,
+            TempData["Password"] as string ?? string.Empty);
+
+        if (errorOrUser.HasError)
+        {
+            return Error();
+        }
+
+        var code = await _userManager.GenerateEmailConfirmationTokenAsync(null!);
+        _logger.LogInformation("Generate confirmation code: {code}", code);
+
+        // Send email to user
+        return Page();
+    }
 
     public IActionResult OnPost()
     {
