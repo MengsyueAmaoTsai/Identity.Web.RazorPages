@@ -208,4 +208,14 @@ internal sealed class UserManager(
 
         return Result<string>.With("0000");
     }
+
+    public async Task<Result> ConfirmEmailAsync(User user, string token)
+    {
+        // if (!await VerifyUserTokenAsync(user, Options.Tokens.EmailConfirmationTokenProvider, ConfirmEmailTokenPurpose, token).ConfigureAwait(false))
+        // {
+        //     return IdentityResult.Failed(ErrorDescriber.InvalidToken());
+        // }
+        // await store.SetEmailConfirmedAsync(user, true, CancellationToken).ConfigureAwait(false);
+        return await UpdateUserAsync(user);
+    }
 }

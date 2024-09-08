@@ -14,4 +14,5 @@ public interface IUserManager
     Task<Result> ChangePasswordAsync(User user, string currentPassword, string newPassword);
     Task<Result<string>> GenerateEmailConfirmationTokenAsync(User user);
     Task<Result<string>> GenerateUserTokenAsync(User user, string tokenProvider, string purpose);
+    Task<Result> ConfirmEmailAsync(User user, string token);
 }

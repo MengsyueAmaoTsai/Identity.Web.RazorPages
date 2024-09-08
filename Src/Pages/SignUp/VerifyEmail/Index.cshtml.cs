@@ -9,7 +9,8 @@ using RichillCapital.SharedKernel.Monads;
 [AllowAnonymous]
 public sealed class SignUpVerifyEmailViewModel(
     ILogger<SignUpVerifyEmailViewModel> _logger,
-    IUserManager _userManager) :
+    IUserManager _userManager,
+    ISignInManager _signInManager) :
     ViewModel
 {
     [BindProperty(Name = "returnUrl", SupportsGet = true)]
@@ -40,16 +41,38 @@ public sealed class SignUpVerifyEmailViewModel(
             return Error();
         }
 
-        var code = await _userManager.GenerateEmailConfirmationTokenAsync(null!);
+        var user = errorOrUser.Value;
+
+        await _userManager.CreateAsync(user, TempData["Password"] as string ?? string.Empty);
+
+        var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
         _logger.LogInformation("Generate confirmation code: {code}", code);
 
         // Send email to user
         return Page();
     }
 
-    public IActionResult OnPost()
+    public async Task<IActionResult> OnPostAsync(CancellationToken cancellationToken = default)
     {
         // if invalid : That code didn't work. Check the code and try again.
+
+        var email = Email.From(EmailAddress).ThrowIfFailure().Value;
+
+        var userResult = await _userManager.FindByEmailAsync(email, cancellationToken).ThrowIfFailure();
+
+        var confirmResult = await _userManager.ConfirmEmailAsync(
+            userResult.Value,
+            EmailVerificationCode);
+
+        if (confirmResult.IsFailure)
+        {
+            ModelState.AddModelError(string.Empty, "That code didn't work. Check the code and try again.");
+
+            return Page();
+        }
+
+        // Sign in user
+
         return Page();
     }
 }
