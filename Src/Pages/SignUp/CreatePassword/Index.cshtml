@@ -13,6 +13,49 @@
             <div role="heading">@ViewData["Title"]</div>
         </div>
     </div>
+
+    <div class="form-description">
+        <div class="form-description-text">Enter the password you would like to use with your account.</div>
+    </div>
+
+    <div class="form-body">
+        <div style="overflow-wrap: break-word; white-space: pre-wrap;">
+            <div class="form-input-control">
+                <div role="alert">
+                    <span class="form-validation-error" asp-validation-for="Password"></span>
+                </div>
+
+                <div style="display: flex; flex-direction: row;">
+                    <div class="form-input-container">
+                        <input asp-for="Password" class="form-input" placeholder="Create password" type="password"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-input-control">
+                <div class="form-input-control">
+                    <div class="show-password-container">
+                        <label class="show-password-label">
+                            <input class="show-password-input" type="checkbox"/>
+                            <span>Show password</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-footer">
+        <div style="display: inline-block; width: 100%; margin-bottom: 36px;">
+            <div style="min-height: 1px; margin-left: 0px; margin-right: 0px;">
+                <div class="form-footer-row">
+                    <div style="display: inline-block;">
+                        <button class="next-button" type="submit">Next</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </form>
 
 @section Scripts {
@@ -20,4 +63,41 @@
 }
 
 <style>
+.form-description {
+    min-height: 1px;
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-top: 16px;
+    margin-bottom: 12px;
+    padding-top: 0px;
+    padding-right: 0px;
+    padding-left: 0px;
+    padding-bottom: 0px;
+}   
+
+.from-description-text {
+    margin-top: 0px;
+    overflow-wrap: break-word;
+    white-space: pre-wrap;
+}
+
+.show-password-container {
+    position: relative;
+    margin-bottom: 16px;
+    margin-top: 12px;
+    display: block;
+}
+
+.show-password-label {
+    min-height: 20px;
+    padding-left: 28px;
+    cursor: pointer;
+    display: inline-block;
+    max-width: 100%;
+}
+
+.show-password-input {
+    position: absolute;
+    margin-left: -28px;
+}
 </style>
