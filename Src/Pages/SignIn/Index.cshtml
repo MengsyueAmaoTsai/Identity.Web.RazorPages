@@ -7,8 +7,12 @@
 }
 
 <form method="post">
-    <div>Sign in</div>
-
+    <div class="form-header">
+        <div>
+            <div role="heading">@ViewData["Title"]</div>
+        </div>
+    </div>
+    
     <span asp-validation-for="EmailAddress"></span>
     <input asp-for="EmailAddress" type="email" autocomplete="username" spellcheck="false" placeholder="Email address">
 

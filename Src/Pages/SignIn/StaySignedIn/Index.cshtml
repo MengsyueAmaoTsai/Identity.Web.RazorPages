@@ -2,15 +2,25 @@
 @model SignInStaySignedInViewModel
 @{
     Layout = "_AnonymousLayout";
+    ViewData["Title"] = "Stay signed in?";
 }
 
 <form method="post">
-    <div>Stay signed in?</div>
-    <div>Stay signed in so you don't have to sign in again next time.</div>
-    
-    <label asp-for="DoNotShowThisAgain"></label>
-    <input asp-for="DoNotShowThisAgain" type="checkbox">
+    <div class="form-header">
+        <div>
+            <div role="heading">@ViewData["Title"]</div>
+        </div>
+    </div>
 
-    <button type="submit" name="StaySignedIn" value="false">No</button>
-    <button type="submit" name="StaySignedIn" value="true">Yes</button>
+    <div>Stay signed in so you don't have to sign in again next time.</div>
+
+    <div>
+        <input asp-for="DoNotShowThisAgain" type="checkbox">
+        <label asp-for="DoNotShowThisAgain"></label>
+    </div>
+
+    <div>
+        <button type="submit" name="StaySignedIn" value="false">No</button>
+        <button type="submit" name="StaySignedIn" value="true">Yes</button>
+    </div>
 </form>

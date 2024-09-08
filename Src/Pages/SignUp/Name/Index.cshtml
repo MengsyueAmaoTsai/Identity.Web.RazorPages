@@ -6,8 +6,16 @@
 }
 
 <form method="post">
+    <div class="form-header">
+        <div>
+            <div role="heading">@ViewData["Title"]</div>
+        </div>
+    </div>
+
     <span asp-validation-for="Name"></span>
+    
     <input asp-for="Name" type="text">
+    
     <button type="submit">Next</button>
 </form>
 

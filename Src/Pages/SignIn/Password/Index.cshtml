@@ -1,17 +1,28 @@
 @page "/sign-in/password"
 @model SignInPasswordViewModel
 @{
+    ViewData["Title"] = "Enter password";
     Layout = "_AnonymousLayout";
 }
 
 <form method="post">
-    <div>Enter password</div>
+    <div class="form-header">
+        <div>
+            <div role="heading">@ViewData["Title"]</div>
+        </div>
+    </div>
 
     <span asp-validation-for="Password"></span>
+
     <input asp-for="Password" type="password" autocomplete="off" spellcheck="false">
     
-    <a>Forgot password?</a>
-    <a>Other ways to sign in</a>
+    <div>
+        <a>Forgot password?</a>
+    </div>
+
+    <div>
+        <a>Other ways to sign in</a>
+    </div>
 
     <button type="submit">Sign in</button>
 </form>
