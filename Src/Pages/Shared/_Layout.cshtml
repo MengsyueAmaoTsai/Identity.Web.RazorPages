@@ -10,7 +10,11 @@
     <link rel="stylesheet" href="~/RichillCapital.Identity.Web.styles.css" asp-append-version="true" />
 </head>
 <body>
-    @RenderBody()
+    <div id="PageWrapper">
+        <partial name="_SiteHeader" />
+        
+        @RenderBody()
+    </div>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
@@ -18,3 +22,12 @@
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
+
+<style>
+#PageWrapper {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: #f2f2f2;   
+}
+</style>
