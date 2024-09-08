@@ -49,6 +49,11 @@ public abstract class ViewModel : PageModel
             emailAddress,
         });
 
-    protected IActionResult SignUpVerifyEmail() =>
-        RedirectToPage("/signUp/verifyEmail/index");
+    protected IActionResult SignUpVerifyEmail(string returnUrl, string emailAddress) => RedirectToPage(
+        "/signUp/verifyEmail/index", 
+        new 
+        {
+            returnUrl,
+            emailAddress,
+        });
 }

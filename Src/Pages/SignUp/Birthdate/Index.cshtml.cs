@@ -46,6 +46,6 @@ public sealed class SignUpBirthdateViewModel(
         var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
         _logger.LogInformation("Send email confirmation code: {code} to {email}", code, user.Email);
 
-        return SignUpVerifyEmail();
+        return SignUpVerifyEmail(ReturnUrl, EmailAddress);
     }
 }
