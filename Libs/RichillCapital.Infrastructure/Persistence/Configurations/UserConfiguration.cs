@@ -37,12 +37,17 @@ internal sealed class UserConfiguration : IEntityTypeConfiguration<User>
         ]);
     }
 
-    private static User CreateUser(string id, string name, string email, string passwordHash) =>
+    private static User CreateUser(
+        string id,
+        string name,
+        string email,
+        string passwordHash) =>
         User
             .Create(
                 UserId.From(id).ThrowIfFailure().Value,
                 name,
                 Email.From(email).ThrowIfFailure().Value,
+                true,
                 passwordHash)
             .ThrowIfError().Value;
 }
