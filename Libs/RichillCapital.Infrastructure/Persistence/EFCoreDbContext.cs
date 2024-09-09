@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.DataProtection.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using RichillCapital.Domain.Abstractions;
 
 namespace RichillCapital.Infrastructure.Persistence;
@@ -6,8 +7,11 @@ namespace RichillCapital.Infrastructure.Persistence;
 public sealed class EFCoreDbContext(
     DbContextOptions<EFCoreDbContext> options) :
     DbContext(options),
-    IUnitOfWork
+    IUnitOfWork,
+    IDataProtectionKeyContext
 {
+    public DbSet<DataProtectionKey> DataProtectionKeys { get; set; }
+
     public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
     {
         int result = await base.SaveChangesAsync(cancellationToken)

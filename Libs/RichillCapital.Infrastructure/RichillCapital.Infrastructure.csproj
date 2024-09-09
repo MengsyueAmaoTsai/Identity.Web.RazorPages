@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <PackageReference Include="RichillCapital.Extensions.Options" Version="1.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.DataProtection.EntityFrameworkCore" Version="8.0.8" />
     <!-- Logging -->
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="8.0.0" />
