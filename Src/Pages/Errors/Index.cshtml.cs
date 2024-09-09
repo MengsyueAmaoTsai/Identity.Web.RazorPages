@@ -2,6 +2,7 @@ using Duende.IdentityServer.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using System.Net;
 
 namespace RichillCapital.Identity.Web.Pages;
 
@@ -15,22 +16,28 @@ public sealed class ErrorViewModel(
 {
     [BindProperty(Name = "errorId", SupportsGet = true)]
     public required string ErrorId { get; init; }
-
-    public required string RequestId { get; set; }
-
     public required string ErrorMessage { get; init; }
 
-    public async Task<IActionResult> OnGetAsync()
+    public required string RequestId { get; set; }
+    public required string Title { get; set; }
+    public required string Detail { get; set; }
+    public required HttpStatusCode Status { get; set; }
+    public required string Type { get; set; }
+
+    public async Task<IActionResult> OnGetAsync(string errorId)
     {
         RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier;
 
-        var message = await _interactionService.GetErrorContextAsync(ErrorId);
-
-        _logger.LogError("ErrorId: {ErrorId}, ErrorMessage: {ErrorMessage}", ErrorId, message?.Error);
+        var message = await _interactionService.GetErrorContextAsync(errorId);
 
         if (message is not null)
         {
+            _logger.LogInformation("Identity server error. {error} {description}",
+                message.Error,
+                message.ErrorDescription);
         }
+
+        _logger.LogError("Unexpected error. {title}: {detail}", Title, Detail);
 
         return Page();
     }
