@@ -22,10 +22,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        os: [ubuntu-latest]
-
     steps:
     - name: Checkout Repository
       uses: actions/checkout@v4
