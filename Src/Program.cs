@@ -1,3 +1,4 @@
+using RichillCapital.Identity.Web.Middlewares;
 using RichillCapital.Infrastructure.Identity;
 using RichillCapital.Infrastructure.Identity.Server;
 using RichillCapital.Infrastructure.Logging;
@@ -22,6 +23,8 @@ builder.Services
     .AddRazorPages()
     .WithRazorPagesRoot("/Src/Pages");
 
+builder.Services.AddMiddlewares();
+
 builder.Services.AddCors(builder =>
 {
     builder
@@ -35,6 +38,8 @@ builder.Services.AddCors(builder =>
 });
 
 var app = builder.Build();
+
+app.UseRequestDebuggingMiddleware();
 
 if (!app.Environment.IsDevelopment())
 {
