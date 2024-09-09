@@ -16,6 +16,7 @@ public static class IdentityServerExtensions
                 options.UserInteraction.ErrorUrl = "/error";
                 options.UserInteraction.ErrorIdParameter = "errorId";
             })
+            .AddDeveloperSigningCredential()
             .AddInMemoryClients(InMemoryClients.Default)
             .AddInMemoryApiResources(InMemoryApiResources.Default)
             .AddInMemoryIdentityResources(InMemoryIdentityResources.Default);
@@ -24,6 +25,6 @@ public static class IdentityServerExtensions
     }
 
     public static bool IsNativeClient(this AuthorizationRequest context) =>
-        !context.RedirectUri.StartsWith("https", StringComparison.Ordinal) && 
+        !context.RedirectUri.StartsWith("https", StringComparison.Ordinal) &&
         !context.RedirectUri.StartsWith("http", StringComparison.Ordinal);
 }
