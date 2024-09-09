@@ -36,8 +36,6 @@ builder.Services.AddCors(builder =>
 
 var app = builder.Build();
 
-app.ResetDatabase();
-
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/error");
