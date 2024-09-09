@@ -38,11 +38,6 @@ builder.Services.AddCors(builder =>
         });
 });
 
-builder.Services
-    .AddDataProtection()
-    .PersistKeysToFileSystem(new DirectoryInfo(builder.Environment.ContentRootPath))
-    .SetApplicationName("RichillCapital");
-
 var app = builder.Build();
 
 app.UseRequestDebuggingMiddleware();
