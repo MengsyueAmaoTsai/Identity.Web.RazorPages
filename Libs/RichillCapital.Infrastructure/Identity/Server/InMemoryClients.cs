@@ -13,7 +13,7 @@ internal static class InMemoryClients
     [
         new Client
         {
-            ClientId = "RichillCapital.Identity.Web.RazorPages",
+            ClientId = "RichillCapital.Identity.Web",
             ClientName = "RichillCapital Identity Web",
             Description = "RichillCapital Identity Web Client",
             ClientSecrets = DefaultSecrets,
@@ -41,7 +41,7 @@ internal static class InMemoryClients
         },
         new Client
         {
-            ClientId = "RichillCapital.TraderStudio.Web.Blazor",
+            ClientId = "RichillCapital.TraderStudio.Web",
             ClientName = "RichillCapital Trader Studio Web",
             Description = "RichillCapital Trader Studio Web Client",
             ClientSecrets = DefaultSecrets,
@@ -55,10 +55,12 @@ internal static class InMemoryClients
             RedirectUris =
             {
                 "https://localhost:9998/signin-oidc",
+                "https://trader-studio.richillcapital.com/signin-oidc",
             },
             PostLogoutRedirectUris =
             {
                 "https://localhost:9998/signout-callback-oidc",
+                "https://trader-studio.richillcapital.com/signout-callback-oidc",
             },
             AllowOfflineAccess = true,
             AllowedScopes =
