@@ -5,6 +5,7 @@
     "ASPNETCORE",
     "Birthdate",
     "Hasher",
+    "Hsts",
     "Serilog"
   ]
 }
