@@ -22,6 +22,18 @@ builder.Services
     .AddRazorPages()
     .WithRazorPagesRoot("/Src/Pages");
 
+builder.Services.AddCors(builder =>
+{
+    builder
+        .AddDefaultPolicy(policy =>
+        {
+            policy
+                .AllowAnyHeader()
+                .AllowAnyMethod()
+                .AllowAnyOrigin();
+        });
+});
+
 var app = builder.Build();
 
 app.ResetDatabase();
@@ -36,6 +48,8 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+app.UseCors();
 
 app.UseIdentityServer();
 app.UseAuthorization();
