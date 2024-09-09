@@ -27,10 +27,16 @@ internal static class InMemoryClients
             RedirectUris =
             {
                 "https://localhost:9999/signin-oidc",
+                "http://localhost:9999/signin-oidc",
+                "https://identity.richillcapital.com/signin-oidc",
+                "http://identity.richillcapital.com/signin-oidc",
             },
             PostLogoutRedirectUris =
             {
                 "https://localhost:9999/signout-callback-oidc",
+                "http://localhost:9999/signout-callback-oidc",
+                "https://identity.richillcapital.com/signout-callback-oidc",
+                "http://identity.richillcapital.com/signout-callback-oidc",
             },
             AllowOfflineAccess = true,
             AllowedScopes =
@@ -55,12 +61,16 @@ internal static class InMemoryClients
             RedirectUris =
             {
                 "https://localhost:9998/signin-oidc",
+                "http://localhost:9998/signin-oidc",
                 "https://trader-studio.richillcapital.com/signin-oidc",
+                "http://trader-studio.richillcapital.com/signin-oidc",
             },
             PostLogoutRedirectUris =
             {
                 "https://localhost:9998/signout-callback-oidc",
+                "http://localhost:9998/signout-callback-oidc",
                 "https://trader-studio.richillcapital.com/signout-callback-oidc",
+                "http://trader-studio.richillcapital.com/signout-callback-oidc",
             },
             AllowOfflineAccess = true,
             AllowedScopes =
