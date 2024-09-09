@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.DataProtection;
 using RichillCapital.Identity.Web.Middlewares;
 using RichillCapital.Infrastructure.Identity;
 using RichillCapital.Infrastructure.Identity.Server;
@@ -36,6 +37,11 @@ builder.Services.AddCors(builder =>
                 .AllowAnyOrigin();
         });
 });
+
+builder.Services
+    .AddDataProtection()
+    .PersistKeysToFileSystem(new DirectoryInfo(builder.Environment.ContentRootPath))
+    .SetApplicationName("RichillCapital");
 
 var app = builder.Build();
 
