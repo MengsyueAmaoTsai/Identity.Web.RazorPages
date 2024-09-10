@@ -6,6 +6,7 @@
     "Birthdate",
     "Hasher",
     "Hsts",
+    "Newtonsoft",
     "Serilog"
   ]
 }

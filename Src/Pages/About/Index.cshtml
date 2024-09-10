@@ -1,0 +1,23 @@
+@page "/about"
+@model AboutViewModel
+@{
+    ViewData["Title"] = "About";
+}
+
+
+<div>
+    @foreach (var claim in Model.Claims)
+    {
+        <div style="display: flex;">
+            <dt>@claim.Type</dt>
+            <dd>@claim.Value</dd>
+        </div>
+    }    
+</div>
+
+<div>
+    @foreach (var name in Model.ApplicationIds)
+    {
+        <div>@name</div>
+    }
+</div>
