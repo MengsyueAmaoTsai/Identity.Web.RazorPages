@@ -30,6 +30,7 @@ public static class IdentityServerExtensions
             .AddDeveloperSigningCredential()
             .AddInMemoryClients(InMemoryClients.Default)
             .AddInMemoryApiResources(InMemoryApiResources.Default)
+            .AddInMemoryApiScopes(InMemoryApiScopes.Default)
             .AddInMemoryIdentityResources(InMemoryIdentityResources.Default);
 
         return services;

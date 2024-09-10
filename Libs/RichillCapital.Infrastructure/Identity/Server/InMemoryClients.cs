@@ -77,6 +77,9 @@ internal static class InMemoryClients
             {
                 "openid",
                 "profile",
+                "email",
+                "RichillCapital.Api.AspNetCore",
+                "offline_access",
             },
         },
         new Client
