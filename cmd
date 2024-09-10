@@ -5,6 +5,7 @@ IMAGE_NAME=identity-web
 TAG=latest
 SERVICE_PORT=9999
 CONTAINER_PORT=8080
+KEYS_DIR=/keys
 
 case $1 in
     build)
@@ -14,7 +15,12 @@ case $1 in
         docker pull msat7201/$IMAGE_NAME:$TAG
         ;;
     start)
-        docker run -d -it -p $SERVICE_PORT:$CONTAINER_PORT --restart=always --name $SERVICE_NAME msat7201/$IMAGE_NAME:$TAG
+        docker run -d -it \
+            -p $SERVICE_PORT:$CONTAINER_PORT \
+            --restart=always \
+            --name $SERVICE_NAME \
+            -v $KEYS_DIR:/app/keys \
+            msat7201/$IMAGE_NAME:$TAG
         ;;
     stop)
         docker stop $SERVICE_NAME && docker rm $SERVICE_NAME || true  
