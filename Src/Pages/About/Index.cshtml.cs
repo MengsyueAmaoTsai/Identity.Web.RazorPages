@@ -2,11 +2,13 @@ using System.Security.Claims;
 using System.Text;
 using IdentityModel;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
 namespace RichillCapital.Identity.Web.Pages.About;
 
+[Authorize]
 public sealed class AboutViewModel(
     ILogger<AboutViewModel> _logger) :
     ViewModel
