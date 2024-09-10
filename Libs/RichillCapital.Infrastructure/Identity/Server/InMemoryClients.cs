@@ -1,3 +1,4 @@
+using Duende.IdentityServer;
 using Duende.IdentityServer.Models;
 
 namespace RichillCapital.Infrastructure.Identity.Server;
@@ -75,11 +76,11 @@ internal static class InMemoryClients
             AllowOfflineAccess = true,
             AllowedScopes =
             {
-                "openid",
-                "profile",
-                "email",
-                "RichillCapital.Api.AspNetCore",
-                "offline_access",
+                IdentityServerConstants.StandardScopes.OpenId,
+                IdentityServerConstants.StandardScopes.Profile,
+                IdentityServerConstants.StandardScopes.Email,
+                IdentityServerConstants.StandardScopes.OfflineAccess,
+                "RichillCapital.Api",
             },
         },
         new Client

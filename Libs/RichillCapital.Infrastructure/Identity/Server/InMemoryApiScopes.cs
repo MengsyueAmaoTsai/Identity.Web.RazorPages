@@ -6,6 +6,6 @@ internal static class InMemoryApiScopes
 {
     public static IEnumerable<ApiScope> Default =
     [
-        new("RichillCapital.Api.AspNetCore", "RichillCapital Api"),
+        new("RichillCapital.Api", "RichillCapital api scope"),
     ];
 }
