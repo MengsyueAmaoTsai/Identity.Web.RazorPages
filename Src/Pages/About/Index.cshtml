@@ -4,20 +4,66 @@
     ViewData["Title"] = "About";
 }
 
+<h1>@ViewData["Title"]</h1>
 
+</table>
+    <h2>Claims</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Type</th>
+                <th>Value</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var claim in Model.Claims)
+            {
+                <tr>
+                    <td>@claim.Type</td>
+                    <td>@claim.Value</td>
+                </tr>
+            }
+        </tbody>
+    </table>
 <div>
-    @foreach (var claim in Model.Claims)
-    {
-        <div style="display: flex;">
-            <dt>@claim.Type</dt>
-            <dd>@claim.Value</dd>
-        </div>
-    }    
+
 </div>
 
 <div>
-    @foreach (var name in Model.ApplicationIds)
+    <h2>Applications</h2>
+
+    @foreach (var id in Model.ApplicationIds)
     {
-        <div>@name</div>
+        <div>@id</div>
     }
+    </div>
 </div>
+
+<style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    table, th, td {
+        border: 1px solid black;
+    }
+
+    th, td {
+        padding: 10px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    tr:hover {
+        background-color: #f5f5f5;
+    }
+</style>

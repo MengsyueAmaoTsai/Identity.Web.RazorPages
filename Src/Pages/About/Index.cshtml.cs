@@ -13,7 +13,7 @@ public sealed class AboutViewModel(
     ILogger<AboutViewModel> _logger) :
     ViewModel
 {
-    public required string[] ApplicationIds { get; set; }
+    public required string[] ApplicationIds { get; set; } = [];
     public required IEnumerable<Claim> Claims { get; set; }
 
     public async Task<IActionResult> OnGetAsync()
