@@ -45,6 +45,8 @@ builder.Services
 
 var app = builder.Build();
 
+app.UseForwardedHeaders();
+
 app.UseRequestDebuggingMiddleware();
 
 if (!app.Environment.IsDevelopment())
