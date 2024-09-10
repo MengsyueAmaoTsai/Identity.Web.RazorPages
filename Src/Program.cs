@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.DataProtection;
+using Microsoft.AspNetCore.HttpOverrides;
 using RichillCapital.Identity.Web.Middlewares;
 using RichillCapital.Infrastructure.Identity;
 using RichillCapital.Infrastructure.Identity.Server;
@@ -38,14 +39,22 @@ builder.Services.AddCors(builder =>
         });
 });
 
-var keysPath = Path.Combine(builder.Environment.ContentRootPath, "keys");
+builder.Services
+    .Configure<ForwardedHeadersOptions>(options =>
+    {
+        options.ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
+        options.KnownNetworks.Clear();
+        options.KnownProxies.Clear();
+    });
 
 builder.Services
     .AddDataProtection()
-    .PersistKeysToFileSystem(new DirectoryInfo(keysPath))
+    .PersistKeysToFileSystem(new DirectoryInfo(builder.Environment.ContentRootPath))
     .SetApplicationName("RichillCapital");
 
 var app = builder.Build();
+
+app.UseForwardedHeaders();
 
 app.UseRequestDebuggingMiddleware();
 
