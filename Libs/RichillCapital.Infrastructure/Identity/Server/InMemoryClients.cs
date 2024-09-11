@@ -10,6 +10,15 @@ internal static class InMemoryClients
         new Secret("secret".Sha256()),
     ];
 
+    private static readonly ICollection<string> DefaultAllowedScopes =
+    [
+        IdentityServerConstants.StandardScopes.OpenId,
+        IdentityServerConstants.StandardScopes.Profile,
+        IdentityServerConstants.StandardScopes.Email,
+        IdentityServerConstants.StandardScopes.OfflineAccess,
+        "RichillCapital.Api",
+    ];
+
     internal static readonly IEnumerable<Client> Default =
     [
         new Client
@@ -40,11 +49,7 @@ internal static class InMemoryClients
                 "http://identity.richillcapital.com/signout-callback-oidc",
             },
             AllowOfflineAccess = true,
-            AllowedScopes =
-            {
-                "openid",
-                "profile",
-            },
+            AllowedScopes = DefaultAllowedScopes,
         },
         new Client
         {
@@ -74,18 +79,11 @@ internal static class InMemoryClients
                 "http://trader-studio.richillcapital.com/signout-callback-oidc",
             },
             AllowOfflineAccess = true,
-            AllowedScopes =
-            {
-                IdentityServerConstants.StandardScopes.OpenId,
-                IdentityServerConstants.StandardScopes.Profile,
-                IdentityServerConstants.StandardScopes.Email,
-                IdentityServerConstants.StandardScopes.OfflineAccess,
-                "RichillCapital.Api",
-            },
+            AllowedScopes = DefaultAllowedScopes,
         },
         new Client
         {
-            ClientId = "RichillCapital.Research.Web.Next",
+            ClientId = "RichillCapital.Research.Web",
             ClientName = "RichillCapital Research Web",
             Description = "RichillCapital Research Web Client",
             ClientSecrets = DefaultSecrets,
@@ -99,23 +97,24 @@ internal static class InMemoryClients
             RedirectUris =
             {
                 "https://localhost:9997/signin-oidc",
+                "http://localhost:9997/signin-oidc",
+                "https://research.richillcapital.com/signin-oidc",
+                "http://research.richillcapital.com/signin-oidc",
             },
             PostLogoutRedirectUris =
             {
                 "https://localhost:9997/signout-callback-oidc",
+                "http://localhost:9997/signout-callback-oidc",
+                "https://research.richillcapital.com/signout-callback-oidc",
+                "http://research.richillcapital.com/signout-callback-oidc",
             },
             AllowOfflineAccess = true,
-            AllowedScopes =
-            {
-                "openid",
-                "profile",
-                "email",
-            },
+            AllowedScopes = DefaultAllowedScopes,
         },
 
         new Client
         {
-            ClientId = "RichillCapital.Exchange.Web.Angular",
+            ClientId = "RichillCapital.Exchange.Web",
             ClientName = "RichillCapital Exchange Web",
             Description = "RichillCapital Exchange Web Client",
             ClientSecrets = DefaultSecrets,
@@ -129,23 +128,24 @@ internal static class InMemoryClients
             RedirectUris =
             {
                 "https://localhost:9996/signin-oidc",
+                "http://localhost:9996/signin-oidc",
+                "https://exchange.richillcapital.com/signin-oidc",
+                "http://exchange.richillcapital.com/signin-oidc",
             },
             PostLogoutRedirectUris =
             {
                 "https://localhost:9996/signout-callback-oidc",
+                "http://localhost:9996/signout-callback-oidc",
+                "https://exchange.richillcapital.com/signout-callback-oidc",
+                "http://exchange.richillcapital.com/signout-callback-oidc",
             },
             AllowOfflineAccess = true,
-            AllowedScopes =
-            {
-                "openid",
-                "profile",
-                "email",
-            },
+            AllowedScopes = DefaultAllowedScopes,
         },
 
         new Client
         {
-            ClientId = "RichillCapital.Admin.Web.Nuxt",
+            ClientId = "RichillCapital.Admin.Web",
             ClientName = "RichillCapital Admin Web",
             ClientSecrets = DefaultSecrets,
 
@@ -160,24 +160,22 @@ internal static class InMemoryClients
                 "https://localhost:9995/sign-in-callback",
                 "http://localhost:9995/sign-in-callback",
                 "https://admin.richillcapital.com/sign-in-callback",
+                "http://admin.richillcapital.com/sign-in-callback",
             },
             PostLogoutRedirectUris =
             {
                 "https://localhost:9995/signout-callback-oidc",
                 "http://localhost:9995/signout-callback-oidc",
+                "https://admin.richillcapital.com/signout-callback-oidc",
+                "http://admin.richillcapital.com/signout-callback-oidc",
             },
             AllowOfflineAccess = true,
-            AllowedScopes =
-            {
-                "openid",
-                "profile",
-                "email",
-            },
+            AllowedScopes = DefaultAllowedScopes,
         },
 
         new Client
         {
-            ClientId = "RichillCapital.Community.Web.Astro",
+            ClientId = "RichillCapital.Community.Web",
             ClientName = "RichillCapital Community Web",
             Description = "RichillCapital Community Web Client",
             ClientSecrets = DefaultSecrets,
@@ -190,22 +188,23 @@ internal static class InMemoryClients
             RedirectUris =
             {
                 "https://localhost:9994/signin-oidc",
+                "http://localhost:9994/signin-oidc",
+                "https://community.richillcapital.com/signin-oidc",
+                "http://community.richillcapital.com/signin-oidc",
             },
             PostLogoutRedirectUris =
             {
                 "https://localhost:9994/signout-callback-oidc",
+                "http://localhost:9994/signout-callback-oidc",
+                "https://community.richillcapital.com/signout-callback-oidc",
+                "http://community.richillcapital.com/signout-callback-oidc",
             },
             AllowOfflineAccess = true,
-            AllowedScopes =
-            {
-                "openid",
-                "profile",
-                "email",
-            },
+            AllowedScopes = DefaultAllowedScopes,
         },
         new Client
         {
-            ClientId = "RichillCapital.TraderStudio.Desktop.Wpf",
+            ClientId = "RichillCapital.TraderStudio.Desktop",
             ClientName = "RichillCapital Trader Studio Desktop",
             Description = "RichillCapital Trader Studio Desktop Client",
             ClientSecrets = DefaultSecrets,
