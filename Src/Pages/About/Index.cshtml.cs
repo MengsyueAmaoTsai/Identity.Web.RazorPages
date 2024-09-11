@@ -25,22 +25,16 @@ public sealed class AboutViewModel(
         Environment = _environment.EnvironmentName ?? string.Empty,
     };
 
+    public required string LocalIpAddress { get; set; }
+    public required string RemoteIpAddress { get; set; }
+
     public required IEnumerable<Claim> Claims { get; set; } = [];
     public required string[] ApplicationIds { get; set; } = [];
 
     public async Task<IActionResult> OnGetAsync()
     {
-        var localAddress = new string[]
-        {
-            "127.0.0.1",
-            "::1",
-            HttpContext.Connection.LocalIpAddress?.ToString() ?? string.Empty,
-        };
-
-        if (!localAddress.Contains(HttpContext.Connection.RemoteIpAddress?.ToString()))
-        {
-            return NotFound();
-        }
+        LocalIpAddress = HttpContext.Connection.LocalIpAddress?.ToString() ?? string.Empty;
+        RemoteIpAddress = HttpContext.Connection.RemoteIpAddress?.ToString() ?? string.Empty;
 
         var result = await HttpContext.AuthenticateAsync();
 

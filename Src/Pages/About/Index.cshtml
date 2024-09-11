@@ -1,5 +1,7 @@
 @page "/about"
+
 @model AboutViewModel
+
 @{
     ViewData["Title"] = "About";
 }
@@ -32,7 +34,17 @@
     <div class="app-info-item">
         <div>Runtime identifier:</div>
         <div>@Model.ApplicationInformation.RuntimeIdentifier</div>
+    </div>
+
+    <div class="app-info-item">
+        <div>Remote IP Address:</div>
+        <div>@Model.RemoteIpAddress</div>
     </div>    
+
+    <div class="app-info-item">
+        <div>Local IP Address:</div>
+        <div>@Model.LocalIpAddress</div>
+    </div>        
 </div>
 
 <div>
