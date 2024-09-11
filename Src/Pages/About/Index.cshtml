@@ -66,6 +66,26 @@
     </ul>
 </div>
 
+<div>
+    <h3>Properties</h3>
+
+    <ul>
+        @foreach (var property in Model.Properties)
+        {
+            <li class="claim-list-item">
+                <div>
+                    @property.Key:
+                </div>
+
+                <div>
+                    @property.Value
+                </div>
+            </li>
+        }
+    </ul>
+</div>
+
+
 <style>
     .app-info-item {
         display: flex;

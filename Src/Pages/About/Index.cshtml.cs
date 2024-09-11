@@ -29,6 +29,8 @@ public sealed class AboutViewModel(
     public required string RemoteIpAddress { get; set; }
 
     public required IEnumerable<Claim> Claims { get; set; } = [];
+
+    public required IDictionary<string, string?> Properties { get; set; }
     public required string[] ApplicationIds { get; set; } = [];
 
     public async Task<IActionResult> OnGetAsync()
@@ -55,6 +57,7 @@ public sealed class AboutViewModel(
         }
 
         Claims = result.Principal.Claims;
+        Properties = result.Properties.Items;
 
         return Page();
     }
