@@ -1,3 +1,5 @@
+using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Security.Claims;
 using System.Text;
 using IdentityModel;
@@ -10,11 +12,21 @@ namespace RichillCapital.Identity.Web.Pages.About;
 
 [Authorize]
 public sealed class AboutViewModel(
-    ILogger<AboutViewModel> _logger) :
+    ILogger<AboutViewModel> _logger,
+    IWebHostEnvironment _environment) :
     ViewModel
 {
+    public required ApplicationInformationModel ApplicationInformation { get; init; } = new ApplicationInformationModel()
+    {
+        AssemblyName = Assembly.GetExecutingAssembly()?.GetName().Name ?? string.Empty,
+        AssemblyVersion = Assembly.GetEntryAssembly()?.GetName().Version?.ToString() ?? string.Empty,
+        DotNetVersion = RuntimeInformation.FrameworkDescription,
+        RuntimeIdentifier = RuntimeInformation.RuntimeIdentifier,
+        Environment = _environment.EnvironmentName ?? string.Empty,
+    };
+
+    public required IEnumerable<Claim> Claims { get; set; } = [];
     public required string[] ApplicationIds { get; set; } = [];
-    public required IEnumerable<Claim> Claims { get; set; }
 
     public async Task<IActionResult> OnGetAsync()
     {
@@ -52,4 +64,13 @@ public sealed class AboutViewModel(
 
         return Page();
     }
+}
+
+public sealed record ApplicationInformationModel
+{
+    public required string AssemblyName { get; init; }
+    public required string AssemblyVersion { get; init; }
+    public required string DotNetVersion { get; init; }
+    public required string RuntimeIdentifier { get; init; }
+    public required string Environment { get; init; }
 }
