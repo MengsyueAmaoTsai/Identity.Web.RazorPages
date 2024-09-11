@@ -24,7 +24,7 @@ public static class IdentityServerExtensions
                 options.UserInteraction.LoginUrl = "/sign-in";
                 options.UserInteraction.LoginReturnUrlParameter = "returnUrl";
 
-                options.UserInteraction.ErrorUrl = "/error";
+                options.UserInteraction.ErrorUrl = "/errors";
                 options.UserInteraction.ErrorIdParameter = "errorId";
             })
             .AddDeveloperSigningCredential()

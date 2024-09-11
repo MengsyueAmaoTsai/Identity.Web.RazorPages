@@ -60,7 +60,7 @@ app.UseRequestDebuggingMiddleware();
 
 if (!app.Environment.IsDevelopment())
 {
-    app.UseExceptionHandler("/error");
+    app.UseExceptionHandler("/errors");
     app.UseHsts();
 }
 

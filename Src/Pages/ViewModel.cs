@@ -7,7 +7,7 @@ namespace RichillCapital.Identity.Web.Pages;
 public abstract class ViewModel : PageModel
 {
     protected IActionResult Home() => RedirectToPage("/index");
-    protected IActionResult Error() => RedirectToPage("/error/index");
+    protected IActionResult Error() => RedirectToPage("/errors/index");
 
     protected IActionResult Redirecting(string redirectUri)
     {
@@ -50,8 +50,8 @@ public abstract class ViewModel : PageModel
         });
 
     protected IActionResult SignUpVerifyEmail(string returnUrl, string emailAddress) => RedirectToPage(
-        "/signUp/verifyEmail/index", 
-        new 
+        "/signUp/verifyEmail/index",
+        new
         {
             returnUrl,
             emailAddress,
