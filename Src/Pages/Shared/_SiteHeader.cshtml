@@ -1,13 +1,16 @@
 <div id="SiteHeader">
-    <div class="site-header-left-region">
-        <partial name="_AppLauncher" />
-    </div>
-
-    <div class="site-header-center-region">
-    </div>
-    
-    <div class="site-header-right-region">
-        <partial name="_CurrentUser" />
+    <div id="SiteHeaderRoot">
+        <div class="site-header-container">
+            <div style="height: 48px;">
+                <div class="site-header-nav-bar" style="height: 48px; line-height: 48px;">
+                    <div class="nav-bar-left">
+                        @await Html.PartialAsync("_ServiceLauncherButton")
+                    </div>
+                    <div class="nav-bar-center" style="width: calc(100% - 96px);"></div>
+                    <div class="nav-bar-right"></div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -18,13 +21,50 @@
         position: sticky;
         z-index: 10;
     }
-
-    .site-header-left-region {
+    
+    .site-header-container {
+        display: flex; 
+        flex-flow: column; 
+        width: auto; 
+        height: auto; 
+        box-sizing: border-box;
     }
 
-    .site-header-center-region {
+    .site-header-container > * {
+        text-overflow: ellipsis;
     }
 
-    .site-header-right-region {
+    .site-header-nav-bar {
+        width: 100%;
+        height: 50px;
+        display: flex;
+        border-spacing: 0;
+        white-space: nowrap;
+        line-height: normal;        
+        background-color: #006fc9;
+        background-position: left top;
+        background-image: none;        
+    }
+
+    .nav-bar-left {
+        align-items: center;
+        justify-content: space-between;
+        margin: 0;
+        padding: 0;
+        text-align: center;
+        height: 100%;
+    }
+
+    .nav-bar-center {
+        display: flex;
+        flex: 1 0 auto;
+        height: 100%;
+    }
+
+    .nav-bar-right {
+        display: flex;
+        flex: 0 0 auto;
+        color: #F2F2F2;
+        background-color: #006fc9;
     }
 </style>
