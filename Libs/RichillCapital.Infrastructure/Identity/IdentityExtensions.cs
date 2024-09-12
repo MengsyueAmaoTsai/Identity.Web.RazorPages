@@ -9,11 +9,7 @@ public static class IdentityExtensions
 {
     public static IServiceCollection AddCustomIdentity(this IServiceCollection services)
     {
-        services.AddValidatorsFromAssembly(
-            typeof(IdentityExtensions).Assembly,
-            includeInternalTypes: true);
-
-        services.AddOptionsWithFluentValidation<IdentityOptions>(IdentityOptions.SectionKey);
+        services.AddIdentityOptions();
 
         var authenticationBuilder = services.AddAuthentication(options =>
         {
@@ -31,9 +27,27 @@ public static class IdentityExtensions
                 });
 
         services.AddHttpContextAccessor();
-        services.AddSingleton<IPasswordHasher, PasswordHasher>();
+
+        services.AddScoped<ICurrentUser, CurrentUser>();
+
         services.AddScoped<IUserManager, UserManager>();
+
         services.AddScoped<ISignInManager, SignInManager>();
+
+        services.AddSingleton<IPasswordHasher, PasswordHasher>();
+
+        return services;
+    }
+
+    private static IServiceCollection AddIdentityOptions(
+        this IServiceCollection services,
+        string? sectionKey = null)
+    {
+        services.AddValidatorsFromAssembly(
+            typeof(IdentityExtensions).Assembly,
+            includeInternalTypes: true);
+
+        services.AddOptionsWithFluentValidation<IdentityOptions>(sectionKey ?? IdentityOptions.SectionKey);
 
         return services;
     }

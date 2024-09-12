@@ -14,14 +14,21 @@ public static class DatabaseExtensions
 {
     public static IServiceCollection AddDatabase(this IServiceCollection services)
     {
+        services.AddDatabaseOptions();
+        services.AddMsSql();
+
+        return services;
+    }
+
+    private static IServiceCollection AddDatabaseOptions(
+        this IServiceCollection services,
+        string? sectionKey = null)
+    {
         services.AddValidatorsFromAssembly(
             typeof(DatabaseExtensions).Assembly,
             includeInternalTypes: true);
 
-        services.AddOptionsWithFluentValidation<DatabaseOptions>(DatabaseOptions.SectionKey);
-
-        services.AddMsSql();
-
+        services.AddOptionsWithFluentValidation<DatabaseOptions>(sectionKey ?? DatabaseOptions.SectionKey);
         return services;
     }
 

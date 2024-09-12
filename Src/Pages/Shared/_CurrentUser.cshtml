@@ -1,0 +1,8 @@
+@using RichillCapital.Domain.Abstractions
+
+@inject ICurrentUser CurrentUser
+
+<div>
+    <div>@CurrentUser.Email</div>
+    <div>@CurrentUser.Name</div>
+</div>  
