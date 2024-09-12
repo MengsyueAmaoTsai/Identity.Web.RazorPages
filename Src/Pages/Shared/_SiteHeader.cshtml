@@ -5,7 +5,10 @@
         <div class="site-header-container">
             <div class="site-header-content-wrapper">
                 <div class="site-header-content" style="height: 48px; line-height: 48px;">
-                    <div id="SiteHeaderLeft"></div>
+                    <div id="SiteHeaderLeft">
+                        @await Html.PartialAsync("_ServiceLauncherTrigger")
+                    </div>
+
                     <div id="SiteHeaderCenter" style="width: calc(100% - 96px);">
                         <div style="width: 100%;">
                             <div>
@@ -29,7 +32,9 @@
                             </div>
                         </div>
                     </div>
-                    <div id="SiteHeaderRight"></div>
+                    
+                    <div id="SiteHeaderRight">
+                    </div>
                 </div>
             </div>
         </div>
