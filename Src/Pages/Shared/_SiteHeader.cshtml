@@ -1,0 +1,75 @@
+﻿<div id="SiteHeader">
+    <div id="SuiteHeaderRoot">
+        <div id="CookieBanner"></div>
+        @* <button>skip to main</button> *@
+        <div class="site-header-container">
+            <div class="site-header-content-wrapper">
+                <div class="site-header-content" style="height: 48px; line-height: 48px;">
+                    <div id="SiteHeaderLeft"></div>
+                    <div id="SiteHeaderCenter" style="width: calc(100% - 96px);"></div>
+                    <div id="SiteHeaderRight"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    #SiteHeader {
+        z-index: 10;
+        position: sticky;
+        width: 100%;
+        top: 0;
+    }
+
+    .site-header-container {
+        display: flex;
+        flex-flow: column;
+        width: auto;
+        height: auto;
+        box-sizing: border-box;
+    }
+
+    .site-header-container > * {
+        text-overflow: ellipsis;
+    }
+
+    .site-header-content-wrapper {
+        height: 48px;
+    }
+
+    .site-header-content {
+        width: 100%;
+        height: 50px;
+        display: flex;
+        border-spacing: 0;
+        white-space: nowrap;
+        line-height: normal;
+        background-color: #006fc9;
+        background-position: left top;
+        background-repeat-x: repeat;
+        background-image: none;
+    }
+
+    #SiteHeaderLeft {
+        align-items: center;
+        justify-content: space-between;
+        margin: 0;
+        padding: 0;
+        text-align: center;
+        height: 100%;
+    }
+
+    #SiteHeaderCenter {
+        display: flex;
+        flex: 1 0 auto;
+        height: 100%;
+    }
+
+    #SiteHeaderRight {
+        display: flex;
+        flex: 0 0 auto;
+        color: #f2f2f2;
+        background-color: #006fc9;
+    }
+</style>
