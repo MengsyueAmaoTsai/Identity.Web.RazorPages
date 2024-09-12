@@ -1,10 +1,27 @@
 ﻿<div class="service-launcher-trigger-root">
-    <button class="service-launcher-trigger-button" type="button" role="button" title="Service launcher">
+    <button id="ServiceLauncherTrigger" class="service-launcher-trigger-button" type="button" role="button" title="Service launcher">
         <span class="service-launcher-trigger-icon" style="display: inline-block; font-size: 16px;">
             O
         </span>
     </button>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const serviceLauncher = document.getElementById('ServiceLauncher');
+        const trigger = document.getElementById('ServiceLauncherTrigger');
+        
+        serviceLauncher.style.display = 'none';
+
+        trigger.addEventListener('click', () => {
+            if (serviceLauncher.style.display === 'none') {
+                serviceLauncher.style.display = 'block';
+            } else {
+                serviceLauncher.style.display = 'none';
+            }
+        });
+    });
+</script>
 
 <style>
     .service-launcher-trigger-root {

@@ -1,0 +1,278 @@
+﻿@inject IWebHostEnvironment Environment
+
+@{
+    List<(string Name, string Url)> services = Environment.IsDevelopment() ? 
+    [
+        ("TraderStudio.Web", "https://localhost:9998"),
+        ("Research.Web", "http://localhost:9997"),
+        ("Exchange.Web", "http://localhost:9996"),
+        ("Admin.Web", "http://localhost:9995"),
+        ("Community.Web", "http://localhost:9994"),
+
+        ("TraderStudio.Desktop", "https://github.com/MengsyueAmaoTsai"),
+        ("TraderStudio.Mobile", "https://github.com/MengsyueAmaoTsai"),
+        ("CopyTrader.Desktop", "https://github.com/MengsyueAmaoTsai"),
+    ] :
+    [
+        ("TraderStudio.Web", "https://trader-studio.richillcapital.com"),
+        ("Research.Web", "https://research.richillcapital.com"),
+        ("Exchange.Web", "https://exchange.richillcapital.com"),
+        ("Admin.Web", "https://admin.richillcapital.com"),
+        ("Community.Web", "https://community.richillcapital.com"),
+
+        ("TraderStudio.Desktop", "https://github.com/MengsyueAmaoTsai"),
+        ("TraderStudio.Mobile", "https://github.com/MengsyueAmaoTsai"),
+        ("CopyTrader.Desktop", "https://github.com/MengsyueAmaoTsai"),
+    ];
+}
+
+<div 
+    id="ServiceLauncher" 
+    role="dialog" 
+    style="position: fixed; box-shadow: rgba(0, 0, 0, 0.22) 0px 25.6px 57.6px 0px, rgba(0, 0, 0, 0.18) 0px 4.8px 14.4px 0px;">
+    
+    <div class="service-launcher">
+        <div id="ServiceLauncherSearch" style="color: rgb(0, 89, 162);">
+            <button class="service-launcher-search-icon">
+                <div>
+                    <span class="search-icon" style="display: inline-block; font-size: 12px;"></span>
+                </div>
+            </button>
+            <input class="service-launcher-search-input" 
+                type="text" 
+                placeholder="Find Microsoft 365 apps" 
+                autocomplete="off" 
+                spellcheck="false"/>
+        </div>
+        
+        <div class="service-launcher-content-wrapper">
+            <div class="service-launcher-content">
+                <div class="service-list" role="list">
+                    @foreach (var service in services)
+                    {
+                        <div class="service-tile-container">
+                            <button 
+                                id="ServiceTrigger-@service.Name" 
+                                class="service-tile-button" 
+                                onclick="accessWithNewTab('@service.Url')"
+                                title="@service.Name" 
+                                role="listitem">
+                                <div class="service-tile-logo-container">
+                                    <div>
+                                        <span class="service-tile-logo">O</span>
+                                    </div>
+                                </div>
+
+                                <div class="service-tile-name">
+                                    <span class="service-tile-name-text">@service.Name</span>
+                                </div>
+                            </button>
+                        </div>
+                    }
+                </div>
+
+                <div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const accessWithNewTab = (url) => {
+        window.open(url, '_blank');
+    }
+</script>
+
+<style>
+    #ServiceLauncher {
+        position: absolute;
+        z-index: 1000000;
+        width: 512px;
+        min-width: 512px;
+        max-width: 512px;
+        box-sizing: border-box;
+        outline: none;
+        overflow: hidden;
+        visibility: visible;
+        pointer-events: auto;
+        top: 49px;
+        left: 2px;
+        right: auto;
+        min-height: 200px;
+        max-height: 90vh;
+        border-radius: 8px;
+        -webkit-transform-origin: top left;
+        -ms-transform-origin: top left;
+        transform-origin: top left;
+        -webkit-animation-duration: .18s;
+        animation-duration: .18s;
+        -webkit-animation-timing-function: ease;
+        animation-timing-function: ease;
+        -webkit-animation-name: slideInFrames;
+        animation-name: slideInFrames;
+    }
+    
+    .service-launcher {
+        background-color: #FFFFFF;
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        padding: 16px 0;
+        box-sizing: border-box;
+        height: 100%;
+        min-height: 200px;
+        row-gap: 16px;
+        max-height: inherit;
+    }
+
+    #ServiceLauncherSearch {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        box-sizing: border-box;
+        width: auto;
+        height: 32px;
+        align-items: flex-start;
+        border-radius: 4px;
+        padding-bottom: 2px;
+        margin: 0 16px;
+        background-color: #f5f5f5;
+    }
+
+    #ServiceLauncherSearch button {
+        min-width: 30px;
+        width: 30px;
+        height: 30px;
+        padding: 4px 0 0;
+        background-color: transparent;
+        border: none;
+        align-items: flex-start;
+    }
+
+    .search-icon {
+        font-family: ShellFabricMDL2IconsLite, ShellFabricMDL2Icons;
+        display: inline-block;
+        line-height: 1;
+        color: #0059a2;
+    }
+
+    .service-launcher-search-input {
+        color: #252423;
+        width: 100%;
+        height: 30px;
+        padding: 0;
+        background: transparent;
+        align-items: flex-start;
+        border: none;
+        display: block;
+        font: 13px SegoeUI-Regular-final, Segoe UI, "Segoe UI Web (West European)", Segoe, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, Tahoma, Helvetica, Arial, sans-serif;
+        text-overflow: ellipsis;
+        outline: none;
+    }
+
+    .service-launcher-content-wrapper {
+        overflow-x: hidden;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        padding: 0 16px;
+        flex-grow: 1;
+        margin-right: 2px;
+    }
+
+    .service-launcher-content {
+        display: flex;
+        flex-direction: column;
+        -ms-flex: 1;
+        max-height: 75vh;
+        flex: 1;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        -webkit-animation-duration: .25s;
+        animation-duration: .25s;
+        -webkit-animation-name: mainViewSlideInFrames;
+        animation-name: mainViewSlideInFrames;
+        -webkit-animation-timing-function: cubic-bezier(.26,1,.48,1);
+        animation-timing-function: cubic-bezier(.26,1,.48,1);
+    }
+
+    .service-list {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        width: 480px;
+    }
+
+    .service-tile-container {
+        height: 88px;
+        width: 96px;
+    }
+
+    .service-tile-button {
+        position: relative;
+        display: flex;
+        border-radius: 6px;
+        box-sizing: border-box;
+        border: 1px solid transparent !important;
+        text-decoration: none !important;
+        background-color: transparent;
+        -webkit-touch-callout: none;
+        cursor: pointer;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        max-height: 100%;
+        max-width: 100%;
+        height: 100%;
+        width: 100%;
+        padding: 8px 4px 4px;
+        gap: 4px;
+        flex-direction: column;
+        outline-offset: -2px;
+    }
+
+    .service-tile-logo-container {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .service-tile-logo {
+        font-family: ShellFabricMDL2IconsLite, ShellFabricMDL2Icons;
+        display: inline-block;
+        line-height: 1;
+        display: flex !important;
+        height: 40px;
+        width: 40px;
+        font-size: 32px;
+        justify-content: center;
+        display: inline-block;
+    }
+
+    .service-tile-name {
+        color: #252423;
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        box-sizing: border-box;
+        height: 32px;
+    }
+
+    .service-tile-name-text {
+        font: 12px SegoeUI-Regular-final, Segoe UI, "Segoe UI Web (West European)", Segoe, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, Tahoma, Helvetica, Arial, sans-serif;
+        margin-top: 0;
+        overflow: hidden;
+        line-height: 16px;
+        transition: color 83ms linear;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        text-overflow: ellipsis;
+        text-align: center;
+        max-height: 32px;
+    }
+</style>
