@@ -18,9 +18,25 @@
                             </div>
                         </div>
 
-                        <div class="current-user-menu-spacer"></div>
+                        <div class="current-user-menu-spacer">
+                        </div>
                         
-                        <div></div>
+                        <div class="current-user-info">
+                            <a class="current-user-profile-image-link">
+                                <div class="current-user-image"></div>
+                            </a>
+
+                            <div class="current-user-info-details">
+                                <div class="current-user-name">@CurrentUser.Name</div>
+                                <div class="current-user-email">@CurrentUser.Email</div>
+                                <div class="my-account-link-container">
+                                    <a class="my-account-lnik">My Richill Capital account</a>
+                                </div>
+                                <div class="current-user-commands">
+                                    <a class="my-profile-link">My Profile</a>
+                                </div>
+                            </div>
+                        </div>
                         
                         <a class="sign-out" asp-page="/signOut/index" role="button" target="_top">Sign out</a>
                     </div>
@@ -119,6 +135,185 @@
         font-family: "Segoe UI", "Segoe UI Web Regular", "Segoe UI Symbol", "Helvetica Neue", "BBAlpha Sans", "S60 Sans", Arial, sans-serif;
         line-height: normal;
         box-sizing: border-box;
+    }
+
+    .current-user-info {
+        font-family: "Segoe UI", "Segoe UI Web Regular", "Segoe UI Symbol", "Helvetica Neue", "BBAlpha Sans", "S60 Sans", Arial, sans-serif;
+        line-height: normal;
+        box-sizing: border-box;
+        min-height: 132px;
+        width: 100%;
+        -ms-grid-column: 1;
+        -ms-grid-column-span: 3;
+        grid-column: 1 / 4;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+    }
+
+    .current-user-profile-image-link {
+        position: relative;
+        height: auto;
+        min-width: auto;
+        min-height: auto;
+        border-style: none;
+        border-width: 0;
+        padding: 0;
+        margin: 0;
+        outline-style: none !important;
+        background-color: transparent;
+        text-decoration: none;
+        text-align: left;
+        font-family: "Segoe UI", "Segoe UI Web Regular", "Segoe UI Symbol", "Helvetica Neue", "BBAlpha Sans", "S60 Sans", Arial, sans-serif;
+        cursor: pointer;
+        box-sizing: border-box;
+        height: auto;
+        min-width: auto;
+        min-height: auto;
+        border-style: none;
+        border-width: 0;
+        padding: 0;
+        margin: 0;
+        outline-style: none !important;
+        background-color: transparent;
+        text-decoration: none;
+        text-align: left;
+        font-family: "Segoe UI", "Segoe UI Web Regular", "Segoe UI Symbol", "Helvetica Neue", "BBAlpha Sans", "S60 Sans", Arial, sans-serif;
+        cursor: pointer;
+        color: #333;
+        display: block;
+        border-radius: 50%;
+        overflow: hidden;
+        width: 88px;
+        height: 88px;
+        margin-left: 16px;
+        margin-right: 20px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    .current-user-image {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        overflow: hidden;
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
+        font-family: "Segoe UI", "Segoe UI Web Regular", "Segoe UI Symbol", "Helvetica Neue", "BBAlpha Sans", "S60 Sans", Arial, sans-serif;
+        line-height: normal;
+        box-sizing: border-box;
+    }
+
+    .current-user-info-details {
+        font-size: 13px;
+        -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+        min-width: 0;
+        width: 0;
+        padding-right: 12px;
+    }
+
+    .current-user-name {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-family: "Segoe UI", "Segoe UI Web Regular", "Segoe UI Symbol", "Helvetica Neue", "BBAlpha Sans", "S60 Sans", Arial, sans-serif;
+        line-height: normal;
+        box-sizing: border-box;
+        padding: 1px;
+        font-size: 18px;
+        font-weight: 700;
+        margin-top: 0;
+    }
+
+    .current-user-email {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-family: "Segoe UI", "Segoe UI Web Regular", "Segoe UI Symbol", "Helvetica Neue", "BBAlpha Sans", "S60 Sans", Arial, sans-serif;
+        line-height: normal;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        padding: 1px;
+        margin-top: 3px;
+        font-size: 13px;
+    }
+
+    .my-account-link-container {
+        font-family: "Segoe UI", "Segoe UI Web Regular", "Segoe UI Symbol", "Helvetica Neue", "BBAlpha Sans", "S60 Sans", Arial, sans-serif;
+        line-height: normal;
+        box-sizing: border-box;
+        padding: 1px;
+        margin-top: 4px;
+    }
+
+    .my-account-lnik {
+        display: block;
+        max-width: -webkit-fit-content;
+        max-width: -moz-fit-content;
+        max-width: fit-content;
+        color: #0078d6;
+        background-color: inherit;
+        text-decoration: underline;
+    }
+
+    .current-user-commands {
+        position: relative;
+        font-family: "Segoe UI", "Segoe UI Web Regular", "Segoe UI Symbol", "Helvetica Neue", "BBAlpha Sans", "S60 Sans", Arial, sans-serif;
+        line-height: normal;
+        box-sizing: border-box;
+        margin-top: 4px;
+        adding: 0;
+    }
+
+    .my-profile-link {
+        height: auto;
+        min-width: auto;
+        min-height: auto;
+        border-style: none;
+        border-width: 0;
+        padding: 0;
+        margin: 0;
+        outline-style: none !important;
+        background-color: transparent;
+        text-decoration: none;
+        text-align: left;
+        font-family: "Segoe UI", "Segoe UI Web Regular", "Segoe UI Symbol", "Helvetica Neue", "BBAlpha Sans", "S60 Sans", Arial, sans-serif;
+        cursor: pointer;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        height: auto;
+        min-width: auto;
+        min-height: auto;
+        border-style: none;
+        border-width: 0;
+        padding: 0;
+        margin: 0;
+        outline-style: none !important;
+        background-color: transparent;
+        text-decoration: none;
+        text-align: left;
+        font-family: "Segoe UI", "Segoe UI Web Regular", "Segoe UI Symbol", "Helvetica Neue", "BBAlpha Sans", "S60 Sans", Arial, sans-serif;
+        cursor: pointer;
+        padding: 1px;
+        font-size: 13px;
+        margin-right: 34px;
+        display: block;
+        max-width: -webkit-fit-content;
+        max-width: -moz-fit-content;
+        max-width: fit-content;
+        color: #0078d6;
+        background-color: inherit;
+        text-decoration: underline;
     }
 
     .sign-out {
