@@ -27,13 +27,24 @@
                             </a>
 
                             <div class="current-user-info-details">
-                                <div class="current-user-name">@CurrentUser.Name</div>
-                                <div class="current-user-email">@CurrentUser.Email</div>
-                                <div class="my-account-link-container">
-                                    <a class="my-account-lnik">My Richill Capital account</a>
+                                <div class="current-user-name">
+                                    @CurrentUser.Name
                                 </div>
+                                
+                                <div class="current-user-email">
+                                    @CurrentUser.Email
+                                </div>
+                                
+                                <div class="my-account-link-container">
+                                    <a asp-page="/index" class="my-account-lnik" target="_blank">
+                                        My Richill Capital account
+                                    </a>
+                                </div>
+
                                 <div class="current-user-commands">
-                                    <a class="my-profile-link">My Profile</a>
+                                    <a class="my-profile-link" asp-page="/profile/index" target="_top">
+                                        My Profile
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -41,7 +52,22 @@
                         <a class="sign-out" asp-page="/signOut/index" role="button" target="_top">Sign out</a>
                     </div>
 
-                    <div>
+                    <div class="other-credentials">
+                        <ul class="other-credentials-list">
+                            <li>
+                                <div class="other-credentials-list-item">
+                                    <a class="other-credentials-list-item-link" target="_top">
+                                        <div class="other-credentials-list-item-image"></div>
+
+                                        <div class="other-credentials-list-item-label">
+                                            <div class="other-credentials-list-item-text">
+                                                Sign in with a different account
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -338,7 +364,122 @@
         -ms-grid-column-span: 1;
         grid-column: 3 / 4;
         font-size: 13px;    color: #333;
-    background-color: #fff;
+        background-color: #fff;
         padding: 15px 14px;
+    }
+
+    .other-credentials {
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(50%, #fff), to(rgba(255, 255, 255, 0))), -webkit-gradient(linear, left top, left bottom, color-stop(0, rgba(0, 0, 0, .44)), color-stop(40%, rgba(0, 0, 0, .16)), to(rgba(0, 0, 0, 0)));
+        background: linear-gradient(#fff 50%, rgba(255, 255, 255, 0)), linear-gradient(rgba(0, 0, 0, .44) 0, rgba(0, 0, 0, .16) 40%, rgba(0, 0, 0, 0) 100%);
+        background-repeat: no-repeat;
+        background-size: 100% 12px, 100% 6px;
+        background-attachment: local, scroll;
+        font-family: "Segoe UI", "Segoe UI Web Regular", "Segoe UI Symbol", "Helvetica Neue", "BBAlpha Sans", "S60 Sans", Arial, sans-serif;
+        line-height: normal;
+        box-sizing: border-box;
+        overflow: auto;
+        max-height: 270px;
+        border-top: 1px solid rgba(0, 0, 0, .08);
+    }
+
+    .other-credentials-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        box-sizing: content-box;
+    }
+
+    .other-credentials-list-item {
+        height: 60px;
+        position: relative;
+        font-family: "Segoe UI", "Segoe UI Web Regular", "Segoe UI Symbol", "Helvetica Neue", "BBAlpha Sans", "S60 Sans", Arial, sans-serif;
+        line-height: normal;
+        box-sizing: border-box;
+    }
+
+    .other-credentials-list-item-link {
+        height: auto;
+        min-width: auto;
+        min-height: auto;
+        border-style: none;
+        border-width: 0;
+        padding: 0;
+        margin: 0;
+        outline-style: none !important;
+        background-color: transparent;
+        text-decoration: none;
+        text-align: left;
+        font-family: "Segoe UI", "Segoe UI Web Regular", "Segoe UI Symbol", "Helvetica Neue", "BBAlpha Sans", "S60 Sans", Arial, sans-serif;
+        cursor: pointer;
+        box-sizing: border-box;
+        margin: 0;
+        outline-style: none !important;
+        background-color: transparent;
+        text-decoration: none;
+        text-align: left;
+        font-family: "Segoe UI", "Segoe UI Web Regular", "Segoe UI Symbol", "Helvetica Neue", "BBAlpha Sans", "S60 Sans", Arial, sans-serif;
+        height: auto;
+        min-width: auto;
+        min-height: auto;
+        border-style: none;
+        border-width: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        cursor: pointer;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        color: inherit;
+        background-color: rgba(0, 0, 0, .04);
+    }
+
+    .other-credentials-list-item-image {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        overflow: hidden;
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
+        font-family: "Segoe UI", "Segoe UI Web Regular", "Segoe UI Symbol", "Helvetica Neue", "BBAlpha Sans", "S60 Sans", Arial, sans-serif;
+        line-height: normal;
+        box-sizing: border-box;
+        float: left;
+        margin-left: 16px;
+        margin-right: 12px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        width: 40px;
+        height: 40px;
+    }
+
+    .other-credentials-list-item-label {
+        font-size: 12px;
+        font-family: "Segoe UI", "Segoe UI Web Regular", "Segoe UI Symbol", "Helvetica Neue", "BBAlpha Sans", "S60 Sans", Arial, sans-serif;
+        line-height: normal;
+        box-sizing: border-box;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-right: 48px;
+        -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+        min-width: 0;
+        width: 0;
+    }
+
+    .other-credentials-list-item-text {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-family: "Segoe UI", "Segoe UI Web Regular", "Segoe UI Symbol", "Helvetica Neue", "BBAlpha Sans", "S60 Sans", Arial, sans-serif;
+        line-height: normal;
+        box-sizing: border-box;
+        font-size: 12px;
     }
 </style>
