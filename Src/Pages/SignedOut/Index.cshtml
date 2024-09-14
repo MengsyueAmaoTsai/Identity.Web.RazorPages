@@ -1,0 +1,13 @@
+@page "/signed-out"
+
+@model SignedOutViewModel
+
+@{
+    ViewData["Title"] = "Signed Out";
+    Layout = "_AnonymousLayout";
+}
+
+<div>
+    <h1>You have been signed out</hh1>
+    <p>You have been signed out. You can sign in again by clicking <a asp-page="/signIn/index">here</a>.</p>
+</div>

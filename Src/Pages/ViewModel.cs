@@ -17,6 +17,8 @@ public abstract class ViewModel : PageModel
         return RedirectToPage("/redirect/index", new { RedirectUri = redirectUri });
     }
 
+    protected IActionResult SignedOut() => RedirectToPage("/signedOut/index");
+
     protected IActionResult SignInPassword(string returnUrl, Email email) => RedirectToPage(
         "/signIn/password/index",
         new
