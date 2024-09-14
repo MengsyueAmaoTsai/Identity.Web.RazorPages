@@ -26,7 +26,15 @@
                                         </div>
 
                                         <div class="body-245">
-                                            @RenderBody();
+                                            <main id="ContentLanding" role="main" style="outline: none;">
+                                                <div class="body-246">
+                                                    <div style="height: 100vh; padding: 0px 0px 4px;">
+                                                        @RenderBody()
+                                                    </div>
+
+                                                    @await Html.PartialAsync("_SiteFooter")
+                                                </div>
+                                            </main>
                                         </div>
                                     </div>
                                 </div>
@@ -68,6 +76,11 @@
 
     body, html {
         height: 100%;
+    }
+
+
+    article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section {
+        display: block;
     }
 
     #WebRoot {
@@ -133,5 +146,58 @@
         box-sizing: border-box;
         overflow-x: hidden;
         min-height: 100vh;
+    }
+
+    .body-246 {
+        display: flex;
+        flex-flow: column;
+        width: 100%;
+        height: auto;
+        box-sizing: border-box;
+        justify-content: flex-start;
+        flex: 2 1 0%;
+    }
+
+    .body-246 * {
+        text-overflow: ellipsis;
+    }
+
+    @@media only screen and (min-width: 480px) {
+        .body-246 {
+            padding: 0px 16px 10px;
+            width: 100%;
+        }
+    }
+
+    @@media only screen and (min-width: 640px) {
+        .body-246 {
+            padding: 0px 48px 10px;
+            width: 100%;
+        }
+    }
+
+    @@media only screen and (min-width: 1024px) {
+        .body-246 {
+            padding: 0px 54px 10px;
+            width: 100%;
+        }
+    }
+
+    @@media only screen and (min-width: 1366px) {
+        .body-246 {
+            padding: 0px 0px 10px;
+            margin: 0px auto;
+            max-width: 968px;
+            width: 100%;
+        }
+    }
+
+    @@media only screen and (min-width: 1920px) {
+        .body-246 {
+            padding: 0px 0px 10px;
+            margin: 0px auto;
+            max-width: 1184px;
+            width: 100%;
+        }
     }
 </style>
