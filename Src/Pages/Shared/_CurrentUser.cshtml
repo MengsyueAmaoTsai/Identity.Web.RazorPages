@@ -2,7 +2,103 @@
 
 @inject ICurrentUser CurrentUser
 
-<div>
-    <div>@CurrentUser.Email</div>
-    <div>@CurrentUser.Name</div>
-</div>  
+
+<div class="current-user-root">
+    <div>
+        <div>
+            <button class="current-user-button">
+            </button>
+            
+            <div class="current-user-menu-container" style="insert: 48px auto auto -272px;">
+                <div class="current-user-menu">
+                    <div class="current-user-info-container">
+                        <div></div>
+                        <div class="current-user-menu-spacer"></div>
+                        <div></div>
+                        <a class="sign-out" asp-page="/signOut/index" role="button" target="_top">Sign out</a>
+                    </div>
+
+                    <div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<style>
+    .current-user-menu-container {
+        position: absolute;
+        right: 0;
+        z-index: 1000000;
+        opacity: 0;
+        visibility: hidden;
+        -webkit-transition: visibility 0s linear 120ms, opacity 120ms ease;
+        transition: visibility 0s linear 120ms, opacity 120ms ease;
+        font-family: "Segoe UI", "Segoe UI Web Regular", "Segoe UI Symbol", "Helvetica Neue", "BBAlpha Sans", "S60 Sans", Arial, sans-serif;
+        line-height: normal;
+        box-sizing: border-box;
+        opacity: 1;
+        visibility: visible;
+        -webkit-transition-delay: 0s;
+        transition-delay: 0s;
+        width: 320px;
+        max-width: 100vw;
+        -webkit-box-shadow: 0 24px 54px rgba(0, 0, 0, .15), 0 4.5px 13.5px rgba(0, 0, 0, .08);
+        box-shadow: 0 24px 54px rgba(0, 0, 0, .15), 0 4.5px 13.5px rgba(0, 0, 0, .08);
+    }
+
+    .current-user-menu {
+        text-align: left;
+        color: #333;
+        background-color: #fff;
+        font-family: "Segoe UI", "Segoe UI Web Regular", "Segoe UI Symbol", "Helvetica Neue", "BBAlpha Sans", "S60 Sans", Arial, sans-serif;
+        line-height: normal;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+
+    .current-user-info-container {
+        display: -ms-grid;
+        display: grid;
+        -ms-grid-columns: auto 1fr auto;
+        grid-template-columns: auto 1fr auto;
+        font-family: "Segoe UI", "Segoe UI Web Regular", "Segoe UI Symbol", "Helvetica Neue", "BBAlpha Sans", "S60 Sans", Arial, sans-serif;
+        line-height: normal;
+        box-sizing: border-box;
+    }
+
+    .current-user-info-container * {
+            display: block;
+            -ms-flex-item-align: center;
+            -ms-grid-row-align: center;
+            align-self: center;
+    }
+
+    .sign-out {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        height: auto;
+        min-width: auto;
+        min-height: auto;
+        border-style: none;
+        border-width: 0;
+        margin: 0;
+        outline-style: none !important;
+        text-decoration: none;
+        text-align: left;
+        font-family: "Segoe UI", "Segoe UI Web Regular", "Segoe UI Symbol", "Helvetica Neue", "BBAlpha Sans", "S60 Sans", Arial, sans-serif;
+        cursor: pointer;
+        -ms-grid-row: 1;
+        -ms-grid-row-span: 1;
+        grid-row: 1 / 2;
+        -ms-grid-column: 3;
+        -ms-grid-column-span: 1;
+        grid-column: 3 / 4;
+        font-size: 13px;    color: #333;
+    background-color: #fff;
+        padding: 15px 14px;
+    }
+</style>
