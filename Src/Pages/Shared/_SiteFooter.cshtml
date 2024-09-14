@@ -1,2 +1,59 @@
-﻿<footer id="SiteFooter">
+﻿@{
+    var organziationLinks = new List<(string Text, string Url)>
+    {
+        ("Privacy & cookies", "/"),
+        ("Terms of use", "/"),
+        ("Contact us", "/"),
+    };
+}
+
+<footer id="SiteFooter">
+    <div class="site-footer">
+        <a class="locale-picker-link"></a>
+        <a></a>
+        <a></a>
+        <a></a>
+        
+        <nav style="display: block;">
+            <ul>
+                @foreach (var link in organziationLinks)
+                {
+                    <li>
+                        <a href="@link.Url">@link.Text</a>
+                    </li>
+                }
+            </ul>
+        </nav>
+    </div>
 </footer>
+
+<style>
+    #SiteFooter {
+        font-family: sans-serif;
+        -ms-text-size-adjust: 100%;
+        -webkit-text-size-adjust: 100%;
+        box-sizing: border-box;
+        font-size: 15px;
+        font-family: 'Segoe UI', SegoeUI, "Helvetica Neue", Helvetica, Arial, sans-serif;
+        min-width: 320px;
+        color: #000;
+        background-color: #fff;
+        min-width: 280px;
+        background: #f2f2f2;
+        margin-top: 48px;
+        margin-top: 0;
+    }
+
+    #SiteFooter div {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+
+    .site-footer {
+        box-sizing: inherit;
+        background: #f2f2f2;
+        margin: 0 auto;
+        max-width: calc(1600px + 10%);
+        padding: 30px 5% 16px;
+    }
+</style>
