@@ -14,8 +14,27 @@
     <div id="WebRoot">
         @await Html.PartialAsync("_SiteHeader")
         
-        <div id="MainContentLanding">
-            @RenderBody()
+        <div id="MainContentLanding" style="outline: none;">
+            <div>
+                <div>
+                    <div class="body-163">
+                        <div class="body-164">
+                            <div class="body-165">
+                                <div style="visibility: visible; display: contents;">
+                                    <div class="body-244">
+                                        <div class="body-164">
+                                        </div>
+
+                                        <div class="body-245">
+                                            @RenderBody();
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -63,5 +82,56 @@
         flex-direction: column;
         overflow-y: auto;
         height: 100%;
+    }
+
+    .body-163 {
+        color: rgb(36, 36, 36);
+        background: rgb(255, 255, 255);
+        font-family: "Segoe UI", "Segoe UI Web (West European)", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
+        font-weight: 400;
+        font-size: 14px;
+        -webkit-font-smoothing: antialiased;
+    }
+
+    .body-164 {
+        color: rgb(50, 49, 48);
+        background: rgb(242, 242, 242);
+        font-family: "Segoe UI Variable Text", "Segoe UI", "Segoe UI Web (West European)", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
+        font-weight: 400;
+        font-size: 14px;
+        -webkit-font-smoothing: antialiased;
+    }
+    
+    .body-165 {
+        display: flex;
+        flex-flow: row;
+        width: auto;
+        height: auto;
+        box-sizing: border-box;
+        justify-content: space-between;
+        background-color: rgb(242, 242, 242);
+    }
+
+    .body-244 {
+        display: flex;
+        flex-flow: row;
+        width: 100%;
+        height: auto;
+        box-sizing: border-box;
+        min-height: 100vh;
+    }
+
+    .body-244 > * {
+        text-overflow: ellipsis;
+    }
+
+    .body-245 {
+        display: flex;
+        flex-flow: column;
+        width: 100vw;
+        height: auto;
+        box-sizing: border-box;
+        overflow-x: hidden;
+        min-height: 100vh;
     }
 </style>
