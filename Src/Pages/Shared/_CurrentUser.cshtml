@@ -12,9 +12,16 @@
             <div class="current-user-menu-container" style="insert: 48px auto auto -272px;">
                 <div class="current-user-menu">
                     <div class="current-user-info-container">
-                        <div></div>
+                        <div class="company">
+                            <div class="company-label" style="width: 80px;">
+                                <div class="company-text">Microsoft</div>
+                            </div>
+                        </div>
+
                         <div class="current-user-menu-spacer"></div>
+                        
                         <div></div>
+                        
                         <a class="sign-out" asp-page="/signOut/index" role="button" target="_top">Sign out</a>
                     </div>
 
@@ -74,6 +81,44 @@
             -ms-flex-item-align: center;
             -ms-grid-row-align: center;
             align-self: center;
+    }
+
+    .company {
+        font-family: "Segoe UI", "Segoe UI Web Regular", "Segoe UI Symbol", "Helvetica Neue", "BBAlpha Sans", "S60 Sans", Arial, sans-serif;
+        line-height: normal;
+        box-sizing: border-box;
+        -ms-grid-column: 1;
+        -ms-grid-column-span: 1;
+        grid-column: 1 / 2;
+    }
+
+    .company-label {
+        overflow: hidden;
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
+        font-family: "Segoe UI", "Segoe UI Web Regular", "Segoe UI Symbol", "Helvetica Neue", "BBAlpha Sans", "S60 Sans", Arial, sans-serif;
+        line-height: normal;
+        box-sizing: border-box;
+        width: 16px;
+        height: 16px;
+        float: left;
+        margin-right: 4px;
+    }
+
+    .company-text {
+        clip: rect(1px, 1px, 1px, 1px);
+        -webkit-clip-path: inset(50%);
+        clip-path: inset(50%);
+        height: 1px;
+        width: 1px;
+        margin: -1px;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        font-family: "Segoe UI", "Segoe UI Web Regular", "Segoe UI Symbol", "Helvetica Neue", "BBAlpha Sans", "S60 Sans", Arial, sans-serif;
+        line-height: normal;
+        box-sizing: border-box;
     }
 
     .sign-out {
