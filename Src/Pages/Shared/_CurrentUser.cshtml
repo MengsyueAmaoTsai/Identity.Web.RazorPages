@@ -6,7 +6,7 @@
 <div class="current-user-root">
     <div>
         <div>
-            <button class="current-user-button">
+            <button id="CurrentUserButton" class="current-user-button">
                 <div>
                     <div class="current-user-button-image-container">
                         <div class="current-user-button-image"></div>
@@ -80,6 +80,22 @@
     </div>
 </div>
 
+<script>
+    const toggleCurrentUserMenu = () => {
+        const menu = document.querySelector('.current-user-menu-container');
+        const isVisible = menu.style.visibility === 'visible';
+
+        if (isVisible) {
+            menu.style.visibility = 'hidden';
+            menu.style.opacity = 0;
+        } else {
+            menu.style.visibility = 'visible';
+            menu.style.opacity = 1;
+        }
+    }
+
+    document.getElementById('CurrentUserButton').addEventListener('click', toggleCurrentUserMenu);
+</script>
 
 <style>
     .current-user-menu-container {
@@ -94,7 +110,6 @@
         line-height: normal;
         box-sizing: border-box;
         opacity: 1;
-        visibility: visible;
         -webkit-transition-delay: 0s;
         transition-delay: 0s;
         width: 320px;
@@ -156,7 +171,8 @@
         height: 48px;
         color: #333;
         font-family: "Segoe UI", "Segoe UI Web Regular", "Segoe UI Symbol", "Helvetica Neue", "BBAlpha Sans", "S60 Sans", Arial, sans-serif;
-        line-height: normal;    box-sizing: border-box;
+        line-height: normal;
+        box-sizing: border-box;
     }
 
     .current-user-button-image {
