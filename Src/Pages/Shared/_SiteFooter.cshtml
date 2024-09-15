@@ -15,13 +15,14 @@
         <a></a>
         
         <nav style="display: block;">
-            <ul>
+            <ul class="footer-links">
                 @foreach (var link in organziationLinks)
                 {
-                    <li>
+                    <li class="footer-link">
                         <a href="@link.Url">@link.Text</a>
                     </li>
                 }
+                <li class="footer-link">&copy; Richill Capital @(DateTimeOffset.UtcNow.Year)</li>
             </ul>
         </nav>
     </div>
@@ -55,5 +56,34 @@
         margin: 0 auto;
         max-width: calc(1600px + 10%);
         padding: 30px 5% 16px;
+    }
+
+    .footer-links {
+        box-sizing: inherit;
+        font-size: 15px;
+        padding: 0;
+        list-style: none;
+        padding-left: 0;
+        list-style-type: none;
+        font-size: 11px;
+        line-height: 16px;
+        float: right;
+        margin: 3px 0;
+        color: #616161;        
+    }
+
+    .footer-link {
+        box-sizing: inherit;
+        padding: 0;
+        margin: 0;
+        padding: 8px 0;
+        padding: 0 24px 4px 0;
+        display: inline-block;
+    }
+
+    @@media screen and (min-width: 860px) {
+        .footer-link {
+            word-break: break-word;
+        }
     }
 </style>
