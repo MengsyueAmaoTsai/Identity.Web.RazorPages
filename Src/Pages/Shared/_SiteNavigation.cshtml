@@ -26,42 +26,9 @@
                         <ul class="nav-group" role="menubar">
                             <div role="group">
                                 <li role="presentation">
-                                    <div class="site-nav-header-item">
-                                        <div class="site-nav-header-item-image">
-                                            <a>
-                                                <div>
-                                                    <div>
-                                                        <div>
-                                                            <div>
-                                                                <div>
-                                                                    <div>
-                                                                        <img src="blob:https://account.microsoft.com/c2cf95ac-37a2-4241-b15a-0baa4f1edeea">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </div>
-                                        
-                                        <div class="site-nav-header-item-user-info">
-                                            <a class="user-info-link" asp-page="/profile/index">
-                                                <span style="overflow: hidden; box-sizing: content-box; white-space: normal; display: webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 1; font-size: 14px;">
-                                                    <span class="user-info-username">@CurrentUser.Name</span>
-                                                </span>
-                                            </a>
-
-                                            <a class="user-info-link" href="https://www.outlook.com/?refd=account.microsoft.com&fref=home.banner.viewinbox" target="_blank">
-                                                <div style="display: inline;">
-                                                    <span style="overflow: hidden; box-sizing: content-box; white-space: normal; display: webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 1; font-size: 12px;">
-                                                        <span class="user-info-email">@CurrentUser.Email</span>
-                                                    </span>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </div>
+                                    @await Html.PartialAsync("_SiteNavigationHeaderItem")
                                 </li>
+                                
                                 @foreach (var item in navItems) 
                                 {
                                     <li class="nav-item" role="presentation">
@@ -137,76 +104,6 @@
         margin: 0px;
         padding: 0px;
         list-style: none;        
-    }
-
-    .site-nav-header-item {
-        display: flex;
-        flex-flow: row;
-        width: auto;
-        height: 48px;
-        box-sizing: border-box;
-        margin: 24px 10px;
-    }
-
-    .site-nav-header-item * {
-        text-overflow: ellipsis;
-    }
-
-    .site-nav-header-item-image {
-        display: flex;
-        flex-flow: column;
-        width: auto;
-        height: auto;
-        box-sizing: border-box;
-        margin-right: 8px;        
-    }
-
-    .site-nav-header-item-user-info {
-        display: flex;
-        flex-flow: column;
-        width: auto;
-        height: auto;
-        box-sizing: border-box;
-        justify-content: center;        
-    }
-
-    .site-nav-header-item-user-info *{
-        text-overflow: ellipsis;
-    }
-
-    .user-info-link {
-        font-family: "Segoe UI Variable Text", "Segoe UI", "Segoe UI Web (West European)", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
-        -webkit-font-smoothing: antialiased;
-        font-size: inherit;
-        font-weight: inherit;
-        color: rgb(0, 111, 201);
-        outline: none;
-        text-decoration: none;
-        width: fit-content;        
-    }
-
-    .user-info-link span {
-        color: rgb(50, 49, 48);
-    }
-
-    .user-info-username {
-        font-family: "Segoe UI Variable Text", "Segoe UI", "Segoe UI Web (West European)", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
-        -webkit-font-smoothing: antialiased;
-        font-size: 14px;
-        font-weight: 600;
-        color: rgb(50, 49, 48);
-        display: inline;
-        line-height: 1.4;        
-    }
-
-    .user-info-email {
-        font-family: "Segoe UI Variable Small", "Segoe UI", "Segoe UI Web (West European)", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
-        -webkit-font-smoothing: antialiased;
-        font-size: 12px;
-        font-weight: 400;
-        color: rgb(96, 94, 92);
-        display: inline;
-        line-height: 1.4;        
     }
 
     .nav-item {
