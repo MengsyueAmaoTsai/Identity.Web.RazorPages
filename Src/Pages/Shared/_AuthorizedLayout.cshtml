@@ -23,13 +23,20 @@
                                 <div style="visibility: visible; display: contents;">
                                     <div class="body-244">
                                         <div class="body-164">
+                                            @await Html.PartialAsync("_SiteNavigation")
                                         </div>
 
                                         <div class="body-245">
                                             <main id="ContentLanding" role="main" style="outline: none;">
                                                 <div class="body-246">
                                                     <div style="height: 100vh; padding: 0px 0px 4px;">
-                                                        @RenderBody()
+                                                        <div class="body-247">
+                                                            <div class="body-265">
+                                                                <div class="body-266">
+                                                                    @RenderBody()
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
 
                                                     @await Html.PartialAsync("_SiteFooter")
@@ -199,5 +206,33 @@
             max-width: 1184px;
             width: 100%;
         }
+    }
+
+    .body-247 {
+        display: flex;
+        flex-row: column;
+        width: auto;
+        height: auto;
+        box-sizing: border-box;
+    }
+
+    .body-265 {
+        display: flex;
+        flex-flow: column;
+        width: auto;
+        height: auto;
+        box-sizing: border-box;
+    }
+
+    .body-265 * {
+        text-overflow: ellipsis;
+    }
+
+    .body-266 {
+        display: flex;
+        flex-flow: column;
+        width: auto;
+        height: auto;
+        box-sizing: border-box;
     }
 </style>
