@@ -230,5 +230,33 @@ internal static class InMemoryClients
             },
             AllowAccessTokensViaBrowser = true,
         },
+        new Client
+        {
+            ClientId = "RichillCapital.TraderStudio.Mobile",
+            ClientName = "RichillCapital Trader Studio Mobile",
+            Description = "RichillCapital Trader Studio Mobile Client",
+            ClientSecrets = DefaultSecrets,
+
+            AllowedGrantTypes = GrantTypes.Code,
+
+            RequirePkce = true,
+            RequireClientSecret = false,
+            RequireConsent = false,
+
+            RedirectUris =
+            {
+                "myapp://callback",
+            },
+            PostLogoutRedirectUris =
+            {
+                "myapp://callback",
+            },
+            AllowOfflineAccess = true,
+            AllowedScopes =
+            {
+                "openid",
+            },
+            AllowAccessTokensViaBrowser = true,
+        },
     ];
 }
